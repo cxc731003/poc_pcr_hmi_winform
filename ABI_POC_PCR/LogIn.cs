@@ -69,19 +69,20 @@ namespace ABI_POC_PCR
                 char[] sep = { ',' };
 
                 string[] result = temp.Split(sep);
-                string[] data6 = new string[4] { temp, temp, temp, temp };
+                //string[] data6 = new string[4] { temp, temp, temp, temp };
                 int index = 0;
-                foreach (var item in result)
+                //foreach (var item in result)
+                //{
+                //    result[index++] = item;
+                //}
+                if(result[1] == tb_LoginID.Text &&
+                    result[2] == tb_LoginPW.Text)
                 {
-                    data6[index++] = item;
-                }
-                if(data6[1] == tb_LoginID.Text &&
-                    data6[2] == tb_LoginPW.Text)
-                {
-                    sm.userName = data6[0];
+                    sm.userName = result[0];
                     sm.userID = tb_LoginID.Text;
                     sm.userPW = tb_LoginPW.Text;
-                    sm.userAccessibility = data6[3];
+                    sm.userAccessibility = result[3];
+                    sm.isLoginSucceeded = true;
 
                     //if (tb_LoginID.Text == "ABI" && tb_LoginPW.Text == "5344")
                     //{
@@ -106,7 +107,12 @@ namespace ABI_POC_PCR
                     //this.Close();
                 }
                 //dataGridView_Manage.Rows.Add(data6);
-            }         
+            }  
+            
+            if(!sm.isLoginSucceeded)
+            {
+                //MessageBox("Login Failed, Check your ID and Password");
+            }
         }
 
         private void btn_Connect_Main_Click(object sender, EventArgs e)

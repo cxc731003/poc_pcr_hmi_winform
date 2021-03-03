@@ -8,21 +8,31 @@ namespace ABI_POC_PCR
 {
     public class SharedMemory
     {
-        public string userID { get; set; }
-        public string userPW { get; set; }
-        public string userName { get; set; }
-        public string userAccessibility { get; set; }
+        public string userID { get; set; } // Tester ID = login ID at first
+        public string userPW { get; set; }  // Tester PW = login PW at first
+        public string userName { get; set; } // Tester Name
+        
+        public string testName { get; set; } 
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        
+        public string PatientID { get; set; }
+        public string SampleID { get; set; }
+        public string CartridgeID { get; set; }
+        public string QualityControl { get; set; }
+       
 
-        public string MTBC_Result { get; set; }
-        public string NTM_Result { get; set; }
-        public string RIF_Result { get; set; }
-        public string IC_Result { get; set; }
+
+        public string userAccessibility { get; set; }
+        public bool isLoginSucceeded { get; set; }
+
+
+        public string currentLogFileName { get; set; }
+
+
 
         public int criticalThreshold { get; set; }
-
-  
         public bool opticReceivedFlag { get; set; }
-
         public int measured_cnt { get; set; }
 
         public bool DataUpdateFlag { get; set; }

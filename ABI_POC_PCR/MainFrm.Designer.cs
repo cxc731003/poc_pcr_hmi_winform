@@ -87,7 +87,7 @@
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.tp_engineer = new System.Windows.Forms.TabPage();
             this.tabControl_Engineer = new System.Windows.Forms.TabControl();
-            this.tp_Protocol = new System.Windows.Forms.TabPage();
+            this.tp_CreateTest = new System.Windows.Forms.TabPage();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.tb_RT_PreHoldSecMCU_Eng = new System.Windows.Forms.TextBox();
             this.btn_RT_PreHoldSecMCU_Eng = new System.Windows.Forms.Button();
@@ -195,7 +195,7 @@
             this.btn_Test1_Eng = new System.Windows.Forms.Button();
             this.cb_Motor = new System.Windows.Forms.ComboBox();
             this.tb_Pulse_Cnt = new System.Windows.Forms.TextBox();
-            this.tp_DiagnosisHowTo = new System.Windows.Forms.TabPage();
+            this.tp_Interpretation = new System.Windows.Forms.TabPage();
             this.btnDiagnosisFindAndLoad = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox_NewFileName = new System.Windows.Forms.TextBox();
@@ -234,6 +234,25 @@
             this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_diagnosis_FLU = new System.Windows.Forms.DataGridView();
             this.dgv_diagnosis_COVID = new System.Windows.Forms.DataGridView();
+            this.Column52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column59 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column62 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column63 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column64 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column65 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column66 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column67 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column68 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column69 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column70 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cb_Diagnosis_Target = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tp_base_UserSelection = new System.Windows.Forms.TabPage();
@@ -262,6 +281,12 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -278,20 +303,20 @@
             this.tp_tester = new System.Windows.Forms.TabPage();
             this.btn_DoorOpen_Test = new System.Windows.Forms.Button();
             this.tb_Log = new System.Windows.Forms.TextBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.gb_CartridgeInfo = new System.Windows.Forms.GroupBox();
             this.tb_CartridgeID_Test = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tb_PatientID_Test = new System.Windows.Forms.TextBox();
             this.tb_SampleID_Test = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.gb_TestInfo = new System.Windows.Forms.GroupBox();
             this.tb_WorkerName_Test = new System.Windows.Forms.TextBox();
             this.tb_WorkerID_Test = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.tabControl_Tester = new System.Windows.Forms.TabControl();
-            this.tabPage_Result = new System.Windows.Forms.TabPage();
+            this.tp_TestReport = new System.Windows.Forms.TabPage();
             this.progressBar_Tester = new System.Windows.Forms.ProgressBar();
             this.lb_IC_Result = new System.Windows.Forms.Label();
             this.listViewResultIC = new System.Windows.Forms.ListView();
@@ -313,11 +338,10 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
-            this.tp_Table_Ct = new System.Windows.Forms.TabPage();
+            this.tp_FluorescentSignals = new System.Windows.Forms.TabPage();
             this.dgv_opticDatum_tube4 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn182 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn183 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -535,32 +559,6 @@
             this.cBoxCh4ROX = new System.Windows.Forms.CheckBox();
             this.cBoxCh4FAM = new System.Windows.Forms.CheckBox();
             this.formsPlot4 = new ScottPlot.FormsPlot();
-            this.tp_Result = new System.Windows.Forms.TabPage();
-            this.label36 = new System.Windows.Forms.Label();
-            this.dataGridView4_Tester = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView3_Tester = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2_Tester = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView1_Tester = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_AccountManagement = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.label45 = new System.Windows.Forms.Label();
@@ -588,6 +586,32 @@
             this.tb_ID_IDManage = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
+            this.tp_Result = new System.Windows.Forms.TabPage();
+            this.label36 = new System.Windows.Forms.Label();
+            this.dataGridView4_Tester = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView3_Tester = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2_Tester = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1_Tester = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_Table = new System.Windows.Forms.TabPage();
             this.progressBar_Manager = new System.Windows.Forms.ProgressBar();
             this.dataGridView4_Engineer = new System.Windows.Forms.DataGridView();
@@ -644,11 +668,13 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button7 = new System.Windows.Forms.Button();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.button11 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
-            this.tp_Protocol.SuspendLayout();
+            this.tp_CreateTest.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -668,7 +694,7 @@
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tp_DiagnosisHowTo.SuspendLayout();
+            this.tp_Interpretation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_ct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_TB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_FLU)).BeginInit();
@@ -680,16 +706,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct1)).BeginInit();
             this.tp_simulation.SuspendLayout();
             this.tp_tester.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox12.SuspendLayout();
+            this.gb_CartridgeInfo.SuspendLayout();
+            this.gb_TestInfo.SuspendLayout();
             this.tabControl_Tester.SuspendLayout();
-            this.tabPage_Result.SuspendLayout();
+            this.tp_TestReport.SuspendLayout();
             this.tabPage_rawData.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tp_administrator.SuspendLayout();
             this.tabControl_admin.SuspendLayout();
-            this.tp_Table_Ct.SuspendLayout();
+            this.tp_FluorescentSignals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube2)).BeginInit();
@@ -700,15 +726,15 @@
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.tp_AccountManagement.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Manage)).BeginInit();
+            this.groupBox19.SuspendLayout();
             this.tp_Result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4_Tester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3_Tester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2_Tester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1_Tester)).BeginInit();
-            this.tp_AccountManagement.SuspendLayout();
-            this.groupBox18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Manage)).BeginInit();
-            this.groupBox19.SuspendLayout();
             this.tp_Table.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4_Engineer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3_Engineer)).BeginInit();
@@ -999,9 +1025,9 @@
             // 
             // tabControl_Engineer
             // 
-            this.tabControl_Engineer.Controls.Add(this.tp_Protocol);
+            this.tabControl_Engineer.Controls.Add(this.tp_CreateTest);
             this.tabControl_Engineer.Controls.Add(this.tp_IOSetting);
-            this.tabControl_Engineer.Controls.Add(this.tp_DiagnosisHowTo);
+            this.tabControl_Engineer.Controls.Add(this.tp_Interpretation);
             this.tabControl_Engineer.Controls.Add(this.tp_base_UserSelection);
             this.tabControl_Engineer.Controls.Add(this.tp_simulation);
             this.tabControl_Engineer.Location = new System.Drawing.Point(56, 24);
@@ -1012,44 +1038,44 @@
             this.tabControl_Engineer.Size = new System.Drawing.Size(1760, 850);
             this.tabControl_Engineer.TabIndex = 49;
             // 
-            // tp_Protocol
+            // tp_CreateTest
             // 
-            this.tp_Protocol.Controls.Add(this.groupBox21);
-            this.tp_Protocol.Controls.Add(this.groupBox20);
-            this.tp_Protocol.Controls.Add(this.tb_FianlCycle_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_FianlCycle_Eng);
-            this.tp_Protocol.Controls.Add(this.groupBox14);
-            this.tp_Protocol.Controls.Add(this.groupBox13);
-            this.tp_Protocol.Controls.Add(this.groupBox15);
-            this.tp_Protocol.Controls.Add(this.groupBox16);
-            this.tp_Protocol.Controls.Add(this.groupBox17);
-            this.tp_Protocol.Controls.Add(this.tb_FianlCycleMCU_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_FianlCycleMCU_Eng);
-            this.tp_Protocol.Controls.Add(this.groupBox4);
-            this.tp_Protocol.Controls.Add(this.groupBox3);
-            this.tp_Protocol.Controls.Add(this.groupBox2);
-            this.tp_Protocol.Controls.Add(this.pictureBox8);
-            this.tp_Protocol.Controls.Add(this.pictureBox7);
-            this.tp_Protocol.Controls.Add(this.pictureBox1);
-            this.tp_Protocol.Controls.Add(this.label41);
-            this.tp_Protocol.Controls.Add(this.label40);
-            this.tp_Protocol.Controls.Add(this.btn_DelRecipe_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_LoadRecipe_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_SaveRecipe_Eng);
-            this.tp_Protocol.Controls.Add(this.cb_Recipe_Eng);
-            this.tp_Protocol.Controls.Add(this.label17);
-            this.tp_Protocol.Controls.Add(this.btn_ApplyAll_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_MCURead_Eng);
-            this.tp_Protocol.Controls.Add(this.btn_NewRecipe_Eng);
-            this.tp_Protocol.Location = new System.Drawing.Point(4, 34);
-            this.tp_Protocol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tp_Protocol.Name = "tp_Protocol";
-            this.tp_Protocol.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tp_Protocol.Size = new System.Drawing.Size(1752, 812);
-            this.tp_Protocol.TabIndex = 0;
-            this.tp_Protocol.Text = " Protocol ";
-            this.tp_Protocol.UseVisualStyleBackColor = true;
-            this.tp_Protocol.Click += new System.EventHandler(this.tabPage6_Click);
+            this.tp_CreateTest.Controls.Add(this.groupBox21);
+            this.tp_CreateTest.Controls.Add(this.groupBox20);
+            this.tp_CreateTest.Controls.Add(this.tb_FianlCycle_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_FianlCycle_Eng);
+            this.tp_CreateTest.Controls.Add(this.groupBox14);
+            this.tp_CreateTest.Controls.Add(this.groupBox13);
+            this.tp_CreateTest.Controls.Add(this.groupBox15);
+            this.tp_CreateTest.Controls.Add(this.groupBox16);
+            this.tp_CreateTest.Controls.Add(this.groupBox17);
+            this.tp_CreateTest.Controls.Add(this.tb_FianlCycleMCU_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_FianlCycleMCU_Eng);
+            this.tp_CreateTest.Controls.Add(this.groupBox4);
+            this.tp_CreateTest.Controls.Add(this.groupBox3);
+            this.tp_CreateTest.Controls.Add(this.groupBox2);
+            this.tp_CreateTest.Controls.Add(this.pictureBox8);
+            this.tp_CreateTest.Controls.Add(this.pictureBox7);
+            this.tp_CreateTest.Controls.Add(this.pictureBox1);
+            this.tp_CreateTest.Controls.Add(this.label41);
+            this.tp_CreateTest.Controls.Add(this.label40);
+            this.tp_CreateTest.Controls.Add(this.btn_DelRecipe_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_LoadRecipe_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_SaveRecipe_Eng);
+            this.tp_CreateTest.Controls.Add(this.cb_Recipe_Eng);
+            this.tp_CreateTest.Controls.Add(this.label17);
+            this.tp_CreateTest.Controls.Add(this.btn_ApplyAll_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_MCURead_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_NewRecipe_Eng);
+            this.tp_CreateTest.Location = new System.Drawing.Point(4, 34);
+            this.tp_CreateTest.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tp_CreateTest.Name = "tp_CreateTest";
+            this.tp_CreateTest.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tp_CreateTest.Size = new System.Drawing.Size(1752, 812);
+            this.tp_CreateTest.TabIndex = 0;
+            this.tp_CreateTest.Text = "    Create Test    ";
+            this.tp_CreateTest.UseVisualStyleBackColor = true;
+            this.tp_CreateTest.Click += new System.EventHandler(this.tabPage6_Click);
             // 
             // groupBox21
             // 
@@ -1313,7 +1339,7 @@
             this.groupBox15.Size = new System.Drawing.Size(401, 159);
             this.groupBox15.TabIndex = 3;
             this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "2nd STEP";
+            this.groupBox15.Text = "2nd Cycle";
             // 
             // tb_2HoldSec_Eng
             // 
@@ -1370,7 +1396,7 @@
             this.groupBox16.Size = new System.Drawing.Size(401, 159);
             this.groupBox16.TabIndex = 2;
             this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "1st STEP";
+            this.groupBox16.Text = "1st Cycle";
             // 
             // tb_1HoldSec_Eng
             // 
@@ -1506,7 +1532,7 @@
             this.groupBox4.Size = new System.Drawing.Size(401, 161);
             this.groupBox4.TabIndex = 125;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "2nd STEP";
+            this.groupBox4.Text = "2nd Cycle";
             // 
             // tb_2HoldSecMCU_Eng
             // 
@@ -1565,7 +1591,7 @@
             this.groupBox3.Size = new System.Drawing.Size(401, 161);
             this.groupBox3.TabIndex = 125;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "1st STEP";
+            this.groupBox3.Text = "1st Cycle";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // tb_1HoldSecMCU_Eng
@@ -1718,9 +1744,9 @@
             this.label40.Location = new System.Drawing.Point(286, 147);
             this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(213, 25);
+            this.label40.Size = new System.Drawing.Size(149, 25);
             this.label40.TabIndex = 85;
-            this.label40.Text = "[ PROTOCOL Setting ]";
+            this.label40.Text = "[ Test Settings ]";
             // 
             // btn_DelRecipe_Eng
             // 
@@ -1757,12 +1783,12 @@
             // 
             // cb_Recipe_Eng
             // 
-            this.cb_Recipe_Eng.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cb_Recipe_Eng.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cb_Recipe_Eng.FormattingEnabled = true;
             this.cb_Recipe_Eng.Location = new System.Drawing.Point(270, 57);
             this.cb_Recipe_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cb_Recipe_Eng.Name = "cb_Recipe_Eng";
-            this.cb_Recipe_Eng.Size = new System.Drawing.Size(400, 24);
+            this.cb_Recipe_Eng.Size = new System.Drawing.Size(400, 28);
             this.cb_Recipe_Eng.TabIndex = 0;
             // 
             // label17
@@ -1771,9 +1797,9 @@
             this.label17.Location = new System.Drawing.Point(130, 57);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(125, 25);
+            this.label17.Size = new System.Drawing.Size(119, 25);
             this.label17.TabIndex = 53;
-            this.label17.Text = "PROTOCOL";
+            this.label17.Text = "Test Name :";
             // 
             // btn_ApplyAll_Eng
             // 
@@ -1821,7 +1847,7 @@
             this.tp_IOSetting.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tp_IOSetting.Size = new System.Drawing.Size(1752, 812);
             this.tp_IOSetting.TabIndex = 1;
-            this.tp_IOSetting.Text = " I/O Settings";
+            this.tp_IOSetting.Text = "     I/O Settings    ";
             this.tp_IOSetting.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -2277,29 +2303,29 @@
             this.tb_Pulse_Cnt.TabIndex = 8;
             this.tb_Pulse_Cnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tp_DiagnosisHowTo
+            // tp_Interpretation
             // 
-            this.tp_DiagnosisHowTo.Controls.Add(this.btnDiagnosisFindAndLoad);
-            this.tp_DiagnosisHowTo.Controls.Add(this.label12);
-            this.tp_DiagnosisHowTo.Controls.Add(this.textBox_NewFileName);
-            this.tp_DiagnosisHowTo.Controls.Add(this.btnDiagnosisLoad);
-            this.tp_DiagnosisHowTo.Controls.Add(this.label6);
-            this.tp_DiagnosisHowTo.Controls.Add(this.textBox_ExcelFilePath);
-            this.tp_DiagnosisHowTo.Controls.Add(this.btnDiagnosisDelete);
-            this.tp_DiagnosisHowTo.Controls.Add(this.btnDiagnosisNew);
-            this.tp_DiagnosisHowTo.Controls.Add(this.btnDiagnosisSave);
-            this.tp_DiagnosisHowTo.Controls.Add(this.dgv_diagnosis_ct);
-            this.tp_DiagnosisHowTo.Controls.Add(this.dgv_diagnosis_TB);
-            this.tp_DiagnosisHowTo.Controls.Add(this.dgv_diagnosis_FLU);
-            this.tp_DiagnosisHowTo.Controls.Add(this.dgv_diagnosis_COVID);
-            this.tp_DiagnosisHowTo.Controls.Add(this.cb_Diagnosis_Target);
-            this.tp_DiagnosisHowTo.Controls.Add(this.label5);
-            this.tp_DiagnosisHowTo.Location = new System.Drawing.Point(4, 34);
-            this.tp_DiagnosisHowTo.Name = "tp_DiagnosisHowTo";
-            this.tp_DiagnosisHowTo.Size = new System.Drawing.Size(1752, 812);
-            this.tp_DiagnosisHowTo.TabIndex = 4;
-            this.tp_DiagnosisHowTo.Text = "DiagnosisHowTo";
-            this.tp_DiagnosisHowTo.UseVisualStyleBackColor = true;
+            this.tp_Interpretation.Controls.Add(this.btnDiagnosisFindAndLoad);
+            this.tp_Interpretation.Controls.Add(this.label12);
+            this.tp_Interpretation.Controls.Add(this.textBox_NewFileName);
+            this.tp_Interpretation.Controls.Add(this.btnDiagnosisLoad);
+            this.tp_Interpretation.Controls.Add(this.label6);
+            this.tp_Interpretation.Controls.Add(this.textBox_ExcelFilePath);
+            this.tp_Interpretation.Controls.Add(this.btnDiagnosisDelete);
+            this.tp_Interpretation.Controls.Add(this.btnDiagnosisNew);
+            this.tp_Interpretation.Controls.Add(this.btnDiagnosisSave);
+            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_ct);
+            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_TB);
+            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_FLU);
+            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_COVID);
+            this.tp_Interpretation.Controls.Add(this.cb_Diagnosis_Target);
+            this.tp_Interpretation.Controls.Add(this.label5);
+            this.tp_Interpretation.Location = new System.Drawing.Point(4, 34);
+            this.tp_Interpretation.Name = "tp_Interpretation";
+            this.tp_Interpretation.Size = new System.Drawing.Size(1752, 812);
+            this.tp_Interpretation.TabIndex = 4;
+            this.tp_Interpretation.Text = "    Interpretation    ";
+            this.tp_Interpretation.UseVisualStyleBackColor = true;
             // 
             // btnDiagnosisFindAndLoad
             // 
@@ -2635,10 +2661,125 @@
             // dgv_diagnosis_COVID
             // 
             this.dgv_diagnosis_COVID.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_diagnosis_COVID.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column52,
+            this.Column53,
+            this.Column54,
+            this.Column55,
+            this.Column56,
+            this.Column57,
+            this.Column58,
+            this.Column59,
+            this.Column60,
+            this.Column61,
+            this.Column62,
+            this.Column63,
+            this.Column64,
+            this.Column65,
+            this.Column66,
+            this.Column67,
+            this.Column68,
+            this.Column69,
+            this.Column70});
             this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(158, 248);
             this.dgv_diagnosis_COVID.Name = "dgv_diagnosis_COVID";
-            this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(769, 500);
+            this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(1079, 533);
             this.dgv_diagnosis_COVID.TabIndex = 7;
+            // 
+            // Column52
+            // 
+            this.Column52.HeaderText = "";
+            this.Column52.Name = "Column52";
+            // 
+            // Column53
+            // 
+            this.Column53.HeaderText = "";
+            this.Column53.Name = "Column53";
+            // 
+            // Column54
+            // 
+            this.Column54.HeaderText = "";
+            this.Column54.Name = "Column54";
+            // 
+            // Column55
+            // 
+            this.Column55.HeaderText = "";
+            this.Column55.Name = "Column55";
+            // 
+            // Column56
+            // 
+            this.Column56.HeaderText = "";
+            this.Column56.Name = "Column56";
+            // 
+            // Column57
+            // 
+            this.Column57.HeaderText = "";
+            this.Column57.Name = "Column57";
+            // 
+            // Column58
+            // 
+            this.Column58.HeaderText = "";
+            this.Column58.Name = "Column58";
+            // 
+            // Column59
+            // 
+            this.Column59.HeaderText = "";
+            this.Column59.Name = "Column59";
+            // 
+            // Column60
+            // 
+            this.Column60.HeaderText = "";
+            this.Column60.Name = "Column60";
+            // 
+            // Column61
+            // 
+            this.Column61.HeaderText = "";
+            this.Column61.Name = "Column61";
+            // 
+            // Column62
+            // 
+            this.Column62.HeaderText = "";
+            this.Column62.Name = "Column62";
+            // 
+            // Column63
+            // 
+            this.Column63.HeaderText = "";
+            this.Column63.Name = "Column63";
+            // 
+            // Column64
+            // 
+            this.Column64.HeaderText = "";
+            this.Column64.Name = "Column64";
+            // 
+            // Column65
+            // 
+            this.Column65.HeaderText = "";
+            this.Column65.Name = "Column65";
+            // 
+            // Column66
+            // 
+            this.Column66.HeaderText = "";
+            this.Column66.Name = "Column66";
+            // 
+            // Column67
+            // 
+            this.Column67.HeaderText = "";
+            this.Column67.Name = "Column67";
+            // 
+            // Column68
+            // 
+            this.Column68.HeaderText = "";
+            this.Column68.Name = "Column68";
+            // 
+            // Column69
+            // 
+            this.Column69.HeaderText = "";
+            this.Column69.Name = "Column69";
+            // 
+            // Column70
+            // 
+            this.Column70.HeaderText = "";
+            this.Column70.Name = "Column70";
             // 
             // cb_Diagnosis_Target
             // 
@@ -2656,11 +2797,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 18);
+            this.label5.Location = new System.Drawing.Point(19, 18);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 25);
+            this.label5.Size = new System.Drawing.Size(119, 25);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Target :";
+            this.label5.Text = "Test Name :";
             // 
             // tp_base_UserSelection
             // 
@@ -2678,7 +2819,7 @@
             // dgv_ct4
             // 
             dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dgv_ct4.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle33;
             this.dgv_ct4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ct4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2737,7 +2878,7 @@
             // dgv_ct3
             // 
             dataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dgv_ct3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle35;
             this.dgv_ct3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ct3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2796,7 +2937,7 @@
             // dgv_ct2
             // 
             dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle37.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dgv_ct2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle37;
             this.dgv_ct2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ct2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2855,7 +2996,7 @@
             // dgv_ct1
             // 
             dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.dgv_ct1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle39;
             this.dgv_ct1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ct1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2913,6 +3054,13 @@
             // 
             // tp_simulation
             // 
+            this.tp_simulation.Controls.Add(this.button11);
+            this.tp_simulation.Controls.Add(this.checkBox4);
+            this.tp_simulation.Controls.Add(this.button10);
+            this.tp_simulation.Controls.Add(this.button9);
+            this.tp_simulation.Controls.Add(this.textBox1);
+            this.tp_simulation.Controls.Add(this.checkBox3);
+            this.tp_simulation.Controls.Add(this.button8);
             this.tp_simulation.Controls.Add(this.button7);
             this.tp_simulation.Controls.Add(this.button6);
             this.tp_simulation.Controls.Add(this.button5);
@@ -2934,11 +3082,68 @@
             this.tp_simulation.Text = "simul";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(971, 25);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(209, 60);
+            this.button10.TabIndex = 18;
+            this.button10.Text = "set processStep";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(241, 493);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(145, 30);
+            this.button9.TabIndex = 17;
+            this.button9.Text = "button9";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(241, 440);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(1167, 30);
+            this.textBox1.TabIndex = 16;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(68, 440);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(142, 29);
+            this.checkBox3.TabIndex = 15;
+            this.checkBox3.Text = "log file select";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(920, 295);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(193, 48);
+            this.button8.TabIndex = 14;
+            this.button8.Text = "Ct detection test";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(690, 114);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(200, 60);
+            this.button7.TabIndex = 13;
+            this.button7.Text = "reset plot";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(480, 167);
+            this.button6.Location = new System.Drawing.Point(480, 114);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(213, 48);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 12;
             this.button6.Text = "remove optic data dgv";
             this.button6.UseVisualStyleBackColor = true;
@@ -2946,9 +3151,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(241, 167);
+            this.button5.Location = new System.Drawing.Point(253, 114);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(188, 48);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 11;
             this.button5.Text = "resetDGV";
             this.button5.UseVisualStyleBackColor = true;
@@ -2956,7 +3161,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(45, 167);
+            this.button4.Location = new System.Drawing.Point(729, 295);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(176, 48);
             this.button4.TabIndex = 10;
@@ -2966,9 +3171,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(44, 100);
+            this.button3.Location = new System.Drawing.Point(37, 114);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 47);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
             this.button3.Text = "presetDataRandomly";
             this.button3.UseVisualStyleBackColor = true;
@@ -2976,7 +3181,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(241, 100);
+            this.button2.Location = new System.Drawing.Point(1125, 295);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(216, 50);
             this.button2.TabIndex = 8;
@@ -2986,7 +3191,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(477, 100);
+            this.button1.Location = new System.Drawing.Point(1007, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 50);
             this.button1.TabIndex = 7;
@@ -2996,7 +3201,7 @@
             // 
             // btnLogFileRead
             // 
-            this.btnLogFileRead.Location = new System.Drawing.Point(44, 36);
+            this.btnLogFileRead.Location = new System.Drawing.Point(516, 295);
             this.btnLogFileRead.Name = "btnLogFileRead";
             this.btnLogFileRead.Size = new System.Drawing.Size(177, 46);
             this.btnLogFileRead.TabIndex = 6;
@@ -3006,7 +3211,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(241, 235);
+            this.btnGraph.Location = new System.Drawing.Point(241, 295);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(200, 106);
             this.btnGraph.TabIndex = 5;
@@ -3016,7 +3221,7 @@
             // 
             // btn_firstGraph
             // 
-            this.btn_firstGraph.Location = new System.Drawing.Point(45, 235);
+            this.btn_firstGraph.Location = new System.Drawing.Point(37, 295);
             this.btn_firstGraph.Name = "btn_firstGraph";
             this.btn_firstGraph.Size = new System.Drawing.Size(176, 106);
             this.btn_firstGraph.TabIndex = 4;
@@ -3026,9 +3231,9 @@
             // 
             // btnSimul4
             // 
-            this.btnSimul4.Location = new System.Drawing.Point(946, 36);
+            this.btnSimul4.Location = new System.Drawing.Point(690, 25);
             this.btnSimul4.Name = "btnSimul4";
-            this.btnSimul4.Size = new System.Drawing.Size(216, 46);
+            this.btnSimul4.Size = new System.Drawing.Size(200, 60);
             this.btnSimul4.TabIndex = 3;
             this.btnSimul4.Text = "Final Cycle";
             this.btnSimul4.UseVisualStyleBackColor = true;
@@ -3036,9 +3241,9 @@
             // 
             // btnSimul3
             // 
-            this.btnSimul3.Location = new System.Drawing.Point(715, 36);
+            this.btnSimul3.Location = new System.Drawing.Point(480, 25);
             this.btnSimul3.Name = "btnSimul3";
-            this.btnSimul3.Size = new System.Drawing.Size(216, 46);
+            this.btnSimul3.Size = new System.Drawing.Size(200, 60);
             this.btnSimul3.TabIndex = 2;
             this.btnSimul3.Text = "routine_cnt ++";
             this.btnSimul3.UseVisualStyleBackColor = true;
@@ -3046,9 +3251,9 @@
             // 
             // btnSimul2
             // 
-            this.btnSimul2.Location = new System.Drawing.Point(477, 37);
+            this.btnSimul2.Location = new System.Drawing.Point(253, 25);
             this.btnSimul2.Name = "btnSimul2";
-            this.btnSimul2.Size = new System.Drawing.Size(216, 45);
+            this.btnSimul2.Size = new System.Drawing.Size(200, 60);
             this.btnSimul2.TabIndex = 1;
             this.btnSimul2.Text = "15 cycle";
             this.btnSimul2.UseVisualStyleBackColor = true;
@@ -3056,9 +3261,9 @@
             // 
             // btnSimul1
             // 
-            this.btnSimul1.Location = new System.Drawing.Point(241, 37);
+            this.btnSimul1.Location = new System.Drawing.Point(37, 25);
             this.btnSimul1.Name = "btnSimul1";
-            this.btnSimul1.Size = new System.Drawing.Size(221, 45);
+            this.btnSimul1.Size = new System.Drawing.Size(200, 60);
             this.btnSimul1.TabIndex = 0;
             this.btnSimul1.Text = "Simulation Start";
             this.btnSimul1.UseVisualStyleBackColor = true;
@@ -3068,8 +3273,8 @@
             // 
             this.tp_tester.Controls.Add(this.btn_DoorOpen_Test);
             this.tp_tester.Controls.Add(this.tb_Log);
-            this.tp_tester.Controls.Add(this.groupBox11);
-            this.tp_tester.Controls.Add(this.groupBox12);
+            this.tp_tester.Controls.Add(this.gb_CartridgeInfo);
+            this.tp_tester.Controls.Add(this.gb_TestInfo);
             this.tp_tester.Controls.Add(this.tabControl_Tester);
             this.tp_tester.Controls.Add(this.panel2);
             this.tp_tester.Location = new System.Drawing.Point(4, 34);
@@ -3103,26 +3308,26 @@
             this.tb_Log.Size = new System.Drawing.Size(356, 213);
             this.tb_Log.TabIndex = 9;
             // 
-            // groupBox11
+            // gb_CartridgeInfo
             // 
-            this.groupBox11.Controls.Add(this.tb_CartridgeID_Test);
-            this.groupBox11.Controls.Add(this.label7);
-            this.groupBox11.Controls.Add(this.tb_PatientID_Test);
-            this.groupBox11.Controls.Add(this.tb_SampleID_Test);
-            this.groupBox11.Controls.Add(this.label8);
-            this.groupBox11.Controls.Add(this.label32);
-            this.groupBox11.Location = new System.Drawing.Point(1448, 342);
-            this.groupBox11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox11.Size = new System.Drawing.Size(356, 281);
-            this.groupBox11.TabIndex = 8;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Cartridge Info.";
+            this.gb_CartridgeInfo.Controls.Add(this.tb_CartridgeID_Test);
+            this.gb_CartridgeInfo.Controls.Add(this.label7);
+            this.gb_CartridgeInfo.Controls.Add(this.tb_PatientID_Test);
+            this.gb_CartridgeInfo.Controls.Add(this.tb_SampleID_Test);
+            this.gb_CartridgeInfo.Controls.Add(this.label8);
+            this.gb_CartridgeInfo.Controls.Add(this.label32);
+            this.gb_CartridgeInfo.Location = new System.Drawing.Point(1448, 342);
+            this.gb_CartridgeInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gb_CartridgeInfo.Name = "gb_CartridgeInfo";
+            this.gb_CartridgeInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gb_CartridgeInfo.Size = new System.Drawing.Size(356, 281);
+            this.gb_CartridgeInfo.TabIndex = 8;
+            this.gb_CartridgeInfo.TabStop = false;
+            this.gb_CartridgeInfo.Text = "Cartridge Info.";
             // 
             // tb_CartridgeID_Test
             // 
-            this.tb_CartridgeID_Test.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_CartridgeID_Test.BackColor = System.Drawing.Color.White;
             this.tb_CartridgeID_Test.Location = new System.Drawing.Point(137, 197);
             this.tb_CartridgeID_Test.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_CartridgeID_Test.Name = "tb_CartridgeID_Test";
@@ -3144,7 +3349,7 @@
             // 
             // tb_PatientID_Test
             // 
-            this.tb_PatientID_Test.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_PatientID_Test.BackColor = System.Drawing.Color.White;
             this.tb_PatientID_Test.Location = new System.Drawing.Point(137, 52);
             this.tb_PatientID_Test.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_PatientID_Test.Name = "tb_PatientID_Test";
@@ -3156,7 +3361,7 @@
             // 
             // tb_SampleID_Test
             // 
-            this.tb_SampleID_Test.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_SampleID_Test.BackColor = System.Drawing.Color.White;
             this.tb_SampleID_Test.Location = new System.Drawing.Point(137, 125);
             this.tb_SampleID_Test.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_SampleID_Test.Name = "tb_SampleID_Test";
@@ -3186,24 +3391,23 @@
             this.label32.TabIndex = 5;
             this.label32.Text = "Sample ID";
             // 
-            // groupBox12
+            // gb_TestInfo
             // 
-            this.groupBox12.Controls.Add(this.tb_WorkerName_Test);
-            this.groupBox12.Controls.Add(this.tb_WorkerID_Test);
-            this.groupBox12.Controls.Add(this.label33);
-            this.groupBox12.Controls.Add(this.label34);
-            this.groupBox12.Location = new System.Drawing.Point(1448, 138);
-            this.groupBox12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox12.Size = new System.Drawing.Size(356, 186);
-            this.groupBox12.TabIndex = 7;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Tester Info.";
+            this.gb_TestInfo.Controls.Add(this.tb_WorkerName_Test);
+            this.gb_TestInfo.Controls.Add(this.tb_WorkerID_Test);
+            this.gb_TestInfo.Controls.Add(this.label33);
+            this.gb_TestInfo.Controls.Add(this.label34);
+            this.gb_TestInfo.Location = new System.Drawing.Point(1448, 138);
+            this.gb_TestInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gb_TestInfo.Name = "gb_TestInfo";
+            this.gb_TestInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gb_TestInfo.Size = new System.Drawing.Size(356, 186);
+            this.gb_TestInfo.TabIndex = 7;
+            this.gb_TestInfo.TabStop = false;
+            this.gb_TestInfo.Text = "Tester Info.";
             // 
             // tb_WorkerName_Test
             // 
-            this.tb_WorkerName_Test.Enabled = false;
             this.tb_WorkerName_Test.Location = new System.Drawing.Point(104, 52);
             this.tb_WorkerName_Test.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_WorkerName_Test.Name = "tb_WorkerName_Test";
@@ -3213,7 +3417,6 @@
             // 
             // tb_WorkerID_Test
             // 
-            this.tb_WorkerID_Test.Enabled = false;
             this.tb_WorkerID_Test.Location = new System.Drawing.Point(104, 116);
             this.tb_WorkerID_Test.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_WorkerID_Test.Name = "tb_WorkerID_Test";
@@ -3243,7 +3446,7 @@
             // 
             // tabControl_Tester
             // 
-            this.tabControl_Tester.Controls.Add(this.tabPage_Result);
+            this.tabControl_Tester.Controls.Add(this.tp_TestReport);
             this.tabControl_Tester.Controls.Add(this.tabPage_rawData);
             this.tabControl_Tester.Location = new System.Drawing.Point(46, 108);
             this.tabControl_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -3253,29 +3456,29 @@
             this.tabControl_Tester.TabIndex = 6;
             this.tabControl_Tester.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl4_Selected);
             // 
-            // tabPage_Result
+            // tp_TestReport
             // 
-            this.tabPage_Result.Controls.Add(this.progressBar_Tester);
-            this.tabPage_Result.Controls.Add(this.lb_IC_Result);
-            this.tabPage_Result.Controls.Add(this.listViewResultIC);
-            this.tabPage_Result.Controls.Add(this.listView_Result);
-            this.tabPage_Result.Controls.Add(this.label42);
-            this.tabPage_Result.Controls.Add(this.label31);
-            this.tabPage_Result.Controls.Add(this.label30);
-            this.tabPage_Result.Controls.Add(this.listView_PatientInfo);
-            this.tabPage_Result.Controls.Add(this.listView_inspectorInfo);
-            this.tabPage_Result.Controls.Add(this.label29);
-            this.tabPage_Result.Controls.Add(this.label28);
-            this.tabPage_Result.Controls.Add(this.label11);
-            this.tabPage_Result.Controls.Add(this.listView_ReportInfo);
-            this.tabPage_Result.Location = new System.Drawing.Point(4, 34);
-            this.tabPage_Result.Name = "tabPage_Result";
-            this.tabPage_Result.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Result.Size = new System.Drawing.Size(1352, 732);
-            this.tabPage_Result.TabIndex = 4;
-            this.tabPage_Result.Text = "Test Result";
-            this.tabPage_Result.UseVisualStyleBackColor = true;
-            this.tabPage_Result.Click += new System.EventHandler(this.tabPage_Result_Click);
+            this.tp_TestReport.Controls.Add(this.progressBar_Tester);
+            this.tp_TestReport.Controls.Add(this.lb_IC_Result);
+            this.tp_TestReport.Controls.Add(this.listViewResultIC);
+            this.tp_TestReport.Controls.Add(this.listView_Result);
+            this.tp_TestReport.Controls.Add(this.label42);
+            this.tp_TestReport.Controls.Add(this.label31);
+            this.tp_TestReport.Controls.Add(this.label30);
+            this.tp_TestReport.Controls.Add(this.listView_PatientInfo);
+            this.tp_TestReport.Controls.Add(this.listView_inspectorInfo);
+            this.tp_TestReport.Controls.Add(this.label29);
+            this.tp_TestReport.Controls.Add(this.label28);
+            this.tp_TestReport.Controls.Add(this.label11);
+            this.tp_TestReport.Controls.Add(this.listView_ReportInfo);
+            this.tp_TestReport.Location = new System.Drawing.Point(4, 34);
+            this.tp_TestReport.Name = "tp_TestReport";
+            this.tp_TestReport.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_TestReport.Size = new System.Drawing.Size(1352, 732);
+            this.tp_TestReport.TabIndex = 4;
+            this.tp_TestReport.Text = "    Test Report    ";
+            this.tp_TestReport.UseVisualStyleBackColor = true;
+            this.tp_TestReport.Click += new System.EventHandler(this.tabPage_Result_Click);
             // 
             // progressBar_Tester
             // 
@@ -3289,11 +3492,11 @@
             // lb_IC_Result
             // 
             this.lb_IC_Result.AutoSize = true;
-            this.lb_IC_Result.Location = new System.Drawing.Point(163, 491);
+            this.lb_IC_Result.Location = new System.Drawing.Point(197, 492);
             this.lb_IC_Result.Name = "lb_IC_Result";
-            this.lb_IC_Result.Size = new System.Drawing.Size(97, 25);
+            this.lb_IC_Result.Size = new System.Drawing.Size(114, 25);
             this.lb_IC_Result.TabIndex = 12;
-            this.lb_IC_Result.Text = "not tested";
+            this.lb_IC_Result.Text = "Pass or Fail";
             // 
             // listViewResultIC
             // 
@@ -3330,9 +3533,9 @@
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(26, 491);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(144, 25);
+            this.label31.Size = new System.Drawing.Size(165, 25);
             this.label31.TabIndex = 7;
-            this.label31.Text = "* Test Result :  ";
+            this.label31.Text = "* Quality Control :";
             // 
             // label30
             // 
@@ -3378,9 +3581,9 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(556, 220);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(127, 25);
+            this.label28.Size = new System.Drawing.Size(147, 25);
             this.label28.TabIndex = 2;
-            this.label28.Text = "* Patient Info.";
+            this.label28.Text = "* Cartridge Info.";
             // 
             // label11
             // 
@@ -3440,11 +3643,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(379, 22);
+            this.label9.Location = new System.Drawing.Point(349, 21);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 25);
+            this.label9.Size = new System.Drawing.Size(122, 25);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Protocol";
+            this.label9.Text = "Select Test :";
             // 
             // btn_SetRecipe_Test
             // 
@@ -3454,7 +3657,7 @@
             this.btn_SetRecipe_Test.Name = "btn_SetRecipe_Test";
             this.btn_SetRecipe_Test.Size = new System.Drawing.Size(206, 40);
             this.btn_SetRecipe_Test.TabIndex = 8;
-            this.btn_SetRecipe_Test.Text = "2. Protocol Select";
+            this.btn_SetRecipe_Test.Text = "2. Select";
             this.btn_SetRecipe_Test.UseVisualStyleBackColor = true;
             this.btn_SetRecipe_Test.Click += new System.EventHandler(this.btn_SetRecipe_Test_Click);
             // 
@@ -3469,6 +3672,7 @@
             this.cb_Recipe_Test.Name = "cb_Recipe_Test";
             this.cb_Recipe_Test.Size = new System.Drawing.Size(208, 33);
             this.cb_Recipe_Test.TabIndex = 7;
+            this.cb_Recipe_Test.SelectedIndexChanged += new System.EventHandler(this.cb_Recipe_Test_SelectedIndexChanged);
             // 
             // btn_Start_Test
             // 
@@ -3491,19 +3695,6 @@
             this.btn_OpenDoor_Test.Text = "1. Test Preparation";
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
-            // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
             // 
             // tabControl1
             // 
@@ -3532,10 +3723,10 @@
             // 
             // tabControl_admin
             // 
-            this.tabControl_admin.Controls.Add(this.tp_Table_Ct);
+            this.tabControl_admin.Controls.Add(this.tp_FluorescentSignals);
             this.tabControl_admin.Controls.Add(this.tp_Graph);
-            this.tabControl_admin.Controls.Add(this.tp_Result);
             this.tabControl_admin.Controls.Add(this.tp_AccountManagement);
+            this.tabControl_admin.Controls.Add(this.tp_Result);
             this.tabControl_admin.Controls.Add(this.tp_Table);
             this.tabControl_admin.Location = new System.Drawing.Point(26, 28);
             this.tabControl_admin.Name = "tabControl_admin";
@@ -3543,21 +3734,21 @@
             this.tabControl_admin.Size = new System.Drawing.Size(1789, 846);
             this.tabControl_admin.TabIndex = 0;
             // 
-            // tp_Table_Ct
+            // tp_FluorescentSignals
             // 
-            this.tp_Table_Ct.Controls.Add(this.dgv_opticDatum_tube4);
-            this.tp_Table_Ct.Controls.Add(this.dgv_opticDatum_tube3);
-            this.tp_Table_Ct.Controls.Add(this.dgv_opticDatum_tube2);
-            this.tp_Table_Ct.Controls.Add(this.progressBar1);
-            this.tp_Table_Ct.Controls.Add(this.dgv_opticDatum_tube1);
-            this.tp_Table_Ct.Controls.Add(this.label3);
-            this.tp_Table_Ct.Controls.Add(this.label4);
-            this.tp_Table_Ct.Location = new System.Drawing.Point(4, 34);
-            this.tp_Table_Ct.Name = "tp_Table_Ct";
-            this.tp_Table_Ct.Size = new System.Drawing.Size(1781, 808);
-            this.tp_Table_Ct.TabIndex = 3;
-            this.tp_Table_Ct.Text = "Table";
-            this.tp_Table_Ct.UseVisualStyleBackColor = true;
+            this.tp_FluorescentSignals.Controls.Add(this.dgv_opticDatum_tube4);
+            this.tp_FluorescentSignals.Controls.Add(this.dgv_opticDatum_tube3);
+            this.tp_FluorescentSignals.Controls.Add(this.dgv_opticDatum_tube2);
+            this.tp_FluorescentSignals.Controls.Add(this.progressBar1);
+            this.tp_FluorescentSignals.Controls.Add(this.dgv_opticDatum_tube1);
+            this.tp_FluorescentSignals.Controls.Add(this.label3);
+            this.tp_FluorescentSignals.Controls.Add(this.label4);
+            this.tp_FluorescentSignals.Location = new System.Drawing.Point(4, 34);
+            this.tp_FluorescentSignals.Name = "tp_FluorescentSignals";
+            this.tp_FluorescentSignals.Size = new System.Drawing.Size(1781, 808);
+            this.tp_FluorescentSignals.TabIndex = 3;
+            this.tp_FluorescentSignals.Text = "    Fluorescence Signals    ";
+            this.tp_FluorescentSignals.UseVisualStyleBackColor = true;
             // 
             // dgv_opticDatum_tube4
             // 
@@ -3628,7 +3819,7 @@
             dataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle42;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 589);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 491);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -4083,7 +4274,7 @@
             dataGridViewCellStyle44.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle44;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 412);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 314);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -4538,7 +4729,7 @@
             dataGridViewCellStyle46.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle46;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 233);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 135);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -5003,7 +5194,7 @@
             dataGridViewCellStyle48.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle48;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, 59);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -39);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -5419,7 +5610,7 @@
             this.tp_Graph.Name = "tp_Graph";
             this.tp_Graph.Size = new System.Drawing.Size(1781, 808);
             this.tp_Graph.TabIndex = 2;
-            this.tp_Graph.Text = "Graph";
+            this.tp_Graph.Text = "    Graph (Signals)    ";
             this.tp_Graph.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
@@ -5788,271 +5979,6 @@
             this.formsPlot4.Size = new System.Drawing.Size(887, 396);
             this.formsPlot4.TabIndex = 5;
             // 
-            // tp_Result
-            // 
-            this.tp_Result.Controls.Add(this.label36);
-            this.tp_Result.Controls.Add(this.dataGridView4_Tester);
-            this.tp_Result.Controls.Add(this.dataGridView3_Tester);
-            this.tp_Result.Controls.Add(this.dataGridView2_Tester);
-            this.tp_Result.Controls.Add(this.dataGridView1_Tester);
-            this.tp_Result.Location = new System.Drawing.Point(4, 34);
-            this.tp_Result.Name = "tp_Result";
-            this.tp_Result.Size = new System.Drawing.Size(1781, 808);
-            this.tp_Result.TabIndex = 4;
-            this.tp_Result.Text = "Result (P/N)";
-            this.tp_Result.UseVisualStyleBackColor = true;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label36.Location = new System.Drawing.Point(738, 85);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(198, 37);
-            this.label36.TabIndex = 26;
-            this.label36.Text = "R E S U L T";
-            // 
-            // dataGridView4_Tester
-            // 
-            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView4_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
-            this.dataGridView4_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView4_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.Honeydew;
-            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView4_Tester.DefaultCellStyle = dataGridViewCellStyle50;
-            this.dataGridView4_Tester.Enabled = false;
-            this.dataGridView4_Tester.Location = new System.Drawing.Point(238, 591);
-            this.dataGridView4_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridView4_Tester.Name = "dataGridView4_Tester";
-            this.dataGridView4_Tester.RowTemplate.Height = 23;
-            this.dataGridView4_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView4_Tester.Size = new System.Drawing.Size(1269, 87);
-            this.dataGridView4_Tester.TabIndex = 24;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "FAM";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "ROX";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "HEX";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "CY5";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 250;
-            // 
-            // dataGridView3_Tester
-            // 
-            dataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle51.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView3_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle51;
-            this.dataGridView3_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView3_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.Honeydew;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3_Tester.DefaultCellStyle = dataGridViewCellStyle52;
-            this.dataGridView3_Tester.Enabled = false;
-            this.dataGridView3_Tester.Location = new System.Drawing.Point(238, 455);
-            this.dataGridView3_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridView3_Tester.Name = "dataGridView3_Tester";
-            this.dataGridView3_Tester.RowTemplate.Height = 23;
-            this.dataGridView3_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView3_Tester.Size = new System.Drawing.Size(1269, 87);
-            this.dataGridView3_Tester.TabIndex = 23;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "FAM";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "ROX";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "HEX";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "CY5";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 250;
-            // 
-            // dataGridView2_Tester
-            // 
-            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView2_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle53;
-            this.dataGridView2_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView2_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15});
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.Honeydew;
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2_Tester.DefaultCellStyle = dataGridViewCellStyle54;
-            this.dataGridView2_Tester.Enabled = false;
-            this.dataGridView2_Tester.Location = new System.Drawing.Point(238, 319);
-            this.dataGridView2_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridView2_Tester.Name = "dataGridView2_Tester";
-            this.dataGridView2_Tester.RowTemplate.Height = 23;
-            this.dataGridView2_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView2_Tester.Size = new System.Drawing.Size(1269, 87);
-            this.dataGridView2_Tester.TabIndex = 22;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "FAM";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "ROX";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "HEX";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "CY5";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.Width = 250;
-            // 
-            // dataGridView1_Tester
-            // 
-            dataGridViewCellStyle55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("Gulim", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.dataGridView1_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle55;
-            this.dataGridView1_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20});
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            dataGridViewCellStyle56.ForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.Honeydew;
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1_Tester.DefaultCellStyle = dataGridViewCellStyle56;
-            this.dataGridView1_Tester.Enabled = false;
-            this.dataGridView1_Tester.Location = new System.Drawing.Point(238, 183);
-            this.dataGridView1_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridView1_Tester.Name = "dataGridView1_Tester";
-            this.dataGridView1_Tester.RowTemplate.Height = 23;
-            this.dataGridView1_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1_Tester.Size = new System.Drawing.Size(1269, 87);
-            this.dataGridView1_Tester.TabIndex = 21;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "FAM";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.HeaderText = "ROX";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.HeaderText = "HEX";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.HeaderText = "CY5";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.Width = 250;
-            // 
             // tp_AccountManagement
             // 
             this.tp_AccountManagement.Controls.Add(this.groupBox18);
@@ -6062,7 +5988,7 @@
             this.tp_AccountManagement.Padding = new System.Windows.Forms.Padding(3);
             this.tp_AccountManagement.Size = new System.Drawing.Size(1781, 808);
             this.tp_AccountManagement.TabIndex = 1;
-            this.tp_AccountManagement.Text = " Account Management ";
+            this.tp_AccountManagement.Text = "    Account Management    ";
             this.tp_AccountManagement.UseVisualStyleBackColor = true;
             // 
             // groupBox18
@@ -6274,8 +6200,8 @@
             // 
             this.tb_Right_IDManage.FormattingEnabled = true;
             this.tb_Right_IDManage.Items.AddRange(new object[] {
-            "Inspector",
-            "Administrator"});
+            "tester",
+            "administrator"});
             this.tb_Right_IDManage.Location = new System.Drawing.Point(206, 259);
             this.tb_Right_IDManage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_Right_IDManage.Name = "tb_Right_IDManage";
@@ -6338,6 +6264,271 @@
             this.label52.Size = new System.Drawing.Size(31, 25);
             this.label52.TabIndex = 5;
             this.label52.Text = "ID";
+            // 
+            // tp_Result
+            // 
+            this.tp_Result.Controls.Add(this.label36);
+            this.tp_Result.Controls.Add(this.dataGridView4_Tester);
+            this.tp_Result.Controls.Add(this.dataGridView3_Tester);
+            this.tp_Result.Controls.Add(this.dataGridView2_Tester);
+            this.tp_Result.Controls.Add(this.dataGridView1_Tester);
+            this.tp_Result.Location = new System.Drawing.Point(4, 34);
+            this.tp_Result.Name = "tp_Result";
+            this.tp_Result.Size = new System.Drawing.Size(1781, 808);
+            this.tp_Result.TabIndex = 4;
+            this.tp_Result.Text = "Result (P/N)";
+            this.tp_Result.UseVisualStyleBackColor = true;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label36.Location = new System.Drawing.Point(738, 85);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(198, 37);
+            this.label36.TabIndex = 26;
+            this.label36.Text = "R E S U L T";
+            // 
+            // dataGridView4_Tester
+            // 
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView4_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
+            this.dataGridView4_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView4_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.Honeydew;
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView4_Tester.DefaultCellStyle = dataGridViewCellStyle50;
+            this.dataGridView4_Tester.Enabled = false;
+            this.dataGridView4_Tester.Location = new System.Drawing.Point(238, 591);
+            this.dataGridView4_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridView4_Tester.Name = "dataGridView4_Tester";
+            this.dataGridView4_Tester.RowTemplate.Height = 23;
+            this.dataGridView4_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView4_Tester.Size = new System.Drawing.Size(1269, 87);
+            this.dataGridView4_Tester.TabIndex = 24;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "FAM";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "ROX";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "HEX";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "CY5";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 250;
+            // 
+            // dataGridView3_Tester
+            // 
+            dataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle51.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView3_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle51;
+            this.dataGridView3_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView3_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10});
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle52.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.Honeydew;
+            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3_Tester.DefaultCellStyle = dataGridViewCellStyle52;
+            this.dataGridView3_Tester.Enabled = false;
+            this.dataGridView3_Tester.Location = new System.Drawing.Point(238, 455);
+            this.dataGridView3_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridView3_Tester.Name = "dataGridView3_Tester";
+            this.dataGridView3_Tester.RowTemplate.Height = 23;
+            this.dataGridView3_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView3_Tester.Size = new System.Drawing.Size(1269, 87);
+            this.dataGridView3_Tester.TabIndex = 23;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "FAM";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "ROX";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "HEX";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "CY5";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 250;
+            // 
+            // dataGridView2_Tester
+            // 
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView2_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle53;
+            this.dataGridView2_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView2_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15});
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.Honeydew;
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2_Tester.DefaultCellStyle = dataGridViewCellStyle54;
+            this.dataGridView2_Tester.Enabled = false;
+            this.dataGridView2_Tester.Location = new System.Drawing.Point(238, 319);
+            this.dataGridView2_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridView2_Tester.Name = "dataGridView2_Tester";
+            this.dataGridView2_Tester.RowTemplate.Height = 23;
+            this.dataGridView2_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView2_Tester.Size = new System.Drawing.Size(1269, 87);
+            this.dataGridView2_Tester.TabIndex = 22;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "FAM";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "ROX";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "HEX";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "CY5";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.Width = 250;
+            // 
+            // dataGridView1_Tester
+            // 
+            dataGridViewCellStyle55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle55.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.dataGridView1_Tester.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle55;
+            this.dataGridView1_Tester.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1_Tester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1_Tester.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20});
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle56.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            dataGridViewCellStyle56.ForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.Honeydew;
+            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1_Tester.DefaultCellStyle = dataGridViewCellStyle56;
+            this.dataGridView1_Tester.Enabled = false;
+            this.dataGridView1_Tester.Location = new System.Drawing.Point(238, 183);
+            this.dataGridView1_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridView1_Tester.Name = "dataGridView1_Tester";
+            this.dataGridView1_Tester.RowTemplate.Height = 23;
+            this.dataGridView1_Tester.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView1_Tester.Size = new System.Drawing.Size(1269, 87);
+            this.dataGridView1_Tester.TabIndex = 21;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "FAM";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "ROX";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "HEX";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "CY5";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Width = 250;
             // 
             // tp_Table
             // 
@@ -6866,15 +7057,38 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button7
+            // checkBox4
             // 
-            this.button7.Location = new System.Drawing.Point(731, 114);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 36);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "reset plot";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(68, 581);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(234, 29);
+            this.checkBox4.TabIndex = 19;
+            this.checkBox4.Text = "zero set based on base";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(729, 377);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(176, 42);
+            this.button11.TabIndex = 20;
+            this.button11.Text = "updateGraph";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // MainFrm
             // 
@@ -6899,8 +7113,8 @@
             this.panel1.PerformLayout();
             this.tp_engineer.ResumeLayout(false);
             this.tabControl_Engineer.ResumeLayout(false);
-            this.tp_Protocol.ResumeLayout(false);
-            this.tp_Protocol.PerformLayout();
+            this.tp_CreateTest.ResumeLayout(false);
+            this.tp_CreateTest.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.groupBox20.ResumeLayout(false);
@@ -6936,8 +7150,8 @@
             this.groupBox7.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tp_DiagnosisHowTo.ResumeLayout(false);
-            this.tp_DiagnosisHowTo.PerformLayout();
+            this.tp_Interpretation.ResumeLayout(false);
+            this.tp_Interpretation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_ct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_TB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_FLU)).EndInit();
@@ -6948,15 +7162,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct1)).EndInit();
             this.tp_simulation.ResumeLayout(false);
+            this.tp_simulation.PerformLayout();
             this.tp_tester.ResumeLayout(false);
             this.tp_tester.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
+            this.gb_CartridgeInfo.ResumeLayout(false);
+            this.gb_CartridgeInfo.PerformLayout();
+            this.gb_TestInfo.ResumeLayout(false);
+            this.gb_TestInfo.PerformLayout();
             this.tabControl_Tester.ResumeLayout(false);
-            this.tabPage_Result.ResumeLayout(false);
-            this.tabPage_Result.PerformLayout();
+            this.tp_TestReport.ResumeLayout(false);
+            this.tp_TestReport.PerformLayout();
             this.tabPage_rawData.ResumeLayout(false);
             this.tabPage_rawData.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -6964,8 +7179,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tp_administrator.ResumeLayout(false);
             this.tabControl_admin.ResumeLayout(false);
-            this.tp_Table_Ct.ResumeLayout(false);
-            this.tp_Table_Ct.PerformLayout();
+            this.tp_FluorescentSignals.ResumeLayout(false);
+            this.tp_FluorescentSignals.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticDatum_tube2)).EndInit();
@@ -6980,18 +7195,18 @@
             this.panel9.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
-            this.tp_Result.ResumeLayout(false);
-            this.tp_Result.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4_Tester)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3_Tester)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2_Tester)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1_Tester)).EndInit();
             this.tp_AccountManagement.ResumeLayout(false);
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Manage)).EndInit();
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
+            this.tp_Result.ResumeLayout(false);
+            this.tp_Result.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4_Tester)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3_Tester)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2_Tester)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1_Tester)).EndInit();
             this.tp_Table.ResumeLayout(false);
             this.tp_Table.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4_Engineer)).EndInit();
@@ -7034,7 +7249,7 @@
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.TabPage tp_engineer;
         private System.Windows.Forms.TabControl tabControl_Engineer;
-        private System.Windows.Forms.TabPage tp_Protocol;
+        private System.Windows.Forms.TabPage tp_CreateTest;
         private System.Windows.Forms.TextBox tb_FianlCycle_Eng;
         private System.Windows.Forms.Button btn_FianlCycle_Eng;
         private System.Windows.Forms.GroupBox groupBox14;
@@ -7134,14 +7349,14 @@
         private System.Windows.Forms.TextBox tb_Pulse_Cnt;
         private System.Windows.Forms.Button btn_DoorOpen_Test;
         private System.Windows.Forms.TextBox tb_Log;
-        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.GroupBox gb_CartridgeInfo;
         private System.Windows.Forms.TextBox tb_CartridgeID_Test;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tb_PatientID_Test;
         private System.Windows.Forms.TextBox tb_SampleID_Test;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.GroupBox gb_TestInfo;
         private System.Windows.Forms.TextBox tb_WorkerName_Test;
         private System.Windows.Forms.TextBox tb_WorkerID_Test;
         private System.Windows.Forms.Label label33;
@@ -7155,7 +7370,7 @@
         private System.Windows.Forms.Button btn_OpenDoor_Test;
         private QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx progressBar_step;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage_Result;
+        private System.Windows.Forms.TabPage tp_TestReport;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListView listView_ReportInfo;
         private System.Windows.Forms.ListView listView_inspectorInfo;
@@ -7281,7 +7496,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TabPage tp_Table_Ct;
+        private System.Windows.Forms.TabPage tp_FluorescentSignals;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridView dgv_opticDatum_tube1;
         private System.Windows.Forms.Label label3;
@@ -7362,7 +7577,7 @@
         private System.Windows.Forms.Button btnGraph;
         private System.Windows.Forms.Button btnLogFileRead;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tp_DiagnosisHowTo;
+        private System.Windows.Forms.TabPage tp_Interpretation;
         private System.Windows.Forms.DataGridView dgv_diagnosis_TB;
         private System.Windows.Forms.ComboBox cb_Diagnosis_Target;
         private System.Windows.Forms.Label label5;
@@ -7592,6 +7807,32 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column52;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column53;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column54;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column55;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column56;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column57;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column58;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column59;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column60;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column61;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column62;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column63;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column64;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column65;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column66;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column67;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column68;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column69;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column70;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button button11;
     }
 }
 
