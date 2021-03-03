@@ -1582,14 +1582,14 @@ namespace ABI_POC_PCR
                         break;
                 }
             }
-            
+        }
 
-
-
-
-
-
-
+        public void initBaseValue()
+        {
+            dgv_diagnosis_ct.Rows[0].Cells[3].Value = "255";
+            for (int i = 0; i < 16; i++ )
+            { }
+                
         }
 
         public void CtCalculation()
@@ -1702,7 +1702,7 @@ namespace ABI_POC_PCR
 
         public void initDiagnosisCT()
         {
-            dgv_diagnosis_ct.ColumnCount = 3;
+            dgv_diagnosis_ct.ColumnCount = 4;
             dgv_diagnosis_ct.ColumnHeadersVisible = true;
 
             //DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -1715,28 +1715,28 @@ namespace ABI_POC_PCR
             dgv_diagnosis_ct.Columns[0].Name = "Dye(tube)";
             dgv_diagnosis_ct.Columns[1].Name = "Threshold";
             dgv_diagnosis_ct.Columns[2].Name = "Result";
-           
+            dgv_diagnosis_ct.Columns[3].Name = "Bases";
             //dataGridView_Diagnosis.Columns[9].Name = "INH";
 
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             //populate the rows
-            string[] row1 = new string[] { "FAM(Tube 1)", "1.2", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "1.2", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "1.2", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "1.2", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "1.2", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "1.2", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "1.2", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "1.2", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "1.2", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "1.2", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "1.2", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "1.2", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "1.2", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "1.2", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "1.2", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "1.2", "" };
+            string[] row1 = new string[] { "FAM(Tube 1)", "1.2", "", "" };
+            string[] row2 = new string[] { "ROX(Tube 1)", "1.2", "", "" };
+            string[] row3 = new string[] { "HEX(Tube 1)", "1.2", "", "" };
+            string[] row4 = new string[] { "Cy5(Tube 1)", "1.2", "", "" };
+            string[] row5 = new string[] { "FAM(Tube 2)", "1.2", "", "" };
+            string[] row6 = new string[] { "ROX(Tube 2)", "1.2", "", "" };
+            string[] row7 = new string[] { "HEX(Tube 2)", "1.2", "", "" };
+            string[] row8 = new string[] { "Cy5(Tube 2)", "1.2", "", "" };
+            string[] row9 = new string[] { "FAM(Tube 3)", "1.2", "", "" };
+            string[] row10 = new string[] { "ROX(Tube 3)", "1.2", "", "" };
+            string[] row11 = new string[] { "ROX(Tube 3)", "1.2", "", "" };
+            string[] row12 = new string[] { "ROX(Tube 3)", "1.2", "", "" };
+            string[] row13 = new string[] { "FAM(Tube 4)", "1.2", "", "" };
+            string[] row14 = new string[] { "ROX(Tube 4)", "1.2", "", "" };
+            string[] row15 = new string[] { "HEX(Tube 4)", "1.2", "", "" };
+            string[] row16 = new string[] { "Cy5(Tube 4)", "1.2", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -1892,6 +1892,7 @@ namespace ABI_POC_PCR
             dgv_diagnosis_COVID.Visible = false;
             dgv_diagnosis_FLU.Visible = false;
 
+            initBaseValue();
             initDiagnosisCT();
             loadExcelFile_Interpretation(dgv_diagnosis_TB ,"TB");
             //initDgvDiagnosis();
