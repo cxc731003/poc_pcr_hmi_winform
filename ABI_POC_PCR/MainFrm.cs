@@ -1585,14 +1585,22 @@ namespace ABI_POC_PCR
         }
 
         public void initBaseValue()
-        {
-            dgv_diagnosis_ct.Rows[0].Cells[3].Value = "255";
+        {            
             for (int i = 0; i < 16; i++ )
-            { }
-                
+            {
+                dgv_diagnosis_ct.Rows[i].Cells[3].Value = "";
+            }
         }
 
-        public void CtCalculation()
+        public void setBaseValue(double[] baseValues)
+        {
+            for(int i= 0; i < 16; i++ )
+            {
+                dgv_diagnosis_ct.Rows[i].Cells[3].Value = baseValues[i].ToString();
+            }
+        }
+
+        public void baseCalculation()
         {
             int temp;
             for (int i = 0; i < 16; i++)
@@ -1649,7 +1657,9 @@ namespace ABI_POC_PCR
                 removeAlldgv();
                 
                 sm.isFirstUpdate = false;
-                CtCalculation();
+                baseCalculation();
+                setBaseValue(base_calculated);
+
                 updateDataGridOpticDatum(dgvArr, DISPLAY_DATA); //updateDataGridOpticDatum(dgvArr, MEASURED_DATA);
                               
                 for (int i = 0; i < Plotter.CH_CNT; i++)
@@ -1892,8 +1902,9 @@ namespace ABI_POC_PCR
             dgv_diagnosis_COVID.Visible = false;
             dgv_diagnosis_FLU.Visible = false;
 
-            initBaseValue();
+           
             initDiagnosisCT();
+            initBaseValue();
             loadExcelFile_Interpretation(dgv_diagnosis_TB ,"TB");
             //initDgvDiagnosis();
 
@@ -3267,6 +3278,7 @@ namespace ABI_POC_PCR
             if (tb_Name_IDManage.Text == "" || tb_ID_IDManage.Text == "" || tb_PW_IDManage.Text == "")
             {
                 MessageBox.Show("성명, ID, Password 모두 입력하세요.", "계정 등록 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Name, ID, Password must be .", "계정 등록 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -5855,7 +5867,7 @@ namespace ABI_POC_PCR
 
         private void button8_Click(object sender, EventArgs e)
         {
-            CtCalculation();
+            baseCalculation();
         }
 
         private void cb_Recipe_Test_SelectedIndexChanged(object sender, EventArgs e)
@@ -5912,6 +5924,22 @@ namespace ABI_POC_PCR
             {
                 updateScottPlot(i, base_calculated);
             }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            baseCalculation();
+            setBaseValue(base_calculated);
+        }
+
+        private void formsPlot3_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formsPlot4_Load(object sender, EventArgs e)
+        {
+
         }
     }
     #endregion
