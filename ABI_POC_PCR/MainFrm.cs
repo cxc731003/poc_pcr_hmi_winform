@@ -637,6 +637,8 @@ namespace ABI_POC_PCR
 
         private void updateDataGridOpticDatum(DataGridView[] dgv, string[,] stringArray )
         {
+            int iTemp2;
+
             dgv_opticDatum_tube1.Columns[0].HeaderText = "Dye";
             for (int i = 0; i < Plotter.COL_CNT ; i++)
             {
@@ -713,7 +715,28 @@ namespace ABI_POC_PCR
                                 if (iTemp[i + 1] > base_calculated[j + Plotter.CH_CNT * k])
                                 {
                                     //temp[i + 1] = (iTemp[i + 1]).ToString();
-                                    temp[i + 1] = (iTemp[i + 1] - base_calculated[Plotter.CH_CNT*k +j]).ToString();
+                                    temp[i + 1] = ((int)(iTemp[i + 1] - base_calculated[Plotter.CH_CNT*k +j])).ToString();
+                                }
+                                else
+                                {
+                                    temp[i + 1] = "0";
+                                }
+                                //temp[i + 1] = stringArray[Plotter.CH_CNT * k + j, i];
+                            }
+                        }
+                        else if(checkBox5.Checked)
+                        {
+                            if (i < Plotter.optic_CycleCnt_ForBase)
+                            {
+                                temp[i + 1] = "0"; // 0until bas calculated  
+                            }
+                            else
+                            {
+                                Int32.TryParse(stringArray[Plotter.CH_CNT * k + j, i], out iTemp[i + 1]);
+                                if (iTemp[i + 1] > base_calculated[j + Plotter.CH_CNT * k])
+                                {
+                                    //temp[i + 1] = (iTemp[i + 1]).ToString();
+                                    temp[i + 1] = ((iTemp[i + 1] - base_calculated[Plotter.CH_CNT * k + j])*1.5).ToString();
                                 }
                                 else
                                 {
@@ -735,11 +758,15 @@ namespace ABI_POC_PCR
                                 temp[i + 1] = "0";
                             }
                         }
-
-                       
-                        DISPLAY_DATA[Plotter.CH_CNT * k + j, i] = temp[i + 1];
+                        double dTemp1;
+                        dTemp1 = Convert.ToDouble(temp[i + 1]);
+                        iTemp2 = (int)dTemp1;
+                        temp[i + 1] = iTemp2.ToString();
+                        DISPLAY_DATA[Plotter.CH_CNT * k + j, i] = iTemp2.ToString();
+                        //DISPLAY_DATA[Plotter.CH_CNT * k + j, i] = (temp[i + 1];
                         FluoresenceValuesOne[Plotter.CH_CNT * k + j, i + 1] = stringArray[Plotter.CH_CNT * k + j, i];
                     }
+                    //dgv[k].Rows.Add();
                     dgv[k].Rows.Add(temp);
                 }
                 
@@ -1610,9 +1637,10 @@ namespace ABI_POC_PCR
                 double iCt_temp;
                 iCt_temp = Convert.ToDouble(ct_temp);
                 //Int32.TryParse(ct_temp, out iCt_temp);
+                //for (int j = 0; j < Plotter.COL_CNT; j++)
                 for (int j = 0; j < Plotter.optic_CycleCnt_ForBase; j++)
                 {
-                    double data_temp;
+                    double data_temp; 
                     data_temp = Convert.ToDouble(MEASURED_DATA[i,j]);
                     //Int32.TryParse(MEASURED_DATA[i, j], out temp);
                     base_calculated[i] += data_temp;
@@ -1788,7 +1816,7 @@ namespace ABI_POC_PCR
         {
             //Excel ex = Excel.GetInstance();//new Excel();
             Excel ex = Excel.GetInstance();
-            ex.initExcel(path, 1);
+            //ex.initExcel(path, 1);
 
             ex.CreateNewFile();
             ex.CreateNewSheet();
@@ -1888,9 +1916,34 @@ namespace ABI_POC_PCR
             }
         }
 
+        public void FindCyclesForBaseCalculation()
+        {
+            //dgv_CycleForBaseCalculation.Rows[0].Cells[0].Value = "";
+            //Plotter.isThisCycleWouldbeUsedForBaseCal[0] = dgv_CycleForBaseCalculation.Rows[0].Cells[0].FormattedValue.ToString();
+            for(int i = 0; i <45; i++)
+            {
+                if (dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "v")
+                {
+                    Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 1;
+                }
+            }
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            dgv_CycleForBaseCalculation.Rows.Add();
+
+
+            dgv_opticDatum_tube1.Location = new Point(33, 60);
+            dgv_opticDatum_tube2.Location = new Point(33, 230);
+            dgv_opticDatum_tube3.Location = new Point(33, 400);
+            dgv_opticDatum_tube4.Location = new Point(33, 570);
+           
+            lb_opticMeasurementCycleSelection.Visible = false;
+            dgv_opticMeasurementCycleSelection.Visible = false;
+
             gb_CartridgeInfo.Enabled = false;
             gb_TestInfo.Enabled = false;
 
@@ -3387,6 +3440,58 @@ namespace ABI_POC_PCR
 
         }
 
+        private void Save_Csv_BaseCycles(string fileName, DataGridView dgv, bool header)
+        {
+            // 현재 선택한 셀의 정보를 삭제 후
+            //dataGridView_Manage.Rows.RemoveAt(this.dataGridView_Manage.SelectedRows[0].Index);
+            //int sIndex = dgv.CurrentCell.RowIndex;
+            //dgv.Rows.RemoveAt(sIndex);
+
+            // 그리드뷰를 파일로 저장함
+            string delimiter = ",";  // 구분자
+            FileStream fs = new FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+            StreamWriter csvExport = new StreamWriter(fs, System.Text.Encoding.UTF8);
+
+            if (dgv.Rows.Count == 0) return;
+
+            // 헤더정보 출력
+            if (header)
+            {
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    csvExport.Write(dgv.Columns[i].HeaderText);
+                    if (i != dgv.Columns.Count - 1)
+                    {
+                        csvExport.Write(delimiter);
+                    }
+                }
+            }
+
+            csvExport.Write(csvExport.NewLine); // add new line
+
+            // 데이터 출력
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    for (int i = 0; i < dgv.Columns.Count; i++)
+                    {
+                        csvExport.Write(row.Cells[i].Value);
+                        if (i != dgv.Columns.Count - 1)
+                        {
+                            csvExport.Write(delimiter);
+                        }
+                    }
+                    csvExport.Write(csvExport.NewLine); // write new line
+                }
+            }
+
+            csvExport.Flush(); // flush from the buffers.
+            csvExport.Close();
+            fs.Close();
+            MessageBox.Show("Base cycle Information Saved.", "Info Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         /// <summary>
         /// 계정을 1개 삭제 후 dataGridView 데이터를 파일 내보내기
         /// </summary>
@@ -3498,6 +3603,8 @@ namespace ABI_POC_PCR
         {
             // 새로운 레시피를 만들고 싶으면 레시피 콤보박스에 이름을 넣은 후 클릭
             // 레시피 이름 입력 체크
+           
+
             int index = cb_Recipe_Eng.SelectedIndex;    // -1 이면 입력한 것이 없음
             string str = cb_Recipe_Eng.Text;
 
@@ -3512,6 +3619,8 @@ namespace ABI_POC_PCR
                     di.Create();
                 }
                 string fileName = di.ToString() + "\\" + str + ".rcp";
+                string xlsxFileName = di.ToString() + "\\" + str + ".xlsx";
+                CreateNewFile(xlsxFileName);
 
                 // 기존 파일 삭제
                 FileInfo fileDel = new FileInfo(fileName);
@@ -5690,10 +5799,7 @@ namespace ABI_POC_PCR
         {
             //sm.opticReceivedFlag = true;
             //setGridValue(7);
-            presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
-            presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
-            presetDataGrid_ct(dgv_opticDatum_tube3, chamberName[2]);
-            presetDataGrid_ct(dgv_opticDatum_tube4, chamberName[3]);
+            _reset_Process();
         }
 
         private void cb_Diagnosis_Target_SelectedIndexChanged(object sender, EventArgs e)
@@ -5744,14 +5850,12 @@ namespace ABI_POC_PCR
         private void btnDiagnosisLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.OpenFile();
-           
+            dlg.OpenFile();           
         }
 
         private void btnDiagnosisNew_Click(object sender, EventArgs e)
         {
-            CreateNewFile(textBox_NewFileName.Text);
-            
+                      
         }
 
         private void btnDiagnosisSave_Click(object sender, EventArgs e)
@@ -5940,6 +6044,101 @@ namespace ABI_POC_PCR
         private void formsPlot4_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox6.Checked)
+            {
+                lb_opticMeasurementCycleSelection.Visible = true;
+                dgv_opticMeasurementCycleSelection.Visible = true;
+            }
+            else if (!checkBox6.Checked)
+            {
+                lb_opticMeasurementCycleSelection.Visible = false;
+                dgv_opticMeasurementCycleSelection.Visible = false;
+            }
+        }
+
+        private void btnBaseCycleSelection_Save_Click(object sender, EventArgs e)
+        {
+            FindCyclesForBaseCalculation();//setBaseValue();
+
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+
+            string fileName = di.ToString() + "\\baseCalculationCycles.info";
+            Save_Csv_BaseCycles(fileName, dgv_CycleForBaseCalculation, false);
+        }
+
+        private void dgv_CycleForBaseCalculation_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FindCyclesForBaseCalculation();
+        }
+
+
+        private void loadCsv_BaseCycles(DataGridView dgv)
+        {
+            dgv.Rows.Clear();
+
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\baseCalculationCycles.info";
+
+            string[] lines = File.ReadAllLines(fileName);
+
+            int readNum = 1;
+            string temp = "";
+            for (int i = 1; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                char[] sep = { ',' };
+
+                string[] result = temp.Split(sep);
+                //string[] data6 = new string[4] { temp, temp, temp, temp };
+                int index = 0;
+                //foreach (var item in result)
+                //{
+                //    data6[index++] = item;
+                //}
+
+                dgv.Rows.Add(result);
+            }
+
+            for (int i = 0; i < dataGridView_Manage.Rows.Count; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    dgv.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                }
+                else
+                {
+                    dgv.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(240, 255, 240);
+                }
+            }
+        }
+
+
+ 
+        private void button13_Click(object sender, EventArgs e)
+        {
+            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
+            MatchAndFindOpticDataForResult();
+            baseCalculation();
+            setBaseValue(base_calculated);
+
+            updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
+            Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
+            for (int i = 0; i < Plotter.CH_CNT; i++)
+            {
+                updateScottPlot(i, base_calculated);
+            }
         }
     }
     #endregion

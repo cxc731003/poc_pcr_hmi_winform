@@ -29,18 +29,24 @@ namespace ABI_POC_PCR.GraphPlot
         };
 
         public static int[] isOpticData_buffer_filled = new int[39]//// must be same with COL_CNT
-       {
-
+        {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //9
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //19
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //29
             0, 0, 0, 0, 0, 0, 0, 0, 0 //39
+        };
 
-       };
-
+        public static int[] isThisCycleWouldbeUsedForBaseCal = new int[45]
+        {
+          //1  2  3  4  5  6  7  8  9  10
+            0, 0, 1, 1, 1, 1, 1, 1, 1, 1, //9
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //19
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //29
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,//39
+        };
 
         public static bool isValueBase = false;
-      
         public static PlottableScatterHighlight ch1FAMHL, ch1ROXHL, ch1HEXHL, ch1CY5HL;
         public static PlottableScatterHighlight ch2FAMHL, ch2ROXHL, ch2HEXHL, ch2CY5HL;
         public static PlottableScatterHighlight ch3FAMHL, ch3ROXHL, ch3HEXHL, ch3CY5HL;
@@ -192,20 +198,18 @@ namespace ABI_POC_PCR.GraphPlot
             }
                 
             //for (int i = 0; i < dataXList.Count; i++)
-
-
+            
             formsPlot.plt.XTicks(dataXList.ToArray(), labelTicks.ToArray());
             formsPlot.plt.Title(title);
             formsPlot.plt.Legend(location: legendLocation.upperLeft);
             formsPlot.plt.Axis(0, COL_CNT-1, 0, 3000);
             formsPlot.plt.Layout(xLabelHeight:40);
             formsPlot.Configure(recalculateLayoutOnMouseUp: false);
-
-
-            formsPlot.plt.PlotHLine(y: Ct_FAM, label: "FAM Ct");
-            formsPlot.plt.PlotHLine(y: Ct_ROX, label: "ROX Ct");
-            formsPlot.plt.PlotHLine(y: Ct_HEX, label: "HEX Ct");
-            formsPlot.plt.PlotHLine(y: Ct_CY5, label: "CY5 Ct");
+            
+            formsPlot.plt.PlotHLine(y: Ct_FAM, label: "FAM baseline");
+            formsPlot.plt.PlotHLine(y: Ct_ROX, label: "ROX baseline");
+            formsPlot.plt.PlotHLine(y: Ct_HEX, label: "HEX baseline");
+            formsPlot.plt.PlotHLine(y: Ct_CY5, label: "CY5 baseline");
             //formsPlot.plt.TightenLayout(padding: 40);
             formsPlot.Render();
         }
