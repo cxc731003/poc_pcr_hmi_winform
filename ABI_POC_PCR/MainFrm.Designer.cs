@@ -378,10 +378,11 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.chkBox_BaselineScale = new System.Windows.Forms.CheckBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chkBox_baselineNoScale = new System.Windows.Forms.CheckBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -439,7 +440,6 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -770,8 +770,9 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -1957,7 +1958,7 @@
             this.tp_Interpretation.Name = "tp_Interpretation";
             this.tp_Interpretation.Size = new System.Drawing.Size(1752, 812);
             this.tp_Interpretation.TabIndex = 4;
-            this.tp_Interpretation.Text = "    2. Interpretation    ";
+            this.tp_Interpretation.Text = "    2. Test Interpretation    ";
             this.tp_Interpretation.UseVisualStyleBackColor = true;
             // 
             // btnDiagnosisFindAndLoad
@@ -2432,7 +2433,7 @@
             this.tp_pcr_options.Name = "tp_pcr_options";
             this.tp_pcr_options.Size = new System.Drawing.Size(1752, 812);
             this.tp_pcr_options.TabIndex = 5;
-            this.tp_pcr_options.Text = "    3. Options    ";
+            this.tp_pcr_options.Text = "    3. Test Options    ";
             this.tp_pcr_options.UseVisualStyleBackColor = true;
             // 
             // btnBaseCycleSelection_Load
@@ -2443,6 +2444,7 @@
             this.btnBaseCycleSelection_Load.TabIndex = 6;
             this.btnBaseCycleSelection_Load.Text = "Load";
             this.btnBaseCycleSelection_Load.UseVisualStyleBackColor = true;
+            this.btnBaseCycleSelection_Load.Click += new System.EventHandler(this.btnBaseCycleSelection_Load_Click);
             // 
             // btnBaseCycleSelection_Save
             // 
@@ -3958,12 +3960,13 @@
             // 
             // tp_simulation
             // 
-            this.tp_simulation.Controls.Add(this.button14);
+            this.tp_simulation.Controls.Add(this.label13);
+            this.tp_simulation.Controls.Add(this.label12);
             this.tp_simulation.Controls.Add(this.button13);
-            this.tp_simulation.Controls.Add(this.checkBox5);
+            this.tp_simulation.Controls.Add(this.chkBox_BaselineScale);
             this.tp_simulation.Controls.Add(this.button12);
             this.tp_simulation.Controls.Add(this.button11);
-            this.tp_simulation.Controls.Add(this.checkBox4);
+            this.tp_simulation.Controls.Add(this.chkBox_baselineNoScale);
             this.tp_simulation.Controls.Add(this.button10);
             this.tp_simulation.Controls.Add(this.button9);
             this.tp_simulation.Controls.Add(this.textBox1);
@@ -3990,19 +3993,29 @@
             this.tp_simulation.Text = "simul";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // button13
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(68, 633);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(275, 29);
-            this.checkBox5.TabIndex = 22;
-            this.checkBox5.Text = "zero set using base, Scaling";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.button13.Location = new System.Drawing.Point(377, 592);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(247, 60);
+            this.button13.TabIndex = 23;
+            this.button13.Text = "Data and Graph update with base cal";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click_1);
+            // 
+            // chkBox_BaselineScale
+            // 
+            this.chkBox_BaselineScale.AutoSize = true;
+            this.chkBox_BaselineScale.Location = new System.Drawing.Point(68, 633);
+            this.chkBox_BaselineScale.Name = "chkBox_BaselineScale";
+            this.chkBox_BaselineScale.Size = new System.Drawing.Size(275, 29);
+            this.chkBox_BaselineScale.TabIndex = 22;
+            this.chkBox_BaselineScale.Text = "zero set using base, Scaling";
+            this.chkBox_BaselineScale.UseVisualStyleBackColor = true;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(243, 201);
+            this.button12.Location = new System.Drawing.Point(849, 564);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 21;
@@ -4012,7 +4025,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(449, 201);
+            this.button11.Location = new System.Drawing.Point(1055, 564);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 20;
@@ -4020,19 +4033,19 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // checkBox4
+            // chkBox_baselineNoScale
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(68, 581);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(301, 29);
-            this.checkBox4.TabIndex = 19;
-            this.checkBox4.Text = "zero set using base, No scaling";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkBox_baselineNoScale.AutoSize = true;
+            this.chkBox_baselineNoScale.Location = new System.Drawing.Point(68, 581);
+            this.chkBox_baselineNoScale.Name = "chkBox_baselineNoScale";
+            this.chkBox_baselineNoScale.Size = new System.Drawing.Size(301, 29);
+            this.chkBox_baselineNoScale.TabIndex = 19;
+            this.chkBox_baselineNoScale.Text = "zero set using base, No scaling";
+            this.chkBox_baselineNoScale.UseVisualStyleBackColor = true;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(865, 25);
+            this.button10.Location = new System.Drawing.Point(865, 46);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(209, 60);
             this.button10.TabIndex = 18;
@@ -4069,9 +4082,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(865, 116);
+            this.button8.Location = new System.Drawing.Point(445, 283);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(193, 48);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 14;
             this.button8.Text = "Ct detection test";
             this.button8.UseVisualStyleBackColor = true;
@@ -4079,7 +4092,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(447, 295);
+            this.button7.Location = new System.Drawing.Point(643, 631);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 13;
@@ -4089,7 +4102,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(659, 295);
+            this.button6.Location = new System.Drawing.Point(849, 631);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 12;
@@ -4099,7 +4112,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(243, 114);
+            this.button5.Location = new System.Drawing.Point(243, 219);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 11;
@@ -4109,7 +4122,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(37, 201);
+            this.button4.Location = new System.Drawing.Point(643, 564);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 10;
@@ -4119,7 +4132,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(37, 114);
+            this.button3.Location = new System.Drawing.Point(37, 219);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
@@ -4129,7 +4142,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(659, 201);
+            this.button2.Location = new System.Drawing.Point(445, 219);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 8;
@@ -4139,9 +4152,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(878, 295);
+            this.button1.Location = new System.Drawing.Point(1055, 631);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(196, 50);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 7;
             this.button1.Text = "reset test variables";
             this.button1.UseVisualStyleBackColor = true;
@@ -4149,7 +4162,7 @@
             // 
             // btnLogFileRead
             // 
-            this.btnLogFileRead.Location = new System.Drawing.Point(1090, 25);
+            this.btnLogFileRead.Location = new System.Drawing.Point(1090, 46);
             this.btnLogFileRead.Name = "btnLogFileRead";
             this.btnLogFileRead.Size = new System.Drawing.Size(200, 60);
             this.btnLogFileRead.TabIndex = 6;
@@ -4159,7 +4172,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(241, 295);
+            this.btnGraph.Location = new System.Drawing.Point(241, 283);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(200, 60);
             this.btnGraph.TabIndex = 5;
@@ -4169,7 +4182,7 @@
             // 
             // btn_firstGraph
             // 
-            this.btn_firstGraph.Location = new System.Drawing.Point(37, 295);
+            this.btn_firstGraph.Location = new System.Drawing.Point(37, 283);
             this.btn_firstGraph.Name = "btn_firstGraph";
             this.btn_firstGraph.Size = new System.Drawing.Size(200, 60);
             this.btn_firstGraph.TabIndex = 4;
@@ -4179,7 +4192,7 @@
             // 
             // btnSimul4
             // 
-            this.btnSimul4.Location = new System.Drawing.Point(659, 25);
+            this.btnSimul4.Location = new System.Drawing.Point(659, 46);
             this.btnSimul4.Name = "btnSimul4";
             this.btnSimul4.Size = new System.Drawing.Size(200, 60);
             this.btnSimul4.TabIndex = 3;
@@ -4189,7 +4202,7 @@
             // 
             // btnSimul3
             // 
-            this.btnSimul3.Location = new System.Drawing.Point(449, 25);
+            this.btnSimul3.Location = new System.Drawing.Point(449, 46);
             this.btnSimul3.Name = "btnSimul3";
             this.btnSimul3.Size = new System.Drawing.Size(200, 60);
             this.btnSimul3.TabIndex = 2;
@@ -4199,7 +4212,7 @@
             // 
             // btnSimul2
             // 
-            this.btnSimul2.Location = new System.Drawing.Point(243, 25);
+            this.btnSimul2.Location = new System.Drawing.Point(243, 46);
             this.btnSimul2.Name = "btnSimul2";
             this.btnSimul2.Size = new System.Drawing.Size(200, 60);
             this.btnSimul2.TabIndex = 1;
@@ -4209,7 +4222,7 @@
             // 
             // btnSimul1
             // 
-            this.btnSimul1.Location = new System.Drawing.Point(37, 25);
+            this.btnSimul1.Location = new System.Drawing.Point(37, 46);
             this.btnSimul1.Name = "btnSimul1";
             this.btnSimul1.Size = new System.Drawing.Size(200, 60);
             this.btnSimul1.TabIndex = 0;
@@ -4644,19 +4657,6 @@
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
             // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tp_tester);
@@ -4780,7 +4780,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 449);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 431);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5235,7 +5235,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 272);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 254);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5690,7 +5690,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 93);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 75);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6155,7 +6155,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -81);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -99);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8020,24 +8020,36 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button13
+            // progressBar_step
             // 
-            this.button13.Location = new System.Drawing.Point(390, 564);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(174, 60);
-            this.button13.TabIndex = 23;
-            this.button13.Text = "button13";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click_1);
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
             // 
-            // button14
+            // label12
             // 
-            this.button14.Location = new System.Drawing.Point(390, 633);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(174, 60);
-            this.button14.TabIndex = 24;
-            this.button14.Text = "button14";
-            this.button14.UseVisualStyleBackColor = true;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(638, 522);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(218, 25);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Update Data and Graph";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(162, 25);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Simul start to end";
             // 
             // MainFrm
             // 
@@ -8778,7 +8790,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox chkBox_baselineNoScale;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TabPage tp_pcr_options;
@@ -8880,12 +8892,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_coefficient;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_result;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Ct;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox chkBox_BaselineScale;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Button btnBaseCycleSelection_Save;
         private System.Windows.Forms.Button btnBaseCycleSelection_Load;
-        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
     }
 }
 

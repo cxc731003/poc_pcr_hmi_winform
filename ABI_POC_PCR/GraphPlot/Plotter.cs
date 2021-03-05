@@ -17,7 +17,8 @@ namespace ABI_POC_PCR.GraphPlot
         public static int DYE_CNT = 4;
         public static int COL_CNT = 39; // base, 15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,45
         public static int CYCLE_CNT = 46; // 45 cycle = 46-1
-        public static int optic_CycleCnt_ForBase = 8;
+        public static int CycleCntForBaseCal = 0;
+        public static int MaxCycleForBaseCalculation = 0;
 
         public static int[] Optic_Measure_Idx = new int[39] // must be same with COL_CNT
         {
@@ -111,7 +112,7 @@ namespace ABI_POC_PCR.GraphPlot
             ch4DataDic.Add("CY5", new List<double>());
             
 
-                    }
+        }
 
         public static void UpdatePlot(FormsPlot formsPlot, string title, int chamberNum
                                         , Dictionary<string, List<double>> chDataDic
@@ -187,9 +188,6 @@ namespace ABI_POC_PCR.GraphPlot
                 chCY5HLArray[chamberNum].visible = chCY5HLIsCheck[chamberNum];
             }
             //formsPlot.plt.AxisAutoX(expandOnly: true);
-
-
-
             for (int i = 0; i < dataXList.Count; i++)
             {
                 if (i < COL_CNT)

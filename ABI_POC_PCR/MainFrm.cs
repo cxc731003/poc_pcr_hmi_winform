@@ -66,7 +66,10 @@ namespace ABI_POC_PCR
         int iRoutine_cnt = 0;
         int iTube_no = 0;
         int iDye = 0;
-        double[] base_calculated = new double[16];
+        double[] CtlineVal = new double[16];
+        double[] BaselineVal = new double[16];
+        double[] zerosetValArray = new double[16];
+
 
 
         //int[] iRoutine_cnt = new int[COL_CNT * CH_CNT * OPT_VAL_CNT];
@@ -703,19 +706,19 @@ namespace ABI_POC_PCR
                     temp[0] = FluoresenceValuesOne[j, 0];
                     for (int i = 0; i < Plotter.COL_CNT; i++)
                     {
-                        if(checkBox4.Checked)
+                        if(chkBox_baselineNoScale.Checked)
                         {
-                            if (i < Plotter.optic_CycleCnt_ForBase)
+                            if (i < Plotter.MaxCycleForBaseCalculation)
                             {
                                 temp[i + 1] = "0"; // 0until bas calculated  
                             }
                             else
                             {
                                 Int32.TryParse(stringArray[Plotter.CH_CNT * k + j, i], out iTemp[i + 1]);
-                                if (iTemp[i + 1] > base_calculated[j + Plotter.CH_CNT * k])
+                                if (iTemp[i + 1] > CtlineVal[j + Plotter.CH_CNT * k])
                                 {
                                     //temp[i + 1] = (iTemp[i + 1]).ToString();
-                                    temp[i + 1] = ((int)(iTemp[i + 1] - base_calculated[Plotter.CH_CNT*k +j])).ToString();
+                                    temp[i + 1] = ((int)(iTemp[i + 1] - CtlineVal[Plotter.CH_CNT*k +j])).ToString();
                                 }
                                 else
                                 {
@@ -724,19 +727,19 @@ namespace ABI_POC_PCR
                                 //temp[i + 1] = stringArray[Plotter.CH_CNT * k + j, i];
                             }
                         }
-                        else if(checkBox5.Checked)
+                        else if(chkBox_BaselineScale.Checked)
                         {
-                            if (i < Plotter.optic_CycleCnt_ForBase)
+                            if (i < Plotter.MaxCycleForBaseCalculation)
                             {
                                 temp[i + 1] = "0"; // 0until bas calculated  
                             }
                             else
                             {
                                 Int32.TryParse(stringArray[Plotter.CH_CNT * k + j, i], out iTemp[i + 1]);
-                                if (iTemp[i + 1] > base_calculated[j + Plotter.CH_CNT * k])
+                                if (iTemp[i + 1] > CtlineVal[j + Plotter.CH_CNT * k])
                                 {
                                     //temp[i + 1] = (iTemp[i + 1]).ToString();
-                                    temp[i + 1] = ((iTemp[i + 1] - base_calculated[Plotter.CH_CNT * k + j])*1.5).ToString();
+                                    temp[i + 1] = ((iTemp[i + 1] - CtlineVal[Plotter.CH_CNT * k + j])*1.5).ToString();
                                 }
                                 else
                                 {
@@ -748,7 +751,7 @@ namespace ABI_POC_PCR
                         else
                         {
                             Int32.TryParse(stringArray[Plotter.CH_CNT * k + j, i], out iTemp[i + 1]);
-                            if (iTemp[i + 1] > base_calculated[j + Plotter.CH_CNT * k])
+                            if (iTemp[i + 1] > CtlineVal[j + Plotter.CH_CNT * k])
                             {
                                 temp[i + 1] = (iTemp[i + 1]).ToString();
                                 //temp[i + 1] = (iTemp[i + 1] - base_calculated[Plotter.CH_CNT*k +j]).ToString();
@@ -1619,12 +1622,65 @@ namespace ABI_POC_PCR
             }
         }
 
-        public void setBaseValue(double[] baseValues)
+     
+        public void setBaseValueToDataGridView(DataGridView dgv, double[] baseValues)
         {
-            for(int i= 0; i < 16; i++ )
+            for (int i = 0; i < 16; i++)
             {
-                dgv_diagnosis_ct.Rows[i].Cells[3].Value = baseValues[i].ToString();
+                dgv.Rows[i].Cells[3].Value = baseValues[i].ToString();
             }
+        }
+
+        
+
+
+        public void FindCyclesForBaseCalculation()
+        {
+            //dgv_CycleForBaseCalculation.Rows[0].Cells[0].Value = "";
+            //Plotter.isThisCycleWouldbeUsedForBaseCal[0] = dgv_CycleForBaseCalculation.Rows[0].Cells[0].FormattedValue.ToString();
+            for (int i = 0; i < 45; i++)
+            {
+                if (dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "v")
+                {
+                    Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 1;
+                }
+            }
+        }
+
+
+        public void baseCalculationOptions()
+        {
+            int temp;
+            
+            for (int i = 0; i < 16; i++)
+            {
+                Plotter.CycleCntForBaseCal = 0;
+                string ct_temp = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+
+                double iCt_temp;
+                iCt_temp = Convert.ToDouble(ct_temp);
+                //Int32.TryParse(ct_temp, out iCt_temp);
+                for (int j = 0; j < Plotter.COL_CNT; j++)
+                {
+                    if(Plotter.isThisCycleWouldbeUsedForBaseCal[j] == 1)
+                    {
+                        Plotter.CycleCntForBaseCal++;
+                        if (j > Plotter.MaxCycleForBaseCalculation)
+                            Plotter.MaxCycleForBaseCalculation = j;
+
+                        double data_temp;
+
+                        data_temp = Convert.ToDouble(MEASURED_DATA[i, j]);
+                        //Int32.TryParse(MEASURED_DATA[i, j], out temp);
+                        BaselineVal[i] += data_temp;
+                    }
+                }
+                BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
+                //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
+                CtlineVal[i] = (double)(iCt_temp * BaselineVal[i]);
+                //ic_value[i] = MEASURED_DATA[i, 0];
+            }
+
         }
 
         public void baseCalculation()
@@ -1638,18 +1694,22 @@ namespace ABI_POC_PCR
                 iCt_temp = Convert.ToDouble(ct_temp);
                 //Int32.TryParse(ct_temp, out iCt_temp);
                 //for (int j = 0; j < Plotter.COL_CNT; j++)
-                for (int j = 0; j < Plotter.optic_CycleCnt_ForBase; j++)
+                for (int j = 0; j < Plotter.CycleCntForBaseCal; j++)
                 {
                     double data_temp; 
                     data_temp = Convert.ToDouble(MEASURED_DATA[i,j]);
                     //Int32.TryParse(MEASURED_DATA[i, j], out temp);
-                    base_calculated[i] += data_temp;
+                    BaselineVal[i] += data_temp;
                 }
-                base_calculated[i] = base_calculated[i] / Plotter.optic_CycleCnt_ForBase;
+                BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
-                base_calculated[i] = (double)(iCt_temp * base_calculated[i]);
+                CtlineVal[i] = (double)(iCt_temp * BaselineVal[i]);
                 //ic_value[i] = MEASURED_DATA[i, 0];
             }
+
+
+
+
             
             /*
             for (int i = 0; i < 16; i++)
@@ -1685,14 +1745,25 @@ namespace ABI_POC_PCR
                 removeAlldgv();
                 
                 sm.isFirstUpdate = false;
-                baseCalculation();
-                setBaseValue(base_calculated);
-
+                baseCalculationOptions();//baseCalculation();
+                setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
                 updateDataGridOpticDatum(dgvArr, DISPLAY_DATA); //updateDataGridOpticDatum(dgvArr, MEASURED_DATA);
-                              
+                                                
                 for (int i = 0; i < Plotter.CH_CNT; i++)
                 {
-                    updateScottPlot(i, base_calculated);
+                    if(chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
+                    {
+                        for(int j = 0; j < Plotter.CH_CNT*Plotter.DYE_CNT; j++)
+                        {
+                            zerosetValArray[j] = CtlineVal[j] - BaselineVal[j];                      
+                        }
+                        updateScottPlot(i, zerosetValArray);
+                    }
+                    else
+                    {
+                        updateScottPlot(i, CtlineVal);
+                    }
+                    
                 }
             }
 
@@ -1916,26 +1987,14 @@ namespace ABI_POC_PCR
             }
         }
 
-        public void FindCyclesForBaseCalculation()
-        {
-            //dgv_CycleForBaseCalculation.Rows[0].Cells[0].Value = "";
-            //Plotter.isThisCycleWouldbeUsedForBaseCal[0] = dgv_CycleForBaseCalculation.Rows[0].Cells[0].FormattedValue.ToString();
-            for(int i = 0; i <45; i++)
-            {
-                if (dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "v")
-                {
-                    Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 1;
-                }
-            }
-        }
-
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
+
             dgv_CycleForBaseCalculation.Rows.Add();
-
-
+            
             dgv_opticDatum_tube1.Location = new Point(33, 60);
             dgv_opticDatum_tube2.Location = new Point(33, 230);
             dgv_opticDatum_tube3.Location = new Point(33, 400);
@@ -2451,9 +2510,7 @@ namespace ABI_POC_PCR
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
             presetDataGrid_ct(dgv_opticDatum_tube3, chamberName[2]);
             presetDataGrid_ct(dgv_opticDatum_tube4, chamberName[3]);
-
-
-
+            
             // MCU에 문을 열라고 명령함
             if (!isConnected) {
                 // 검사 장비와 연결이 되어야 진행함
@@ -2573,14 +2630,10 @@ namespace ABI_POC_PCR
                         setProcessMode(7);
                         //if (DialogResult.OK == MessageBox.Show("팁을 장착해 주세요.", "검사 안내", MessageBoxButtons.OK, MessageBoxIcon.Information))
                         //{
-                            
-
                             if (DialogResult.OK == MessageBox.Show("준비가 끝났습니다. 문을 닫고 [검사 시작]을 눌러 검사를 진행해 주세요.", "검사 안내", MessageBoxButtons.OK, MessageBoxIcon.Information))
                             {
                                 setProcessMode(8);
-
                             }
-
                         //}
                     }
                     else
@@ -5196,7 +5249,7 @@ namespace ABI_POC_PCR
             {
                 for (int k = 0; k < 4; k++)
                 {
-                    testResult[j * 4 + k] = isExceededBase_userSelection(dgvArrResult[j], k, 30, base_calculated[j * 4 + k]);
+                    testResult[j * 4 + k] = isExceededBase_userSelection(dgvArrResult[j], k, 30, CtlineVal[j * 4 + k]);
                 }
             }
 
@@ -5971,7 +6024,7 @@ namespace ABI_POC_PCR
 
         private void button8_Click(object sender, EventArgs e)
         {
-            baseCalculation();
+            baseCalculationOptions();//baseCalculation();
         }
 
         private void cb_Recipe_Test_SelectedIndexChanged(object sender, EventArgs e)
@@ -6026,14 +6079,15 @@ namespace ABI_POC_PCR
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
             for (int i = 0; i < Plotter.CH_CNT; i++)
             {
-                updateScottPlot(i, base_calculated);
+                updateScottPlot(i, CtlineVal);
             }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            baseCalculation();
-            setBaseValue(base_calculated);
+            baseCalculationOptions();//baseCalculation();
+            setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
+            
         }
 
         private void formsPlot3_Load(object sender, EventArgs e)
@@ -6075,6 +6129,45 @@ namespace ABI_POC_PCR
             FindCyclesForBaseCalculation();
         }
 
+
+       
+
+ 
+        private void button13_Click(object sender, EventArgs e)
+        {
+            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
+            MatchAndFindOpticDataForResult();
+            baseCalculationOptions();//baseCalculation();
+            setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
+            updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
+            Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
+
+            for (int i = 0; i < Plotter.CH_CNT; i++)
+            {
+                if (chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
+                {
+                    for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+                    {
+                        zerosetValArray[j] = CtlineVal[j] - BaselineVal[j];
+                    }
+                    updateScottPlot(i, zerosetValArray);
+                }
+                else
+                {
+                    updateScottPlot(i, CtlineVal);
+                }
+            }
+        }
+
+        private void btnBaseCycleSelection_Load_Click(object sender, EventArgs e)
+        {
+            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
+        }
 
         private void loadCsv_BaseCycles(DataGridView dgv)
         {
@@ -6120,27 +6213,7 @@ namespace ABI_POC_PCR
         }
 
 
- 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
-        }
-
-        private void button13_Click_1(object sender, EventArgs e)
-        {
-            DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
-            MatchAndFindOpticDataForResult();
-            baseCalculation();
-            setBaseValue(base_calculated);
-
-            updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
-            Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
-            for (int i = 0; i < Plotter.CH_CNT; i++)
-            {
-                updateScottPlot(i, base_calculated);
-            }
-        }
     }
     #endregion
-    
+
 }
