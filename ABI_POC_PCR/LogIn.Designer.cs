@@ -37,9 +37,9 @@
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.tb_LoginID = new System.Windows.Forms.TextBox();
             this.tb_LoginPW = new System.Windows.Forms.TextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.cb_Port_Main = new System.Windows.Forms.ComboBox();
             this.btn_Connect_Main = new MetroFramework.Controls.MetroButton();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
@@ -121,6 +121,16 @@
             this.tb_LoginPW.Size = new System.Drawing.Size(199, 19);
             this.tb_LoginPW.TabIndex = 9;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(140, 40);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(220, 72);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 12;
+            this.pictureBox3.TabStop = false;
+            // 
             // cb_Port_Main
             // 
             this.cb_Port_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
@@ -142,16 +152,6 @@
             this.btn_Connect_Main.UseSelectable = true;
             this.btn_Connect_Main.Visible = false;
             this.btn_Connect_Main.Click += new System.EventHandler(this.btn_Connect_Main_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(140, 40);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(220, 72);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 12;
-            this.pictureBox3.TabStop = false;
             // 
             // LogIn
             // 
@@ -187,8 +187,8 @@
         private MetroFramework.Controls.MetroButton btnLogin;
         private System.Windows.Forms.TextBox tb_LoginID;
         private System.Windows.Forms.TextBox tb_LoginPW;
+        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.ComboBox cb_Port_Main;
         private MetroFramework.Controls.MetroButton btn_Connect_Main;
-        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
