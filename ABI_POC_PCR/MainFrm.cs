@@ -1933,6 +1933,8 @@ namespace ABI_POC_PCR
 
         public void loadExcelFile_Interpretation(DataGridView dgv, string fileName)
         {
+
+
             string currentDir = Environment.CurrentDirectory;
             //string fileName = currentDir + @"\aaa";
             string filePath = Path.Combine(currentDir, "data") + @"\" + fileName;
@@ -2008,7 +2010,7 @@ namespace ABI_POC_PCR
 
             setAccessibility();
 
-            cb_Diagnosis_Target.SelectedIndex = 0;
+            cb_Test_Interpretation.SelectedIndex = 0;
             
             dgv_diagnosis_TB.Visible = true;
             dgv_diagnosis_COVID.Visible = false;
@@ -2017,9 +2019,10 @@ namespace ABI_POC_PCR
            
             initDiagnosisCT();
             initBaseValue();
+
             loadExcelFile_Interpretation(dgv_diagnosis_TB ,"TB");
             //initDgvDiagnosis();
-
+             
             sm.opticReceivedFlag = false;
             if (!backgroundWorker1.IsBusy)
             {
@@ -2500,7 +2503,7 @@ namespace ABI_POC_PCR
             sm.pre_routine_cnt = 0;
             
             //all about reset
-            resetTestInfo();
+            updateTestInfo();
             resetTesterInfo();
             resetCartridgeInfo();
             resetAnalyticResult();
@@ -3091,7 +3094,7 @@ namespace ABI_POC_PCR
             
             for (int i = 0; i < line_count; i++)
             {
-                if (lines[i].Contains("optd"))
+                if (lines[i].Contains("optd") && sm.measured_cnt > -1)
                 //if (lines[i].Contains("routine_cnt"))
                 {
                     string temp = lines[i];
@@ -3144,23 +3147,32 @@ namespace ABI_POC_PCR
                            
 
                             if (iRoutine_cnt > sm.Routine_Cnt 
-                                && Plotter.isOpticData_buffer_filled[sm.measured_cnt] == Plotter.CH_CNT * Plotter.DYE_CNT
+                                && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
                                 && sm.measured_cnt > -1)
                             {
                                 Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
-                                ++sm.measured_cnt;
+
+                                if (sm.measured_cnt < Plotter.COL_CNT - 1)
+                                {
+                                    ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                }
+                                else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
+                                {
+                                    sm.measured_cnt = -1;
+                                }
+
                                 sm.DataUpdateFlag = true;
-                                
+                               
                                 //sm.Routine_Cnt = iRoutine_cnt;
                             }
-                            if (sm.measured_cnt > Plotter.COL_CNT - 1)
-                            {
-                                sm.measured_cnt = -1;
-                            }
+                           
                         }
                     }
                 }
-                else if(lines[i].Contains("g_end_process") && processStep == 9 && sm.measured_cnt == -1)
+                else if(lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
+                    && processStep == 9 
+                    && sm.measured_cnt == -1 
+                    && !sm.DataUpdateFlag)
                 {
                     //_endProcess();
                     sm.ProcessEndFlag = true;
@@ -3656,8 +3668,6 @@ namespace ABI_POC_PCR
         {
             // 새로운 레시피를 만들고 싶으면 레시피 콤보박스에 이름을 넣은 후 클릭
             // 레시피 이름 입력 체크
-           
-
             int index = cb_Recipe_Eng.SelectedIndex;    // -1 이면 입력한 것이 없음
             string str = cb_Recipe_Eng.Text;
 
@@ -3672,9 +3682,7 @@ namespace ABI_POC_PCR
                     di.Create();
                 }
                 string fileName = di.ToString() + "\\" + str + ".rcp";
-                string xlsxFileName = di.ToString() + "\\" + str + ".xlsx";
-                CreateNewFile(xlsxFileName);
-
+                
                 // 기존 파일 삭제
                 FileInfo fileDel = new FileInfo(fileName);
                 if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
@@ -3694,6 +3702,11 @@ namespace ABI_POC_PCR
                 cb_Recipe_Eng.SelectedIndex = cb_Recipe_Eng.Items.Count - 1;
 
                 bLoadedRecipe = false;
+
+                string xlsxFileName = di.ToString() + "\\" + str + ".xlsx";
+                CreateNewFile(xlsxFileName);
+
+                DataGridView dgv_interpretation = new DataGridView();
             }
             else if (index == -1 || str == "")
             {
@@ -3704,6 +3717,8 @@ namespace ABI_POC_PCR
                 MessageBox.Show("기존에 존재하는 레시피 이름인지 확인해 주세요.", "레시피 생성 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+
 
         private void btn_DelRecipe_Eng_Click(object sender, EventArgs e)
         {
@@ -5063,20 +5078,20 @@ namespace ABI_POC_PCR
         private void tabPage_tester_Click()
         {
             //test info. list view 
-            listView_ReportInfo.View = View.Details;           //컬럼형식으로 변경
+            lv_testInfo.View = View.Details;           //컬럼형식으로 변경
 
-            listView_ReportInfo.FullRowSelect = true;          //Row 전체 선택
+            lv_testInfo.FullRowSelect = true;          //Row 전체 선택
 
-            listView_ReportInfo.Columns.Add("Test Name", 433);
-            listView_ReportInfo.Columns.Add("Start Time", 433);        //컬럼추가
-            listView_ReportInfo.Columns.Add("End Time ", 433);
+            lv_testInfo.Columns.Add("Test Name", 433);
+            lv_testInfo.Columns.Add("Start Time", 433);        //컬럼추가
+            lv_testInfo.Columns.Add("End Time ", 433);
 
             //test 
-            listView_inspectorInfo.View = View.Details;           //컬럼형식으로 변경
-            listView_inspectorInfo.FullRowSelect = true;          //Row 전체 선택
+            lv_testerInfo.View = View.Details;           //컬럼형식으로 변경
+            lv_testerInfo.FullRowSelect = true;          //Row 전체 선택
 
-            listView_inspectorInfo.Columns.Add("Tester Name", 250);
-            listView_inspectorInfo.Columns.Add("Tester ID ", 250);        //컬럼추가
+            lv_testerInfo.Columns.Add("Tester Name", 250);
+            lv_testerInfo.Columns.Add("Tester ID ", 250);        //컬럼추가
 
 
             //test 
@@ -5123,25 +5138,25 @@ namespace ABI_POC_PCR
 
         private void initTesterInfo()
         {
-            listView_inspectorInfo.BeginUpdate();
+            lv_testerInfo.BeginUpdate();
             ListViewItem lvi2 = new ListViewItem(sm.userName);
             lvi2.SubItems.Add(sm.userID);
             lvi2.SubItems[0].BackColor = Color.WhiteSmoke;
             //lvi2.SubItems.Add("임시1");
             //lvi2.SubItems.Add("인천광역시 부평구");
             lvi2.ImageIndex = 0;
-            listView_inspectorInfo.Items.Add(lvi2);
-            listView_inspectorInfo.EndUpdate();
+            lv_testerInfo.Items.Add(lvi2);
+            lv_testerInfo.EndUpdate();
             //*************************************************************         
         }
 
         private void updateTesterInfo()
         {
-            listView_inspectorInfo.BeginUpdate();
+            lv_testerInfo.BeginUpdate();
 
-            listView_inspectorInfo.Items[0].SubItems[0].Text = tb_WorkerName_Test.Text;
-            listView_inspectorInfo.Items[0].SubItems[1].Text = tb_WorkerID_Test.Text;
-            listView_inspectorInfo.EndUpdate();
+            lv_testerInfo.Items[0].SubItems[0].Text = tb_WorkerName_Test.Text;
+            lv_testerInfo.Items[0].SubItems[1].Text = tb_WorkerID_Test.Text;
+            lv_testerInfo.EndUpdate();
         }
 
         private void resetTesterInfo()
@@ -5156,7 +5171,7 @@ namespace ABI_POC_PCR
         
         public void initTestInfo()
         {
-            listView_ReportInfo.BeginUpdate();
+            lv_testInfo.BeginUpdate();
 
             lvi1 = new ListViewItem("");
             lvi1.SubItems.Add("");
@@ -5165,34 +5180,34 @@ namespace ABI_POC_PCR
             lvi1.SubItems[0].BackColor = Color.WhiteSmoke;
 
             lvi1.ImageIndex = 0;
-            listView_ReportInfo.Items.Add(lvi1);
+            lv_testInfo.Items.Add(lvi1);
 
-            listView_ReportInfo.EndUpdate();
+            lv_testInfo.EndUpdate();
         }
 
-        public void resetTestInfo()
+        public void updateTestInfo()
         {
             test_start_time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
-            listView_ReportInfo.BeginUpdate();
-            listView_ReportInfo.Items[0].SubItems[0].Text = "COVID";
-            listView_ReportInfo.Items[0].SubItems[1].Text = test_start_time;
-            listView_ReportInfo.Items[0].SubItems[2].Text = "";
+            lv_testInfo.BeginUpdate();
+            lv_testInfo.Items[0].SubItems[0].Text = sm.testName;
+            lv_testInfo.Items[0].SubItems[1].Text = test_start_time;
+            lv_testInfo.Items[0].SubItems[2].Text = "";
           
             //listView_ReportInfo.Items.Add(lvi1);
-            listView_ReportInfo.EndUpdate();
+            lv_testInfo.EndUpdate();
         }
 
         public void endTestInfo()
         {
             test_end_time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
 
-            listView_ReportInfo.BeginUpdate();
+            lv_testInfo.BeginUpdate();
 
             //lvi1 = new ListViewItem("TB");
-            listView_ReportInfo.Items[0].SubItems[2].Text = test_end_time;
+            lv_testInfo.Items[0].SubItems[2].Text = test_end_time;
             //listView_ReportInfo.Items.Add(lvi1);
 
-            listView_ReportInfo.EndUpdate();
+            lv_testInfo.EndUpdate();
         }
 
 
@@ -5612,7 +5627,7 @@ namespace ABI_POC_PCR
             //update test infomation
             test_start_time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
 
-            listView_ReportInfo.BeginUpdate();
+            lv_testInfo.BeginUpdate();
 
             lvi1 = new ListViewItem("COVID");
             lvi1.SubItems.Add(test_start_time);
@@ -5621,9 +5636,9 @@ namespace ABI_POC_PCR
             lvi1.SubItems[0].BackColor = Color.WhiteSmoke;
 
             lvi1.ImageIndex = 0;
-            listView_ReportInfo.Items.Add(lvi1);
+            lv_testInfo.Items.Add(lvi1);
 
-            listView_ReportInfo.EndUpdate();
+            lv_testInfo.EndUpdate();
         }
 
         private void btn_Connect_Barcode_Click(object sender, EventArgs e)
@@ -5731,7 +5746,7 @@ namespace ABI_POC_PCR
             //sm.Routine_Cnt = 7;
             sm.measured_cnt = 0;
 
-            resetTestInfo();
+            updateTestInfo();
             resetTesterInfo();
             resetCartridgeInfo();
             resetAnalyticResult();
@@ -5857,30 +5872,29 @@ namespace ABI_POC_PCR
 
         private void cb_Diagnosis_Target_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cb_Diagnosis_Target.SelectedIndex == 0)
+            if(cb_Test_Interpretation.SelectedIndex == 0)
             {
                 dgv_diagnosis_TB.Visible = true;
                 dgv_diagnosis_COVID.Visible = false;
                 dgv_diagnosis_FLU.Visible = false;
                 selectedDgv = dgv_diagnosis_TB;
             }
-            else if(cb_Diagnosis_Target.SelectedIndex == 1)
+            else if(cb_Test_Interpretation.SelectedIndex == 1)
             {
                 dgv_diagnosis_TB.Visible = false;
                 dgv_diagnosis_COVID.Visible = true;
                 dgv_diagnosis_FLU.Visible = false;
 
-                loadExcelFile_Interpretation(dgv_diagnosis_COVID ,"COVID");
+                loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
                 selectedDgv = dgv_diagnosis_COVID;
-
-
             }
-            else if(cb_Diagnosis_Target.SelectedIndex == 2)
+            else if(cb_Test_Interpretation.SelectedIndex == 2)
             {
                 dgv_diagnosis_TB.Visible = false;
                 dgv_diagnosis_COVID.Visible = false;
                 dgv_diagnosis_FLU.Visible = true;
             }
+            
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -5902,8 +5916,10 @@ namespace ABI_POC_PCR
 
         private void btnDiagnosisLoad_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.OpenFile();           
+            //OpenFileDialog dlg = new OpenFileDialog();
+            //dlg.OpenFile(); 
+            loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
+            selectedDgv = dgv_diagnosis_COVID;
         }
 
         private void btnDiagnosisNew_Click(object sender, EventArgs e)
@@ -6030,7 +6046,7 @@ namespace ABI_POC_PCR
         private void cb_Recipe_Test_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cb_Recipe_Test.SelectedText == cb_Recipe_Eng.SelectedText 
-                && cb_Recipe_Test.SelectedText == cb_Diagnosis_Target.SelectedText )
+                && cb_Recipe_Test.SelectedText == cb_Test_Interpretation.SelectedText )
             {
                 //pass
             }
@@ -6116,12 +6132,12 @@ namespace ABI_POC_PCR
 
         private void btnBaseCycleSelection_Save_Click(object sender, EventArgs e)
         {
-            FindCyclesForBaseCalculation();//setBaseValue();
-
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
 
             string fileName = di.ToString() + "\\baseCalculationCycles.info";
             Save_Csv_BaseCycles(fileName, dgv_CycleForBaseCalculation, false);
+
+            FindCyclesForBaseCalculation();//setBaseValue();
         }
 
         private void dgv_CycleForBaseCalculation_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -6212,7 +6228,13 @@ namespace ABI_POC_PCR
             }
         }
 
-
+        private void cb_Recipe_Eng_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sm.testName = cb_Recipe_Eng.Text;
+            cb_Test_Interpretation.Text = sm.testName;
+            tb_Test_Interpretation.Text = sm.testName;
+            updateTestInfo();
+        }
     }
     #endregion
 
