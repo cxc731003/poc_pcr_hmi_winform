@@ -212,7 +212,7 @@
             this.Column68 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column69 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column70 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cb_Diagnosis_Target = new System.Windows.Forms.ComboBox();
+            this.cb_Test_Interpretation = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tp_pcr_options = new System.Windows.Forms.TabPage();
             this.btnBaseCycleSelection_Load = new System.Windows.Forms.Button();
@@ -427,11 +427,11 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.listView_PatientInfo = new System.Windows.Forms.ListView();
-            this.listView_inspectorInfo = new System.Windows.Forms.ListView();
+            this.lv_testerInfo = new System.Windows.Forms.ListView();
             this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.listView_ReportInfo = new System.Windows.Forms.ListView();
+            this.lv_testInfo = new System.Windows.Forms.ListView();
             this.tabPage_rawData = new System.Windows.Forms.TabPage();
             this.label35 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -770,9 +770,10 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.tb_Test_Interpretation = new System.Windows.Forms.TextBox();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -1896,6 +1897,7 @@
             this.cb_Recipe_Eng.Name = "cb_Recipe_Eng";
             this.cb_Recipe_Eng.Size = new System.Drawing.Size(400, 28);
             this.cb_Recipe_Eng.TabIndex = 0;
+            this.cb_Recipe_Eng.SelectedIndexChanged += new System.EventHandler(this.cb_Recipe_Eng_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -1942,6 +1944,7 @@
             // 
             // tp_Interpretation
             // 
+            this.tp_Interpretation.Controls.Add(this.tb_Test_Interpretation);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisFindAndLoad);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisLoad);
             this.tp_Interpretation.Controls.Add(this.label6);
@@ -1952,7 +1955,7 @@
             this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_TB);
             this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_FLU);
             this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_COVID);
-            this.tp_Interpretation.Controls.Add(this.cb_Diagnosis_Target);
+            this.tp_Interpretation.Controls.Add(this.cb_Test_Interpretation);
             this.tp_Interpretation.Controls.Add(this.label5);
             this.tp_Interpretation.Location = new System.Drawing.Point(4, 34);
             this.tp_Interpretation.Name = "tp_Interpretation";
@@ -1963,17 +1966,18 @@
             // 
             // btnDiagnosisFindAndLoad
             // 
-            this.btnDiagnosisFindAndLoad.Location = new System.Drawing.Point(157, 60);
+            this.btnDiagnosisFindAndLoad.Location = new System.Drawing.Point(946, 13);
             this.btnDiagnosisFindAndLoad.Name = "btnDiagnosisFindAndLoad";
             this.btnDiagnosisFindAndLoad.Size = new System.Drawing.Size(180, 35);
             this.btnDiagnosisFindAndLoad.TabIndex = 42;
             this.btnDiagnosisFindAndLoad.Text = "Search and Load";
             this.btnDiagnosisFindAndLoad.UseVisualStyleBackColor = true;
+            this.btnDiagnosisFindAndLoad.Visible = false;
             this.btnDiagnosisFindAndLoad.Click += new System.EventHandler(this.btnDiagnosisFindAndLoad_Click);
             // 
             // btnDiagnosisLoad
             // 
-            this.btnDiagnosisLoad.Location = new System.Drawing.Point(346, 60);
+            this.btnDiagnosisLoad.Location = new System.Drawing.Point(344, 60);
             this.btnDiagnosisLoad.Name = "btnDiagnosisLoad";
             this.btnDiagnosisLoad.Size = new System.Drawing.Size(180, 35);
             this.btnDiagnosisLoad.TabIndex = 39;
@@ -1999,17 +2003,18 @@
             // 
             // btnDiagnosisDelete
             // 
-            this.btnDiagnosisDelete.Location = new System.Drawing.Point(722, 60);
+            this.btnDiagnosisDelete.Location = new System.Drawing.Point(946, 58);
             this.btnDiagnosisDelete.Name = "btnDiagnosisDelete";
             this.btnDiagnosisDelete.Size = new System.Drawing.Size(180, 35);
             this.btnDiagnosisDelete.TabIndex = 36;
             this.btnDiagnosisDelete.Text = "Delete";
             this.btnDiagnosisDelete.UseVisualStyleBackColor = true;
+            this.btnDiagnosisDelete.Visible = false;
             this.btnDiagnosisDelete.Click += new System.EventHandler(this.btnDiagnosisDelete_Click);
             // 
             // btnDiagnosisSave
             // 
-            this.btnDiagnosisSave.Location = new System.Drawing.Point(535, 60);
+            this.btnDiagnosisSave.Location = new System.Drawing.Point(158, 60);
             this.btnDiagnosisSave.Name = "btnDiagnosisSave";
             this.btnDiagnosisSave.Size = new System.Drawing.Size(180, 35);
             this.btnDiagnosisSave.TabIndex = 34;
@@ -2086,9 +2091,9 @@
             this.Column33,
             this.Column34,
             this.Column35});
-            this.dgv_diagnosis_TB.Location = new System.Drawing.Point(24, 170);
+            this.dgv_diagnosis_TB.Location = new System.Drawing.Point(338, 709);
             this.dgv_diagnosis_TB.Name = "dgv_diagnosis_TB";
-            this.dgv_diagnosis_TB.Size = new System.Drawing.Size(995, 578);
+            this.dgv_diagnosis_TB.Size = new System.Drawing.Size(403, 84);
             this.dgv_diagnosis_TB.TabIndex = 6;
             this.dgv_diagnosis_TB.Visible = false;
             // 
@@ -2270,9 +2275,9 @@
             // dgv_diagnosis_FLU
             // 
             this.dgv_diagnosis_FLU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_diagnosis_FLU.Location = new System.Drawing.Point(24, 170);
+            this.dgv_diagnosis_FLU.Location = new System.Drawing.Point(11, 709);
             this.dgv_diagnosis_FLU.Name = "dgv_diagnosis_FLU";
-            this.dgv_diagnosis_FLU.Size = new System.Drawing.Size(995, 578);
+            this.dgv_diagnosis_FLU.Size = new System.Drawing.Size(312, 83);
             this.dgv_diagnosis_FLU.TabIndex = 8;
             // 
             // dgv_diagnosis_COVID
@@ -2298,9 +2303,9 @@
             this.Column68,
             this.Column69,
             this.Column70});
-            this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(24, 170);
+            this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(755, 709);
             this.dgv_diagnosis_COVID.Name = "dgv_diagnosis_COVID";
-            this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(962, 533);
+            this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(283, 86);
             this.dgv_diagnosis_COVID.TabIndex = 7;
             // 
             // Column52
@@ -2398,18 +2403,18 @@
             this.Column70.HeaderText = "";
             this.Column70.Name = "Column70";
             // 
-            // cb_Diagnosis_Target
+            // cb_Test_Interpretation
             // 
-            this.cb_Diagnosis_Target.FormattingEnabled = true;
-            this.cb_Diagnosis_Target.Items.AddRange(new object[] {
+            this.cb_Test_Interpretation.FormattingEnabled = true;
+            this.cb_Test_Interpretation.Items.AddRange(new object[] {
             "TB",
             "COVID19",
             "FLU"});
-            this.cb_Diagnosis_Target.Location = new System.Drawing.Point(158, 15);
-            this.cb_Diagnosis_Target.Name = "cb_Diagnosis_Target";
-            this.cb_Diagnosis_Target.Size = new System.Drawing.Size(353, 33);
-            this.cb_Diagnosis_Target.TabIndex = 5;
-            this.cb_Diagnosis_Target.SelectedIndexChanged += new System.EventHandler(this.cb_Diagnosis_Target_SelectedIndexChanged);
+            this.cb_Test_Interpretation.Location = new System.Drawing.Point(549, 15);
+            this.cb_Test_Interpretation.Name = "cb_Test_Interpretation";
+            this.cb_Test_Interpretation.Size = new System.Drawing.Size(353, 33);
+            this.cb_Test_Interpretation.TabIndex = 5;
+            this.cb_Test_Interpretation.SelectedIndexChanged += new System.EventHandler(this.cb_Diagnosis_Target_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -2459,12 +2464,13 @@
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(28, 4);
+            this.checkBox6.Location = new System.Drawing.Point(25, 434);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(128, 29);
             this.checkBox6.TabIndex = 4;
             this.checkBox6.Text = "checkBox6";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.Visible = false;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // dgv_CycleForBaseCalculation
@@ -3990,7 +3996,7 @@
             this.tp_simulation.Name = "tp_simulation";
             this.tp_simulation.Size = new System.Drawing.Size(1752, 812);
             this.tp_simulation.TabIndex = 3;
-            this.tp_simulation.Text = "simul";
+            this.tp_simulation.Text = "    simulation    ";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
             // button13
@@ -4427,11 +4433,11 @@
             this.tp_TestReport.Controls.Add(this.label31);
             this.tp_TestReport.Controls.Add(this.label30);
             this.tp_TestReport.Controls.Add(this.listView_PatientInfo);
-            this.tp_TestReport.Controls.Add(this.listView_inspectorInfo);
+            this.tp_TestReport.Controls.Add(this.lv_testerInfo);
             this.tp_TestReport.Controls.Add(this.label29);
             this.tp_TestReport.Controls.Add(this.label28);
             this.tp_TestReport.Controls.Add(this.label11);
-            this.tp_TestReport.Controls.Add(this.listView_ReportInfo);
+            this.tp_TestReport.Controls.Add(this.lv_testInfo);
             this.tp_TestReport.Location = new System.Drawing.Point(4, 34);
             this.tp_TestReport.Name = "tp_TestReport";
             this.tp_TestReport.Padding = new System.Windows.Forms.Padding(3);
@@ -4518,24 +4524,24 @@
             this.listView_PatientInfo.TabIndex = 5;
             this.listView_PatientInfo.UseCompatibleStateImageBehavior = false;
             // 
-            // listView_inspectorInfo
+            // lv_testerInfo
             // 
-            this.listView_inspectorInfo.HideSelection = false;
-            this.listView_inspectorInfo.Location = new System.Drawing.Point(26, 250);
-            this.listView_inspectorInfo.Name = "listView_inspectorInfo";
-            this.listView_inspectorInfo.Scrollable = false;
-            this.listView_inspectorInfo.Size = new System.Drawing.Size(500, 65);
-            this.listView_inspectorInfo.TabIndex = 4;
-            this.listView_inspectorInfo.UseCompatibleStateImageBehavior = false;
+            this.lv_testerInfo.HideSelection = false;
+            this.lv_testerInfo.Location = new System.Drawing.Point(26, 250);
+            this.lv_testerInfo.Name = "lv_testerInfo";
+            this.lv_testerInfo.Scrollable = false;
+            this.lv_testerInfo.Size = new System.Drawing.Size(500, 65);
+            this.lv_testerInfo.TabIndex = 4;
+            this.lv_testerInfo.UseCompatibleStateImageBehavior = false;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(26, 220);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(147, 25);
+            this.label29.Size = new System.Drawing.Size(123, 25);
             this.label29.TabIndex = 3;
-            this.label29.Text = "* Inspector Info.";
+            this.label29.Text = "* Tester Info.";
             // 
             // label28
             // 
@@ -4555,15 +4561,15 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "* Test Info.";
             // 
-            // listView_ReportInfo
+            // lv_testInfo
             // 
-            this.listView_ReportInfo.HideSelection = false;
-            this.listView_ReportInfo.Location = new System.Drawing.Point(26, 130);
-            this.listView_ReportInfo.Name = "listView_ReportInfo";
-            this.listView_ReportInfo.Scrollable = false;
-            this.listView_ReportInfo.Size = new System.Drawing.Size(1300, 65);
-            this.listView_ReportInfo.TabIndex = 0;
-            this.listView_ReportInfo.UseCompatibleStateImageBehavior = false;
+            this.lv_testInfo.HideSelection = false;
+            this.lv_testInfo.Location = new System.Drawing.Point(26, 130);
+            this.lv_testInfo.Name = "lv_testInfo";
+            this.lv_testInfo.Scrollable = false;
+            this.lv_testInfo.Size = new System.Drawing.Size(1300, 65);
+            this.lv_testInfo.TabIndex = 0;
+            this.lv_testInfo.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage_rawData
             // 
@@ -4780,7 +4786,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 431);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 579);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5235,7 +5241,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 254);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 402);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5690,7 +5696,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 75);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 223);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6155,7 +6161,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -99);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, 56);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8020,19 +8026,6 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -8050,6 +8043,26 @@
             this.label13.Size = new System.Drawing.Size(162, 25);
             this.label13.TabIndex = 26;
             this.label13.Text = "Simul start to end";
+            // 
+            // tb_Test_Interpretation
+            // 
+            this.tb_Test_Interpretation.Location = new System.Drawing.Point(158, 15);
+            this.tb_Test_Interpretation.Name = "tb_Test_Interpretation";
+            this.tb_Test_Interpretation.Size = new System.Drawing.Size(368, 30);
+            this.tb_Test_Interpretation.TabIndex = 43;
+            // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
             // 
             // MainFrm
             // 
@@ -8337,8 +8350,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tp_TestReport;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ListView listView_ReportInfo;
-        private System.Windows.Forms.ListView listView_inspectorInfo;
+        private System.Windows.Forms.ListView lv_testInfo;
+        private System.Windows.Forms.ListView lv_testerInfo;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.ListView listView_PatientInfo;
@@ -8544,7 +8557,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tp_Interpretation;
         private System.Windows.Forms.DataGridView dgv_diagnosis_TB;
-        private System.Windows.Forms.ComboBox cb_Diagnosis_Target;
+        private System.Windows.Forms.ComboBox cb_Test_Interpretation;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgv_diagnosis_FLU;
         private System.Windows.Forms.DataGridView dgv_diagnosis_COVID;
@@ -8899,6 +8912,7 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tb_Test_Interpretation;
     }
 }
 
