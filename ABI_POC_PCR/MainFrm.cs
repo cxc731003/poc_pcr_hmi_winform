@@ -61,17 +61,15 @@ namespace ABI_POC_PCR
         int userMode = 0;
         int processStep = 0;
         int receiveDataStep = 0;                // BASE, 15, 20, 25, ... FiNAL = 1, ..., 8  // Base 측정값이 오면 1, Final 측정값이 오면 8
-
         int temp_Idx = 0;
-
-    
-
+            
         int iRoutine_cnt = 0;
         int iTube_no = 0;
         int iDye = 0;
-        double[] CtlineVal = new double[16];
-        double[] BaselineVal = new double[16];
-        double[] zerosetValArray = new double[16];
+        double[] CtlineVal = new double[Plotter.DYE_CNT * Plotter.CH_CNT];
+        double[] BaselineVal = new double[Plotter.DYE_CNT*Plotter.CH_CNT];
+        double[] BaseStandardDeviation = new double[Plotter.DYE_CNT * Plotter.CH_CNT];
+        double[] zerosetValArray = new double[Plotter.DYE_CNT * Plotter.CH_CNT];
 
 
 
@@ -1663,7 +1661,76 @@ namespace ABI_POC_PCR
             return 0.01;
         }
 
-        public void baseCalculationOptions()
+        public double[] baseCalculationDeviation()
+        {
+            int temp;
+            double[] base_avg = new double[Plotter.CH_CNT * Plotter.DYE_CNT];
+            double[] base_temp = new double[Plotter.COL_CNT];
+            double[] base_deviation = new double[Plotter.CH_CNT * Plotter.DYE_CNT];
+
+
+            for(int l = 0; l < Plotter.COL_CNT; l++)
+            {
+                base_temp[l] = 0;
+            }
+
+
+            for (int k = 0; k < Plotter.CH_CNT * Plotter.DYE_CNT; k++)
+            {
+                BaselineVal[k] = 0;
+                base_avg[k] = 0;
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                string sigma_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+
+                double fSigma_scale;
+                fSigma_scale = Convert.ToDouble(sigma_scale);
+                //Int32.TryParse(ct_temp, out iCt_temp);
+                for (int j = 0; j < Plotter.COL_CNT; j++)
+                {
+                    if (Plotter.isThisCycleWouldbeUsedForBaseCal[j] == 1)
+                    {
+                        if (j > Plotter.MaxCycleForBaseCalculation)
+                            Plotter.MaxCycleForBaseCalculation = j;
+
+                        base_temp[j] = Convert.ToDouble(MEASURED_DATA[i, j]);
+                        //Int32.TryParse(MEASURED_DATA[i, j], out temp);
+                        base_avg[i] += base_temp[j];
+                    }
+                    else
+                    {
+                        base_temp[j] = 0;
+                    }
+                }
+                
+                base_avg[i] /= Plotter.CycleCntForBaseCal;
+
+
+                for (int m = 0; m < Plotter.COL_CNT; m++)
+                {
+                    if(base_temp[m] > 0)
+                    {
+                        base_deviation[i] += (base_temp[m] - base_avg[i]) * (base_temp[m] - base_avg[i]) ;
+
+                    }
+        
+                }
+                base_deviation[i] /= Plotter.CycleCntForBaseCal;
+                base_deviation[i] = Math.Pow(base_deviation[i], 0.5);
+                //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
+                //CtlineVal[i] = (double)(iCt_temp * BaselineVal[i]);
+                //ic_value[i] = MEASURED_DATA[i, 0];
+                CtlineVal[i] = base_avg[i]+ (fSigma_scale * base_deviation[i]);
+
+
+
+            }
+            return base_deviation;
+        }
+
+        public void baseCalculationAverage()
         {
             int temp;
             for(int k = 0; k < 16; k++)
@@ -1674,10 +1741,10 @@ namespace ABI_POC_PCR
             for (int i = 0; i < 16; i++)
             {
                 
-                string ct_temp = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string ct_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
-                double iCt_temp;
-                iCt_temp = Convert.ToDouble(ct_temp);
+                double iCt_scale;
+                iCt_scale = Convert.ToDouble(ct_scale);
                 //Int32.TryParse(ct_temp, out iCt_temp);
                 for (int j = 0; j < Plotter.COL_CNT; j++)
                 {
@@ -1695,7 +1762,7 @@ namespace ABI_POC_PCR
                 }
                 BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
-                CtlineVal[i] = (double)(iCt_temp * BaselineVal[i]);
+                CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
                 //ic_value[i] = MEASURED_DATA[i, 0];
             }
         }
@@ -1797,7 +1864,7 @@ namespace ABI_POC_PCR
                 
                 sm.isFirstUpdate = false;
                 FindCyclesForBaseCalculation();
-                baseCalculationOptions();//baseCalculation();
+                baseCalculationAverage();//baseCalculation();
                 setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
                 //updateDataGridOpticDatum(dgvArr, DISPLAY_DATA); 
                 updateDataGridOpticDatum(dgvArr, MEASURED_DATA);
@@ -3156,6 +3223,8 @@ namespace ABI_POC_PCR
             }
             return false;
         }
+
+        private object lockObject = new object();
   
         public void MatchAndFindOpticDataForResult()
         {
@@ -3187,102 +3256,102 @@ namespace ABI_POC_PCR
             //string fileName = sPath + @"\" + "temp" + ".txt"; //di.ToString() + "\\" + str + ".rcp";
 
             //string fileName = sPath + @"\Pcr 2021-02-24 17-46-11.txt";//@"\Pcr 2021-02-16 13-25-31" + ".txt";
-            if(!sm.isLogSaving) //not in log saving timing
+            lock(lockObject)
             {
-                int line_count = 0;
-                string[] lines = File.ReadAllLines(fileName);
-                line_count = File.ReadAllLines(fileName).Length;
-
-                for (int i = 0; i < line_count; i++)
+                if (!sm.isLogSaving) //not in log saving timing
                 {
-                    if (lines[i].Contains("optd") && sm.measured_cnt > -1)
-                    //if (lines[i].Contains("routine_cnt"))
+                    int line_count = 0;
+                    string[] lines = File.ReadAllLines(fileName);
+                    line_count = File.ReadAllLines(fileName).Length;
+
+                    for (int i = 0; i < line_count; i++)
                     {
-                        string temp = lines[i];
-
-                        char[] sep = { ',' };
-                        string[] result = temp.Split(sep);
-
-                        char[] sep2 = { '=' };
-                        string[] routine_cnt = result[1].Split(sep2);
-
-                        Int32.TryParse(routine_cnt[1], out iRoutine_cnt);
-
-                        string[] tube_no = result[2].Split(sep2);
-                        Int32.TryParse(tube_no[1], out iTube_no);
-
-                        string[] dye = result[3].Split(sep2);
-
-                        int dye_idx = 0;
-                        if (dye[0] == "e1d1[0]")
+                        if (lines[i].Contains("optd") && sm.measured_cnt > -1)
+                        //if (lines[i].Contains("routine_cnt"))
                         {
-                            dye_idx = (int)TUBE_INDEX.FAM;
-                        }
-                        else if (dye[0] == "e2d2[0]")
-                        {
-                            dye_idx = (int)TUBE_INDEX.HEX;
-                        }
-                        else if (dye[0] == "e1d1[1]")
-                        {
-                            dye_idx = (int)TUBE_INDEX.ROX;
-                        }
-                        else if (dye[0] == "e2d2[1]")
-                        {
-                            dye_idx = (int)TUBE_INDEX.CY5;
-                        }
+                            string temp = lines[i];
 
-                        Int32.TryParse(dye[1], out iDye);
+                            char[] sep = { ',' };
+                            string[] result = temp.Split(sep);
 
-                        for (int j = 0; j < Plotter.COL_CNT; j++)
-                        {
-                            if (Plotter.Optic_Measure_Idx[j] == iRoutine_cnt)
+                            char[] sep2 = { '=' };
+                            string[] routine_cnt = result[1].Split(sep2);
+
+                            Int32.TryParse(routine_cnt[1], out iRoutine_cnt);
+
+                            string[] tube_no = result[2].Split(sep2);
+                            Int32.TryParse(tube_no[1], out iTube_no);
+
+                            string[] dye = result[3].Split(sep2);
+
+                            int dye_idx = 0;
+                            if (dye[0] == "e1d1[0]")
                             {
-                                Plotter.isOpticData_buffer_filled[j]++;
-                                MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
-                                DISPLAY_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
-                                if (MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] == "0")
+                                dye_idx = (int)TUBE_INDEX.FAM;
+                            }
+                            else if (dye[0] == "e2d2[0]")
+                            {
+                                dye_idx = (int)TUBE_INDEX.HEX;
+                            }
+                            else if (dye[0] == "e1d1[1]")
+                            {
+                                dye_idx = (int)TUBE_INDEX.ROX;
+                            }
+                            else if (dye[0] == "e2d2[1]")
+                            {
+                                dye_idx = (int)TUBE_INDEX.CY5;
+                            }
+
+                            Int32.TryParse(dye[1], out iDye);
+
+                            for (int j = 0; j < Plotter.COL_CNT; j++)
+                            {
+                                if (Plotter.Optic_Measure_Idx[j] == iRoutine_cnt)
                                 {
-                                    //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
-                                }
-
-
-
-                                if (iRoutine_cnt > sm.Routine_Cnt
-                                    && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
-                                    && sm.measured_cnt > -1)
-                                {
-                                    Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
-
-                                    if (sm.measured_cnt < Plotter.COL_CNT - 1)
+                                    Plotter.isOpticData_buffer_filled[j]++;
+                                    MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                                    DISPLAY_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                                    if (MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] == "0")
                                     {
-                                        ++sm.measured_cnt;//sm.measured_cnt = -1;
-                                    }
-                                    else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
-                                    {
-                                        sm.measured_cnt = -1;
+                                        //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
                                     }
 
-                                    sm.DataUpdateFlag = true;
 
-                                    //sm.Routine_Cnt = iRoutine_cnt;
+
+                                    if (iRoutine_cnt > sm.Routine_Cnt
+                                        && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
+                                        && sm.measured_cnt > -1)
+                                    {
+                                        Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
+
+                                        if (sm.measured_cnt < Plotter.COL_CNT - 1)
+                                        {
+                                            ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                        }
+                                        else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
+                                        {
+                                            sm.measured_cnt = -1;
+                                        }
+
+                                        sm.DataUpdateFlag = true;
+
+                                        //sm.Routine_Cnt = iRoutine_cnt;
+                                    }
+
                                 }
-
                             }
                         }
-                    }
-                    else if (lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
-                        && processStep == 9
-                        && sm.measured_cnt == -1
-                        && !sm.DataUpdateFlag)
-                    {
-                        //_endProcess();
-                        sm.ProcessEndFlag = true;
+                        else if (lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
+                            && processStep == 9
+                            && sm.measured_cnt == -1
+                            && !sm.DataUpdateFlag)
+                        {
+                            //_endProcess();
+                            sm.ProcessEndFlag = true;
+                        }
                     }
                 }
             }
-               
-           
-            
         }
         
         public void checkRoutineCntChanged()
@@ -3848,16 +3917,31 @@ namespace ABI_POC_PCR
 
             DataGridView dgv = new DataGridView();
             dgv_Interpretation.Add(dgv);
-
-
+            setupDGV_Interpretation();
             //SetupDataGridView(dgv_interpretation[dgv_Interpretation_Cnt]);
             //dgv_Interpretation_Cnt++;
         }
 
+        public void setupDGV_Interpretation()
+        {
+            int startY = 30;
+
+            int height = dgv_Interpretation[0].Height;
+            int posY = startY + 10 + height;
+
+            pnl_interpretation.Controls.Add(dgv_Interpretation[0]);
+            dgv_Interpretation[0].Parent = pnl_interpretation;
+            pnl_interpretation.Location = new Point(100, posY);
+            pnl_interpretation.Name = "pnl_interpretation";
+            pnl_interpretation.Height = dgv_Interpretation[0].Height;
+            pnl_interpretation.Width = dgv_Interpretation[0].Width;
+
+            SetupDataGridView(dgv_Interpretation[0]);
+            PopulateDataGridView(dgv_Interpretation[0]);
+        }
+
         public void SetupDataGridView(DataGridView dgv)
         {
-            //this.Controls.Add(dgv);
-            tabControl_Engineer.GetControl(0).Controls.Add(dgv); 
             dgv.ColumnCount = 5;
 
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
@@ -3887,7 +3971,40 @@ namespace ABI_POC_PCR
             dgv.Dock = DockStyle.Fill;
         }
 
-     
+        private void PopulateDataGridView(DataGridView dgv)
+        {
+            string[] row0 = { "11/22/1968", "29", "Revolution 9",
+            "Beatles", "The Beatles [White Album]" };
+            string[] row1 = { "1960", "6", "Fools Rush In",
+            "Frank Sinatra", "Nice 'N' Easy" };
+            string[] row2 = { "11/11/1971", "1", "One of These Days",
+            "Pink Floyd", "Meddle" };
+            string[] row3 = { "1988", "7", "Where Is My Mind?",
+            "Pixies", "Surfer Rosa" };
+            string[] row4 = { "5/1981", "9", "Can't Find My Mind",
+            "Cramps", "Psychedelic Jungle" };
+            string[] row5 = { "6/10/2003", "13",
+            "Scatterbrain. (As Dead As Leaves.)",
+            "Radiohead", "Hail to the Thief" };
+            string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
+
+            dgv.Rows.Add(row0);
+            dgv.Rows.Add(row1);
+            dgv.Rows.Add(row2);
+            dgv.Rows.Add(row3);
+            dgv.Rows.Add(row4);
+            dgv.Rows.Add(row5);
+            dgv.Rows.Add(row6);
+
+            dgv.Columns[0].DisplayIndex = 3;
+            dgv.Columns[1].DisplayIndex = 4;
+            dgv.Columns[2].DisplayIndex = 0;
+            dgv.Columns[3].DisplayIndex = 1;
+            dgv.Columns[4].DisplayIndex = 2;
+        }
+
+
+
 
 
         private void btn_DelRecipe_Eng_Click(object sender, EventArgs e)
@@ -4459,45 +4576,46 @@ namespace ABI_POC_PCR
 
         void GetSerialString(object sender)
         {
-            byte[] raw;
-            strData = serial.ReceiveString(out raw);
-            SetDataBox(strData);
-            strData = strData.Replace(" ", "");
-            
-           
-
-            if (strData.Contains("<"))
+            lock (lockObject)
             {
-                globRecv = true;
-            }
-
-            waitData += strData;
-
-            if (strData.Contains("-"))
-            {
-                globRecv = false;
-            }
-
-           
-            if (!globRecv)
-            {
-                if (waitData.IndexOf('\n') > -1)
+                byte[] raw;
+                strData = serial.ReceiveString(out raw);
+                SetDataBox(strData);
+                strData = strData.Replace(" ", "");
+                                
+                if (strData.Contains("<"))
                 {
-                    procData = waitData.Split('\n');
-                    foreach (string tmp in procData)
+                    globRecv = true;
+                }
+
+                waitData += strData;
+
+                if (strData.Contains("-"))
+                {
+                    globRecv = false;
+                }
+
+
+                if (!globRecv)
+                {
+                    if (waitData.IndexOf('\n') > -1)
                     {
-                        SetCommRXProc(tmp);
-                        waitData = "";
+                        procData = waitData.Split('\n');
+                        foreach (string tmp in procData)
+                        {
+                            SetCommRXProc(tmp);
+                            waitData = "";
+                        }
                     }
                 }
-            }
 
-            if (bSaveLog && sm.isLogSaving)
-            {
-                if ((!string.IsNullOrEmpty(strData)) && (strData.Length > 0))
+                if (bSaveLog && sm.isLogSaving)
                 {
-                    logToFile.Append(strData);
-                    sm.isLogSaving = false;
+                    if ((!string.IsNullOrEmpty(strData)) && (strData.Length > 0))
+                    {
+                        logToFile.Append(strData);
+                        sm.isLogSaving = false;
+                    }
                 }
             }
         }
@@ -6236,7 +6354,7 @@ namespace ABI_POC_PCR
 
         private void button8_Click(object sender, EventArgs e)
         {
-            baseCalculationOptions();//baseCalculation();
+            baseCalculationAverage();//baseCalculation();
         }
 
         private void cb_Recipe_Test_SelectedIndexChanged(object sender, EventArgs e)
@@ -6297,9 +6415,8 @@ namespace ABI_POC_PCR
 
         private void button12_Click(object sender, EventArgs e)
         {
-            baseCalculationOptions();//baseCalculation();
+            baseCalculationAverage();//baseCalculation();
             setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
-            
         }
 
         private void formsPlot3_Load(object sender, EventArgs e)
@@ -6355,7 +6472,7 @@ namespace ABI_POC_PCR
             DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
             MatchAndFindOpticDataForResult();
             FindCyclesForBaseCalculation();
-            baseCalculationOptions();//baseCalculation();
+            baseCalculationAverage();//baseCalculation();
             setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
             updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
@@ -6446,7 +6563,16 @@ namespace ABI_POC_PCR
 
         private void dgvCtTable3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            BaseStandardDeviation = baseCalculationDeviation();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            FindCyclesForBaseCalculation();
         }
     }
     #endregion
