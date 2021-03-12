@@ -22,8 +22,8 @@ namespace ABI_POC_PCR
         public LogIn()
         {
             InitializeComponent();
-            sm.ui_mode = (int)UI_MODE.ENGINEER_UI;
-            //sm.ui_mode = (int)UI_MODE.TESTER_UI;
+            //sm.ui_mode = (int)UI_MODE.ENGINEER_UI;
+            sm.ui_mode = (int)UI_MODE.TESTER_UI;
             
             //tb_LoginPW.BackColor = Color.LightPink;
             //tb_LoginID.BackColor = Color.LightPink;
