@@ -22,7 +22,9 @@ namespace ABI_POC_PCR
         public LogIn()
         {
             InitializeComponent();
-
+            sm.ui_mode = (int)UI_MODE.ENGINEER_UI;
+            //sm.ui_mode = (int)UI_MODE.TESTER_UI;
+            
             //tb_LoginPW.BackColor = Color.LightPink;
             //tb_LoginID.BackColor = Color.LightPink;
             //btnLogin.BackColor = Color.LightPink; 
@@ -87,24 +89,22 @@ namespace ABI_POC_PCR
                     //if (tb_LoginID.Text == "ABI" && tb_LoginPW.Text == "5344")
                     //{
                     // 엔지니어 계정 로그인임 --> 계정정보에서도 관리 가능
-
-                    //sm.userName =   
-                    this.Visible = false;
-                    //this.Close();
-                    //Home dlg = new Home();
-                    MainFrm dlg = new MainFrm();
-                    dlg.Owner = this;
-                    dlg.ShowDialog();
-                    //dlg.Owner = this;
-                    //Owner.Show();
-
-                    //}
-
-                    ////this.Visible = false;
-                    ////Home dlg = new Home();
-                    ////dlg.Owner = this;
-                    //home.ShowDialog();
-                    //this.Close();
+                                      
+                    if(sm.ui_mode == (int)UI_MODE.ENGINEER_UI)
+                    {
+                        this.Visible = false;
+                        MainFrm dlg = new MainFrm();
+                        dlg.Owner = this;
+                        dlg.ShowDialog();
+                    }
+                    else if(sm.ui_mode == (int)UI_MODE.TESTER_UI)
+                    {
+                        this.Visible = false;
+                        UI_for_Tester dlg = new UI_for_Tester();
+                        dlg.Owner = this;
+                        dlg.ShowDialog();
+                    }
+                  
                 }
                 //dataGridView_Manage.Rows.Add(data6);
             }  
@@ -211,3 +211,24 @@ namespace ABI_POC_PCR
         }
     }
 }
+
+
+/*
+                    sm.userName =   
+                    this.Visible = false;
+                    //this.Close();
+                    //Home dlg = new Home();
+                    MainFrm dlg = new MainFrm();
+                    dlg.Owner = this;
+                    dlg.ShowDialog();
+                    //dlg.Owner = this;
+                    //Owner.Show();
+
+                    //}
+
+                    ////this.Visible = false;
+                    ////Home dlg = new Home();
+                    ////dlg.Owner = this;
+                    //home.ShowDialog();
+                    //this.Close();
+ */

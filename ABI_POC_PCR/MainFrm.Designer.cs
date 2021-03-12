@@ -157,6 +157,7 @@
             this.btn_MCURead_Eng = new System.Windows.Forms.Button();
             this.btn_NewRecipe_Eng = new System.Windows.Forms.Button();
             this.tp_Interpretation = new System.Windows.Forms.TabPage();
+            this.tb_Test_Interpretation = new System.Windows.Forms.TextBox();
             this.btnDiagnosisFindAndLoad = new System.Windows.Forms.Button();
             this.btnDiagnosisLoad = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -378,6 +379,9 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
+            this.button14 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.chkBox_BaselineScale = new System.Windows.Forms.CheckBox();
             this.button12 = new System.Windows.Forms.Button();
@@ -440,6 +444,7 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -634,6 +639,7 @@
             this.tp_Graph = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.dgvCtTable1 = new System.Windows.Forms.DataGridView();
             this.btnRSTPlot1 = new System.Windows.Forms.Button();
             this.cBoxCh1CY5 = new System.Windows.Forms.CheckBox();
             this.cBoxCh1HEX = new System.Windows.Forms.CheckBox();
@@ -641,6 +647,7 @@
             this.cBoxCh1FAM = new System.Windows.Forms.CheckBox();
             this.formsPlot1 = new ScottPlot.FormsPlot();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.dgvCtTable2 = new System.Windows.Forms.DataGridView();
             this.btnRSTPlot2 = new System.Windows.Forms.Button();
             this.cBoxCh2CY5 = new System.Windows.Forms.CheckBox();
             this.cBoxCh2HEX = new System.Windows.Forms.CheckBox();
@@ -648,13 +655,15 @@
             this.cBoxCh2FAM = new System.Windows.Forms.CheckBox();
             this.formsPlot2 = new ScottPlot.FormsPlot();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.formsPlot4 = new ScottPlot.FormsPlot();
+            this.dgvCtTable3 = new System.Windows.Forms.DataGridView();
+            this.cBoxCh4CY5 = new System.Windows.Forms.CheckBox();
             this.cBoxCh4FAM = new System.Windows.Forms.CheckBox();
             this.btnRSTPlot4 = new System.Windows.Forms.Button();
             this.cBoxCh4ROX = new System.Windows.Forms.CheckBox();
             this.cBoxCh4HEX = new System.Windows.Forms.CheckBox();
-            this.cBoxCh4CY5 = new System.Windows.Forms.CheckBox();
+            this.formsPlot4 = new ScottPlot.FormsPlot();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.dgvCtTable4 = new System.Windows.Forms.DataGridView();
             this.btnRSTPlot3 = new System.Windows.Forms.Button();
             this.cBoxCh3CY5 = new System.Windows.Forms.CheckBox();
             this.cBoxCh3HEX = new System.Windows.Forms.CheckBox();
@@ -770,10 +779,8 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tb_Test_Interpretation = new System.Windows.Forms.TextBox();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
+            this.pnl_interpretation = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -829,9 +836,13 @@
             this.tp_Graph.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable1)).BeginInit();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable2)).BeginInit();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable3)).BeginInit();
             this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable4)).BeginInit();
             this.tp_AccountManagement.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Manage)).BeginInit();
@@ -1944,6 +1955,7 @@
             // 
             // tp_Interpretation
             // 
+            this.tp_Interpretation.Controls.Add(this.pnl_interpretation);
             this.tp_Interpretation.Controls.Add(this.tb_Test_Interpretation);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisFindAndLoad);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisLoad);
@@ -1963,6 +1975,13 @@
             this.tp_Interpretation.TabIndex = 4;
             this.tp_Interpretation.Text = "    2. Test Interpretation    ";
             this.tp_Interpretation.UseVisualStyleBackColor = true;
+            // 
+            // tb_Test_Interpretation
+            // 
+            this.tb_Test_Interpretation.Location = new System.Drawing.Point(158, 15);
+            this.tb_Test_Interpretation.Name = "tb_Test_Interpretation";
+            this.tb_Test_Interpretation.Size = new System.Drawing.Size(368, 30);
+            this.tb_Test_Interpretation.TabIndex = 43;
             // 
             // btnDiagnosisFindAndLoad
             // 
@@ -2091,7 +2110,7 @@
             this.Column33,
             this.Column34,
             this.Column35});
-            this.dgv_diagnosis_TB.Location = new System.Drawing.Point(338, 709);
+            this.dgv_diagnosis_TB.Location = new System.Drawing.Point(348, 725);
             this.dgv_diagnosis_TB.Name = "dgv_diagnosis_TB";
             this.dgv_diagnosis_TB.Size = new System.Drawing.Size(403, 84);
             this.dgv_diagnosis_TB.TabIndex = 6;
@@ -2275,7 +2294,7 @@
             // dgv_diagnosis_FLU
             // 
             this.dgv_diagnosis_FLU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_diagnosis_FLU.Location = new System.Drawing.Point(11, 709);
+            this.dgv_diagnosis_FLU.Location = new System.Drawing.Point(30, 726);
             this.dgv_diagnosis_FLU.Name = "dgv_diagnosis_FLU";
             this.dgv_diagnosis_FLU.Size = new System.Drawing.Size(312, 83);
             this.dgv_diagnosis_FLU.TabIndex = 8;
@@ -2303,7 +2322,7 @@
             this.Column68,
             this.Column69,
             this.Column70});
-            this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(755, 709);
+            this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(757, 723);
             this.dgv_diagnosis_COVID.Name = "dgv_diagnosis_COVID";
             this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(283, 86);
             this.dgv_diagnosis_COVID.TabIndex = 7;
@@ -3966,6 +3985,7 @@
             // 
             // tp_simulation
             // 
+            this.tp_simulation.Controls.Add(this.button14);
             this.tp_simulation.Controls.Add(this.label13);
             this.tp_simulation.Controls.Add(this.label12);
             this.tp_simulation.Controls.Add(this.button13);
@@ -3998,6 +4018,34 @@
             this.tp_simulation.TabIndex = 3;
             this.tp_simulation.Text = "    simulation    ";
             this.tp_simulation.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(865, 219);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(200, 60);
+            this.button14.TabIndex = 27;
+            this.button14.Text = "calculate ct cycles";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(162, 25);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Simul start to end";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(638, 522);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(218, 25);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Update Data and Graph";
             // 
             // button13
             // 
@@ -4663,6 +4711,19 @@
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
             // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tp_tester);
@@ -4786,7 +4847,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 579);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 321);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5241,7 +5302,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 402);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 144);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5696,7 +5757,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 223);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -35);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6161,7 +6222,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, 56);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -202);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -6599,6 +6660,7 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.dgvCtTable1);
             this.panel7.Controls.Add(this.btnRSTPlot1);
             this.panel7.Controls.Add(this.cBoxCh1CY5);
             this.panel7.Controls.Add(this.cBoxCh1HEX);
@@ -6611,10 +6673,23 @@
             this.panel7.Size = new System.Drawing.Size(886, 392);
             this.panel7.TabIndex = 0;
             // 
+            // dgvCtTable1
+            // 
+            this.dgvCtTable1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCtTable1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvCtTable1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCtTable1.ColumnHeadersVisible = false;
+            this.dgvCtTable1.Location = new System.Drawing.Point(235, 40);
+            this.dgvCtTable1.Name = "dgvCtTable1";
+            this.dgvCtTable1.RowHeadersVisible = false;
+            this.dgvCtTable1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvCtTable1.Size = new System.Drawing.Size(78, 80);
+            this.dgvCtTable1.TabIndex = 9;
+            // 
             // btnRSTPlot1
             // 
             this.btnRSTPlot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.btnRSTPlot1.Location = new System.Drawing.Point(804, 15);
+            this.btnRSTPlot1.Location = new System.Drawing.Point(670, 10);
             this.btnRSTPlot1.Name = "btnRSTPlot1";
             this.btnRSTPlot1.Size = new System.Drawing.Size(75, 23);
             this.btnRSTPlot1.TabIndex = 8;
@@ -6628,7 +6703,7 @@
             this.cBoxCh1CY5.Checked = true;
             this.cBoxCh1CY5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh1CY5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh1CY5.Location = new System.Drawing.Point(237, 3);
+            this.cBoxCh1CY5.Location = new System.Drawing.Point(592, 10);
             this.cBoxCh1CY5.Name = "cBoxCh1CY5";
             this.cBoxCh1CY5.Size = new System.Drawing.Size(73, 17);
             this.cBoxCh1CY5.TabIndex = 4;
@@ -6641,7 +6716,7 @@
             this.cBoxCh1HEX.Checked = true;
             this.cBoxCh1HEX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh1HEX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh1HEX.Location = new System.Drawing.Point(155, 3);
+            this.cBoxCh1HEX.Location = new System.Drawing.Point(513, 10);
             this.cBoxCh1HEX.Name = "cBoxCh1HEX";
             this.cBoxCh1HEX.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh1HEX.TabIndex = 5;
@@ -6654,7 +6729,7 @@
             this.cBoxCh1ROX.Checked = true;
             this.cBoxCh1ROX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh1ROX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh1ROX.Location = new System.Drawing.Point(77, 3);
+            this.cBoxCh1ROX.Location = new System.Drawing.Point(433, 10);
             this.cBoxCh1ROX.Name = "cBoxCh1ROX";
             this.cBoxCh1ROX.Size = new System.Drawing.Size(76, 17);
             this.cBoxCh1ROX.TabIndex = 6;
@@ -6667,7 +6742,7 @@
             this.cBoxCh1FAM.Checked = true;
             this.cBoxCh1FAM.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh1FAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh1FAM.Location = new System.Drawing.Point(3, 3);
+            this.cBoxCh1FAM.Location = new System.Drawing.Point(355, 10);
             this.cBoxCh1FAM.Name = "cBoxCh1FAM";
             this.cBoxCh1FAM.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh1FAM.TabIndex = 7;
@@ -6687,6 +6762,7 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.dgvCtTable2);
             this.panel8.Controls.Add(this.btnRSTPlot2);
             this.panel8.Controls.Add(this.cBoxCh2CY5);
             this.panel8.Controls.Add(this.cBoxCh2HEX);
@@ -6699,10 +6775,23 @@
             this.panel8.Size = new System.Drawing.Size(887, 392);
             this.panel8.TabIndex = 1;
             // 
+            // dgvCtTable2
+            // 
+            this.dgvCtTable2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCtTable2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvCtTable2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCtTable2.ColumnHeadersVisible = false;
+            this.dgvCtTable2.Location = new System.Drawing.Point(235, 40);
+            this.dgvCtTable2.Name = "dgvCtTable2";
+            this.dgvCtTable2.RowHeadersVisible = false;
+            this.dgvCtTable2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvCtTable2.Size = new System.Drawing.Size(78, 80);
+            this.dgvCtTable2.TabIndex = 10;
+            // 
             // btnRSTPlot2
             // 
             this.btnRSTPlot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.btnRSTPlot2.Location = new System.Drawing.Point(798, 15);
+            this.btnRSTPlot2.Location = new System.Drawing.Point(667, 13);
             this.btnRSTPlot2.Name = "btnRSTPlot2";
             this.btnRSTPlot2.Size = new System.Drawing.Size(75, 23);
             this.btnRSTPlot2.TabIndex = 8;
@@ -6716,7 +6805,7 @@
             this.cBoxCh2CY5.Checked = true;
             this.cBoxCh2CY5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh2CY5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh2CY5.Location = new System.Drawing.Point(237, 3);
+            this.cBoxCh2CY5.Location = new System.Drawing.Point(587, 15);
             this.cBoxCh2CY5.Name = "cBoxCh2CY5";
             this.cBoxCh2CY5.Size = new System.Drawing.Size(73, 17);
             this.cBoxCh2CY5.TabIndex = 4;
@@ -6729,7 +6818,7 @@
             this.cBoxCh2HEX.Checked = true;
             this.cBoxCh2HEX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh2HEX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh2HEX.Location = new System.Drawing.Point(157, 3);
+            this.cBoxCh2HEX.Location = new System.Drawing.Point(507, 15);
             this.cBoxCh2HEX.Name = "cBoxCh2HEX";
             this.cBoxCh2HEX.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh2HEX.TabIndex = 5;
@@ -6742,7 +6831,7 @@
             this.cBoxCh2ROX.Checked = true;
             this.cBoxCh2ROX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh2ROX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh2ROX.Location = new System.Drawing.Point(78, 3);
+            this.cBoxCh2ROX.Location = new System.Drawing.Point(428, 15);
             this.cBoxCh2ROX.Name = "cBoxCh2ROX";
             this.cBoxCh2ROX.Size = new System.Drawing.Size(76, 17);
             this.cBoxCh2ROX.TabIndex = 6;
@@ -6755,7 +6844,7 @@
             this.cBoxCh2FAM.Checked = true;
             this.cBoxCh2FAM.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh2FAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh2FAM.Location = new System.Drawing.Point(3, 4);
+            this.cBoxCh2FAM.Location = new System.Drawing.Point(350, 15);
             this.cBoxCh2FAM.Name = "cBoxCh2FAM";
             this.cBoxCh2FAM.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh2FAM.TabIndex = 7;
@@ -6774,28 +6863,45 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.formsPlot4);
+            this.panel9.Controls.Add(this.dgvCtTable3);
+            this.panel9.Controls.Add(this.cBoxCh4CY5);
             this.panel9.Controls.Add(this.cBoxCh4FAM);
             this.panel9.Controls.Add(this.btnRSTPlot4);
             this.panel9.Controls.Add(this.cBoxCh4ROX);
             this.panel9.Controls.Add(this.cBoxCh4HEX);
-            this.panel9.Controls.Add(this.cBoxCh4CY5);
+            this.panel9.Controls.Add(this.formsPlot4);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 401);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(886, 396);
             this.panel9.TabIndex = 2;
             // 
-            // formsPlot4
+            // dgvCtTable3
             // 
-            this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(0, 0);
-            this.formsPlot4.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
-            this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.formsPlot4.Size = new System.Drawing.Size(886, 396);
-            this.formsPlot4.TabIndex = 5;
-            this.formsPlot4.Load += new System.EventHandler(this.formsPlot4_Load);
+            this.dgvCtTable3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCtTable3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvCtTable3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCtTable3.ColumnHeadersVisible = false;
+            this.dgvCtTable3.Location = new System.Drawing.Point(235, 40);
+            this.dgvCtTable3.Name = "dgvCtTable3";
+            this.dgvCtTable3.RowHeadersVisible = false;
+            this.dgvCtTable3.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvCtTable3.Size = new System.Drawing.Size(78, 80);
+            this.dgvCtTable3.TabIndex = 11;
+            this.dgvCtTable3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCtTable3_CellContentClick);
+            // 
+            // cBoxCh4CY5
+            // 
+            this.cBoxCh4CY5.AutoSize = true;
+            this.cBoxCh4CY5.Checked = true;
+            this.cBoxCh4CY5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cBoxCh4CY5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.cBoxCh4CY5.Location = new System.Drawing.Point(594, 11);
+            this.cBoxCh4CY5.Name = "cBoxCh4CY5";
+            this.cBoxCh4CY5.Size = new System.Drawing.Size(73, 17);
+            this.cBoxCh4CY5.TabIndex = 10;
+            this.cBoxCh4CY5.Text = "CH4_CY5";
+            this.cBoxCh4CY5.UseVisualStyleBackColor = true;
             // 
             // cBoxCh4FAM
             // 
@@ -6803,7 +6909,7 @@
             this.cBoxCh4FAM.Checked = true;
             this.cBoxCh4FAM.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh4FAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh4FAM.Location = new System.Drawing.Point(17, 9);
+            this.cBoxCh4FAM.Location = new System.Drawing.Point(357, 11);
             this.cBoxCh4FAM.Name = "cBoxCh4FAM";
             this.cBoxCh4FAM.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh4FAM.TabIndex = 6;
@@ -6813,7 +6919,7 @@
             // btnRSTPlot4
             // 
             this.btnRSTPlot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.btnRSTPlot4.Location = new System.Drawing.Point(804, 9);
+            this.btnRSTPlot4.Location = new System.Drawing.Point(670, 11);
             this.btnRSTPlot4.Name = "btnRSTPlot4";
             this.btnRSTPlot4.Size = new System.Drawing.Size(75, 23);
             this.btnRSTPlot4.TabIndex = 7;
@@ -6827,7 +6933,7 @@
             this.cBoxCh4ROX.Checked = true;
             this.cBoxCh4ROX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh4ROX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh4ROX.Location = new System.Drawing.Point(92, 9);
+            this.cBoxCh4ROX.Location = new System.Drawing.Point(435, 11);
             this.cBoxCh4ROX.Name = "cBoxCh4ROX";
             this.cBoxCh4ROX.Size = new System.Drawing.Size(76, 17);
             this.cBoxCh4ROX.TabIndex = 8;
@@ -6840,28 +6946,27 @@
             this.cBoxCh4HEX.Checked = true;
             this.cBoxCh4HEX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh4HEX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh4HEX.Location = new System.Drawing.Point(171, 9);
+            this.cBoxCh4HEX.Location = new System.Drawing.Point(514, 11);
             this.cBoxCh4HEX.Name = "cBoxCh4HEX";
             this.cBoxCh4HEX.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh4HEX.TabIndex = 9;
             this.cBoxCh4HEX.Text = "CH4_HEX";
             this.cBoxCh4HEX.UseVisualStyleBackColor = true;
             // 
-            // cBoxCh4CY5
+            // formsPlot4
             // 
-            this.cBoxCh4CY5.AutoSize = true;
-            this.cBoxCh4CY5.Checked = true;
-            this.cBoxCh4CY5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cBoxCh4CY5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh4CY5.Location = new System.Drawing.Point(251, 9);
-            this.cBoxCh4CY5.Name = "cBoxCh4CY5";
-            this.cBoxCh4CY5.Size = new System.Drawing.Size(73, 17);
-            this.cBoxCh4CY5.TabIndex = 10;
-            this.cBoxCh4CY5.Text = "CH4_CY5";
-            this.cBoxCh4CY5.UseVisualStyleBackColor = true;
+            this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot4.Location = new System.Drawing.Point(0, 0);
+            this.formsPlot4.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
+            this.formsPlot4.Name = "formsPlot4";
+            this.formsPlot4.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.formsPlot4.Size = new System.Drawing.Size(886, 396);
+            this.formsPlot4.TabIndex = 5;
+            this.formsPlot4.Load += new System.EventHandler(this.formsPlot4_Load);
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.dgvCtTable4);
             this.panel10.Controls.Add(this.btnRSTPlot3);
             this.panel10.Controls.Add(this.cBoxCh3CY5);
             this.panel10.Controls.Add(this.cBoxCh3HEX);
@@ -6874,10 +6979,23 @@
             this.panel10.Size = new System.Drawing.Size(887, 396);
             this.panel10.TabIndex = 3;
             // 
+            // dgvCtTable4
+            // 
+            this.dgvCtTable4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCtTable4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvCtTable4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCtTable4.ColumnHeadersVisible = false;
+            this.dgvCtTable4.Location = new System.Drawing.Point(235, 40);
+            this.dgvCtTable4.Name = "dgvCtTable4";
+            this.dgvCtTable4.RowHeadersVisible = false;
+            this.dgvCtTable4.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvCtTable4.Size = new System.Drawing.Size(78, 80);
+            this.dgvCtTable4.TabIndex = 12;
+            // 
             // btnRSTPlot3
             // 
             this.btnRSTPlot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.btnRSTPlot3.Location = new System.Drawing.Point(798, 15);
+            this.btnRSTPlot3.Location = new System.Drawing.Point(666, 15);
             this.btnRSTPlot3.Name = "btnRSTPlot3";
             this.btnRSTPlot3.Size = new System.Drawing.Size(75, 23);
             this.btnRSTPlot3.TabIndex = 7;
@@ -6891,7 +7009,7 @@
             this.cBoxCh3CY5.Checked = true;
             this.cBoxCh3CY5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh3CY5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh3CY5.Location = new System.Drawing.Point(247, 15);
+            this.cBoxCh3CY5.Location = new System.Drawing.Point(590, 15);
             this.cBoxCh3CY5.Name = "cBoxCh3CY5";
             this.cBoxCh3CY5.Size = new System.Drawing.Size(73, 17);
             this.cBoxCh3CY5.TabIndex = 10;
@@ -6904,7 +7022,7 @@
             this.cBoxCh3HEX.Checked = true;
             this.cBoxCh3HEX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh3HEX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh3HEX.Location = new System.Drawing.Point(165, 15);
+            this.cBoxCh3HEX.Location = new System.Drawing.Point(512, 15);
             this.cBoxCh3HEX.Name = "cBoxCh3HEX";
             this.cBoxCh3HEX.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh3HEX.TabIndex = 9;
@@ -6917,7 +7035,7 @@
             this.cBoxCh3ROX.Checked = true;
             this.cBoxCh3ROX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh3ROX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh3ROX.Location = new System.Drawing.Point(87, 15);
+            this.cBoxCh3ROX.Location = new System.Drawing.Point(433, 15);
             this.cBoxCh3ROX.Name = "cBoxCh3ROX";
             this.cBoxCh3ROX.Size = new System.Drawing.Size(76, 17);
             this.cBoxCh3ROX.TabIndex = 8;
@@ -6930,7 +7048,7 @@
             this.cBoxCh3FAM.Checked = true;
             this.cBoxCh3FAM.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cBoxCh3FAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cBoxCh3FAM.Location = new System.Drawing.Point(13, 15);
+            this.cBoxCh3FAM.Location = new System.Drawing.Point(356, 15);
             this.cBoxCh3FAM.Name = "cBoxCh3FAM";
             this.cBoxCh3FAM.Size = new System.Drawing.Size(75, 17);
             this.cBoxCh3FAM.TabIndex = 6;
@@ -8026,43 +8144,20 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // label12
+            // domainUpDown1
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(638, 522);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(218, 25);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "Update Data and Graph";
+            this.domainUpDown1.Location = new System.Drawing.Point(125, 64);
+            this.domainUpDown1.Name = "domainUpDown1";
+            this.domainUpDown1.Size = new System.Drawing.Size(8, 31);
+            this.domainUpDown1.TabIndex = 25;
+            this.domainUpDown1.Text = "domainUpDown1";
             // 
-            // label13
+            // pnl_interpretation
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(15, 12);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(162, 25);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "Simul start to end";
-            // 
-            // tb_Test_Interpretation
-            // 
-            this.tb_Test_Interpretation.Location = new System.Drawing.Point(158, 15);
-            this.tb_Test_Interpretation.Name = "tb_Test_Interpretation";
-            this.tb_Test_Interpretation.Size = new System.Drawing.Size(368, 30);
-            this.tb_Test_Interpretation.TabIndex = 43;
-            // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
+            this.pnl_interpretation.Location = new System.Drawing.Point(43, 170);
+            this.pnl_interpretation.Name = "pnl_interpretation";
+            this.pnl_interpretation.Size = new System.Drawing.Size(1062, 533);
+            this.pnl_interpretation.TabIndex = 44;
             // 
             // MainFrm
             // 
@@ -8070,6 +8165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1920, 1061);
+            this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.pictureBox2);
@@ -8167,12 +8263,16 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable1)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable2)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable3)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCtTable4)).EndInit();
             this.tp_AccountManagement.ResumeLayout(false);
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
@@ -8913,6 +9013,13 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tb_Test_Interpretation;
+        private System.Windows.Forms.DataGridView dgvCtTable1;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.DataGridView dgvCtTable2;
+        private System.Windows.Forms.DataGridView dgvCtTable3;
+        private System.Windows.Forms.DataGridView dgvCtTable4;
+        private System.Windows.Forms.DomainUpDown domainUpDown1;
+        private System.Windows.Forms.Panel pnl_interpretation;
     }
 }
 

@@ -14,6 +14,11 @@ namespace ABI_POC_PCR
         CY5
     }
 
+    enum UI_MODE
+    {
+        TESTER_UI = 0,
+        ENGINEER_UI
+    }
     
     public static class Global
     {
