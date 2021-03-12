@@ -41,7 +41,10 @@ namespace ABI_POC_PCR
         public int Routine_Cnt { get; set; }
         public int pre_routine_cnt { get; set; }
         public string current_Log_Name { get; set; }
+        
+        public int ui_mode { get; set; }
 
+        public bool isLogSaving { get; set; }
 
         private static SharedMemory _instance = null;
 

@@ -20,6 +20,8 @@ namespace ABI_POC_PCR.GraphPlot
         public static int CycleCntForBaseCal = 0;
         public static int MaxCycleForBaseCalculation = 0;
 
+        public static double[] CtCycles = new double[16];
+
         public static int[] Optic_Measure_Idx = new int[39] // must be same with COL_CNT
         {
            //1, 2,
@@ -214,9 +216,11 @@ namespace ABI_POC_PCR.GraphPlot
 
         public static void ViewInit(FormsPlot formsPlot)
         {
-            formsPlot.plt.Axis(0, COL_CNT - 1, 0, 2500);
+            formsPlot.Reset();
+
+            //formsPlot.plt.Axis(0, COL_CNT - 1, 0, 3000);
             //formsPlot.plt.TightenLayout(padding: 40);
-            formsPlot.Render();
+            //formsPlot.Render();
         }
 
 
@@ -228,6 +232,7 @@ namespace ABI_POC_PCR.GraphPlot
 
         public static void ResetAllPlots(FormsPlot formsPlot1, FormsPlot formsPlot2, FormsPlot formsPlot3, FormsPlot formsPlot4)
         {
+            
             formsPlot1.plt.Clear();
             formsPlot2.plt.Clear();
             formsPlot3.plt.Clear();

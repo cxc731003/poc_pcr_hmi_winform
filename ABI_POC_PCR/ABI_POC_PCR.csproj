@@ -143,6 +143,24 @@
     <Compile Include="Tester.cs" />
     <Compile Include="ThreadManager.cs" />
     <Compile Include="ThreadUnit.cs" />
+    <Compile Include="ucFirstScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucFirstScreen.Designer.cs">
+      <DependentUpon>ucFirstScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucTestInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucTestInfo.Designer.cs">
+      <DependentUpon>ucTestInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI_for_Tester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI_for_Tester.Designer.cs">
+      <DependentUpon>UI_for_Tester.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -167,6 +185,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucFirstScreen.resx">
+      <DependentUpon>ucFirstScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucTestInfo.resx">
+      <DependentUpon>ucTestInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI_for_Tester.resx">
+      <DependentUpon>UI_for_Tester.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="ABI_POC_PCR_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

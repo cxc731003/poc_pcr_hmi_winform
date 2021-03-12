@@ -18,6 +18,7 @@ namespace ABI_POC_PCR
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new LogIn());
             //Application.Run(new MainFrm());
         }
