@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel_ui = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // panel_TestInfo
+            // panel_ui
             // 
             this.panel_ui.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_ui.Location = new System.Drawing.Point(0, 0);
-            this.panel_ui.Name = "panel_TestInfo";
+            this.panel_ui.Name = "panel_ui";
             this.panel_ui.Size = new System.Drawing.Size(1080, 800);
             this.panel_ui.TabIndex = 24;
             this.panel_ui.Visible = false;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // UI_for_Tester
             // 
@@ -51,7 +60,6 @@
             this.Name = "UI_for_Tester";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UI_for_Tester";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.UI_for_Tester_Load);
             this.ResumeLayout(false);
 
@@ -59,5 +67,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel_ui;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
