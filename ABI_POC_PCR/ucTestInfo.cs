@@ -12,16 +12,26 @@ namespace ABI_POC_PCR
 {
     public partial class ucTestInfo : UserControl
     {
+        public event EventHandler btnTestInfoNext_Event;
+
         DataGridView dgv_TestInfo = new DataGridView();
         public ucTestInfo()
         {
             InitializeComponent();
+            picBox_TestInfoNext.Click += btnTestInfoNext_Click_Event;
+            
+        }
+
+        public void btnTestInfoNext_Click_Event(object sender, EventArgs e)
+        {
+            if (this.btnTestInfoNext_Event != null)
+                btnTestInfoNext_Event(sender, e);
         }
 
         private void ucTestInfo_Load(object sender, EventArgs e)
         {
-            SetupDataGridView(dgv_TestInfo);
-            PopulateDataGridView(dgv_TestInfo);
+            //SetupDataGridView(dgv_TestInfo);
+            //PopulateDataGridView(dgv_TestInfo);
         }
 
 

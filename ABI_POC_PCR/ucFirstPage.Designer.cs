@@ -1,6 +1,6 @@
 ﻿namespace ABI_POC_PCR
 {
-    partial class ucFirstScreen
+    partial class ucFirstPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucFirstScreen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucFirstPage));
             this.btnPreviousTest = new System.Windows.Forms.Button();
             this.btnNewTest = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -45,7 +45,7 @@
             this.btnPreviousTest.TabIndex = 25;
             this.btnPreviousTest.Text = "Previous Test";
             this.btnPreviousTest.UseVisualStyleBackColor = false;
-            this.btnPreviousTest.Click += new System.EventHandler(this.btnPreviousTest_Click);
+            //this.btnPreviousTest.Click += new System.EventHandler(this.btnPreviousTest_Click);
             // 
             // btnNewTest
             // 
@@ -57,7 +57,7 @@
             this.btnNewTest.TabIndex = 24;
             this.btnNewTest.Text = "New Test";
             this.btnNewTest.UseVisualStyleBackColor = false;
-            this.btnNewTest.Click += new System.EventHandler(this.btnNewTest_Click);
+            //this.btnNewTest.Click += new System.EventHandler(this.btnNewTest_Click);
             // 
             // pictureBox2
             // 

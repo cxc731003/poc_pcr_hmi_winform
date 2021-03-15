@@ -157,6 +157,7 @@
             this.btn_MCURead_Eng = new System.Windows.Forms.Button();
             this.btn_NewRecipe_Eng = new System.Windows.Forms.Button();
             this.tp_Interpretation = new System.Windows.Forms.TabPage();
+            this.pnl_interpretation = new System.Windows.Forms.Panel();
             this.tb_Test_Interpretation = new System.Windows.Forms.TextBox();
             this.btnDiagnosisFindAndLoad = new System.Windows.Forms.Button();
             this.btnDiagnosisLoad = new System.Windows.Forms.Button();
@@ -379,6 +380,8 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -778,9 +781,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.pnl_interpretation = new System.Windows.Forms.Panel();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
             this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
@@ -1977,6 +1977,13 @@
             this.tp_Interpretation.Text = "    2. Test Interpretation    ";
             this.tp_Interpretation.UseVisualStyleBackColor = true;
             // 
+            // pnl_interpretation
+            // 
+            this.pnl_interpretation.Location = new System.Drawing.Point(43, 170);
+            this.pnl_interpretation.Name = "pnl_interpretation";
+            this.pnl_interpretation.Size = new System.Drawing.Size(1062, 533);
+            this.pnl_interpretation.TabIndex = 44;
+            // 
             // tb_Test_Interpretation
             // 
             this.tb_Test_Interpretation.Location = new System.Drawing.Point(158, 15);
@@ -2469,6 +2476,7 @@
             this.btnBaseCycleSelection_Load.TabIndex = 6;
             this.btnBaseCycleSelection_Load.Text = "Load";
             this.btnBaseCycleSelection_Load.UseVisualStyleBackColor = true;
+            this.btnBaseCycleSelection_Load.Visible = false;
             this.btnBaseCycleSelection_Load.Click += new System.EventHandler(this.btnBaseCycleSelection_Load_Click);
             // 
             // btnBaseCycleSelection_Save
@@ -2479,6 +2487,7 @@
             this.btnBaseCycleSelection_Save.TabIndex = 5;
             this.btnBaseCycleSelection_Save.Text = "Save";
             this.btnBaseCycleSelection_Save.UseVisualStyleBackColor = true;
+            this.btnBaseCycleSelection_Save.Visible = false;
             this.btnBaseCycleSelection_Save.Click += new System.EventHandler(this.btnBaseCycleSelection_Save_Click);
             // 
             // checkBox6
@@ -2555,6 +2564,7 @@
             this.dgv_CycleForBaseCalculation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgv_CycleForBaseCalculation.Size = new System.Drawing.Size(1710, 95);
             this.dgv_CycleForBaseCalculation.TabIndex = 3;
+            this.dgv_CycleForBaseCalculation.Visible = false;
             this.dgv_CycleForBaseCalculation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CycleForBaseCalculation_CellContentClick);
             // 
             // dataGridViewTextBoxColumn199
@@ -2880,6 +2890,7 @@
             this.label14.Size = new System.Drawing.Size(251, 25);
             this.label14.TabIndex = 2;
             this.label14.Text = "Cycles for Base Calculation";
+            this.label14.Visible = false;
             // 
             // lb_opticMeasurementCycleSelection
             // 
@@ -4022,9 +4033,29 @@
             this.tp_simulation.Text = "    simulation    ";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(243, 172);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(200, 60);
+            this.button16.TabIndex = 29;
+            this.button16.Text = "find base cycle count ";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(449, 144);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(200, 62);
+            this.button15.TabIndex = 28;
+            this.button15.Text = "base calculation with standard deviation";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(1261, 564);
+            this.button14.Location = new System.Drawing.Point(659, 172);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 27;
@@ -4044,7 +4075,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(625, 511);
+            this.label12.Location = new System.Drawing.Point(19, 125);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(218, 25);
             this.label12.TabIndex = 25;
@@ -4072,7 +4103,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(849, 564);
+            this.button12.Location = new System.Drawing.Point(449, 217);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 21;
@@ -4082,7 +4113,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(1055, 564);
+            this.button11.Location = new System.Drawing.Point(865, 172);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 20;
@@ -4139,7 +4170,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(445, 283);
+            this.button8.Location = new System.Drawing.Point(447, 336);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 14;
@@ -4149,7 +4180,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(643, 631);
+            this.button7.Location = new System.Drawing.Point(659, 249);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 13;
@@ -4159,7 +4190,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(849, 631);
+            this.button6.Location = new System.Drawing.Point(865, 249);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 12;
@@ -4169,7 +4200,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(243, 219);
+            this.button5.Location = new System.Drawing.Point(920, 336);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 11;
@@ -4179,7 +4210,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(643, 564);
+            this.button4.Location = new System.Drawing.Point(37, 172);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 10;
@@ -4189,7 +4220,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(37, 219);
+            this.button3.Location = new System.Drawing.Point(692, 336);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
@@ -4199,7 +4230,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(445, 219);
+            this.button2.Location = new System.Drawing.Point(1126, 336);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 8;
@@ -4209,7 +4240,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1055, 631);
+            this.button1.Location = new System.Drawing.Point(1074, 249);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 7;
@@ -4229,7 +4260,7 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(241, 283);
+            this.btnGraph.Location = new System.Drawing.Point(243, 336);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(200, 60);
             this.btnGraph.TabIndex = 5;
@@ -4239,7 +4270,7 @@
             // 
             // btn_firstGraph
             // 
-            this.btn_firstGraph.Location = new System.Drawing.Point(37, 283);
+            this.btn_firstGraph.Location = new System.Drawing.Point(39, 336);
             this.btn_firstGraph.Name = "btn_firstGraph";
             this.btn_firstGraph.Size = new System.Drawing.Size(200, 60);
             this.btn_firstGraph.TabIndex = 4;
@@ -4837,7 +4868,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 243);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 237);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5292,7 +5323,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 66);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 60);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5747,7 +5778,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -113);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -119);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6212,7 +6243,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -280);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -286);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8133,33 +8164,6 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // pnl_interpretation
-            // 
-            this.pnl_interpretation.Location = new System.Drawing.Point(43, 170);
-            this.pnl_interpretation.Name = "pnl_interpretation";
-            this.pnl_interpretation.Size = new System.Drawing.Size(1062, 533);
-            this.pnl_interpretation.TabIndex = 44;
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(849, 496);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(200, 62);
-            this.button15.TabIndex = 28;
-            this.button15.Text = "base calculation with standard deviation";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(849, 709);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(200, 60);
-            this.button16.TabIndex = 29;
-            this.button16.Text = "find base cycle count ";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // progressBar_step
             // 

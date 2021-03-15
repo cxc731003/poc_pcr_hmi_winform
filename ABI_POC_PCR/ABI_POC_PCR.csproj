@@ -63,6 +63,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CircularProgressBar, Version=2.6.6823.24527, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.6.6823.24527\lib\net35-client\CircularProgressBar.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -92,6 +95,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinFormAnimation, Version=1.5.6298.3372, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.5.6298.3372\lib\net35-client\WinFormAnimation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox1.cs">
@@ -143,17 +149,35 @@
     <Compile Include="Tester.cs" />
     <Compile Include="ThreadManager.cs" />
     <Compile Include="ThreadUnit.cs" />
-    <Compile Include="ucFirstScreen.cs">
+    <Compile Include="ucFirstPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucFirstScreen.Designer.cs">
-      <DependentUpon>ucFirstScreen.cs</DependentUpon>
+    <Compile Include="ucFirstPage.Designer.cs">
+      <DependentUpon>ucFirstPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucRunning.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucRunning.Designer.cs">
+      <DependentUpon>ucRunning.cs</DependentUpon>
     </Compile>
     <Compile Include="ucTestInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucTestInfo.Designer.cs">
       <DependentUpon>ucTestInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucTestPreparation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucTestPreparation.Designer.cs">
+      <DependentUpon>ucTestPreparation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucTestStart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucTestStart.Designer.cs">
+      <DependentUpon>ucTestStart.cs</DependentUpon>
     </Compile>
     <Compile Include="UI_for_Tester.cs">
       <SubType>Form</SubType>
@@ -185,11 +209,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ucFirstScreen.resx">
-      <DependentUpon>ucFirstScreen.cs</DependentUpon>
+    <EmbeddedResource Include="ucFirstPage.resx">
+      <DependentUpon>ucFirstPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucRunning.resx">
+      <DependentUpon>ucRunning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucTestInfo.resx">
       <DependentUpon>ucTestInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucTestPreparation.resx">
+      <DependentUpon>ucTestPreparation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucTestStart.resx">
+      <DependentUpon>ucTestStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI_for_Tester.resx">
       <DependentUpon>UI_for_Tester.cs</DependentUpon>

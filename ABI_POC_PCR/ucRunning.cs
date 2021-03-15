@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace ABI_POC_PCR
 {
-    public partial class ucFirstScreen : UserControl
+    public partial class ucRunning : UserControl
     {
-        public ucFirstScreen()
+        public ucRunning()
         {
             InitializeComponent();
-        }
-
-        private void btnNewTest_Click(object sender, EventArgs e)
-        {
-            //testerUIObject.showTestInfo();
-        }
-
-        private void btnPreviousTest_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
