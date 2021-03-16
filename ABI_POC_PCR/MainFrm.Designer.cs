@@ -166,10 +166,6 @@
             this.btnDiagnosisDelete = new System.Windows.Forms.Button();
             this.btnDiagnosisSave = new System.Windows.Forms.Button();
             this.dgv_diagnosis_ct = new System.Windows.Forms.DataGridView();
-            this.dgvtbc_Fluorescence = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbc_coefficient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbc_result = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbc_Ct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_diagnosis_TB = new System.Windows.Forms.DataGridView();
             this.columnDye = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -381,7 +377,7 @@
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
+            this.chkbox_use_deviation = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -781,7 +777,13 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dgvtbc_Fluorescence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbc_scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbc_result = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbc_Ct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.chkbox_use_standard_dev = new System.Windows.Forms.CheckBox();
+            this.chkbox_use_avg = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -2056,39 +2058,13 @@
             this.dgv_diagnosis_ct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_diagnosis_ct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbc_Fluorescence,
-            this.dgvtbc_coefficient,
+            this.dgvtbc_scale,
             this.dgvtbc_result,
             this.dgvtbc_Ct});
             this.dgv_diagnosis_ct.Location = new System.Drawing.Point(1146, 170);
             this.dgv_diagnosis_ct.Name = "dgv_diagnosis_ct";
             this.dgv_diagnosis_ct.Size = new System.Drawing.Size(587, 533);
             this.dgv_diagnosis_ct.TabIndex = 33;
-            // 
-            // dgvtbc_Fluorescence
-            // 
-            this.dgvtbc_Fluorescence.HeaderText = "Fluorescence(Tube)";
-            this.dgvtbc_Fluorescence.Name = "dgvtbc_Fluorescence";
-            this.dgvtbc_Fluorescence.Width = 215;
-            // 
-            // dgvtbc_coefficient
-            // 
-            this.dgvtbc_coefficient.HeaderText = "Coefficient";
-            this.dgvtbc_coefficient.Name = "dgvtbc_coefficient";
-            this.dgvtbc_coefficient.Width = 129;
-            // 
-            // dgvtbc_result
-            // 
-            this.dgvtbc_result.HeaderText = "Result";
-            this.dgvtbc_result.Name = "dgvtbc_result";
-            this.dgvtbc_result.Width = 91;
-            // 
-            // dgvtbc_Ct
-            // 
-            this.dgvtbc_Ct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgvtbc_Ct.HeaderText = "Ct";
-            this.dgvtbc_Ct.Name = "dgvtbc_Ct";
-            this.dgvtbc_Ct.ReadOnly = true;
-            this.dgvtbc_Ct.Width = 57;
             // 
             // dgv_diagnosis_TB
             // 
@@ -3997,8 +3973,10 @@
             // 
             // tp_simulation
             // 
+            this.tp_simulation.Controls.Add(this.chkbox_use_avg);
+            this.tp_simulation.Controls.Add(this.chkbox_use_standard_dev);
             this.tp_simulation.Controls.Add(this.button16);
-            this.tp_simulation.Controls.Add(this.button15);
+            this.tp_simulation.Controls.Add(this.chkbox_use_deviation);
             this.tp_simulation.Controls.Add(this.button14);
             this.tp_simulation.Controls.Add(this.label13);
             this.tp_simulation.Controls.Add(this.label12);
@@ -4043,15 +4021,15 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
-            // button15
+            // chkbox_use_deviation
             // 
-            this.button15.Location = new System.Drawing.Point(449, 144);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(200, 62);
-            this.button15.TabIndex = 28;
-            this.button15.Text = "base calculation with standard deviation";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.chkbox_use_deviation.Location = new System.Drawing.Point(449, 144);
+            this.chkbox_use_deviation.Name = "chkbox_use_deviation";
+            this.chkbox_use_deviation.Size = new System.Drawing.Size(200, 62);
+            this.chkbox_use_deviation.TabIndex = 28;
+            this.chkbox_use_deviation.Text = "base calculation with standard deviation";
+            this.chkbox_use_deviation.UseVisualStyleBackColor = true;
+            this.chkbox_use_deviation.Click += new System.EventHandler(this.button15_Click);
             // 
             // button14
             // 
@@ -4167,6 +4145,7 @@
             this.checkBox3.TabIndex = 15;
             this.checkBox3.Text = "log file select";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // button8
             // 
@@ -4180,7 +4159,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(659, 249);
+            this.button7.Location = new System.Drawing.Point(1099, 172);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 13;
@@ -4190,11 +4169,11 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(865, 249);
+            this.button6.Location = new System.Drawing.Point(1099, 112);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 12;
-            this.button6.Text = "remove optic data dgv";
+            this.button6.Text = "reset optic data dgv";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -4240,7 +4219,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1074, 249);
+            this.button1.Location = new System.Drawing.Point(1099, 232);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 7;
@@ -4868,7 +4847,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 237);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 219);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5323,7 +5302,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 60);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 42);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5778,7 +5757,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -119);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -137);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6243,7 +6222,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -286);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -304);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8165,6 +8144,32 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // dgvtbc_Fluorescence
+            // 
+            this.dgvtbc_Fluorescence.HeaderText = "Fluorescence(Tube)";
+            this.dgvtbc_Fluorescence.Name = "dgvtbc_Fluorescence";
+            this.dgvtbc_Fluorescence.Width = 215;
+            // 
+            // dgvtbc_scale
+            // 
+            this.dgvtbc_scale.HeaderText = "Scale factor";
+            this.dgvtbc_scale.Name = "dgvtbc_scale";
+            this.dgvtbc_scale.Width = 140;
+            // 
+            // dgvtbc_result
+            // 
+            this.dgvtbc_result.HeaderText = "Result";
+            this.dgvtbc_result.Name = "dgvtbc_result";
+            this.dgvtbc_result.Width = 91;
+            // 
+            // dgvtbc_Ct
+            // 
+            this.dgvtbc_Ct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvtbc_Ct.HeaderText = "Ct";
+            this.dgvtbc_Ct.Name = "dgvtbc_Ct";
+            this.dgvtbc_Ct.ReadOnly = true;
+            this.dgvtbc_Ct.Width = 57;
+            // 
             // progressBar_step
             // 
             this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -8177,6 +8182,26 @@
             this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar_step.TabIndex = 11;
             this.progressBar_step.Value = 50;
+            // 
+            // chkbox_use_standard_dev
+            // 
+            this.chkbox_use_standard_dev.AutoSize = true;
+            this.chkbox_use_standard_dev.Location = new System.Drawing.Point(449, 113);
+            this.chkbox_use_standard_dev.Name = "chkbox_use_standard_dev";
+            this.chkbox_use_standard_dev.Size = new System.Drawing.Size(227, 29);
+            this.chkbox_use_standard_dev.TabIndex = 30;
+            this.chkbox_use_standard_dev.Text = "use standard deviation";
+            this.chkbox_use_standard_dev.UseVisualStyleBackColor = true;
+            // 
+            // chkbox_use_avg
+            // 
+            this.chkbox_use_avg.AutoSize = true;
+            this.chkbox_use_avg.Location = new System.Drawing.Point(449, 283);
+            this.chkbox_use_avg.Name = "chkbox_use_avg";
+            this.chkbox_use_avg.Size = new System.Drawing.Size(139, 29);
+            this.chkbox_use_avg.TabIndex = 31;
+            this.chkbox_use_avg.Text = "use average";
+            this.chkbox_use_avg.UseVisualStyleBackColor = true;
             // 
             // MainFrm
             // 
@@ -9019,10 +9044,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column113;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column114;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column115;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Fluorescence;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_coefficient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_result;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Ct;
         private System.Windows.Forms.CheckBox chkBox_BaselineScale;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Button btnBaseCycleSelection_Save;
@@ -9037,8 +9058,14 @@
         private System.Windows.Forms.DataGridView dgvCtTable3;
         private System.Windows.Forms.DataGridView dgvCtTable4;
         private System.Windows.Forms.Panel pnl_interpretation;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button chkbox_use_deviation;
         private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Fluorescence;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_scale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_result;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Ct;
+        private System.Windows.Forms.CheckBox chkbox_use_avg;
+        private System.Windows.Forms.CheckBox chkbox_use_standard_dev;
     }
 }
 

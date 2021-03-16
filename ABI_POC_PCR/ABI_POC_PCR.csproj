@@ -149,42 +149,6 @@
     <Compile Include="Tester.cs" />
     <Compile Include="ThreadManager.cs" />
     <Compile Include="ThreadUnit.cs" />
-    <Compile Include="ucFirstPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucFirstPage.Designer.cs">
-      <DependentUpon>ucFirstPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucRunning.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucRunning.Designer.cs">
-      <DependentUpon>ucRunning.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucTestInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucTestInfo.Designer.cs">
-      <DependentUpon>ucTestInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucTestPreparation.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucTestPreparation.Designer.cs">
-      <DependentUpon>ucTestPreparation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucTestStart.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucTestStart.Designer.cs">
-      <DependentUpon>ucTestStart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI_for_Tester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI_for_Tester.Designer.cs">
-      <DependentUpon>UI_for_Tester.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -209,24 +173,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ucFirstPage.resx">
-      <DependentUpon>ucFirstPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucRunning.resx">
-      <DependentUpon>ucRunning.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucTestInfo.resx">
-      <DependentUpon>ucTestInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucTestPreparation.resx">
-      <DependentUpon>ucTestPreparation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucTestStart.resx">
-      <DependentUpon>ucTestStart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI_for_Tester.resx">
-      <DependentUpon>UI_for_Tester.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="ABI_POC_PCR_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
