@@ -206,7 +206,6 @@
   <ItemGroup>
     <None Include="Resources\geneDtech.png" />
     <Content Include="Image\abi_logo.png" />
-    <Content Include="Image\geneDtech.png" />
     <Content Include="Image\home.png" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\logo2.png" />
