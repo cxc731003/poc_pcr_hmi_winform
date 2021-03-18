@@ -22,15 +22,9 @@ namespace ABI_POC_PCR
         public LogIn()
         {
             InitializeComponent();
-            sm.ui_mode = (int)UI_MODE.ENGINEER_UI;
-            //sm.ui_mode = (int)UI_MODE.TESTER_UI;
+          
+          
             
-            //tb_LoginPW.BackColor = Color.LightPink;
-            //tb_LoginID.BackColor = Color.LightPink;
-            //btnLogin.BackColor = Color.LightPink; 
-            //tb_LoginPW.Enabled = false;
-            //tb_LoginID.Enabled = false;
-            //btnLogin.Enabled = false;
         }
 
         private void LogIn_Load(object sender, EventArgs e)
@@ -90,20 +84,12 @@ namespace ABI_POC_PCR
                     //{
                     // 엔지니어 계정 로그인임 --> 계정정보에서도 관리 가능
                                       
-                    if(sm.ui_mode == (int)UI_MODE.ENGINEER_UI)
-                    {
+                   
                         this.Visible = false;
                         MainFrm dlg = new MainFrm();
                         dlg.Owner = this;
                         dlg.ShowDialog();
-                    }
-                    else if(sm.ui_mode == (int)UI_MODE.TESTER_UI)
-                    {
-                        //this.Visible = false;
-                        //UI_for_Tester dlg = new UI_for_Tester();
-                        //dlg.Owner = this;
-                        //dlg.ShowDialog();
-                    }
+                    
                   
                 }
                 //dataGridView_Manage.Rows.Add(data6);

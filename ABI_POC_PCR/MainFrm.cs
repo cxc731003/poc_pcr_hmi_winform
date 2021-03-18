@@ -35,8 +35,8 @@ namespace ABI_POC_PCR
 {
     public partial class MainFrm : Form
     {
-
-
+        string[] allDataArray;
+        
         Random r = new Random();
 
         MotionManager mm = new MotionManager();
@@ -115,6 +115,8 @@ namespace ABI_POC_PCR
 
         // 로그 파일 생성용
         LogWriter logToFile = new LogWriter();
+        LogWriter logForMonitor = new LogWriter();
+
         bool bSaveLog = true;
 
         string[] headerName = { "", "", "", "" };
@@ -146,6 +148,7 @@ namespace ABI_POC_PCR
         string waitData;
         string[] procData;
 
+        string allData;
         delegate void SetDataBoxCallback(string str);
         delegate void SetTextBoxCallback(TextBox tb, string str);
 
@@ -736,11 +739,14 @@ namespace ABI_POC_PCR
                             else
                             {
                                 Int32.TryParse(stringArray[Plotter.CH_CNT * k + j, i], out iTemp[i + 1]);
-                                if (iTemp[i + 1] > CtlineVal[j + Plotter.CH_CNT * k])
+                                if (iTemp[i + 1] > BaselineVal[j + Plotter.CH_CNT * k])
                                 {
                                     //temp[i + 1] = (iTemp[i + 1]).ToString();
-                                    double scaleFactor = (double)(2500 / (2500 - CtlineVal[Plotter.CH_CNT * k + j]));
-                                    temp[i + 1] = ((iTemp[i + 1] - CtlineVal[Plotter.CH_CNT * k + j]) * scaleFactor).ToString();
+                                    //double scaleFactor = (double)(2500 / (2500 - CtlineVal[Plotter.CH_CNT * k + j]));
+                                    double scaleFactor = (double)(2500 / (2500 - BaselineVal[Plotter.CH_CNT * k + j]));
+
+                                    //temp[i + 1] = ((iTemp[i + 1] - CtlineVal[Plotter.CH_CNT * k + j]) * scaleFactor).ToString();
+                                    temp[i + 1] = ((iTemp[i + 1] - BaselineVal[Plotter.CH_CNT * k + j]) * scaleFactor).ToString();
                                 }
                                 else
                                 {
@@ -1723,7 +1729,8 @@ namespace ABI_POC_PCR
             int[] iD3 = new int[Plotter.COL_CNT];
             int[] iD4 = new int[Plotter.COL_CNT];
 
-            for(int q=0; q < sm.measured_cnt ; q++)//for(int q = 0; q < Plotter.COL_CNT; q++)
+            //for(int q=0; q < sm.measured_cnt ; q++)
+            for(int q = 0; q < Plotter.COL_CNT; q++)
             {
                 Int32.TryParse(d1[q], out iD1[q]);
                 Int32.TryParse(d2[q], out iD2[q]);
@@ -1731,7 +1738,8 @@ namespace ABI_POC_PCR
                 Int32.TryParse(d4[q], out iD4[q]);
             }
 
-            for(int i = 0; i < sm.measured_cnt; i++) //for(int i = 0; i < Plotter.COL_CNT; i++)
+            //for(int i = 0; i < sm.measured_cnt; i++)
+            for(int i = 0; i < Plotter.COL_CNT; i++)
             {
                 switch (tube_idx+1)
                 {
@@ -2036,12 +2044,15 @@ namespace ABI_POC_PCR
         public double[] CtCyclesCalculation()
         {
             int tempCt = 0;
+            double value = 0;
 
             for (int i = 0; i < 16; i++)
             {
                 for (int j = 0; j < Plotter.COL_CNT; j++)
                 {
-                    if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
+                    value = Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i];
+                    //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
+                    if ( value > CtlineVal[i])
                     {
                             Plotter.CtCycles[i] = j;
                             tempCt = j;
@@ -2060,12 +2071,12 @@ namespace ABI_POC_PCR
                 {
                     
                     Plotter.CtCycles[i] += 0.01;
-                    if (tempCtline + delta*k >= CtlineVal[i])
+                    if (tempCtline - BaselineVal[i] + delta*k >= CtlineVal[i])
                     {
                         break;
                     }
                 }
-                Plotter.CtCycles[i] += 1;
+                //Plotter.CtCycles[i] += 1;
             }
 
             return Plotter.CtCycles ;
@@ -2111,7 +2122,8 @@ namespace ABI_POC_PCR
 
         public void updateDataNGraph()
         {
-            MatchAndFindOpticDataForResult();
+            MatchAndFindOpticDataForResultForRealTime();
+            //MatchAndFindOpticDataForResult();
 
             if (sm.DataUpdateFlag)
             {
@@ -2233,22 +2245,22 @@ namespace ABI_POC_PCR
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             //populate the rows
-            string[] row1 = new string[] { "FAM(Tube 1)", "10", "", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "10", "", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "10", "", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "10", "", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "10", "", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "10", "", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "10", "", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "10", "", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "10", "", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "10", "", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "10", "", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "10", "", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "10", "", "" };
+            string[] row1 = new string[] { "FAM(Tube 1)", "15", "", "" };
+            string[] row2 = new string[] { "ROX(Tube 1)", "15", "", "" };
+            string[] row3 = new string[] { "HEX(Tube 1)", "15", "", "" };
+            string[] row4 = new string[] { "Cy5(Tube 1)", "15", "", "" };
+            string[] row5 = new string[] { "FAM(Tube 2)", "15", "", "" };
+            string[] row6 = new string[] { "ROX(Tube 2)", "15", "", "" };
+            string[] row7 = new string[] { "HEX(Tube 2)", "15", "", "" };
+            string[] row8 = new string[] { "Cy5(Tube 2)", "15", "", "" };
+            string[] row9 = new string[] { "FAM(Tube 3)", "15", "", "" };
+            string[] row10 = new string[] { "ROX(Tube 3)", "15", "", "" };
+            string[] row11 = new string[] { "ROX(Tube 3)", "15", "", "" };
+            string[] row12 = new string[] { "ROX(Tube 3)", "15", "", "" };
+            string[] row13 = new string[] { "FAM(Tube 4)", "15", "", "" };
+            string[] row14 = new string[] { "ROX(Tube 4)", "15", "", "" };
+            string[] row15 = new string[] { "HEX(Tube 4)", "15", "", "" };
+            string[] row16 = new string[] { "Cy5(Tube 4)", "15", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2530,6 +2542,7 @@ namespace ABI_POC_PCR
             //tabControl_Engineer.TabPages.Remove(tp_simulation);
             //tabControl_Engineer.TabPages.Remove(tp_diagnosis);
             tabControl_Engineer.TabPages.Remove(tp_base_UserSelection);
+            tabControl_Engineer.TabPages.Remove(tp_pcr_options);
             //dataGridView1.AutoGenerateColumns = false;
 
             //TestResult menu Info. initialize 
@@ -3150,6 +3163,8 @@ namespace ABI_POC_PCR
             procData = null;
             waitData = "";
 
+            //sm.logLineCnt = 0;
+
             // 데이터 받을 준비되었음
             routine_cnt = 0;
             sm.pre_routine_cnt = routine_cnt;
@@ -3503,10 +3518,132 @@ namespace ABI_POC_PCR
             }
             return false;
         }
-
-        private object lockObject = new object();
-  
         public void MatchAndFindOpticDataForResult()
+        {
+            string sPath;
+            string sFileName;
+
+            sPath = Path.Combine(Environment.CurrentDirectory, "log");
+            //sFileName = Path.Combine(sPath, ".txt");
+
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(sPath);
+            foreach (System.IO.FileInfo File in di.GetFiles())
+            {
+                if (File.Extension.ToLower().CompareTo(".txt") == 0)
+                {
+                    String FileNameOnly = File.Name.Substring(0, File.Name.Length - 4);
+                    String FullFileName = File.FullName;
+                    //MessageBox.Show(FullFileName + " " + FileNameOnly);
+                }
+            }
+            string fileName = "";
+            if (checkBox3.Checked)
+            {
+                fileName = sm.currentLogFileName;
+            }
+            else
+            {
+                fileName = sPath + @"\" + sm.current_Log_Name + ".txt"; //di.ToString() + "\\" + str + ".rcp";
+            }
+            //string fileName = sPath + @"\" + "temp" + ".txt"; //di.ToString() + "\\" + str + ".rcp";
+
+            //string fileName = sPath + @"\Pcr 2021-02-24 17-46-11.txt";//@"\Pcr 2021-02-16 13-25-31" + ".txt";
+
+
+            int line_count = 0;
+            string[] lines = File.ReadAllLines(fileName);
+            line_count = File.ReadAllLines(fileName).Length;
+
+            for (int i = 0; i < line_count; i++)
+            {
+                if (lines[i].Contains("optd") && sm.measured_cnt > -1)
+                //if (lines[i].Contains("routine_cnt"))
+                {
+                    string temp = lines[i];
+
+                    char[] sep = { ',' };
+                    string[] result = temp.Split(sep);
+
+                    char[] sep2 = { '=' };
+                    string[] routine_cnt = result[1].Split(sep2);
+
+                    Int32.TryParse(routine_cnt[1], out iRoutine_cnt);
+
+                    string[] tube_no = result[2].Split(sep2);
+                    Int32.TryParse(tube_no[1], out iTube_no);
+
+                    string[] dye = result[3].Split(sep2);
+
+                    int dye_idx = 0;
+                    if (dye[0] == "e1d1[0]")
+                    {
+                        dye_idx = (int)TUBE_INDEX.FAM;
+                    }
+                    else if (dye[0] == "e2d2[0]")
+                    {
+                        dye_idx = (int)TUBE_INDEX.HEX;
+                    }
+                    else if (dye[0] == "e1d1[1]")
+                    {
+                        dye_idx = (int)TUBE_INDEX.ROX;
+                    }
+                    else if (dye[0] == "e2d2[1]")
+                    {
+                        dye_idx = (int)TUBE_INDEX.CY5;
+                    }
+
+                    Int32.TryParse(dye[1], out iDye);
+
+                    for (int j = 0; j < Plotter.COL_CNT; j++)
+                    {
+                        if (Plotter.Optic_Measure_Idx[j] == iRoutine_cnt)
+                        {
+                            Plotter.isOpticData_buffer_filled[j]++;
+                            MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                            DISPLAY_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                            if (MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] == "0")
+                            {
+                                //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
+                            }
+
+
+
+                            if (iRoutine_cnt > sm.Routine_Cnt
+                                && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
+                                && sm.measured_cnt > -1)
+                            {
+                                Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
+
+                                if (sm.measured_cnt < Plotter.COL_CNT - 1)
+                                {
+                                    ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                }
+                                else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
+                                {
+                                    sm.measured_cnt = -1;
+                                }
+
+                                sm.DataUpdateFlag = true;
+
+                                //sm.Routine_Cnt = iRoutine_cnt;
+                            }
+
+                        }
+                    }
+                }
+                else if (lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
+                    && processStep == 9
+                    && sm.measured_cnt == -1
+                    && !sm.DataUpdateFlag)
+                {
+                    //_endProcess();
+                    sm.ProcessEndFlag = true;
+                }
+            }
+
+        }
+
+        public void MatchAndFindOpticDataForResultForRealTime()
         {
             string sPath;
             string sFileName;
@@ -3536,102 +3673,109 @@ namespace ABI_POC_PCR
             //string fileName = sPath + @"\" + "temp" + ".txt"; //di.ToString() + "\\" + str + ".rcp";
 
             //string fileName = sPath + @"\Pcr 2021-02-24 17-46-11.txt";//@"\Pcr 2021-02-16 13-25-31" + ".txt";
-            lock(lockObject)
+
+            try
             {
-                if (!sm.isLogSaving) //not in log saving timing
+                int line_count = 0;
+
+                //string[] lines = File.ReadAllLines(fileName);
+                allDataArray = allData.Split('\n');
+                line_count = allDataArray.Length;//line_count = File.ReadAllLines(fileName).Length;
+
+                for (int i = 0; i < line_count; i++)
                 {
-                    int line_count = 0;
-                    string[] lines = File.ReadAllLines(fileName);
-                    line_count = File.ReadAllLines(fileName).Length;
-
-                    for (int i = 0; i < line_count; i++)
+                    //if (lines[i].Contains("optd") && sm.measured_cnt > -1)
+                    if (allDataArray[i].Contains("optd") && sm.measured_cnt > -1)
                     {
-                        if (lines[i].Contains("optd") && sm.measured_cnt > -1)
-                        //if (lines[i].Contains("routine_cnt"))
+                        string temp = allDataArray[i];
+
+                        char[] sep = { ',' };
+                        string[] result = temp.Split(sep);
+
+                        char[] sep2 = { '=' };
+                        string[] routine_cnt = result[1].Split(sep2);
+
+                        Int32.TryParse(routine_cnt[1], out iRoutine_cnt);
+
+                        string[] tube_no = result[2].Split(sep2);
+                        Int32.TryParse(tube_no[1], out iTube_no);
+
+                        string[] dye = result[3].Split(sep2);
+
+                        int dye_idx = 0;
+                        if (dye[0] == "e1d1[0]")
                         {
-                            string temp = lines[i];
-
-                            char[] sep = { ',' };
-                            string[] result = temp.Split(sep);
-
-                            char[] sep2 = { '=' };
-                            string[] routine_cnt = result[1].Split(sep2);
-
-                            Int32.TryParse(routine_cnt[1], out iRoutine_cnt);
-
-                            string[] tube_no = result[2].Split(sep2);
-                            Int32.TryParse(tube_no[1], out iTube_no);
-
-                            string[] dye = result[3].Split(sep2);
-
-                            int dye_idx = 0;
-                            if (dye[0] == "e1d1[0]")
-                            {
-                                dye_idx = (int)TUBE_INDEX.FAM;
-                            }
-                            else if (dye[0] == "e2d2[0]")
-                            {
-                                dye_idx = (int)TUBE_INDEX.HEX;
-                            }
-                            else if (dye[0] == "e1d1[1]")
-                            {
-                                dye_idx = (int)TUBE_INDEX.ROX;
-                            }
-                            else if (dye[0] == "e2d2[1]")
-                            {
-                                dye_idx = (int)TUBE_INDEX.CY5;
-                            }
-
-                            Int32.TryParse(dye[1], out iDye);
-
-                            for (int j = 0; j < Plotter.COL_CNT; j++)
-                            {
-                                if (Plotter.Optic_Measure_Idx[j] == iRoutine_cnt)
-                                {
-                                    Plotter.isOpticData_buffer_filled[j]++;
-                                    MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
-                                    DISPLAY_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
-                                    if (MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] == "0")
-                                    {
-                                        //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
-                                    }
-
-
-
-                                    if (iRoutine_cnt > sm.Routine_Cnt
-                                        && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
-                                        && sm.measured_cnt > -1)
-                                    {
-                                        Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
-
-                                        if (sm.measured_cnt < Plotter.COL_CNT - 1)
-                                        {
-                                            ++sm.measured_cnt;//sm.measured_cnt = -1;
-                                        }
-                                        else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
-                                        {
-                                            sm.measured_cnt = -1;
-                                        }
-
-                                        sm.DataUpdateFlag = true;
-
-                                        //sm.Routine_Cnt = iRoutine_cnt;
-                                    }
-
-                                }
-                            }
+                            dye_idx = (int)TUBE_INDEX.FAM;
                         }
-                        else if (lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
-                            && processStep == 9
-                            && sm.measured_cnt == -1
-                            && !sm.DataUpdateFlag)
+                        else if (dye[0] == "e2d2[0]")
                         {
-                            //_endProcess();
-                            sm.ProcessEndFlag = true;
+                            dye_idx = (int)TUBE_INDEX.HEX;
+                        }
+                        else if (dye[0] == "e1d1[1]")
+                        {
+                            dye_idx = (int)TUBE_INDEX.ROX;
+                        }
+                        else if (dye[0] == "e2d2[1]")
+                        {
+                            dye_idx = (int)TUBE_INDEX.CY5;
+                        }
+
+                        Int32.TryParse(dye[1], out iDye);
+
+                        for (int j = 0; j < Plotter.COL_CNT; j++)
+                        {
+                            if (Plotter.Optic_Measure_Idx[j] == iRoutine_cnt)
+                            {
+                                Plotter.isOpticData_buffer_filled[j]++;
+                                MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                                DISPLAY_DATA[4 * (iTube_no - 1) + dye_idx, j] = iDye.ToString();
+                                if (MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] == "0")
+                                {
+                                    //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
+                                }
+                                sm.DataUpdateFlag = true;
+
+
+                                if (iRoutine_cnt > sm.Routine_Cnt
+                                    && Plotter.isOpticData_buffer_filled[sm.measured_cnt] >= Plotter.CH_CNT * Plotter.DYE_CNT
+                                    && sm.measured_cnt > -1)
+                                {
+                                    Plotter.isOpticData_buffer_filled[sm.measured_cnt] = 0;
+
+                                    if (sm.measured_cnt < Plotter.COL_CNT - 1)
+                                    {
+                                        ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                    }
+                                    else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
+                                    {
+                                        sm.measured_cnt = -1;
+                                    }
+
+                                    
+
+                                    //sm.Routine_Cnt = iRoutine_cnt;
+                                }
+
+                            }
                         }
                     }
+                    else if (allDataArray[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
+                        && processStep == 9
+                        && sm.measured_cnt == -1
+                        && !sm.DataUpdateFlag)
+                    {
+                        //_endProcess();
+                        sm.ProcessEndFlag = true;
+                    }
+
                 }
             }
+            catch(Exception ex)
+            {
+                logToFile.Append(ex.ToString());
+            }
+                
+            
         }
         
         public void checkRoutineCntChanged()
@@ -4854,8 +4998,7 @@ namespace ABI_POC_PCR
 
         void GetSerialString(object sender)
         {
-            lock (lockObject)
-            {
+           
                 byte[] raw;
                 strData = serial.ReceiveString(out raw);
                 SetDataBox(strData);
@@ -4867,6 +5010,10 @@ namespace ABI_POC_PCR
                 }
 
                 waitData += strData;
+                allData += strData;
+                
+                // allDataArray[sm.logLineCnt] = strData;
+                // sm.logLineCnt++;
 
                 if (strData.Contains("-"))
                 {
@@ -4887,15 +5034,14 @@ namespace ABI_POC_PCR
                     }
                 }
 
-                if (bSaveLog && sm.isLogSaving)
+            
+                if ((!string.IsNullOrEmpty(strData)) && (strData.Length > 0))
                 {
-                    if ((!string.IsNullOrEmpty(strData)) && (strData.Length > 0))
-                    {
-                        logToFile.Append(strData);
-                        sm.isLogSaving = false;
-                    }
+                    logToFile.Append(strData);
+                    
                 }
-            }
+               
+            
         }
 
         void GetSerialString4(object sender)
@@ -6873,7 +7019,10 @@ namespace ABI_POC_PCR
             BaseStandardDeviation = baseCalculationDeviation_WithoutMinMax();//baseCalculationDeviation();
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
 
+        }
     }
     #endregion
 

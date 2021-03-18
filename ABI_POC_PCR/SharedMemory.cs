@@ -8,6 +8,7 @@ namespace ABI_POC_PCR
 {
     public class SharedMemory
     {
+        public int logLineCnt { get; set; }
         public string userID { get; set; } // Tester ID = login ID at first
         public string userPW { get; set; }  // Tester PW = login PW at first
         public string userName { get; set; } // Tester Name
@@ -44,7 +45,7 @@ namespace ABI_POC_PCR
         
         public int ui_mode { get; set; }
 
-        public bool isLogSaving { get; set; }
+     
 
         private static SharedMemory _instance = null;
 
