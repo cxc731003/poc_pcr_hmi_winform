@@ -198,7 +198,7 @@ namespace ABI_POC_PCR.SerialComm
         public string ReceiveString(out byte[] rawLog)
         {
             //return Serial.Receive_String();
-            sm.isLogSaving = true;
+          
 
             byte[] read = Serial.Receive();
             byte[] str = rxProc.RxFindPacket(read);

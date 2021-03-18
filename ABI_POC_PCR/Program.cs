@@ -62,6 +62,31 @@ namespace ABI_POC_PCR
             //}
         }
 
+        public void MakeNewFileForMonitor()
+        {
+            //filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            filePath = Application.StartupPath + @"\log";
+            string temp = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            filePath += "/Pcr " + temp + "_M.txt";
+            sm.current_Log_Name = "Pcr " + temp;
+            //filePath = @"Pcr 2019-12-05 14-20-45.log";
+            //Console.WriteLine("file name={0}", filePath);
+            AppendLine("");
+            AppendLine("==== start ====");
+            AppendLine("");
+
+
+            //try
+            //{
+            //    fileWriter = new StreamWriter(File.OpenWrite(filePath));
+            //    Console.WriteLine("Wrtie log: {0}", filePath);
+            //}
+            //catch
+            //{
+            //    Console.WriteLine("log file open error");
+            //}
+        }
+
         public void CloseFile()
         {
             filePath = null;
