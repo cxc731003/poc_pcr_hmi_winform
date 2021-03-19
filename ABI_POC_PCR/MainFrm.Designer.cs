@@ -380,6 +380,8 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.chkbox_use_avg = new System.Windows.Forms.CheckBox();
@@ -785,7 +787,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button18 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
@@ -4013,6 +4015,8 @@
             // 
             // tp_simulation
             // 
+            this.tp_simulation.Controls.Add(this.button20);
+            this.tp_simulation.Controls.Add(this.button19);
             this.tp_simulation.Controls.Add(this.button18);
             this.tp_simulation.Controls.Add(this.button17);
             this.tp_simulation.Controls.Add(this.button15);
@@ -4054,6 +4058,26 @@
             this.tp_simulation.Text = "    simulation    ";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(865, 390);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(200, 60);
+            this.button19.TabIndex = 35;
+            this.button19.Text = "print csv file";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(244, 634);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(200, 60);
+            this.button18.TabIndex = 34;
+            this.button18.Text = "read and clone log";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // button17
             // 
             this.button17.Location = new System.Drawing.Point(655, 390);
@@ -4066,7 +4090,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(861, 211);
+            this.button15.Location = new System.Drawing.Point(659, 172);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 32;
@@ -4096,7 +4120,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(243, 172);
+            this.button16.Location = new System.Drawing.Point(244, 172);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 29;
@@ -4116,7 +4140,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(655, 184);
+            this.button14.Location = new System.Drawing.Point(874, 172);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 27;
@@ -4174,7 +4198,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(861, 143);
+            this.button11.Location = new System.Drawing.Point(1090, 172);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 20;
@@ -4276,7 +4300,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 10;
-            this.button4.Text = "update dgv";
+            this.button4.Text = "get display data";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -4930,7 +4954,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 159);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 105);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5385,7 +5409,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, -18);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, -72);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5840,7 +5864,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -197);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -251);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6305,7 +6329,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -364);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -418);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -6778,6 +6802,7 @@
             this.btnRSTPlot1.TabIndex = 8;
             this.btnRSTPlot1.Text = "RST";
             this.btnRSTPlot1.UseVisualStyleBackColor = true;
+            this.btnRSTPlot1.Visible = false;
             this.btnRSTPlot1.Click += new System.EventHandler(this.btnRSTPlot1_Click);
             // 
             // cBoxCh1CY5
@@ -6792,6 +6817,7 @@
             this.cBoxCh1CY5.TabIndex = 4;
             this.cBoxCh1CY5.Text = "CH1_CY5";
             this.cBoxCh1CY5.UseVisualStyleBackColor = true;
+            this.cBoxCh1CY5.Visible = false;
             // 
             // cBoxCh1HEX
             // 
@@ -6805,6 +6831,7 @@
             this.cBoxCh1HEX.TabIndex = 5;
             this.cBoxCh1HEX.Text = "CH1_HEX";
             this.cBoxCh1HEX.UseVisualStyleBackColor = true;
+            this.cBoxCh1HEX.Visible = false;
             // 
             // cBoxCh1ROX
             // 
@@ -6818,6 +6845,7 @@
             this.cBoxCh1ROX.TabIndex = 6;
             this.cBoxCh1ROX.Text = "CH1_ROX";
             this.cBoxCh1ROX.UseVisualStyleBackColor = true;
+            this.cBoxCh1ROX.Visible = false;
             // 
             // cBoxCh1FAM
             // 
@@ -6831,6 +6859,7 @@
             this.cBoxCh1FAM.TabIndex = 7;
             this.cBoxCh1FAM.Text = "CH1_FAM";
             this.cBoxCh1FAM.UseVisualStyleBackColor = true;
+            this.cBoxCh1FAM.Visible = false;
             // 
             // formsPlot1
             // 
@@ -6880,6 +6909,7 @@
             this.btnRSTPlot2.TabIndex = 8;
             this.btnRSTPlot2.Text = "RST";
             this.btnRSTPlot2.UseVisualStyleBackColor = true;
+            this.btnRSTPlot2.Visible = false;
             this.btnRSTPlot2.Click += new System.EventHandler(this.btnRSTPlot2_Click);
             // 
             // cBoxCh2CY5
@@ -6894,6 +6924,7 @@
             this.cBoxCh2CY5.TabIndex = 4;
             this.cBoxCh2CY5.Text = "CH2_CY5";
             this.cBoxCh2CY5.UseVisualStyleBackColor = true;
+            this.cBoxCh2CY5.Visible = false;
             // 
             // cBoxCh2HEX
             // 
@@ -6907,6 +6938,7 @@
             this.cBoxCh2HEX.TabIndex = 5;
             this.cBoxCh2HEX.Text = "CH2_HEX";
             this.cBoxCh2HEX.UseVisualStyleBackColor = true;
+            this.cBoxCh2HEX.Visible = false;
             // 
             // cBoxCh2ROX
             // 
@@ -6920,6 +6952,7 @@
             this.cBoxCh2ROX.TabIndex = 6;
             this.cBoxCh2ROX.Text = "CH2_ROX";
             this.cBoxCh2ROX.UseVisualStyleBackColor = true;
+            this.cBoxCh2ROX.Visible = false;
             // 
             // cBoxCh2FAM
             // 
@@ -6933,6 +6966,7 @@
             this.cBoxCh2FAM.TabIndex = 7;
             this.cBoxCh2FAM.Text = "CH2_FAM";
             this.cBoxCh2FAM.UseVisualStyleBackColor = true;
+            this.cBoxCh2FAM.Visible = false;
             // 
             // formsPlot2
             // 
@@ -6985,6 +7019,7 @@
             this.cBoxCh4CY5.TabIndex = 10;
             this.cBoxCh4CY5.Text = "CH4_CY5";
             this.cBoxCh4CY5.UseVisualStyleBackColor = true;
+            this.cBoxCh4CY5.Visible = false;
             // 
             // cBoxCh4FAM
             // 
@@ -6998,6 +7033,7 @@
             this.cBoxCh4FAM.TabIndex = 6;
             this.cBoxCh4FAM.Text = "CH4_FAM";
             this.cBoxCh4FAM.UseVisualStyleBackColor = true;
+            this.cBoxCh4FAM.Visible = false;
             // 
             // btnRSTPlot4
             // 
@@ -7008,6 +7044,7 @@
             this.btnRSTPlot4.TabIndex = 7;
             this.btnRSTPlot4.Text = "RST";
             this.btnRSTPlot4.UseVisualStyleBackColor = true;
+            this.btnRSTPlot4.Visible = false;
             this.btnRSTPlot4.Click += new System.EventHandler(this.btnRSTPlot4_Click);
             // 
             // cBoxCh4ROX
@@ -7022,6 +7059,7 @@
             this.cBoxCh4ROX.TabIndex = 8;
             this.cBoxCh4ROX.Text = "CH4_ROX";
             this.cBoxCh4ROX.UseVisualStyleBackColor = true;
+            this.cBoxCh4ROX.Visible = false;
             // 
             // cBoxCh4HEX
             // 
@@ -7035,6 +7073,7 @@
             this.cBoxCh4HEX.TabIndex = 9;
             this.cBoxCh4HEX.Text = "CH4_HEX";
             this.cBoxCh4HEX.UseVisualStyleBackColor = true;
+            this.cBoxCh4HEX.Visible = false;
             // 
             // formsPlot4
             // 
@@ -7084,6 +7123,7 @@
             this.btnRSTPlot3.TabIndex = 7;
             this.btnRSTPlot3.Text = "RST";
             this.btnRSTPlot3.UseVisualStyleBackColor = true;
+            this.btnRSTPlot3.Visible = false;
             this.btnRSTPlot3.Click += new System.EventHandler(this.btnRSTPlot3_Click);
             // 
             // cBoxCh3CY5
@@ -7098,6 +7138,7 @@
             this.cBoxCh3CY5.TabIndex = 10;
             this.cBoxCh3CY5.Text = "CH3_CY5";
             this.cBoxCh3CY5.UseVisualStyleBackColor = true;
+            this.cBoxCh3CY5.Visible = false;
             // 
             // cBoxCh3HEX
             // 
@@ -7111,6 +7152,7 @@
             this.cBoxCh3HEX.TabIndex = 9;
             this.cBoxCh3HEX.Text = "CH3_HEX";
             this.cBoxCh3HEX.UseVisualStyleBackColor = true;
+            this.cBoxCh3HEX.Visible = false;
             // 
             // cBoxCh3ROX
             // 
@@ -7124,6 +7166,7 @@
             this.cBoxCh3ROX.TabIndex = 8;
             this.cBoxCh3ROX.Text = "CH3_ROX";
             this.cBoxCh3ROX.UseVisualStyleBackColor = true;
+            this.cBoxCh3ROX.Visible = false;
             // 
             // cBoxCh3FAM
             // 
@@ -7137,6 +7180,7 @@
             this.cBoxCh3FAM.TabIndex = 6;
             this.cBoxCh3FAM.Text = "CH3_FAM";
             this.cBoxCh3FAM.UseVisualStyleBackColor = true;
+            this.cBoxCh3FAM.Visible = false;
             // 
             // formsPlot3
             // 
@@ -8227,15 +8271,15 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button18
+            // button20
             // 
-            this.button18.Location = new System.Drawing.Point(244, 634);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(200, 60);
-            this.button18.TabIndex = 34;
-            this.button18.Text = "read and clone log";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.button20.Location = new System.Drawing.Point(1090, 390);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(200, 60);
+            this.button20.TabIndex = 36;
+            this.button20.Text = "calculate ct cycles";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // progressBar_step
             // 
@@ -9116,6 +9160,8 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
     }
 }
 

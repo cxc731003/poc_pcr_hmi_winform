@@ -743,10 +743,10 @@ namespace ABI_POC_PCR
                                 {
                                     //temp[i + 1] = (iTemp[i + 1]).ToString();
                                     //double scaleFactor = (double)(2500 / (2500 - CtlineVal[Plotter.CH_CNT * k + j]));
-                                    double scaleFactor = (double)(2500 / (2500 - BaselineVal[Plotter.CH_CNT * k + j]));
+                                   sm.scaleFactor[Plotter.CH_CNT * k + j] = (double)(2500 / (2500 - BaselineVal[Plotter.CH_CNT * k + j]));
 
                                     //temp[i + 1] = ((iTemp[i + 1] - CtlineVal[Plotter.CH_CNT * k + j]) * scaleFactor).ToString();
-                                    temp[i + 1] = ((iTemp[i + 1] - BaselineVal[Plotter.CH_CNT * k + j]) * scaleFactor).ToString();
+                                    temp[i + 1] = ((iTemp[i + 1] - BaselineVal[Plotter.CH_CNT * k + j]) * sm.scaleFactor[Plotter.CH_CNT * k + j]).ToString();
                                 }
                                 else
                                 {
@@ -1762,14 +1762,14 @@ namespace ABI_POC_PCR
                         Plotter.ch3DataDic["ROX"].Add(iD2[i]);
                         Plotter.ch3DataDic["HEX"].Add(iD3[i]);
                         Plotter.ch3DataDic["CY5"].Add(iD4[i]);
-                        Plotter.UpdatePlot(formsPlot3, "Tube3", 2, Plotter.ch3DataDic, cBoxCh3FAM, cBoxCh3ROX, cBoxCh3HEX, cBoxCh3CY5, hValue[8], hValue[9], hValue[10], hValue[11]);
+                        Plotter.UpdatePlot(formsPlot3, "Tube3", 2, Plotter.ch3DataDic, cBoxCh3FAM, cBoxCh3ROX, cBoxCh3HEX, cBoxCh3CY5, hValue[12], hValue[13], hValue[14], hValue[15]);
                         break;
                     case 4:
                         Plotter.ch4DataDic["FAM"].Add(iD1[i]);
                         Plotter.ch4DataDic["ROX"].Add(iD2[i]);
                         Plotter.ch4DataDic["HEX"].Add(iD3[i]);
                         Plotter.ch4DataDic["CY5"].Add(iD4[i]);
-                        Plotter.UpdatePlot(formsPlot4, "Tube4", 3, Plotter.ch4DataDic, cBoxCh4FAM, cBoxCh4ROX, cBoxCh4HEX, cBoxCh4CY5, hValue[12], hValue[13], hValue[14], hValue[15]);
+                        Plotter.UpdatePlot(formsPlot4, "Tube4", 3, Plotter.ch4DataDic, cBoxCh4FAM, cBoxCh4ROX, cBoxCh4HEX, cBoxCh4CY5,  hValue[8], hValue[9], hValue[10], hValue[11]);
                         break;
                     default:
                         break;
@@ -1940,8 +1940,10 @@ namespace ABI_POC_PCR
 
                 for (int m = 0; m < Plotter.COL_CNT; m++)
                 {
-                    if (base_temp[m] > 0)
+                    if (Plotter.isThisCycleWouldbeUsedForBaseCal[m] == 1)
                     {
+                        base_temp[m] = Convert.ToDouble(MEASURED_DATA[i, m]);
+
                         base_deviation[i] += (base_temp[m] - base_avg[i]) * (base_temp[m] - base_avg[i]);
                     }
                 }
@@ -1987,7 +1989,7 @@ namespace ABI_POC_PCR
                 }
                 BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
-                CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
+                //CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
                 //ic_value[i] = MEASURED_DATA[i, 0];
             }
         }
@@ -2050,35 +2052,58 @@ namespace ABI_POC_PCR
             {
                 for (int j = 0; j < Plotter.COL_CNT; j++)
                 {
-                    value = Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i];
+                    //value = Convert.ToDouble(DISPLAY_DATA[i, j]);
+                    value = (Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i])*sm.scaleFactor[i];
+                    if (value < 0) value = 0;
+
                     //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
-                    if ( value > CtlineVal[i])
+                    if ( value > ((CtlineVal[i]- BaselineVal[i])*sm.scaleFactor[i]))
                     {
                             Plotter.CtCycles[i] = j;
                             tempCt = j;
                             break;
+                    }
+                    else if( value < ((CtlineVal[i] - BaselineVal[i]) * sm.scaleFactor[i]))
+                    {
+                        Plotter.CtCycles[i] = 0;
                     }
                 }
                 if(tempCt == 0 )
                 {
                     tempCt = 1;
                 }
+                //double tempCtline = Convert.ToDouble(DISPLAY_DATA[i, tempCt - 1]);
                 double tempCtline = Convert.ToDouble(MEASURED_DATA[i, tempCt -1]);
+
+                //double delta = Math.Abs(((Convert.ToDouble(DISPLAY_DATA[i, tempCt]) - tempCtline)) / 100);
                 double delta =  Math.Abs(((Convert.ToDouble(MEASURED_DATA[i, tempCt]) - tempCtline)) / 100);
-              
+
                 Plotter.CtCycles[i] = tempCt;
                 for(int k = 0; k < 100; k++)
                 {
-                    
                     Plotter.CtCycles[i] += 0.01;
-                    if (tempCtline - BaselineVal[i] + delta*k >= CtlineVal[i])
+                    //if ((tempCtline + delta * k) >= (CtlineVal[i] - BaselineVal[i]) * sm.scaleFactor[i])
+                    if ((tempCtline - BaselineVal[i] + delta*k)*sm.scaleFactor[i] >= (CtlineVal[i]-BaselineVal[i])*sm.scaleFactor[i])
                     {
                         break;
                     }
+                  //  else if ((tempCtline + delta * k) < (CtlineVal[i] - BaselineVal[i]) * sm.scaleFactor[i])
+                    else if((tempCtline - BaselineVal[i] + delta * k)*sm.scaleFactor[i] < (CtlineVal[i] - BaselineVal[i])*sm.scaleFactor[i])
+                    {
+                        if (k == 99) Plotter.CtCycles[i] = 0;
+                    }
                 }
-                //Plotter.CtCycles[i] += 1;
+                Plotter.CtCycles[i] += 1;
             }
-
+            /*
+            for(int l = 0; l < 16; l++)
+            {
+                if (Plotter.CtCycles[l] <= 12)
+                {
+                    Plotter.CtCycles[l] = 0;
+                }
+            }
+            */
             return Plotter.CtCycles ;
         }
 
@@ -2164,7 +2189,7 @@ namespace ABI_POC_PCR
                     {
                         for(int j = 0; j < Plotter.CH_CNT*Plotter.DYE_CNT; j++)
                         {
-                            zerosetValArray[j] = CtlineVal[j] - BaselineVal[j];                      
+                            zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j]) * sm.scaleFactor[j];                      
                         }
                         updateScottPlot(i, zerosetValArray);
                     }
@@ -2173,7 +2198,7 @@ namespace ABI_POC_PCR
                         updateScottPlot(i, CtlineVal);
                     }
                 }
-                CtCyclesCalculation();
+                double[] ctCycles = CtCyclesCalculation();
 
                 drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
                 drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
@@ -2245,22 +2270,22 @@ namespace ABI_POC_PCR
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             //populate the rows
-            string[] row1 = new string[] { "FAM(Tube 1)", "15", "", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "15", "", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "15", "", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "15", "", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "15", "", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "15", "", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "15", "", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "15", "", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "15", "", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "15", "", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "15", "", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "15", "", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "15", "", "" };
+            string[] row1 = new string[] { "FAM(Tube 1)", "6", "", "" };
+            string[] row2 = new string[] { "ROX(Tube 1)", "6", "", "" };
+            string[] row3 = new string[] { "HEX(Tube 1)", "6", "", "" };
+            string[] row4 = new string[] { "Cy5(Tube 1)", "6", "", "" };
+            string[] row5 = new string[] { "FAM(Tube 2)", "6", "", "" };
+            string[] row6 = new string[] { "ROX(Tube 2)", "6", "", "" };
+            string[] row7 = new string[] { "HEX(Tube 2)", "6", "", "" };
+            string[] row8 = new string[] { "Cy5(Tube 2)", "6", "", "" };
+            string[] row9 = new string[] { "FAM(Tube 3)", "6", "", "" };
+            string[] row10 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row11 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row12 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row13 = new string[] { "FAM(Tube 4)", "6", "", "" };
+            string[] row14 = new string[] { "ROX(Tube 4)", "6", "", "" };
+            string[] row15 = new string[] { "HEX(Tube 4)", "6", "", "" };
+            string[] row16 = new string[] { "Cy5(Tube 4)", "6", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2445,6 +2470,8 @@ namespace ABI_POC_PCR
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            sm.scaleFactor = new double[16];
+          
             chkbox_use_standard_dev.Checked = true;
             chkBox_BaselineScale.Checked = true;
             
@@ -6677,10 +6704,10 @@ namespace ABI_POC_PCR
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
+            //DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
             MatchAndFindOpticDataForResult();
             //updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
-            updateDataGridOpticDatas(dgvArr, MEASURED_DATA);
+            //updateDataGridOpticDatas(dgvArr, MEASURED_DATA);
             /*
             DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
             updateDataGridOpticDatum(dgvArr, MEASURED_DATA);
@@ -6833,7 +6860,18 @@ namespace ABI_POC_PCR
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
             for (int i = 0; i < Plotter.CH_CNT; i++)
             {
-                updateScottPlot(i, CtlineVal);
+                if (chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
+                {
+                    for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+                    {
+                        zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j])*sm.scaleFactor[j];
+                    }
+                    updateScottPlot(i, zerosetValArray);
+                }
+                else
+                {
+                    updateScottPlot(i, CtlineVal);
+                }
             }
         }
 
@@ -6907,7 +6945,7 @@ namespace ABI_POC_PCR
                 {
                     for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
                     {
-                        zerosetValArray[j] = CtlineVal[j] - BaselineVal[j];
+                        zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j]) * sm.scaleFactor[j];
                     }
                     updateScottPlot(i, zerosetValArray);
                 }
@@ -6976,7 +7014,7 @@ namespace ABI_POC_PCR
 
         private void button14_Click(object sender, EventArgs e)
         {
-            CtCyclesCalculation();
+            double[] ctCycles = CtCyclesCalculation();
         
             drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
             drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
@@ -7007,7 +7045,7 @@ namespace ABI_POC_PCR
         private void button15_Click_1(object sender, EventArgs e)
         {
             DataGridView[] dgvArr = new DataGridView[4] { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
-            MatchAndFindOpticDataForResult();
+            //MatchAndFindOpticDataForResult();
             //updateDataGridOpticDatum(dgvArr, DISPLAY_DATA);
             updateDataGridOpticDatas(dgvArr, MEASURED_DATA);
         }
@@ -7022,6 +7060,45 @@ namespace ABI_POC_PCR
         private void button18_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string dt = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            // 결과 csv 저장
+            string filePath2 = Application.StartupPath + @"\log";
+
+            filePath2 += "/PCR " + dt + ".csv";
+
+            Save_GridCsv(filePath2);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            for (int j = 0; j < Plotter.COL_CNT; j++)
+            {
+                //value = Convert.ToDouble(DISPLAY_DATA[i, j]);
+                double value = (Convert.ToDouble(MEASURED_DATA[8, j]) - BaselineVal[8]) * sm.scaleFactor[8];
+                if (value < 0) value = 0;
+
+                //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
+                if (value > ((CtlineVal[8] - BaselineVal[8]) * sm.scaleFactor[8]))
+                {
+                    Plotter.CtCycles[8] = j;
+                    //tempCt = j;
+                    break;
+                }
+                else if (value < ((CtlineVal[8] - BaselineVal[8]) * sm.scaleFactor[8]))
+                {
+                    Plotter.CtCycles[8] = 0;
+                }
+            }
+
+            for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+            {
+                zerosetValArray[8] = (CtlineVal[8] - BaselineVal[8]) * sm.scaleFactor[8];
+            }
+            updateScottPlot(2, zerosetValArray);
         }
     }
     #endregion

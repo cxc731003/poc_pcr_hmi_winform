@@ -45,7 +45,8 @@ namespace ABI_POC_PCR
         
         public int ui_mode { get; set; }
 
-     
+
+        public double[] scaleFactor { get; set; }
 
         private static SharedMemory _instance = null;
 
