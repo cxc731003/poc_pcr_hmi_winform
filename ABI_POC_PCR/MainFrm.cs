@@ -1940,8 +1940,10 @@ namespace ABI_POC_PCR
 
                 for (int m = 0; m < Plotter.COL_CNT; m++)
                 {
-                    if (base_temp[m] > 0)
+                    if (Plotter.isThisCycleWouldbeUsedForBaseCal[m] == 1)
                     {
+                        base_temp[m] = Convert.ToDouble(MEASURED_DATA[i, m]);
+
                         base_deviation[i] += (base_temp[m] - base_avg[i]) * (base_temp[m] - base_avg[i]);
                     }
                 }
@@ -1987,7 +1989,7 @@ namespace ABI_POC_PCR
                 }
                 BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
-                CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
+                //CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
                 //ic_value[i] = MEASURED_DATA[i, 0];
             }
         }
@@ -2052,11 +2054,17 @@ namespace ABI_POC_PCR
                 {
                     value = Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i];
                     //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
-                    if ( value > CtlineVal[i])
+                   
+
+                    if ( value > (CtlineVal[i]- BaselineVal[i]))
                     {
                             Plotter.CtCycles[i] = j;
                             tempCt = j;
                             break;
+                    }
+                    else if(value < (CtlineVal[i] - BaselineVal[i]))
+                    {
+                            Plotter.CtCycles[i] = 0;
                     }
                 }
                 if(tempCt == 0 )
@@ -2071,7 +2079,7 @@ namespace ABI_POC_PCR
                 {
                     
                     Plotter.CtCycles[i] += 0.01;
-                    if (tempCtline - BaselineVal[i] + delta*k >= CtlineVal[i])
+                    if (tempCtline - BaselineVal[i] + delta*k >= (CtlineVal[i]-BaselineVal[i]))
                     {
                         break;
                     }
@@ -2245,22 +2253,22 @@ namespace ABI_POC_PCR
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             //populate the rows
-            string[] row1 = new string[] { "FAM(Tube 1)", "15", "", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "15", "", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "15", "", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "15", "", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "15", "", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "15", "", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "15", "", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "15", "", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "15", "", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "15", "", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "15", "", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "15", "", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "15", "", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "15", "", "" };
+            string[] row1 = new string[] { "FAM(Tube 1)", "6", "", "" };
+            string[] row2 = new string[] { "ROX(Tube 1)", "6", "", "" };
+            string[] row3 = new string[] { "HEX(Tube 1)", "6", "", "" };
+            string[] row4 = new string[] { "Cy5(Tube 1)", "6", "", "" };
+            string[] row5 = new string[] { "FAM(Tube 2)", "6", "", "" };
+            string[] row6 = new string[] { "ROX(Tube 2)", "6", "", "" };
+            string[] row7 = new string[] { "HEX(Tube 2)", "6", "", "" };
+            string[] row8 = new string[] { "Cy5(Tube 2)", "6", "", "" };
+            string[] row9 = new string[] { "FAM(Tube 3)", "6", "", "" };
+            string[] row10 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row11 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row12 = new string[] { "ROX(Tube 3)", "6", "", "" };
+            string[] row13 = new string[] { "FAM(Tube 4)", "6", "", "" };
+            string[] row14 = new string[] { "ROX(Tube 4)", "6", "", "" };
+            string[] row15 = new string[] { "HEX(Tube 4)", "6", "", "" };
+            string[] row16 = new string[] { "Cy5(Tube 4)", "6", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -6833,7 +6841,18 @@ namespace ABI_POC_PCR
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
             for (int i = 0; i < Plotter.CH_CNT; i++)
             {
-                updateScottPlot(i, CtlineVal);
+                if (chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
+                {
+                    for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+                    {
+                        zerosetValArray[j] = CtlineVal[j] - BaselineVal[j];
+                    }
+                    updateScottPlot(i, zerosetValArray);
+                }
+                else
+                {
+                    updateScottPlot(i, CtlineVal);
+                }
             }
         }
 
@@ -7022,6 +7041,17 @@ namespace ABI_POC_PCR
         private void button18_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string dt = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            // 결과 csv 저장
+            string filePath2 = Application.StartupPath + @"\log";
+
+            filePath2 += "/PCR " + dt + ".csv";
+
+            Save_GridCsv(filePath2);
         }
     }
     #endregion
