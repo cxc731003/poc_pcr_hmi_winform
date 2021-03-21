@@ -118,7 +118,7 @@ namespace ABI_POC_PCR.GraphPlot
 
         public static void UpdatePlot(FormsPlot formsPlot, string title, int chamberNum
                                         , Dictionary<string, List<double>> chDataDic
-                                        , CheckBox cBoxFAM, CheckBox cBoxROX, CheckBox cBoxHEX, CheckBox cBoxCYS, double Ct_FAM, double Ct_ROX, double Ct_HEX, double Ct_CY5)
+                                        , CheckBox cBoxFAM, CheckBox cBoxROX, CheckBox cBoxHEX, CheckBox cBoxCYS, int Ct_FAM, int Ct_ROX, int Ct_HEX, int Ct_CY5)
         {
             labelTicks = new List<string>();
             formsPlot.plt.Clear();
