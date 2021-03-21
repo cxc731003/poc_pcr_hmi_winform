@@ -2387,8 +2387,6 @@ namespace ABI_POC_PCR
 
         public void loadExcelFile_Interpretation(DataGridView dgv, string fileName)
         {
-
-
             string currentDir = Environment.CurrentDirectory;
             //string fileName = currentDir + @"\aaa";
             string filePath = Path.Combine(currentDir, "data") + @"\" + fileName;
@@ -4378,27 +4376,31 @@ namespace ABI_POC_PCR
 
             DataGridView dgv = new DataGridView();
             dgv_Interpretation.Add(dgv);
-            setupDGV_Interpretation();
+            setupDGV_Interpretation(dgv_Interpretation[0]);
+
+
+            loadExcelFile_Interpretation(dgv_Interpretation[0], str);//loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
+            //selectedDgv = dgv_diagnosis_COVID;
+
             //SetupDataGridView(dgv_interpretation[dgv_Interpretation_Cnt]);
             //dgv_Interpretation_Cnt++;
         }
 
-        public void setupDGV_Interpretation()
+        public void setupDGV_Interpretation(DataGridView dgv)
         {
             int startY = 30;
-
-            int height = dgv_Interpretation[0].Height;
+            int height = dgv.Height;
             int posY = startY + 10 + height;
 
-            pnl_interpretation.Controls.Add(dgv_Interpretation[0]);
-            dgv_Interpretation[0].Parent = pnl_interpretation;
+            pnl_interpretation.Controls.Add(dgv);
+            dgv.Parent = pnl_interpretation;
             pnl_interpretation.Location = new Point(100, posY);
             pnl_interpretation.Name = "pnl_interpretation";
-            pnl_interpretation.Height = dgv_Interpretation[0].Height;
-            pnl_interpretation.Width = dgv_Interpretation[0].Width;
+            pnl_interpretation.Height = dgv.Height;
+            pnl_interpretation.Width = dgv.Width;
 
-            SetupDataGridView(dgv_Interpretation[0]);
-            PopulateDataGridView(dgv_Interpretation[0]);
+            //SetupDataGridView(dgv_Interpretation[0]);
+            //PopulateDataGridView(dgv_Interpretation[0]);
         }
 
         public void SetupDataGridView(DataGridView dgv)
