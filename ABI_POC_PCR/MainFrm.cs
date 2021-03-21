@@ -6679,7 +6679,7 @@ namespace ABI_POC_PCR
 
         private void btnDiagnosisSave_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnDiagnosisDelete_Click(object sender, EventArgs e)

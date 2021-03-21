@@ -22,9 +22,6 @@ namespace ABI_POC_PCR
         public LogIn()
         {
             InitializeComponent();
-          
-          
-            
         }
 
         private void LogIn_Load(object sender, EventArgs e)
@@ -83,14 +80,10 @@ namespace ABI_POC_PCR
                     //if (tb_LoginID.Text == "ABI" && tb_LoginPW.Text == "5344")
                     //{
                     // 엔지니어 계정 로그인임 --> 계정정보에서도 관리 가능
-                                      
-                   
-                        this.Visible = false;
-                        MainFrm dlg = new MainFrm();
-                        dlg.Owner = this;
-                        dlg.ShowDialog();
-                    
-                  
+                    this.Visible = false;
+                    MainFrm dlg = new MainFrm();
+                    dlg.Owner = this;
+                    dlg.ShowDialog();
                 }
                 //dataGridView_Manage.Rows.Add(data6);
             }  
@@ -108,8 +101,7 @@ namespace ABI_POC_PCR
 
             //컴포트 연결시도
             bool flag = Open_exec();
-
-
+            
             //added by dahunj
             //tb_Log.Visible = true;
 
