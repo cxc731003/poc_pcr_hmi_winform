@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace ABI_POC_PCR
 {
-    
-
     public class Diagnosis
     {
         

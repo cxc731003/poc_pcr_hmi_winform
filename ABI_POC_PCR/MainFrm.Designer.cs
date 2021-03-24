@@ -434,9 +434,13 @@
             this.label34 = new System.Windows.Forms.Label();
             this.tabControl_Tester = new System.Windows.Forms.TabControl();
             this.tp_TestReport = new System.Windows.Forms.TabPage();
+            this.pnl_AnalyticResult = new System.Windows.Forms.Panel();
+            this.lbl_CycleCount = new System.Windows.Forms.Label();
+            this.Cycle = new System.Windows.Forms.Label();
+            this.lbl_Status = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.progressBar_Tester = new System.Windows.Forms.ProgressBar();
             this.lb_IC_Result = new System.Windows.Forms.Label();
-            this.listViewResultIC = new System.Windows.Forms.ListView();
             this.listView_Result = new System.Windows.Forms.ListView();
             this.label42 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -455,7 +459,6 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -790,6 +793,8 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.button22 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -2489,7 +2494,6 @@
             this.btnBaseCycleSelection_Load.TabIndex = 6;
             this.btnBaseCycleSelection_Load.Text = "Load";
             this.btnBaseCycleSelection_Load.UseVisualStyleBackColor = true;
-            this.btnBaseCycleSelection_Load.Visible = false;
             this.btnBaseCycleSelection_Load.Click += new System.EventHandler(this.btnBaseCycleSelection_Load_Click);
             // 
             // btnBaseCycleSelection_Save
@@ -2500,7 +2504,6 @@
             this.btnBaseCycleSelection_Save.TabIndex = 5;
             this.btnBaseCycleSelection_Save.Text = "Save";
             this.btnBaseCycleSelection_Save.UseVisualStyleBackColor = true;
-            this.btnBaseCycleSelection_Save.Visible = false;
             this.btnBaseCycleSelection_Save.Click += new System.EventHandler(this.btnBaseCycleSelection_Save_Click);
             // 
             // checkBox6
@@ -2512,7 +2515,6 @@
             this.checkBox6.TabIndex = 4;
             this.checkBox6.Text = "checkBox6";
             this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.Visible = false;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // dgv_CycleForBaseCalculation
@@ -2578,7 +2580,6 @@
             this.dgv_CycleForBaseCalculation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgv_CycleForBaseCalculation.Size = new System.Drawing.Size(1710, 95);
             this.dgv_CycleForBaseCalculation.TabIndex = 3;
-            this.dgv_CycleForBaseCalculation.Visible = false;
             this.dgv_CycleForBaseCalculation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CycleForBaseCalculation_CellContentClick);
             // 
             // dataGridViewTextBoxColumn199
@@ -4016,6 +4017,7 @@
             // 
             // tp_simulation
             // 
+            this.tp_simulation.Controls.Add(this.button22);
             this.tp_simulation.Controls.Add(this.button21);
             this.tp_simulation.Controls.Add(this.button20);
             this.tp_simulation.Controls.Add(this.button19);
@@ -4615,9 +4617,13 @@
             // 
             // tp_TestReport
             // 
+            this.tp_TestReport.Controls.Add(this.pnl_AnalyticResult);
+            this.tp_TestReport.Controls.Add(this.lbl_CycleCount);
+            this.tp_TestReport.Controls.Add(this.Cycle);
+            this.tp_TestReport.Controls.Add(this.lbl_Status);
+            this.tp_TestReport.Controls.Add(this.label15);
             this.tp_TestReport.Controls.Add(this.progressBar_Tester);
             this.tp_TestReport.Controls.Add(this.lb_IC_Result);
-            this.tp_TestReport.Controls.Add(this.listViewResultIC);
             this.tp_TestReport.Controls.Add(this.listView_Result);
             this.tp_TestReport.Controls.Add(this.label42);
             this.tp_TestReport.Controls.Add(this.label31);
@@ -4637,9 +4643,52 @@
             this.tp_TestReport.UseVisualStyleBackColor = true;
             this.tp_TestReport.Click += new System.EventHandler(this.tabPage_Result_Click);
             // 
+            // pnl_AnalyticResult
+            // 
+            this.pnl_AnalyticResult.Location = new System.Drawing.Point(31, 600);
+            this.pnl_AnalyticResult.Name = "pnl_AnalyticResult";
+            this.pnl_AnalyticResult.Size = new System.Drawing.Size(1295, 100);
+            this.pnl_AnalyticResult.TabIndex = 31;
+            // 
+            // lbl_CycleCount
+            // 
+            this.lbl_CycleCount.AutoSize = true;
+            this.lbl_CycleCount.Location = new System.Drawing.Point(1295, 385);
+            this.lbl_CycleCount.Name = "lbl_CycleCount";
+            this.lbl_CycleCount.Size = new System.Drawing.Size(23, 25);
+            this.lbl_CycleCount.TabIndex = 30;
+            this.lbl_CycleCount.Text = "0";
+            // 
+            // Cycle
+            // 
+            this.Cycle.AutoSize = true;
+            this.Cycle.Location = new System.Drawing.Point(1165, 385);
+            this.Cycle.Name = "Cycle";
+            this.Cycle.Size = new System.Drawing.Size(131, 25);
+            this.Cycle.TabIndex = 29;
+            this.Cycle.Text = "Cycle Count :";
+            // 
+            // lbl_Status
+            // 
+            this.lbl_Status.AutoSize = true;
+            this.lbl_Status.Location = new System.Drawing.Point(117, 384);
+            this.lbl_Status.Name = "lbl_Status";
+            this.lbl_Status.Size = new System.Drawing.Size(84, 25);
+            this.lbl_Status.TabIndex = 28;
+            this.lbl_Status.Text = "Running";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(26, 384);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(79, 25);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "Status :";
+            // 
             // progressBar_Tester
             // 
-            this.progressBar_Tester.Location = new System.Drawing.Point(26, 347);
+            this.progressBar_Tester.Location = new System.Drawing.Point(26, 344);
             this.progressBar_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.progressBar_Tester.Name = "progressBar_Tester";
             this.progressBar_Tester.Size = new System.Drawing.Size(1300, 38);
@@ -4655,26 +4704,16 @@
             this.lb_IC_Result.TabIndex = 12;
             this.lb_IC_Result.Text = "Pass or Fail";
             // 
-            // listViewResultIC
-            // 
-            this.listViewResultIC.HideSelection = false;
-            this.listViewResultIC.Location = new System.Drawing.Point(26, 651);
-            this.listViewResultIC.Name = "listViewResultIC";
-            this.listViewResultIC.Scrollable = false;
-            this.listViewResultIC.Size = new System.Drawing.Size(1300, 65);
-            this.listViewResultIC.TabIndex = 11;
-            this.listViewResultIC.UseCompatibleStateImageBehavior = false;
-            this.listViewResultIC.Visible = false;
-            // 
             // listView_Result
             // 
             this.listView_Result.HideSelection = false;
-            this.listView_Result.Location = new System.Drawing.Point(26, 580);
+            this.listView_Result.Location = new System.Drawing.Point(31, 655);
             this.listView_Result.Name = "listView_Result";
             this.listView_Result.Scrollable = false;
             this.listView_Result.Size = new System.Drawing.Size(1300, 65);
             this.listView_Result.TabIndex = 10;
             this.listView_Result.UseCompatibleStateImageBehavior = false;
+            this.listView_Result.Visible = false;
             // 
             // label42
             // 
@@ -4853,19 +4892,6 @@
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
             // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tp_tester);
@@ -4989,7 +5015,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 63);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, -39);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5444,7 +5470,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, -114);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, -216);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5899,7 +5925,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -293);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, -395);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6364,7 +6390,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -460);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -562);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8308,6 +8334,29 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(655, 484);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(200, 62);
+            this.button22.TabIndex = 38;
+            this.button22.Text = "createAnalyticDGV";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -8728,7 +8777,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tp_base_UserSelection;
-        private System.Windows.Forms.ListView listViewResultIC;
         private System.Windows.Forms.Label lb_IC_Result;
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.TextBox tb_RT_PreHoldSec_Eng;
@@ -9177,6 +9225,12 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Label lbl_CycleCount;
+        private System.Windows.Forms.Label Cycle;
+        private System.Windows.Forms.Label lbl_Status;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel pnl_AnalyticResult;
+        private System.Windows.Forms.Button button22;
     }
 }
 

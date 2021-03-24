@@ -220,7 +220,7 @@ namespace ABI_POC_PCR.SerialComm
             return ComPort1.IsOpen;
         }
 
-        public event Action<object> ReceivedRacketEvent
+        public event Action<object> ReceivedPacketEvent
         {
             add
             {
