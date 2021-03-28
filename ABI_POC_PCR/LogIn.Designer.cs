@@ -111,6 +111,7 @@
             this.tb_LoginID.Name = "tb_LoginID";
             this.tb_LoginID.Size = new System.Drawing.Size(199, 19);
             this.tb_LoginID.TabIndex = 8;
+            this.tb_LoginID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_LoginID_KeyDown);
             // 
             // tb_LoginPW
             // 
@@ -120,6 +121,7 @@
             this.tb_LoginPW.Name = "tb_LoginPW";
             this.tb_LoginPW.Size = new System.Drawing.Size(199, 19);
             this.tb_LoginPW.TabIndex = 9;
+            this.tb_LoginPW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_LoginPW_KeyDown);
             // 
             // pictureBox3
             // 

@@ -39,7 +39,12 @@ namespace ABI_POC_PCR
         public bool DataUpdateFlag { get; set; }
         public bool isFirstUpdate { get; set; }
         public bool ProcessEndFlag { get; set; }
+
         public int Routine_Cnt { get; set; }
+
+        public int progressSecond { get; set; }//optic action 10~100%
+        public int progressFirst { get; set; } //extraction 0~10%
+
         public int pre_routine_cnt { get; set; }
         public string current_Log_Name { get; set; }
         

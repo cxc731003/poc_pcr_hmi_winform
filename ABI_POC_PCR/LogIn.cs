@@ -47,7 +47,7 @@ namespace ABI_POC_PCR
 
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        public void Sign_In()
         {
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
             if (!di.Exists) di.Create();
@@ -71,7 +71,7 @@ namespace ABI_POC_PCR
                 //{
                 //    result[index++] = item;
                 //}
-                if(result[1] == tb_LoginID.Text &&
+                if (result[1] == tb_LoginID.Text &&
                     result[2] == tb_LoginPW.Text)
                 {
                     sm.userName = result[0];
@@ -83,22 +83,26 @@ namespace ABI_POC_PCR
                     //if (tb_LoginID.Text == "ABI" && tb_LoginPW.Text == "5344")
                     //{
                     // 엔지니어 계정 로그인임 --> 계정정보에서도 관리 가능
-                                      
-                   
-                        this.Visible = false;
-                        MainFrm dlg = new MainFrm();
-                        dlg.Owner = this;
-                        dlg.ShowDialog();
-                    
-                  
+
+
+                    this.Visible = false;
+                    MainFrm dlg = new MainFrm();
+                    dlg.Owner = this;
+                    dlg.ShowDialog();
+
+
                 }
                 //dataGridView_Manage.Rows.Add(data6);
-            }  
-            
-            if(!sm.isLoginSucceeded)
+            }
+
+            if (!sm.isLoginSucceeded)
             {
                 //MessageBox("Login Failed, Check your ID and Password");
             }
+        }
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Sign_In();
         }
 
         private void btn_Connect_Main_Click(object sender, EventArgs e)
@@ -194,6 +198,22 @@ namespace ABI_POC_PCR
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tb_LoginID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Sign_In();
+            }
+        }
+
+        private void tb_LoginPW_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Sign_In();
+            }
         }
     }
 }

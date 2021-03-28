@@ -324,6 +324,125 @@ namespace ABI_POC_PCR
             serialBarcode.ReceivedEvent += GetSerialStringBarcode;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
+            
+            updateDeviceStatus("Stop");
+            
+
+            chkbox_use_standard_dev.Checked = true;
+            chkBox_BaselineScale.Checked = true;
+
+            drawDataGridView(dgvCtTable1, 0, 0, 0, 0);
+            drawDataGridView(dgvCtTable2, 0, 0, 0, 0);
+            drawDataGridView(dgvCtTable3, 0, 0, 0, 0);
+            drawDataGridView(dgvCtTable4, 0, 0, 0, 0);
+
+            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
+
+            dgv_CycleForBaseCalculation.Rows.Add();
+
+            dgv_opticDatum_tube1.Location = new Point(33, 60);
+            dgv_opticDatum_tube2.Location = new Point(33, 230);
+            dgv_opticDatum_tube3.Location = new Point(33, 400);
+            dgv_opticDatum_tube4.Location = new Point(33, 570);
+
+            lb_opticMeasurementCycleSelection.Visible = false;
+            dgv_opticMeasurementCycleSelection.Visible = false;
+
+            gb_CartridgeInfo.Enabled = false;
+            gb_TestInfo.Enabled = false;
+
+            setAccessibility();
+
+            cb_Test_Interpretation.SelectedIndex = 0;
+
+            dgv_diagnosis_TB.Visible = true;
+            dgv_diagnosis_COVID.Visible = false;
+            dgv_diagnosis_FLU.Visible = false;
+
+            initDiagnosisCT();
+            initBaseValue();
+
+            loadExcelFile_Interpretation(dgv_diagnosis_TB, "TB");
+            //initDgvDiagnosis();
+
+            sm.opticReceivedFlag = false;
+            if (!backgroundWorker1.IsBusy)
+            {
+                _inputparameter.Delay = 0;
+
+                backgroundWorker1.RunWorkerAsync(_inputparameter);
+            }
+
+            this.WindowState = FormWindowState.Maximized;
+
+            // combo_comList = 콤보 박스
+            //COM Port 리스트 얻어 오기
+            string[] comlist = System.IO.Ports.SerialPort.GetPortNames();
+
+            //COM Port가 있는 경우에만 콤보 박스에 추가.
+            if (comlist.Length > 0)
+            {
+                cb_Port_Main.Items.AddRange(comlist);
+                //제일 처음에 위치한 녀석을 선택
+                cb_Port_Main.SelectedIndex = 0;
+            }
+
+            if (comlist.Length > 0)
+            {
+                cb_Port_Barcode.Items.AddRange(comlist);
+                //제일 처음에 위치한 녀석을 선택
+                cb_Port_Barcode.SelectedIndex = 0;
+            }
+
+            aboutBox = new InfoDialog();
+
+            //제일 처음에 위치한 녀석을 선택
+            tb_Right_IDManage.SelectedIndex = 0;
+
+            // 레시피 파일을 검색해서 리스트를 채움
+            SetRecipeCombobox_Test();
+
+            // 라벨 투명하게 설정
+            //lb_Setting.BackColor = Color.Transparent;
+            //lb_Setting.Parent = progressBar_step;
+
+
+            // 계정정보 읽기
+            btn_Search_IDManage_Click(this, null);
+
+            //lb_IC_Result.Text = sm.IC_Result;
+
+            tabPage_tester_Click();
+            // visible false  tabpage 
+            //tabControl1.TabPages.Remove(tp_researcher);
+            //tabControl_Tester.TabPages.Remove(tabPage1);
+            //tabControl_Tester.TabPages.Remove(tabPage9);
+            tabControl_Tester.TabPages.Remove(tabPage_rawData);
+
+            tabControl_admin.TabPages.Remove(tp_Table);
+            tabControl_admin.TabPages.Remove(tp_Result);
+
+            //tabControl_Engineer.TabPages.Remove(tp_simulation);
+
+            tabControl_Engineer.TabPages.Remove(tp_base_UserSelection);
+            tabControl_Engineer.TabPages.Remove(tp_pcr_options);
+            //dataGridView1.AutoGenerateColumns = false;
+
+            //TestResult menu Info. initialize 
+
+            //setDiagnosisTable();
+
+            initTestInfo();
+            initTesterInfo();
+            initCartridgeInfo();
+            init_IC_Result();
+            initializeAnalyticResult();
+
+        }
+
         private async void SetScottPlot()
         {
             var inputDataY = new double[] { 1, 4, 9, 16, 25, 19, 22, 30, 1, 4, 9, 16, 25, 19, 22, 30, 300, 600, 900, 1200, 1500, 1800, 2100, 2200, 2250, 2220, 2210, 2200 };
@@ -1486,7 +1605,6 @@ namespace ABI_POC_PCR
                         tb_CartridgeID_Test.Enabled = true;
 
                         btn_OpenDoor_Test.Enabled = true;
-
                     }
                     else
                     {
@@ -1531,7 +1649,6 @@ namespace ABI_POC_PCR
                         tb_CartridgeID_Test.Enabled = true;
 
                         btn_OpenDoor_Test.Enabled = true;
-
                     }
                     else
                     {
@@ -1544,7 +1661,6 @@ namespace ABI_POC_PCR
                         tb_CartridgeID_Test.Enabled = true;
 
                         btn_OpenDoor_Test.Enabled = false;
-
                     }
                     break;
                 case 9:   // 검사 중
@@ -1655,8 +1771,9 @@ namespace ABI_POC_PCR
             if (processStep == 9) // 5초 마다 업데이트
             {
                 // 상태바 업데이트 - 시작을 20%에서 시작함
-                progressBar_Tester.Value = (int)(routine_cnt * 2);
-                progressBar_Manager.Value = (int)(routine_cnt * 2);
+                sm.progressSecond = (int)(routine_cnt * 2);
+                progressBar_Tester.Value = sm.progressFirst + sm.progressSecond; //(int)(routine_cnt * 2);
+                progressBar_Manager.Value = sm.progressFirst + sm.progressSecond;// (int)(routine_cnt * 2);
             }
 
             // 버퍼에 쓰레기가 있을 경우 체크해서 클리어
@@ -1790,7 +1907,7 @@ namespace ABI_POC_PCR
         {
             for (int i = 0; i < 16; i++)
             {
-                dgv_diagnosis_ct.Rows[i].Cells[3].Value = "";
+                dgv_interpretation_ct.Rows[i].Cells[3].Value = "";
             }
         }
 
@@ -1852,7 +1969,7 @@ namespace ABI_POC_PCR
 
             for (int i = 0; i < 16; i++)
             {
-                string sigma_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string sigma_scale = dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
                 double fSigma_scale;
                 fSigma_scale = Convert.ToDouble(sigma_scale);
@@ -1921,7 +2038,7 @@ namespace ABI_POC_PCR
 
             for (int i = 0; i < 16; i++)
             {
-                string sigma_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string sigma_scale = dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
                 double fSigma_scale;
                 fSigma_scale = Convert.ToDouble(sigma_scale);
@@ -1977,7 +2094,7 @@ namespace ABI_POC_PCR
 
             for (int i = 0; i < 16; i++)
             {
-                string ct_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string ct_scale = dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
                 double iCt_scale;
                 iCt_scale = Convert.ToDouble(ct_scale);
@@ -2022,7 +2139,7 @@ namespace ABI_POC_PCR
 
             for (int i = 0; i < 16; i++)
             {
-                string ct_scale = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string ct_scale = dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
                 double iCt_scale;
                 iCt_scale = Convert.ToDouble(ct_scale);
@@ -2120,7 +2237,7 @@ namespace ABI_POC_PCR
             int temp;
             for (int i = 0; i < 16; i++)
             {
-                string ct_temp = dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString();
+                string ct_temp = dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
 
                 double iCt_temp;
                 iCt_temp = Convert.ToDouble(ct_temp);
@@ -2188,10 +2305,7 @@ namespace ABI_POC_PCR
                 }
 
                 //scale factor calculation
-                for (int i = 0; i < 16; i++)
-                {
-                    scaleFactor[i] = (double)(2500 / (2500 - BaselineVal[i]));
-                }
+                scaleFactorCalculation();
 
                 CtCyclesCalculation();
 
@@ -2200,10 +2314,12 @@ namespace ABI_POC_PCR
                 drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
                 drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
 
-                setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
+                setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
                 //updateDataGridOpticDatum(dgvArr, DISPLAY_DATA); 
                 updateDataGridOpticDatas(dgvArr, MEASURED_DATA);
 
+                updateAllPlots();
+                /*
                 Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
                 for (int i = 0; i < Plotter.CH_CNT; i++)
                 {
@@ -2220,7 +2336,7 @@ namespace ABI_POC_PCR
                         updateScottPlot(i, CtlineVal);
                     }
                 }
-
+                */
 
             }
 
@@ -2268,8 +2384,8 @@ namespace ABI_POC_PCR
 
         public void initDiagnosisCT()
         {
-            dgv_diagnosis_ct.ColumnCount = 4;
-            dgv_diagnosis_ct.ColumnHeadersVisible = true;
+            dgv_interpretation_ct.ColumnCount = 4;
+            dgv_interpretation_ct.ColumnHeadersVisible = true;
 
             //DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
 
@@ -2278,37 +2394,39 @@ namespace ABI_POC_PCR
             //dgv_diagnosis_ct.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
             //set the column header names.
-            dgv_diagnosis_ct.Columns[0].Name = "Dye(tube)";
-            dgv_diagnosis_ct.Columns[1].Name = "Threshold";
-            dgv_diagnosis_ct.Columns[2].Name = "Result";
-            dgv_diagnosis_ct.Columns[3].Name = "Bases";
+            dgv_interpretation_ct.Columns[0].Name = "Dye(tube)";
+            dgv_interpretation_ct.Columns[1].Name = "Threshold";
+            dgv_interpretation_ct.Columns[2].Name = "Result";
+            dgv_interpretation_ct.Columns[3].Name = "Bases";
             //dataGridView_Diagnosis.Columns[9].Name = "INH";
 
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             //populate the rows
-            string[] row1 = new string[] { "FAM(Tube 1)", "6", "", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "6", "", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "6", "", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "6", "", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "6", "", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "6", "", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "6", "", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "6", "", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "6", "", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "6", "", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "6", "", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "6", "", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "6", "", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "6", "", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "6", "", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "6", "", "" };
+            //string[] sigmaScale = SigmaScaleLoad();
+
+            string[] row1 = new string[] { "FAM(Tube 1)", "10", "", "" };
+            string[] row2 = new string[] { "ROX(Tube 1)", "10", "", "" };
+            string[] row3 = new string[] { "HEX(Tube 1)", "10", "", "" };
+            string[] row4 = new string[] { "Cy5(Tube 1)", "10", "", "" };
+            string[] row5 = new string[] { "FAM(Tube 2)", "10", "", "" };
+            string[] row6 = new string[] { "ROX(Tube 2)", "10", "", "" };
+            string[] row7 = new string[] { "HEX(Tube 2)", "10", "", "" };
+            string[] row8 = new string[] { "Cy5(Tube 2)", "10", "", "" };
+            string[] row9 = new string[] { "FAM(Tube 3)", "10", "", "" };
+            string[] row10 = new string[] { "ROX(Tube 3)", "10", "", "" };
+            string[] row11 = new string[] { "ROX(Tube 3)", "10", "", "" };
+            string[] row12 = new string[] { "ROX(Tube 3)", "10", "", "" };
+            string[] row13 = new string[] { "FAM(Tube 4)", "10", "", "" };
+            string[] row14 = new string[] { "ROX(Tube 4)", "10", "", "" };
+            string[] row15 = new string[] { "HEX(Tube 4)", "10", "", "" };
+            string[] row16 = new string[] { "Cy5(Tube 4)", "10", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
             foreach (string[] rowArray in rows)
             {
-                dgv_diagnosis_ct.Rows.Add(rowArray);
+                dgv_interpretation_ct.Rows.Add(rowArray);
             }
 
         }
@@ -2485,122 +2603,7 @@ namespace ABI_POC_PCR
 
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
-            updateDeviceStatus("Stop");
-
-            chkbox_use_standard_dev.Checked = true;
-            chkBox_BaselineScale.Checked = true;
-
-            drawDataGridView(dgvCtTable1, 0, 0, 0, 0);
-            drawDataGridView(dgvCtTable2, 0, 0, 0, 0);
-            drawDataGridView(dgvCtTable3, 0, 0, 0, 0);
-            drawDataGridView(dgvCtTable4, 0, 0, 0, 0);
-
-            loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
-
-            dgv_CycleForBaseCalculation.Rows.Add();
-
-            dgv_opticDatum_tube1.Location = new Point(33, 60);
-            dgv_opticDatum_tube2.Location = new Point(33, 230);
-            dgv_opticDatum_tube3.Location = new Point(33, 400);
-            dgv_opticDatum_tube4.Location = new Point(33, 570);
-
-            lb_opticMeasurementCycleSelection.Visible = false;
-            dgv_opticMeasurementCycleSelection.Visible = false;
-
-            gb_CartridgeInfo.Enabled = false;
-            gb_TestInfo.Enabled = false;
-
-            setAccessibility();
-
-            cb_Test_Interpretation.SelectedIndex = 0;
-
-            dgv_diagnosis_TB.Visible = true;
-            dgv_diagnosis_COVID.Visible = false;
-            dgv_diagnosis_FLU.Visible = false;
-
-            initDiagnosisCT();
-            initBaseValue();
-
-            loadExcelFile_Interpretation(dgv_diagnosis_TB, "TB");
-            //initDgvDiagnosis();
-
-            sm.opticReceivedFlag = false;
-            if (!backgroundWorker1.IsBusy)
-            {
-                _inputparameter.Delay = 0;
-
-                backgroundWorker1.RunWorkerAsync(_inputparameter);
-            }
-
-            this.WindowState = FormWindowState.Maximized;
-
-            // combo_comList = 콤보 박스
-            //COM Port 리스트 얻어 오기
-            string[] comlist = System.IO.Ports.SerialPort.GetPortNames();
-
-            //COM Port가 있는 경우에만 콤보 박스에 추가.
-            if (comlist.Length > 0)
-            {
-                cb_Port_Main.Items.AddRange(comlist);
-                //제일 처음에 위치한 녀석을 선택
-                cb_Port_Main.SelectedIndex = 0;
-            }
-
-            if (comlist.Length > 0)
-            {
-                cb_Port_Barcode.Items.AddRange(comlist);
-                //제일 처음에 위치한 녀석을 선택
-                cb_Port_Barcode.SelectedIndex = 0;
-            }
-
-            aboutBox = new InfoDialog();
-
-            //제일 처음에 위치한 녀석을 선택
-            tb_Right_IDManage.SelectedIndex = 0;
-
-            // 레시피 파일을 검색해서 리스트를 채움
-            SetRecipeCombobox_Test();
-
-            // 라벨 투명하게 설정
-            //lb_Setting.BackColor = Color.Transparent;
-            //lb_Setting.Parent = progressBar_step;
-
-
-            // 계정정보 읽기
-            btn_Search_IDManage_Click(this, null);
-
-            //lb_IC_Result.Text = sm.IC_Result;
-
-            tabPage_tester_Click();
-            // visible false  tabpage 
-            //tabControl1.TabPages.Remove(tp_researcher);
-            //tabControl_Tester.TabPages.Remove(tabPage1);
-            //tabControl_Tester.TabPages.Remove(tabPage9);
-            tabControl_Tester.TabPages.Remove(tabPage_rawData);
-
-            tabControl_admin.TabPages.Remove(tp_Table);
-            tabControl_admin.TabPages.Remove(tp_Result);
-
-            //tabControl_Engineer.TabPages.Remove(tp_simulation);
-            
-            tabControl_Engineer.TabPages.Remove(tp_base_UserSelection);
-            tabControl_Engineer.TabPages.Remove(tp_pcr_options);
-            //dataGridView1.AutoGenerateColumns = false;
-
-            //TestResult menu Info. initialize 
-
-            //setDiagnosisTable();
-
-            initTestInfo();
-            initTesterInfo();
-            initCartridgeInfo();
-            init_IC_Result();
-            initializeAnalyticResult();
-
-        }
+        
 
 
         bool IsTheSameCellValue(int column, int row)
@@ -5378,6 +5381,14 @@ namespace ABI_POC_PCR
                 //_check_Door();
                 //b_check_Door = true;
             }
+            else if (str.Contains("LOG pel_start"))
+            {
+                sm.progressFirst = 5;
+            }
+            else if (str.Equals("PEL: JOB_READY\n") || str.Equals("PEL: JOB_READY\n"))
+            {
+                sm.progressFirst = 10;
+            }
 
 
         }
@@ -6107,7 +6118,7 @@ namespace ABI_POC_PCR
                 Int32.TryParse(dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString(), out ic_Value[i]);
             }
             */
-            lb_IC_Result.Text = dgv_diagnosis_ct.Rows[2].Cells[2].FormattedValue.ToString();
+            lb_IC_Result.Text = dgv_interpretation_ct.Rows[2].Cells[2].FormattedValue.ToString();
             if(lb_IC_Result.Text == "P")
             {
                 lb_IC_Result.Text = "Pass";
@@ -6145,7 +6156,7 @@ namespace ABI_POC_PCR
                 {
                     strResult[k] = "N";
                 }
-                dgv_diagnosis_ct.Rows[k].Cells[2].Value = strResult[k];
+                dgv_interpretation_ct.Rows[k].Cells[2].Value = strResult[k];
 
             }
 
@@ -6160,7 +6171,7 @@ namespace ABI_POC_PCR
                 }
                 else if (dgv.Rows[g].Cells[1].FormattedValue.ToString() == "P")
                 {
-                    if(dgv_diagnosis_ct.Rows[g].Cells[2].FormattedValue.ToString() == "P")
+                    if(dgv_interpretation_ct.Rows[g].Cells[2].FormattedValue.ToString() == "P")
                     {
                         //nothing
                     }
@@ -6172,7 +6183,7 @@ namespace ABI_POC_PCR
                 }
                 else if(dgv.Rows[g+1].Cells[1].FormattedValue.ToString() == "N")
                 {
-                    if(dgv_diagnosis_ct.Rows[g+1].Cells[2].FormattedValue.ToString() == "N")
+                    if(dgv_interpretation_ct.Rows[g+1].Cells[2].FormattedValue.ToString() == "N")
                     {
                         //notrhing
                     }
@@ -6194,7 +6205,7 @@ namespace ABI_POC_PCR
                 }
                 else if (dgv.Rows[f+2].Cells[2].FormattedValue.ToString() == "P")
                 {
-                    if (dgv_diagnosis_ct.Rows[f].Cells[2].FormattedValue.ToString() == "P")
+                    if (dgv_interpretation_ct.Rows[f].Cells[2].FormattedValue.ToString() == "P")
                     {
                         //nothing
                     }
@@ -6206,7 +6217,7 @@ namespace ABI_POC_PCR
                 }
                 else if (dgv.Rows[f].Cells[1].FormattedValue.ToString() == "N")
                 {
-                    if (dgv_diagnosis_ct.Rows[f].Cells[2].FormattedValue.ToString() == "N")
+                    if (dgv_interpretation_ct.Rows[f].Cells[2].FormattedValue.ToString() == "N")
                     {
                         //notrhing
                     }
@@ -6228,7 +6239,7 @@ namespace ABI_POC_PCR
                 }
                 else if (dgv.Rows[a].Cells[2].FormattedValue.ToString() == "P")
                 {
-                    if (dgv_diagnosis_ct.Rows[a].Cells[2].FormattedValue.ToString() == "P")
+                    if (dgv_interpretation_ct.Rows[a].Cells[2].FormattedValue.ToString() == "P")
                     {
                         //nothing
                     }
@@ -6240,7 +6251,7 @@ namespace ABI_POC_PCR
                 }
                 else if (dgv.Rows[a].Cells[2].FormattedValue.ToString() == "N")
                 {
-                    if (dgv_diagnosis_ct.Rows[a].Cells[2].FormattedValue.ToString() == "N")
+                    if (dgv_interpretation_ct.Rows[a].Cells[2].FormattedValue.ToString() == "N")
                     {
                         //notrhing
                     }
@@ -6860,24 +6871,19 @@ namespace ABI_POC_PCR
             {
                 for (int j = 0; j < Plotter.DYE_CNT; j++)
                 {
-                    for(int i = 0;  i < 4; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
                         {
                             dgvArr[j].Rows.RemoveAt(0);
                         }
-                        
+
                     }
                 }
-                        
-                        
-              
-                
-
             }
             catch (Exception e1)
             {
-               
+
 
             }
         }
@@ -6978,6 +6984,11 @@ namespace ABI_POC_PCR
 
         private void button11_Click(object sender, EventArgs e)
         {
+            updateAllPlots();
+        }
+
+        public void updateAllPlots()
+        {
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
             for (int i = 0; i < Plotter.CH_CNT; i++)
             {
@@ -6985,7 +6996,7 @@ namespace ABI_POC_PCR
                 {
                     for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
                     {
-                        zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j])*scaleFactor[j];
+                        zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j]) * scaleFactor[j];
                     }
                     updateScottPlot(i, zerosetValArray);
                 }
@@ -6999,7 +7010,7 @@ namespace ABI_POC_PCR
         private void button12_Click(object sender, EventArgs e)
         {
             baseCalculationAverage();//baseCalculation();
-            setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
+            setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
         }
 
         private void formsPlot3_Load(object sender, EventArgs e)
@@ -7040,11 +7051,7 @@ namespace ABI_POC_PCR
         {
             FindCyclesForBaseCalculation();
         }
-
-
-       
-
- 
+                 
         private void button13_Click(object sender, EventArgs e)
         {
             loadCsv_BaseCycles(dgv_CycleForBaseCalculation);
@@ -7056,7 +7063,7 @@ namespace ABI_POC_PCR
             MatchAndFindOpticDataForResult();
             FindCyclesForBaseCalculation();
             baseCalculationAverage();//baseCalculation();
-            setBaseValueToDataGridView(dgv_diagnosis_ct, CtlineVal);
+            setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
             updateDataGridOpticDatas(dgvArr, DISPLAY_DATA);
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
 
@@ -7196,7 +7203,12 @@ namespace ABI_POC_PCR
 
         private void button20_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < 16; i++)
+            scaleFactorCalculation();
+        }
+
+        public void scaleFactorCalculation()
+        {
+            for (int i = 0; i < 16; i++)
             {
                 scaleFactor[i] = (double)(2500 / (2500 - BaselineVal[i]));
             }
@@ -7284,6 +7296,82 @@ namespace ABI_POC_PCR
         private void button22_Click(object sender, EventArgs e)
         {
             createAnalyticDGV();
+        }
+
+        public void sigmaScaleSave()
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            string fileName = di.ToString() + "\\SigmaScale.info";
+
+            StreamWriter sw = new StreamWriter(fileName, true);
+
+            //first line
+            string buff = dgv_interpretation_ct.Rows[0].Cells[1].FormattedValue.ToString();
+            for (int i = 1; i < 16; i++)
+            {
+                buff += "," + dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
+            }
+            // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
+
+            sw.WriteLine(buff);
+
+            sw.Close();
+        }
+
+        private void btn_SigmaScale_Save_Click(object sender, EventArgs e)
+        {
+            sigmaScaleSave();
+        }
+
+        public string[] SigmaScaleLoad()
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\SigmaScale.info";
+
+            string[] lines = File.ReadAllLines(fileName);
+            string[] result = new string[16];
+
+            int readNum = 1;
+            string temp = "";
+            for (int i = 0; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                char[] sep = { ',' };
+
+                result = temp.Split(sep);
+
+
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                dgv_interpretation_ct.Rows[i].Cells[1].Value = result[i];
+            }
+            return result;
+        }
+
+        private void btn_SigmaScale_Load_Click(object sender, EventArgs e)
+        {
+            SigmaScaleLoad();
+        }
+
+   
+
+        private void tp_Interpretation_Enter(object sender, EventArgs e)
+        {
+            SigmaScaleLoad();
+        }
+
+        private void progressBar_Tester_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
     #endregion
