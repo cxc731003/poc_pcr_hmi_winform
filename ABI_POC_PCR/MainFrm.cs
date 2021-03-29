@@ -181,8 +181,7 @@ namespace ABI_POC_PCR
         public MainFrm()
         {
             InitializeComponent();
-            this.createNewDgvinterpretationEvent += new EventHandler(createNewDgvInterpretation);
-            this.createNewDGVAnalyticResultEvent += new EventHandler(createNewDGVAnalyticResult);
+            
 
             //프로그램 실행시 Data 폴더 확인 및 없을경우 Data 폴더 생성
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\data");
@@ -358,14 +357,13 @@ namespace ABI_POC_PCR
 
             cb_Test_Interpretation.SelectedIndex = 0;
 
-            dgv_diagnosis_TB.Visible = true;
+            dgv_interpretation_howTo.Visible = true;
             dgv_diagnosis_COVID.Visible = false;
             dgv_diagnosis_FLU.Visible = false;
 
             initDiagnosisCT();
             initBaseValue();
-
-            loadExcelFile_Interpretation(dgv_diagnosis_TB, "TB");
+            
             //initDgvDiagnosis();
 
             sm.opticReceivedFlag = false;
@@ -438,7 +436,7 @@ namespace ABI_POC_PCR
             initTestInfo();
             initTesterInfo();
             initCartridgeInfo();
-            init_IC_Result();
+           
             initializeAnalyticResult();
 
         }
@@ -804,22 +802,22 @@ namespace ABI_POC_PCR
             //dataGridView5.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             string[,] FluoresenceValuesOne = new string[Plotter.DYE_CNT * Plotter.CH_CNT, Plotter.COL_CNT + 1];
-            FluoresenceValuesOne[0, 0] = "FAM";
-            FluoresenceValuesOne[1, 0] = "ROX";
-            FluoresenceValuesOne[2, 0] = "HEX";
-            FluoresenceValuesOne[3, 0] = "CY5";
-            FluoresenceValuesOne[4, 0] = "FAM";
-            FluoresenceValuesOne[5, 0] = "ROX";
-            FluoresenceValuesOne[6, 0] = "HEX";
-            FluoresenceValuesOne[7, 0] = "CY5";
-            FluoresenceValuesOne[8, 0] = "FAM";
-            FluoresenceValuesOne[9, 0] = "ROX";
-            FluoresenceValuesOne[10, 0] = "HEX";
-            FluoresenceValuesOne[11, 0] = "CY5";
-            FluoresenceValuesOne[12, 0] = "FAM";
-            FluoresenceValuesOne[13, 0] = "ROX";
-            FluoresenceValuesOne[14, 0] = "HEX";
-            FluoresenceValuesOne[15, 0] = "CY5";
+            FluoresenceValuesOne[0, 0] = "FAM1";
+            FluoresenceValuesOne[1, 0] = "ROX1";
+            FluoresenceValuesOne[2, 0] = "HEX1";
+            FluoresenceValuesOne[3, 0] = "CY51";
+            FluoresenceValuesOne[4, 0] = "FAM2";
+            FluoresenceValuesOne[5, 0] = "ROX2";
+            FluoresenceValuesOne[6, 0] = "HEX2";
+            FluoresenceValuesOne[7, 0] = "CY52";
+            FluoresenceValuesOne[8, 0] = "FAM3";
+            FluoresenceValuesOne[9, 0] = "ROX3";
+            FluoresenceValuesOne[10, 0] = "HEX3";
+            FluoresenceValuesOne[11, 0] = "CY53";
+            FluoresenceValuesOne[12, 0] = "FAM4";
+            FluoresenceValuesOne[13, 0] = "ROX4";
+            FluoresenceValuesOne[14, 0] = "HEX4";
+            FluoresenceValuesOne[15, 0] = "CY54";
 
             string[] temp = new string[Plotter.COL_CNT + 1];
             int[] iTemp = new int[Plotter.COL_CNT + 1];
@@ -960,22 +958,22 @@ namespace ABI_POC_PCR
             //dataGridView5.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             string[,] FluoresenceValuesOne = new string[Plotter.DYE_CNT * Plotter.CH_CNT, Plotter.COL_CNT + 1];
-            FluoresenceValuesOne[0, 0] = "FAM";
-            FluoresenceValuesOne[1, 0] = "ROX";
-            FluoresenceValuesOne[2, 0] = "HEX";
-            FluoresenceValuesOne[3, 0] = "CY5";
-            FluoresenceValuesOne[4, 0] = "FAM";
-            FluoresenceValuesOne[5, 0] = "ROX";
-            FluoresenceValuesOne[6, 0] = "HEX";
-            FluoresenceValuesOne[7, 0] = "CY5";
-            FluoresenceValuesOne[8, 0] = "FAM";
-            FluoresenceValuesOne[9, 0] = "ROX";
-            FluoresenceValuesOne[10, 0] = "HEX";
-            FluoresenceValuesOne[11, 0] = "CY5";
-            FluoresenceValuesOne[12, 0] = "FAM";
-            FluoresenceValuesOne[13, 0] = "ROX";
-            FluoresenceValuesOne[14, 0] = "HEX";
-            FluoresenceValuesOne[15, 0] = "CY5";
+            FluoresenceValuesOne[0, 0] = "FAM1";
+            FluoresenceValuesOne[1, 0] = "ROX1";
+            FluoresenceValuesOne[2, 0] = "HEX1";
+            FluoresenceValuesOne[3, 0] = "CY51";
+            FluoresenceValuesOne[4, 0] = "FAM2";
+            FluoresenceValuesOne[5, 0] = "ROX2";
+            FluoresenceValuesOne[6, 0] = "HEX2";
+            FluoresenceValuesOne[7, 0] = "CY52";
+            FluoresenceValuesOne[8, 0] = "FAM3";
+            FluoresenceValuesOne[9, 0] = "ROX3";
+            FluoresenceValuesOne[10, 0] = "HEX3";
+            FluoresenceValuesOne[11, 0] = "CY53";
+            FluoresenceValuesOne[12, 0] = "FAM4";
+            FluoresenceValuesOne[13, 0] = "ROX4";
+            FluoresenceValuesOne[14, 0] = "HEX4";
+            FluoresenceValuesOne[15, 0] = "CY54";
 
             string[] temp = new string[Plotter.COL_CNT + 1];
             int[] iTemp = new int[Plotter.COL_CNT + 1];
@@ -1920,6 +1918,26 @@ namespace ABI_POC_PCR
             }
         }
 
+
+        public void setCtValueToDGV(DataGridView dgv, double[] CtValue)
+        {
+            for(int i = 0; i < 16; i++)
+            {
+                dgv.Rows[i].Cells[3].Value = CtValue[i].ToString();
+            }
+        }
+
+        public void setCtResultToDGV(DataGridView dgv)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                if( Convert.ToDouble( dgv.Rows[i].Cells[3].FormattedValue) > 0)
+                    dgv.Rows[i].Cells[2].Value = "+";
+                else
+                    dgv.Rows[i].Cells[2].Value = "-";
+            }
+        }
+
         public void FindCyclesForBaseCalculation()
         {
             //dgv_CycleForBaseCalculation.Rows[0].Cells[0].Value = "";
@@ -2314,7 +2332,8 @@ namespace ABI_POC_PCR
                 drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
                 drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
 
-                setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+                setCtValueToDGV(dgv_interpretation_ct,Plotter.CtCycles);//setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+                setCtResultToDGV(dgv_interpretation_ct);
                 //updateDataGridOpticDatum(dgvArr, DISPLAY_DATA); 
                 updateDataGridOpticDatas(dgvArr, MEASURED_DATA);
 
@@ -2405,22 +2424,22 @@ namespace ABI_POC_PCR
             //populate the rows
             //string[] sigmaScale = SigmaScaleLoad();
 
-            string[] row1 = new string[] { "FAM(Tube 1)", "10", "", "" };
-            string[] row2 = new string[] { "ROX(Tube 1)", "10", "", "" };
-            string[] row3 = new string[] { "HEX(Tube 1)", "10", "", "" };
-            string[] row4 = new string[] { "Cy5(Tube 1)", "10", "", "" };
-            string[] row5 = new string[] { "FAM(Tube 2)", "10", "", "" };
-            string[] row6 = new string[] { "ROX(Tube 2)", "10", "", "" };
-            string[] row7 = new string[] { "HEX(Tube 2)", "10", "", "" };
-            string[] row8 = new string[] { "Cy5(Tube 2)", "10", "", "" };
-            string[] row9 = new string[] { "FAM(Tube 3)", "10", "", "" };
-            string[] row10 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row11 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row12 = new string[] { "ROX(Tube 3)", "10", "", "" };
-            string[] row13 = new string[] { "FAM(Tube 4)", "10", "", "" };
-            string[] row14 = new string[] { "ROX(Tube 4)", "10", "", "" };
-            string[] row15 = new string[] { "HEX(Tube 4)", "10", "", "" };
-            string[] row16 = new string[] { "Cy5(Tube 4)", "10", "", "" };
+            string[] row1 = new string[] { "FAM1", "10", "", "" };
+            string[] row2 = new string[] { "ROX1", "10", "", "" };
+            string[] row3 = new string[] { "HEX1", "10", "", "" };
+            string[] row4 = new string[] { "CY51", "10", "", "" };
+            string[] row5 = new string[] { "FAM2", "10", "", "" };
+            string[] row6 = new string[] { "ROX2", "10", "", "" };
+            string[] row7 = new string[] { "HEX2", "10", "", "" };
+            string[] row8 = new string[] { "CY52", "10", "", "" };
+            string[] row9 = new string[] { "FAM3", "10", "", "" };
+            string[] row10 = new string[] { "ROX3", "10", "", "" };
+            string[] row11 = new string[] { "HEX3", "10", "", "" };
+            string[] row12 = new string[] { "CY53", "10", "", "" };
+            string[] row13 = new string[] { "FAM4", "10", "", "" };
+            string[] row14 = new string[] { "ROX4", "10", "", "" };
+            string[] row15 = new string[] { "HEX4", "10", "", "" };
+            string[] row16 = new string[] { "CY54", "10", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2432,92 +2451,7 @@ namespace ABI_POC_PCR
         }
 
         //excel libraries
-        public string[,] readMultipleCells(string path, int x_end, int y_end)
-        {
-            Excel ex = Excel.GetInstance();
-            //new Excel(path, 1);
-            ex.initExcel(path, 1);
-            string[,] read = ex.ReadRange(1, 1, x_end, y_end);
-
-            ex.Close();
-            return read;
-        }
-
-        public void selectAndDelete(string path)
-        {
-            //Excel ex = new Excel(path, 1);
-            Excel ex = Excel.GetInstance();
-            ex.initExcel(path, 1);
-
-            ex.selectWorkSheet(2);
-            ex.WriteToCell(0, 0, "This is Sheet 2");
-            ex.DeleteWorkSheet(1);
-            ex.SaveAs(path);
-            ex.Close();
-        }
-
-
-
-        public void CreateNewFile(string path)
-        {
-            //Excel ex = Excel.GetInstance();//new Excel();
-            Excel ex = Excel.GetInstance();
-            //ex.initExcel(path, 1);
-
-            ex.CreateNewFile();
-            ex.CreateNewSheet();
-            ex.SaveAs(path);
-            ex.Close();
-        }
-
-        public void OpenFile(string path)
-        {
-            // read existing file 
-            Excel excel = Excel.GetInstance();
-            excel.initExcel(path, 1);
-            //Excel excel = new Excel(@"Test.xlsx", 1);
-
-            MessageBox.Show(excel.ReadCell(0, 0));
-            //MessageBox.Show(excel.ReadCell(0, 0));
-        }
-
-        public void WriteData(string path)
-        {
-            //Excel excel = new Excel(@"Test.xlsx", 1);
-            Excel excel = Excel.GetInstance();
-            excel.initExcel(path, 1);
-            excel.WriteToCell(0, 0, "Test2");
-            excel.Save();
-            excel.SaveAs(@"Test2.xlsx");
-
-            excel.Close();
-        }
-
-        public void initDgvDiagnosis()
-        {
-            string currentDir = Environment.CurrentDirectory;
-            //string fileName = currentDir + @"\aaa";
-            string filePath = Path.Combine(currentDir, "data") + @"\TB";
-            //CreateNewFile(fileName);
-            //selectAndDelete(fileName);
-            string[,] tbArray = readMultipleCells(filePath, 18, 18);
-
-            setDataGrid_diagnosis(dgv_diagnosis_TB, tbArray, 17, 17);
-
-        }
-
-        public void loadExcelFile_Interpretation(DataGridView dgv, string fileName)
-        {
-            string currentDir = Environment.CurrentDirectory;
-            //string fileName = currentDir + @"\aaa";
-            string filePath = Path.Combine(currentDir, "data") + @"\" + fileName;
-            //CreateNewFile(fileName);
-            //selectAndDelete(fileName);
-            string[,] tbArray = readMultipleCells(filePath, 18, 18);
-
-            setDataGrid_diagnosis(dgv, tbArray, 17, 17);
-        }
-
+      
         ////////////////////////////////////
 
 
@@ -2584,7 +2518,7 @@ namespace ABI_POC_PCR
             */
 
             DataTable dt = new DataTable();
-            dt.Columns.Add("Fluorescence", typeof(string));
+            dt.Columns.Add("Dye", typeof(string));
             dt.Columns.Add("Ct", typeof(string));
 
             double val1 = Math.Truncate(one * 100) / 100;
@@ -2608,8 +2542,8 @@ namespace ABI_POC_PCR
 
         bool IsTheSameCellValue(int column, int row)
         {
-            DataGridViewCell cell1 = dgv_diagnosis_TB[column, row];
-            DataGridViewCell cell2 = dgv_diagnosis_TB[column, row - 1];
+            DataGridViewCell cell1 = dgv_interpretation_howTo[column, row];
+            DataGridViewCell cell2 = dgv_interpretation_howTo[column, row - 1];
             if (cell1.Value == null || cell2.Value == null)
             {
                 return false;
@@ -2641,44 +2575,44 @@ namespace ABI_POC_PCR
             }
             else
             {
-                e.AdvancedBorderStyle.Top = dgv_diagnosis_TB.AdvancedCellBorderStyle.Top;
+                e.AdvancedBorderStyle.Top = dgv_interpretation_howTo.AdvancedCellBorderStyle.Top;
             }
         }
 
         private void setDiagnosisTable()
         {
-            dgv_diagnosis_TB.ColumnCount = 22;
-            dgv_diagnosis_TB.ColumnHeadersVisible = true;
+            dgv_interpretation_howTo.ColumnCount = 22;
+            dgv_interpretation_howTo.ColumnHeadersVisible = true;
 
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
 
             columnHeaderStyle.BackColor = Color.Beige;
             columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
-            dgv_diagnosis_TB.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            dgv_interpretation_howTo.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
             //set the column header names.
-            dgv_diagnosis_TB.Columns[0].Name = "Dye(tube)";
-            dgv_diagnosis_TB.Columns[1].Name = "TB";
-            dgv_diagnosis_TB.Columns[2].Name = "NTM";
-            dgv_diagnosis_TB.Columns[3].Name = "NEG";
-            dgv_diagnosis_TB.Columns[4].Name = "RIF";
-            dgv_diagnosis_TB.Columns[5].Name = "RIF";
-            dgv_diagnosis_TB.Columns[6].Name = "RIF";
-            dgv_diagnosis_TB.Columns[7].Name = "RIF";
-            dgv_diagnosis_TB.Columns[8].Name = "RIF";
-            dgv_diagnosis_TB.Columns[9].Name = "RIF";
-            dgv_diagnosis_TB.Columns[10].Name = "RIF";
-            dgv_diagnosis_TB.Columns[11].Name = "Dye(tube)";
-            dgv_diagnosis_TB.Columns[12].Name = "TB";
-            dgv_diagnosis_TB.Columns[13].Name = "NTM";
-            dgv_diagnosis_TB.Columns[14].Name = "NEG";
-            dgv_diagnosis_TB.Columns[15].Name = "RIF";
-            dgv_diagnosis_TB.Columns[16].Name = "RIF";
-            dgv_diagnosis_TB.Columns[17].Name = "RIF";
-            dgv_diagnosis_TB.Columns[18].Name = "RIF";
-            dgv_diagnosis_TB.Columns[19].Name = "RIF";
-            dgv_diagnosis_TB.Columns[20].Name = "RIF";
-            dgv_diagnosis_TB.Columns[21].Name = "RIF";
+            dgv_interpretation_howTo.Columns[0].Name = "Dye(tube)";
+            dgv_interpretation_howTo.Columns[1].Name = "TB";
+            dgv_interpretation_howTo.Columns[2].Name = "NTM";
+            dgv_interpretation_howTo.Columns[3].Name = "NEG";
+            dgv_interpretation_howTo.Columns[4].Name = "RIF";
+            dgv_interpretation_howTo.Columns[5].Name = "RIF";
+            dgv_interpretation_howTo.Columns[6].Name = "RIF";
+            dgv_interpretation_howTo.Columns[7].Name = "RIF";
+            dgv_interpretation_howTo.Columns[8].Name = "RIF";
+            dgv_interpretation_howTo.Columns[9].Name = "RIF";
+            dgv_interpretation_howTo.Columns[10].Name = "RIF";
+            dgv_interpretation_howTo.Columns[11].Name = "Dye(tube)";
+            dgv_interpretation_howTo.Columns[12].Name = "TB";
+            dgv_interpretation_howTo.Columns[13].Name = "NTM";
+            dgv_interpretation_howTo.Columns[14].Name = "NEG";
+            dgv_interpretation_howTo.Columns[15].Name = "RIF";
+            dgv_interpretation_howTo.Columns[16].Name = "RIF";
+            dgv_interpretation_howTo.Columns[17].Name = "RIF";
+            dgv_interpretation_howTo.Columns[18].Name = "RIF";
+            dgv_interpretation_howTo.Columns[19].Name = "RIF";
+            dgv_interpretation_howTo.Columns[20].Name = "RIF";
+            dgv_interpretation_howTo.Columns[21].Name = "RIF";
 
 
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
@@ -2705,7 +2639,7 @@ namespace ABI_POC_PCR
 
             foreach (string[] rowArray in rows)
             {
-                dgv_diagnosis_TB.Rows.Add(rowArray);
+                dgv_interpretation_howTo.Rows.Add(rowArray);
             }
 
             /*
@@ -3015,8 +2949,8 @@ namespace ABI_POC_PCR
             updateTestInfo();
             resetTesterInfo();
             resetCartridgeInfo();
-            resetAnalyticResult();
-            reset_IC_Result();
+           
+      
 
             presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
@@ -3932,7 +3866,7 @@ namespace ABI_POC_PCR
                     if (step == 7 && routine_cnt == 45) // final의 경우 검사자 그리드 업데이트
                     {
                         endTestInfo();
-                        updateAnalyticResult(selectedDgv);
+                        update_analytic_result();//updateAnalyticResult(selectedDgv);
                         update_IC_result();
                         sm.opticReceivedFlag = false;
                         routine_cnt = 0;
@@ -4350,7 +4284,7 @@ namespace ABI_POC_PCR
 
                 bLoadedRecipe = false;
 
-                OnClickNewDgvInterpretation(sender, e);
+               
             }
             else if (index == -1 || str == "")
             {
@@ -4361,230 +4295,7 @@ namespace ABI_POC_PCR
                 MessageBox.Show("기존에 존재하는 레시피 이름인지 확인해 주세요.", "레시피 생성 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        public event EventHandler createNewDGVAnalyticResultEvent;
-        public void OnClickNewDGVAnalyticResult(object sender, EventArgs args)
-        {
-            if(createNewDGVAnalyticResultEvent != null)
-            {
-                Invoke(createNewDgvinterpretationEvent, null);
-            }
-        }
-        List<DataGridView> dgv_AnalyticResult = new List<DataGridView>();
-        public void createNewDGVAnalyticResult(object sender, EventArgs e)
-        {
-            DataGridView dgv1 = new DataGridView();
-            dgv_AnalyticResult.Add(dgv1);
-            setupDGV_AnalyticResult(dgv_AnalyticResult[0]);
-        }
-
-        public void createAnalyticDGV()
-        {
-            //this.Controls.Add(pnl_AnalyticResult);
-            DataGridView dgv = new DataGridView();
-            setupDGV_AnalyticResult(dgv);
-            //SetupDataGridView(dgv);
-            //PopulateDataGridView(dgv);
-        }
-               
-        public void setupDGV_AnalyticResult(DataGridView dgv)
-        {
-            int startY = 30;
-            int height = dgv.Height;
-            int posY = startY + 10 + height;
-
-            pnl_AnalyticResult.Controls.Add(dgv);
-            dgv.Parent = pnl_AnalyticResult;
-            pnl_AnalyticResult.Location = new Point(30, 600);//pnl_AnalyticResult.Location = new Point(100, posY);
-            pnl_AnalyticResult.Name = "pnl_AnalyticResult";
-            pnl_AnalyticResult.Height = 150;//dgv.Height;
-            pnl_AnalyticResult.Width = 1200;//dgv.Width;
-
-            Setup_DGV_AnalyticResult(dgv);
-            Populate_DGV_AnalyticResult(dgv);
-        }
-
-        public void Setup_DGV_AnalyticResult(DataGridView dgv)
-        {
-            dgv.ColumnCount = 5;
-
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgv.ColumnHeadersVisible = false;
-            //dgv.ColumnHeadersDefaultCellStyle.
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font(dgv.Font, FontStyle.Regular);
-
-            dgv.Name = "songsDataGridView";
-            dgv.Location = new Point(8, 8);
-            dgv.Size = new Size(500, 1000);
-            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; //DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            //dgv.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgv.GridColor = Color.Black;
-            dgv.RowHeadersVisible = false;
-
-            dgv.Columns[0].Name = "Release Date";
-            dgv.Columns[1].Name = "Track";
-            dgv.Columns[2].Name = "Title";
-            dgv.Columns[3].Name = "Artist";
-            dgv.Columns[4].Name = "Album";
-            dgv.Columns[4].DefaultCellStyle.Font = new Font(dgv.DefaultCellStyle.Font, FontStyle.Regular);
-
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            dgv.Dock = DockStyle.Fill;
-        }
-
-        private void Populate_DGV_AnalyticResult(DataGridView dgv)
-        {
-            string[] row0 = { "11/22/1968", "29", "Revolution 9",
-            "Beatles", "The Beatles [White Album]" };
-            string[] row1 = { "1960", "6", "Fools Rush In",
-            "Frank Sinatra", "Nice 'N' Easy" };
-            //string[] row2 = { "11/11/1971", "1", "One of These Days", "Pink Floyd", "Meddle" };
-            //string[] row3 = { "1988", "7", "Where Is My Mind?", "Pixies", "Surfer Rosa" };
-            //string[] row4 = { "5/1981", "9", "Can't Find My Mind", "Cramps", "Psychedelic Jungle" };
-            //string[] row5 = { "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
-            //string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
-
-            dgv.Rows.Add(row0);
-            dgv.Rows.Add(row1);
-            //dgv.Rows.Add(row2);
-            //dgv.Rows.Add(row3);
-            //dgv.Rows.Add(row4);
-            //dgv.Rows.Add(row5);
-            //dgv.Rows.Add(row6);
-
-            //dgv.Columns[0].DisplayIndex = 3;
-            //dgv.Columns[1].DisplayIndex = 4;
-            //dgv.Columns[2].DisplayIndex = 0;
-            //dgv.Columns[3].DisplayIndex = 1;
-            //dgv.Columns[4].DisplayIndex = 2;
-        }
-
-
-
-        public event EventHandler createNewDgvinterpretationEvent;
-        public void OnClickNewDgvInterpretation(object sender, EventArgs args)
-        {
-            if(createNewDgvinterpretationEvent != null)
-            {
-                Invoke(createNewDgvinterpretationEvent, null);
-            }
-        }
-
-        List<DataGridView> dgv_Interpretation = new List<DataGridView>();
-
-        public void createNewDgvInterpretation(object sender, EventArgs e)
-        {
-            string str = cb_Recipe_Eng.Text;
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
-            if (!di.Exists)
-            {
-                di.Create();
-            }
-
-            string xlsxFileName = di.ToString() + "\\" + str + ".xlsx";
-            CreateNewFile(xlsxFileName);
-
-
-            DataGridView dgv = new DataGridView();
-            dgv_Interpretation.Add(dgv);
-            setupDGV_Interpretation(dgv_Interpretation[0]);
-
-
-            loadExcelFile_Interpretation(dgv_Interpretation[0], str);//loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
-            //selectedDgv = dgv_diagnosis_COVID;
-
-            //SetupDataGridView(dgv_interpretation[dgv_Interpretation_Cnt]);
-            //dgv_Interpretation_Cnt++;
-        }
-
-
-
-        public void setupDGV_Interpretation(DataGridView dgv)
-        {
-            int startY = 30;
-            int height = dgv.Height;
-            int posY = startY + 10 + height;
-
-            pnl_interpretation.Controls.Add(dgv);
-            dgv.Parent = pnl_interpretation;
-            pnl_interpretation.Location = new Point(100, posY);
-            pnl_interpretation.Name = "pnl_interpretation";
-            pnl_interpretation.Height = dgv.Height;
-            pnl_interpretation.Width = dgv.Width;
-
-            //SetupDataGridView(dgv_Interpretation[0]);
-            //PopulateDataGridView(dgv_Interpretation[0]);
-        }
-
-        public void SetupDataGridView(DataGridView dgv)
-        {
-            dgv.ColumnCount = 5;
-
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font(dgv.Font, FontStyle.Bold);
-
-            dgv.Name = "songsDataGridView";
-            dgv.Location = new Point(8, 8);
-            dgv.Size = new Size(500, 250);
-            dgv.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            dgv.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgv.GridColor = Color.Black;
-            dgv.RowHeadersVisible = false;
-
-            dgv.Columns[0].Name = "Release Date";
-            dgv.Columns[1].Name = "Track";
-            dgv.Columns[2].Name = "Title";
-            dgv.Columns[3].Name = "Artist";
-            dgv.Columns[4].Name = "Album";
-            dgv.Columns[4].DefaultCellStyle.Font = new Font(dgv.DefaultCellStyle.Font, FontStyle.Italic);
-
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            dgv.Dock = DockStyle.Fill;
-        }
-
-        private void PopulateDataGridView(DataGridView dgv)
-        {
-            string[] row0 = { "11/22/1968", "29", "Revolution 9",
-            "Beatles", "The Beatles [White Album]" };
-            string[] row1 = { "1960", "6", "Fools Rush In",
-            "Frank Sinatra", "Nice 'N' Easy" };
-            string[] row2 = { "11/11/1971", "1", "One of These Days",
-            "Pink Floyd", "Meddle" };
-            string[] row3 = { "1988", "7", "Where Is My Mind?",
-            "Pixies", "Surfer Rosa" };
-            string[] row4 = { "5/1981", "9", "Can't Find My Mind",
-            "Cramps", "Psychedelic Jungle" };
-            string[] row5 = { "6/10/2003", "13",
-            "Scatterbrain. (As Dead As Leaves.)",
-            "Radiohead", "Hail to the Thief" };
-            string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
-
-            dgv.Rows.Add(row0);
-            dgv.Rows.Add(row1);
-            dgv.Rows.Add(row2);
-            dgv.Rows.Add(row3);
-            dgv.Rows.Add(row4);
-            dgv.Rows.Add(row5);
-            dgv.Rows.Add(row6);
-
-            dgv.Columns[0].DisplayIndex = 3;
-            dgv.Columns[1].DisplayIndex = 4;
-            dgv.Columns[2].DisplayIndex = 0;
-            dgv.Columns[3].DisplayIndex = 1;
-            dgv.Columns[4].DisplayIndex = 2;
-        }
-
-
-
-
+      
 
         private void btn_DelRecipe_Eng_Click(object sender, EventArgs e)
         {
@@ -5674,7 +5385,7 @@ namespace ABI_POC_PCR
             updateDeviceStatus("Stop");
 
             endTestInfo();
-            updateAnalyticResult(selectedDgv);
+            update_analytic_result();//updateAnalyticResult(selectedDgv);
             update_IC_result();
 
             MessageBox.Show("검사가 끝났습니다. 결과를 확인해 주세요.", "검사 종료 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -5980,11 +5691,7 @@ namespace ABI_POC_PCR
             listView_PatientInfo.Columns.Add("Sample ID ", 250);        //컬럼추가
             listView_PatientInfo.Columns.Add("Cartridge ID ", 250);        //컬럼추가
 
-            //test 
-            listView_Result.View = View.Details;           //컬럼형식으로 변경
-            listView_Result.FullRowSelect = true;          //Row 전체 선택
-
-            listView_Result.Columns.Add("COVID", 433);
+    
             //listView_Result.Columns.Add("N T M", 433);        //컬럼추가
             //listView_Result.Columns.Add("R I F", 433);  
 
@@ -6090,181 +5797,7 @@ namespace ABI_POC_PCR
         }
 
 
-        public void resetAnalyticResult()
-        {
-            listView_Result.BeginUpdate();
-            listView_Result.Items[0].SubItems[0].Text = "";
-            listView_Result.Items[0].SubItems[1].Text = "";
-            listView_Result.Items[0].SubItems[2].Text = "";
-            listView_Result.EndUpdate();
-        }
-
-        public void reset_AnalyticResult_COVID()
-        {
-            listView_Result.BeginUpdate();
-            listView_Result.Items[0].SubItems[0].Text = "COVID";
-            listView_Result.Items[0].SubItems[1].Text = "";
-            listView_Result.Items[0].SubItems[2].Text = "";
-            listView_Result.EndUpdate();
-        }
-
-        public void updateAnalyticResult(DataGridView dgv)
-        {
-            /*
-            int[] ic_Value = new int[4 * CH_CNT];
-
-            for (int i = 0; i < 16; i++)
-            {
-                Int32.TryParse(dgv_diagnosis_ct.Rows[i].Cells[1].FormattedValue.ToString(), out ic_Value[i]);
-            }
-            */
-            lb_IC_Result.Text = dgv_interpretation_ct.Rows[2].Cells[2].FormattedValue.ToString();
-            if(lb_IC_Result.Text == "P")
-            {
-                lb_IC_Result.Text = "Pass";
-            }
-            else
-            {
-                lb_IC_Result.Text = "Fail";
-            }
-
-
-            double[] testResult = new double[4 * Plotter.CH_CNT];
-            DataGridView[] dgvArrResult = { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
-
-            for (int j = 0; j < 4; j++)
-            {
-                for (int k = 0; k < 4; k++)
-                {
-                    testResult[j * 4 + k] = isExceededBase_userSelection(dgvArrResult[j], k, 30, CtlineVal[j * 4 + k]);
-                }
-            }
-
-            string[] strResult = new string[4 * Plotter.CH_CNT];
-
-            for(int b = 0; b <16; b++)
-            {
-                strResult[b] = "";
-            }
-            for (int k = 0; k < 16; k++)
-            {
-                if (testResult[k] > 0)
-                {
-                    strResult[k] = "P";
-                }
-                else
-                {
-                    strResult[k] = "N";
-                }
-                dgv_interpretation_ct.Rows[k].Cells[2].Value = strResult[k];
-
-            }
-
-            //TB analysis
-            string is_TB_Positive = "P";
-            for (int g = 0; g < 16; g++)
-            {
-                //dgv_diagnosis_ct.Rows[g].Cells[2].Value = strResult[g];
-                if(dgv.Rows[g+1].Cells[1].FormattedValue.ToString() == "")
-                {
-                    //nothing
-                }
-                else if (dgv.Rows[g].Cells[1].FormattedValue.ToString() == "P")
-                {
-                    if(dgv_interpretation_ct.Rows[g].Cells[2].FormattedValue.ToString() == "P")
-                    {
-                        //nothing
-                    }
-                    else
-                    {
-                        is_TB_Positive = "N";
-                    }
-                    
-                }
-                else if(dgv.Rows[g+1].Cells[1].FormattedValue.ToString() == "N")
-                {
-                    if(dgv_interpretation_ct.Rows[g+1].Cells[2].FormattedValue.ToString() == "N")
-                    {
-                        //notrhing
-                    }
-                    else
-                    {
-                        is_TB_Positive = "N";
-                    }
-                }
-            }
-            listView_Result.Items[0].SubItems[0].Text = is_TB_Positive;
-
-            //NTM analysis
-            string is_NTM_Positive = "P";
-            for (int f = 0; f < 16; f++)
-            {
-                if(dgv.Rows[f+2].Cells[2].FormattedValue.ToString() == "")
-                {
-                    //nothing
-                }
-                else if (dgv.Rows[f+2].Cells[2].FormattedValue.ToString() == "P")
-                {
-                    if (dgv_interpretation_ct.Rows[f].Cells[2].FormattedValue.ToString() == "P")
-                    {
-                        //nothing
-                    }
-                    else
-                    {
-                        is_NTM_Positive = "N";
-                    }
-
-                }
-                else if (dgv.Rows[f].Cells[1].FormattedValue.ToString() == "N")
-                {
-                    if (dgv_interpretation_ct.Rows[f].Cells[2].FormattedValue.ToString() == "N")
-                    {
-                        //notrhing
-                    }
-                    else
-                    {
-                        is_NTM_Positive = "N";
-                    }
-                }
-            }
-            listView_Result.Items[0].SubItems[1].Text = is_NTM_Positive;
-
-            //RIF analysis 
-            string is_RIF_Positive = "P";
-            for (int a = 0; a < 16; a++)
-            {
-                if(dgv.Rows[a].Cells[2].FormattedValue.ToString() == "")
-                {
-                    //nothing
-                }
-                else if (dgv.Rows[a].Cells[2].FormattedValue.ToString() == "P")
-                {
-                    if (dgv_interpretation_ct.Rows[a].Cells[2].FormattedValue.ToString() == "P")
-                    {
-                        //nothing
-                    }
-                    else
-                    {
-                        is_NTM_Positive = "N";
-                    }
-
-                }
-                else if (dgv.Rows[a].Cells[2].FormattedValue.ToString() == "N")
-                {
-                    if (dgv_interpretation_ct.Rows[a].Cells[2].FormattedValue.ToString() == "N")
-                    {
-                        //notrhing
-                    }
-                    else
-                    {
-                        is_NTM_Positive = "N";
-                    }
-                }                
-                //if(dgv_diagnosis_TB.)
-            }
-            listView_Result.Items[0].SubItems[2].Text = is_RIF_Positive;
-        }
-
+       
 
         public string[] CriticalThresholdCalculation(string[] simul_value)
         {
@@ -6360,38 +5893,7 @@ namespace ABI_POC_PCR
             return -1;
         }
 
-
-        public void init_IC_Result()
-        {
-            lb_IC_Result.Text = "Not Tested";
-            /*
-            listViewResultIC.BeginUpdate();
-            lvi5 = new ListViewItem("");
-            lvi5.SubItems.Add("");
-            lvi5.SubItems.Add("");
-            lvi5.ImageIndex = 0;
-            listViewResultIC.Items.Add(lvi5);
-
-            listViewResultIC.EndUpdate();
-            */
-        }
-
-        public void reset_IC_Result()
-        {
-            lb_IC_Result.Text = "Not Tested...";
-        }
-
-        public void is_IC_Positive()
-        {
-            //CriticalThresholdCalculation Test
-            string[] result = CriticalThresholdCalculation(getDataGridArray(dgv_opticDatum_tube1, 2, 28));
-            lb_IC_Result.Text = result[0] + "* Value : " + result[1];
-
-            int tempValue = 0;
-            Int32.TryParse(result[1], out tempValue);
-            Plotter.DrawHLine(formsPlot1, tempValue);
-        }
-               
+        
         public void update_IC_result()
         {
             //listViewResultIC.BeginUpdate();
@@ -6408,16 +5910,7 @@ namespace ABI_POC_PCR
         
         public void initializeAnalyticResult()
         {
-            listView_Result.BeginUpdate();
-            lvi4 = new ListViewItem("");
-            lvi4.SubItems.Add("");
-            lvi4.SubItems.Add("");
-            //lvi2.SubItems.Add("임시1");
-            //lvi2.SubItems.Add("인천광역시 부평구");
-            lvi4.ImageIndex = 0;
-            listView_Result.Items.Add(lvi4);
-
-            listView_Result.EndUpdate();
+           
         }
 
         public void resetCartridgeInfo()
@@ -6621,8 +6114,7 @@ namespace ABI_POC_PCR
             updateTestInfo();
             resetTesterInfo();
             resetCartridgeInfo();
-            resetAnalyticResult();
-            reset_IC_Result();
+        
 
             presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
@@ -6746,23 +6238,22 @@ namespace ABI_POC_PCR
         {
             if(cb_Test_Interpretation.SelectedIndex == 0)
             {
-                dgv_diagnosis_TB.Visible = true;
+                dgv_interpretation_howTo.Visible = true;
                 dgv_diagnosis_COVID.Visible = false;
                 dgv_diagnosis_FLU.Visible = false;
-                selectedDgv = dgv_diagnosis_TB;
+                selectedDgv = dgv_interpretation_howTo;
             }
             else if(cb_Test_Interpretation.SelectedIndex == 1)
             {
-                dgv_diagnosis_TB.Visible = false;
+                dgv_interpretation_howTo.Visible = false;
                 dgv_diagnosis_COVID.Visible = true;
                 dgv_diagnosis_FLU.Visible = false;
 
-                loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
                 selectedDgv = dgv_diagnosis_COVID;
             }
             else if(cb_Test_Interpretation.SelectedIndex == 2)
             {
-                dgv_diagnosis_TB.Visible = false;
+                dgv_interpretation_howTo.Visible = false;
                 dgv_diagnosis_COVID.Visible = false;
                 dgv_diagnosis_FLU.Visible = true;
             }
@@ -6771,7 +6262,10 @@ namespace ABI_POC_PCR
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            updateAnalyticResult(selectedDgv);
+            setCtValueToDGV(dgv_interpretation_ct, Plotter.CtCycles);
+            setCtResultToDGV(dgv_interpretation_ct);
+            update_analytic_result();
+            //updateAnalyticResult(selectedDgv);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -6790,7 +6284,7 @@ namespace ABI_POC_PCR
         {
             //OpenFileDialog dlg = new OpenFileDialog();
             //dlg.OpenFile(); 
-            loadExcelFile_Interpretation(dgv_diagnosis_COVID, "COVID");
+          
             selectedDgv = dgv_diagnosis_COVID;
         }
 
@@ -6877,7 +6371,6 @@ namespace ABI_POC_PCR
                         {
                             dgvArr[j].Rows.RemoveAt(0);
                         }
-
                     }
                 }
             }
@@ -6940,6 +6433,7 @@ namespace ABI_POC_PCR
             if(cb_Recipe_Test.SelectedText == cb_Recipe_Eng.SelectedText 
                 && cb_Recipe_Test.SelectedText == cb_Test_Interpretation.SelectedText )
             {
+                cb_Recipe_Test.Text = sm.testName;
                 //pass
             }
             else
@@ -7010,7 +6504,8 @@ namespace ABI_POC_PCR
         private void button12_Click(object sender, EventArgs e)
         {
             baseCalculationAverage();//baseCalculation();
-            setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+            setCtValueToDGV(dgv_interpretation_ct, Plotter.CtCycles);//setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+            setCtResultToDGV(dgv_interpretation_ct);
         }
 
         private void formsPlot3_Load(object sender, EventArgs e)
@@ -7063,7 +6558,8 @@ namespace ABI_POC_PCR
             MatchAndFindOpticDataForResult();
             FindCyclesForBaseCalculation();
             baseCalculationAverage();//baseCalculation();
-            setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+            setCtValueToDGV(dgv_interpretation_ct, Plotter.CtCycles); //setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
+            setCtResultToDGV(dgv_interpretation_ct);
             updateDataGridOpticDatas(dgvArr, DISPLAY_DATA);
             Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
 
@@ -7138,6 +6634,10 @@ namespace ABI_POC_PCR
             cb_Test_Interpretation.Text = sm.testName;
             tb_Test_Interpretation.Text = sm.testName;
             updateTestInfo();
+
+            init_Test_Result();
+            init_Analytic_Result();
+            init_Interpretation_howTo();
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -7158,6 +6658,7 @@ namespace ABI_POC_PCR
         {
             baseCalculationAverage();
             BaseStandardDeviation = baseCalculationDeviation();
+            
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -7295,7 +6796,7 @@ namespace ABI_POC_PCR
 
         private void button22_Click(object sender, EventArgs e)
         {
-            createAnalyticDGV();
+          
         }
 
         public void sigmaScaleSave()
@@ -7367,11 +6868,351 @@ namespace ABI_POC_PCR
         private void tp_Interpretation_Enter(object sender, EventArgs e)
         {
             SigmaScaleLoad();
+            tb_Test_Interpretation.Text = sm.testName;
+                       
+          
+            init_Interpretation_howTo();
+
+
         }
 
         private void progressBar_Tester_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+
+        public void init_Test_Result()
+        {
+            if (sm.testName == "COVID")
+            {
+                dgv_testResult.ColumnCount = 2;
+                dgv_testResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_testResult.RowHeadersVisible = false;
+
+                dgv_testResult.Columns[0].Name = "COVID";
+                dgv_testResult.Columns[0].MinimumWidth = 520;
+                dgv_testResult.Columns[1].Name = "FLU";
+                dgv_testResult.Columns[1].MinimumWidth = 520;
+
+                dgv_testResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_testResult.MultiSelect = false;
+
+            }
+            else if (sm.testName == "TB")
+            {
+                dgv_testResult.ColumnCount = 3;
+                dgv_testResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_testResult.RowHeadersVisible = false;
+
+                dgv_testResult.Columns[0].Name = "MTC";
+                dgv_testResult.Columns[0].MinimumWidth = 350;
+                dgv_testResult.Columns[1].Name = "NTM";
+                dgv_testResult.Columns[1].MinimumWidth = 350;
+                dgv_testResult.Columns[2].Name = "RIF";
+                dgv_testResult.Columns[2].MinimumWidth = 340;
+
+                dgv_testResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_testResult.MultiSelect = false;
+
+            }
+
+        }
+
+        public void init_Analytic_Result()
+        {
+            if (sm.testName == "COVID")
+            {
+                dgv_analyticResult.ColumnCount = 7;
+                dgv_analyticResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_analyticResult.RowHeadersVisible = false;
+
+                dgv_analyticResult.Columns[0].Name = "";
+                dgv_analyticResult.Columns[0].MinimumWidth = 148;
+
+                dgv_analyticResult.Columns[1].Name = "E1";
+                dgv_analyticResult.Columns[1].MinimumWidth = 148;
+                dgv_analyticResult.Columns[2].Name = "E1";
+                dgv_analyticResult.Columns[2].MinimumWidth = 148;
+                dgv_analyticResult.Columns[3].Name = "IC";
+                dgv_analyticResult.Columns[3].MinimumWidth = 149;
+
+                dgv_analyticResult.Columns[4].Name = "E1";
+                dgv_analyticResult.Columns[4].MinimumWidth = 149;
+                dgv_analyticResult.Columns[5].Name = "N1";
+                dgv_analyticResult.Columns[5].MinimumWidth = 149;
+                dgv_analyticResult.Columns[6].Name = "IC";
+                dgv_analyticResult.Columns[6].MinimumWidth = 149;
+
+                dgv_analyticResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_analyticResult.MultiSelect = false;
+
+                int rowCnt = dgv_analyticResult.Rows.GetRowCount(DataGridViewElementStates.Visible);
+
+                for (int i = 1; i < rowCnt; i++)
+                {
+                    //if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
+                    //{
+                    dgv_analyticResult.Rows.RemoveAt(0);
+                    //}
+                }
+
+                string[] Ct = { "Ct", "", "", "", "", "", "" };
+                string[] result = { "Result", "", "", "", "", "", "" };
+                dgv_analyticResult.Rows.Add(Ct);
+                dgv_analyticResult.Rows.Add(result);
+
+            }
+            else if (sm.testName == "TB")
+            {
+                dgv_analyticResult.ColumnCount = 9;
+                dgv_analyticResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_analyticResult.RowHeadersVisible = false;
+
+                dgv_analyticResult.Columns[0].Name = "";
+                dgv_analyticResult.Columns[0].MinimumWidth = 115;
+
+                dgv_analyticResult.Columns[1].Name = "MTC";
+                dgv_analyticResult.Columns[1].MinimumWidth = 115;
+                dgv_analyticResult.Columns[2].Name = "IC";
+                dgv_analyticResult.Columns[2].MinimumWidth = 115;
+                dgv_analyticResult.Columns[3].Name = "NTM";
+                dgv_analyticResult.Columns[3].MinimumWidth = 115;
+                dgv_analyticResult.Columns[4].Name = "RIF1";
+                dgv_analyticResult.Columns[4].MinimumWidth = 115;
+                dgv_analyticResult.Columns[5].Name = "RIF2";
+                dgv_analyticResult.Columns[5].MinimumWidth = 115;
+                dgv_analyticResult.Columns[6].Name = "RIF3";
+                dgv_analyticResult.Columns[6].MinimumWidth = 115;
+                dgv_analyticResult.Columns[7].Name = "RIF4";
+                dgv_analyticResult.Columns[7].MinimumWidth = 115;
+                dgv_analyticResult.Columns[8].Name = "RIF5";
+                dgv_analyticResult.Columns[8].MinimumWidth = 115;
+
+
+                dgv_analyticResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_analyticResult.MultiSelect = false;
+
+                int rowCnt = dgv_analyticResult.Rows.GetRowCount(DataGridViewElementStates.Visible);
+
+                for (int i = 1; i < rowCnt; i++)
+                {
+                    //if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
+                    //{
+                    dgv_analyticResult.Rows.RemoveAt(0);
+                    //}
+                }
+
+                string[] Ct = { "Ct", "", "", "", "", "", "" };
+                string[] result = { "Result", "", "", "", "", "", "" };
+
+                dgv_analyticResult.Rows.Add(Ct);
+                dgv_analyticResult.Rows.Add(result);
+
+            }
+        }
+
+
+
+        public void init_Interpretation_howTo()
+        {
+            if (sm.testName == "COVID")
+            {
+                dgv_interpretation_howTo.ColumnCount = 7;
+                dgv_interpretation_howTo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_interpretation_howTo.RowHeadersVisible = false;
+
+                dgv_interpretation_howTo.Columns[0].Name = "";
+                dgv_interpretation_howTo.Columns[0].Width = 148;
+
+                dgv_interpretation_howTo.Columns[1].Name = "E1";
+                dgv_interpretation_howTo.Columns[1].Width = 148;
+                dgv_interpretation_howTo.Columns[2].Name = "N1";
+                dgv_interpretation_howTo.Columns[2].Width = 148;
+                dgv_interpretation_howTo.Columns[3].Name = "IC1";
+                dgv_interpretation_howTo.Columns[3].Width = 149;
+
+                dgv_interpretation_howTo.Columns[4].Name = "E2";
+                dgv_interpretation_howTo.Columns[4].Width = 149;
+                dgv_interpretation_howTo.Columns[5].Name = "N2";
+                dgv_interpretation_howTo.Columns[5].Width = 149;
+                dgv_interpretation_howTo.Columns[6].Name = "IC2";
+                dgv_interpretation_howTo.Columns[6].Width = 149;
+
+                dgv_interpretation_howTo.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_interpretation_howTo.MultiSelect = false;
+
+                string[] Ct = { "COVID", "", "", "", "", "", "" };
+                string[] result = { "FLU", "", "", "", "", "", "" };
+
+                dgv_interpretation_howTo.Rows.Add(Ct);
+                dgv_interpretation_howTo.Rows.Add(result);
+
+                int rowCnt = dgv_interpretation_howTo.Rows.GetRowCount(DataGridViewElementStates.Visible);
+
+                for (int i = 1; i < rowCnt; i++)
+                {
+                    //if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
+                    //{
+                    dgv_interpretation_howTo.Rows.RemoveAt(0);
+                    //}
+                }
+
+
+            }
+            else if (sm.testName == "TB")
+            {
+                dgv_interpretation_howTo.ColumnCount = 9;
+                dgv_interpretation_howTo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv_interpretation_howTo.RowHeadersVisible = false;
+
+                dgv_interpretation_howTo.Columns[0].Name = "";
+                dgv_interpretation_howTo.Columns[0].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[0].Width = 120;
+
+                dgv_interpretation_howTo.Columns[1].Name = "FAM1";
+                dgv_interpretation_howTo.Columns[1].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[1].Width = 120;
+
+                dgv_interpretation_howTo.Columns[2].Name = "CY51";
+                dgv_interpretation_howTo.Columns[2].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[2].Width = 120;
+
+                dgv_interpretation_howTo.Columns[3].Name = "FAM2";
+                dgv_interpretation_howTo.Columns[3].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[3].Width = 120;
+                
+                dgv_interpretation_howTo.Columns[4].Name = "CY52";
+                dgv_interpretation_howTo.Columns[4].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[4].Width = 120;
+
+                dgv_interpretation_howTo.Columns[5].Name = "FAM3";
+                dgv_interpretation_howTo.Columns[5].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[5].Width = 120;
+
+                dgv_interpretation_howTo.Columns[6].Name = "CY53";
+                dgv_interpretation_howTo.Columns[6].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[6].Width = 120;
+
+                dgv_interpretation_howTo.Columns[7].Name = "FAM4";
+                dgv_interpretation_howTo.Columns[7].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[7].Width = 120;
+
+                dgv_interpretation_howTo.Columns[8].Name = "CY54";
+                dgv_interpretation_howTo.Columns[8].MinimumWidth = 120;
+                dgv_interpretation_howTo.Columns[8].Width = 120;
+                
+                dgv_interpretation_howTo.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dgv_interpretation_howTo.MultiSelect = false;
+                
+                string[] mtc = { "MTC", "+", "+", "", "", "", "", "", "" };
+                string[] ntm = { "NTM", "-", "+", "+", "", "", "", "", "" };
+                string[] neg = { "NEG", "-", "+", "-", "", "", "", "", "" };
+                string[] rif1 = { "RIF1", "", "", "", "", "", "", "", "" };
+                string[] rif2 = { "RIF2", "", "", "", "", "", "", "", "" };
+                string[] rif3 = { "RIF3", "", "", "", "", "", "", "", "" };
+                string[] rif4 = { "RIF4", "", "", "", "", "", "", "", "" };
+                string[] rif5 = { "RIF5", "", "", "", "", "", "", "", "" };
+
+                int rowCnt = dgv_interpretation_howTo.Rows.GetRowCount(DataGridViewElementStates.Visible);
+
+                for (int i = 1; i < rowCnt; i++)
+                {
+                    //if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
+                    //{
+                    dgv_interpretation_howTo.Rows.RemoveAt(0);
+                    //}
+                }
+
+                dgv_interpretation_howTo.Rows.Add(mtc);
+                dgv_interpretation_howTo.Rows.Add(ntm);
+                dgv_interpretation_howTo.Rows.Add(neg);
+                dgv_interpretation_howTo.Rows.Add(rif1);
+                dgv_interpretation_howTo.Rows.Add(rif2);
+                dgv_interpretation_howTo.Rows.Add(rif3);
+                dgv_interpretation_howTo.Rows.Add(rif4);
+                dgv_interpretation_howTo.Rows.Add(rif5);
+            }
+        }
+
+
+        public void update_Test_Result()
+        {
+
+        }
+
+        public void autoUpdate_analytic_result()
+        {
+            //find same dye
+            int idx = 0;
+            for(int i = 0; i < 16; i++)
+            {
+                if( dgv_interpretation_howTo.Columns[0].HeaderText == dgv_interpretation_ct.Rows[i].Cells[2].FormattedValue.ToString())
+                {
+                    idx = i;
+                }
+            }
+        }
+
+        public void update_analytic_result()
+        {
+            //MTC
+            if(dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+                && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value)
+            {
+                dgv_testResult.Rows[0].Cells[0].Value = "+";
+            }
+            else
+            {
+                dgv_testResult.Rows[0].Cells[0].Value = "-";
+            }
+
+            //NTM
+            if(dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+                && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
+                && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
+            {
+                dgv_testResult.Rows[0].Cells[1].Value = "+";
+            }
+            else
+            {
+                dgv_testResult.Rows[0].Cells[1].Value = "-";
+            }
+
+            // N/A
+            if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+               && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
+               && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
+            {
+                dgv_testResult.Rows[0].Cells[2].Value = "+";
+            }
+            else
+            {
+                dgv_testResult.Rows[0].Cells[2].Value = "-";
+            }
+
+        }
+
+        private void tp_TestReport_Enter(object sender, EventArgs e)
+        {
+            init_Test_Result();
+            init_Analytic_Result();
+        }
+
+        private void tp_tester_Enter(object sender, EventArgs e)
+        {
+            init_Test_Result();
+            init_Analytic_Result();
+        }
+
+        private void btn_save_interpretation_Click(object sender, EventArgs e)
+        {
+            //Save_Csv
+        }
+
+        private void btn_load_interpretation_Click(object sender, EventArgs e)
+        {
+            //load csv
         }
     }
     #endregion

@@ -111,7 +111,6 @@
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Diagnosis.cs" />
     <Compile Include="Engineer.cs" />
-    <Compile Include="Excel.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="GraphPlot\Plotter.cs" />
     <Compile Include="LogIn.cs">
