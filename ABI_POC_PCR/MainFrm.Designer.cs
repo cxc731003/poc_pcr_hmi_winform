@@ -157,6 +157,8 @@
             this.btn_MCURead_Eng = new System.Windows.Forms.Button();
             this.btn_NewRecipe_Eng = new System.Windows.Forms.Button();
             this.tp_Interpretation = new System.Windows.Forms.TabPage();
+            this.btn_load_interpretation = new System.Windows.Forms.Button();
+            this.btn_save_interpretation = new System.Windows.Forms.Button();
             this.btn_SigmaScale_Load = new System.Windows.Forms.Button();
             this.btn_SigmaScale_Save = new System.Windows.Forms.Button();
             this.pnl_interpretation = new System.Windows.Forms.Panel();
@@ -439,6 +441,7 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -773,9 +776,8 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
-            this.btn_save_interpretation = new System.Windows.Forms.Button();
-            this.btn_load_interpretation = new System.Windows.Forms.Button();
+            this.btnResultSave = new System.Windows.Forms.Button();
+            this.ResultLoad = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -1952,6 +1954,8 @@
             // 
             // tp_Interpretation
             // 
+            this.tp_Interpretation.Controls.Add(this.ResultLoad);
+            this.tp_Interpretation.Controls.Add(this.btnResultSave);
             this.tp_Interpretation.Controls.Add(this.btn_load_interpretation);
             this.tp_Interpretation.Controls.Add(this.btn_save_interpretation);
             this.tp_Interpretation.Controls.Add(this.btn_SigmaScale_Load);
@@ -1977,6 +1981,26 @@
             this.tp_Interpretation.Text = "    2. Test Interpretation    ";
             this.tp_Interpretation.UseVisualStyleBackColor = true;
             this.tp_Interpretation.Enter += new System.EventHandler(this.tp_Interpretation_Enter);
+            // 
+            // btn_load_interpretation
+            // 
+            this.btn_load_interpretation.Location = new System.Drawing.Point(448, 722);
+            this.btn_load_interpretation.Name = "btn_load_interpretation";
+            this.btn_load_interpretation.Size = new System.Drawing.Size(389, 35);
+            this.btn_load_interpretation.TabIndex = 48;
+            this.btn_load_interpretation.Text = "Load Interpretation";
+            this.btn_load_interpretation.UseVisualStyleBackColor = true;
+            this.btn_load_interpretation.Click += new System.EventHandler(this.btn_load_interpretation_Click);
+            // 
+            // btn_save_interpretation
+            // 
+            this.btn_save_interpretation.Location = new System.Drawing.Point(43, 722);
+            this.btn_save_interpretation.Name = "btn_save_interpretation";
+            this.btn_save_interpretation.Size = new System.Drawing.Size(377, 35);
+            this.btn_save_interpretation.TabIndex = 47;
+            this.btn_save_interpretation.Text = "Save Interpretation";
+            this.btn_save_interpretation.UseVisualStyleBackColor = true;
+            this.btn_save_interpretation.Click += new System.EventHandler(this.btn_save_interpretation_Click);
             // 
             // btn_SigmaScale_Load
             // 
@@ -2085,6 +2109,7 @@
             this.dgv_interpretation_ct.RowHeadersVisible = false;
             this.dgv_interpretation_ct.Size = new System.Drawing.Size(587, 533);
             this.dgv_interpretation_ct.TabIndex = 33;
+            this.dgv_interpretation_ct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_interpretation_ct_CellContentClick);
             // 
             // dgvtbc_Fluorescence
             // 
@@ -4705,6 +4730,19 @@
             this.btn_OpenDoor_Test.Text = "1. Test Preparation";
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
+            // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
             // 
             // tabControl1
             // 
@@ -8148,38 +8186,25 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // progressBar_step
+            // btnResultSave
             // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
+            this.btnResultSave.Location = new System.Drawing.Point(1146, 765);
+            this.btnResultSave.Name = "btnResultSave";
+            this.btnResultSave.Size = new System.Drawing.Size(200, 35);
+            this.btnResultSave.TabIndex = 49;
+            this.btnResultSave.Text = "Result Save";
+            this.btnResultSave.UseVisualStyleBackColor = true;
+            this.btnResultSave.Click += new System.EventHandler(this.btnResultSave_Click);
             // 
-            // btn_save_interpretation
+            // ResultLoad
             // 
-            this.btn_save_interpretation.Location = new System.Drawing.Point(43, 722);
-            this.btn_save_interpretation.Name = "btn_save_interpretation";
-            this.btn_save_interpretation.Size = new System.Drawing.Size(377, 35);
-            this.btn_save_interpretation.TabIndex = 47;
-            this.btn_save_interpretation.Text = "Save Interpretation";
-            this.btn_save_interpretation.UseVisualStyleBackColor = true;
-            this.btn_save_interpretation.Click += new System.EventHandler(this.btn_save_interpretation_Click);
-            // 
-            // btn_load_interpretation
-            // 
-            this.btn_load_interpretation.Location = new System.Drawing.Point(448, 722);
-            this.btn_load_interpretation.Name = "btn_load_interpretation";
-            this.btn_load_interpretation.Size = new System.Drawing.Size(389, 35);
-            this.btn_load_interpretation.TabIndex = 48;
-            this.btn_load_interpretation.Text = "Load Interpretation";
-            this.btn_load_interpretation.UseVisualStyleBackColor = true;
-            this.btn_load_interpretation.Click += new System.EventHandler(this.btn_load_interpretation_Click);
+            this.ResultLoad.Location = new System.Drawing.Point(1372, 763);
+            this.ResultLoad.Name = "ResultLoad";
+            this.ResultLoad.Size = new System.Drawing.Size(200, 35);
+            this.ResultLoad.TabIndex = 50;
+            this.ResultLoad.Text = "Result Load";
+            this.ResultLoad.UseVisualStyleBackColor = true;
+            this.ResultLoad.Click += new System.EventHandler(this.ResultLoad_Click);
             // 
             // MainFrm
             // 
@@ -9038,6 +9063,8 @@
         private System.Windows.Forms.DataGridView dgv_analyticResult;
         private System.Windows.Forms.Button btn_load_interpretation;
         private System.Windows.Forms.Button btn_save_interpretation;
+        private System.Windows.Forms.Button ResultLoad;
+        private System.Windows.Forms.Button btnResultSave;
     }
 }
 

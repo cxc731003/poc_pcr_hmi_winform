@@ -2602,17 +2602,17 @@ namespace ABI_POC_PCR
             dgv_interpretation_howTo.Columns[8].Name = "RIF";
             dgv_interpretation_howTo.Columns[9].Name = "RIF";
             dgv_interpretation_howTo.Columns[10].Name = "RIF";
-            dgv_interpretation_howTo.Columns[11].Name = "Dye(tube)";
-            dgv_interpretation_howTo.Columns[12].Name = "TB";
-            dgv_interpretation_howTo.Columns[13].Name = "NTM";
-            dgv_interpretation_howTo.Columns[14].Name = "NEG";
-            dgv_interpretation_howTo.Columns[15].Name = "RIF";
-            dgv_interpretation_howTo.Columns[16].Name = "RIF";
-            dgv_interpretation_howTo.Columns[17].Name = "RIF";
-            dgv_interpretation_howTo.Columns[18].Name = "RIF";
-            dgv_interpretation_howTo.Columns[19].Name = "RIF";
-            dgv_interpretation_howTo.Columns[20].Name = "RIF";
-            dgv_interpretation_howTo.Columns[21].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[11].Name = "Dye(tube)";
+            //dgv_interpretation_howTo.Columns[12].Name = "TB";
+            //dgv_interpretation_howTo.Columns[13].Name = "NTM";
+            //dgv_interpretation_howTo.Columns[14].Name = "NEG";
+            //dgv_interpretation_howTo.Columns[15].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[16].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[17].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[18].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[19].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[20].Name = "RIF";
+            //dgv_interpretation_howTo.Columns[21].Name = "RIF";
 
 
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
@@ -6807,7 +6807,12 @@ namespace ABI_POC_PCR
                 di.Create();
             }
             string fileName = di.ToString() + "\\SigmaScale.info";
+            
+            // 기존 파일 삭제
+            FileInfo fileDel = new FileInfo(fileName);
+            if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
 
+            // 새로 저장
             StreamWriter sw = new StreamWriter(fileName, true);
 
             //first line
@@ -6817,7 +6822,8 @@ namespace ABI_POC_PCR
                 buff += "," + dgv_interpretation_ct.Rows[i].Cells[1].FormattedValue.ToString();
             }
             // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
-
+            
+            
             sw.WriteLine(buff);
 
             sw.Close();
@@ -6847,8 +6853,6 @@ namespace ABI_POC_PCR
                 char[] sep = { ',' };
 
                 result = temp.Split(sep);
-
-
             }
 
             for (int i = 0; i < 16; i++)
@@ -7207,12 +7211,159 @@ namespace ABI_POC_PCR
 
         private void btn_save_interpretation_Click(object sender, EventArgs e)
         {
-            //Save_Csv
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+
+            string fileName = di.ToString() + "\\" + sm.testName + "_interpretation.csv";
+            Save_Csv_Interpretation(fileName, dgv_interpretation_howTo, true);//Save_Csv(fileName, dataGridView_Manage, true);
+        }
+
+        private void Save_Csv_Interpretation(string fileName, DataGridView dgv, bool header)
+        {
+            // 현재 선택한 셀의 정보를 삭제 후
+            //dataGridView_Manage.Rows.RemoveAt(this.dataGridView_Manage.SelectedRows[0].Index);
+            //int sIndex = dgv.CurrentCell.RowIndex;
+            //dgv.Rows.RemoveAt(sIndex);
+
+            // 그리드뷰를 파일로 저장함
+            string delimiter = ",";  // 구분자
+            FileStream fs = new FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+            StreamWriter csvExport = new StreamWriter(fs, System.Text.Encoding.UTF8);
+
+            if (dgv.Rows.Count == 0) return;
+
+            // 헤더정보 출력
+            if (header)
+            {
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    csvExport.Write(dgv.Columns[i].HeaderText);
+                    if (i != dgv.Columns.Count - 1)
+                    {
+                        csvExport.Write(delimiter);
+                    }
+                }
+            }
+
+            csvExport.Write(csvExport.NewLine); // add new line
+
+            // 데이터 출력
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    for (int i = 0; i < dgv.Columns.Count; i++)
+                    {
+                        csvExport.Write(row.Cells[i].Value);
+                        if (i != dgv.Columns.Count - 1)
+                        {
+                            csvExport.Write(delimiter);
+                        }
+                    }
+                    csvExport.Write(csvExport.NewLine); // write new line
+                }
+            }
+
+            csvExport.Flush(); // flush from the buffers.
+            csvExport.Close();
+            fs.Close();
+            MessageBox.Show("Interpretation Information Saved.", "Info Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_load_interpretation_Click(object sender, EventArgs e)
         {
             //load csv
+            Interpretation_Load();
+        }
+
+        public void Interpretation_Load()
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\" + sm.testName + "_interpretation.csv";
+
+            string[] lines = File.ReadAllLines(fileName);
+            string[] result;
+
+            int readNum = 1;
+            string temp = "";
+            
+            for (int i = 1; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                char[] sep = { ',' };
+
+                result = temp.Split(sep);
+                                
+                if (dgv_interpretation_howTo.Rows.GetRowCount(DataGridViewElementStates.Visible) > 1)
+                {
+                    dgv_interpretation_howTo.Rows.RemoveAt(0);
+                }
+                dgv_interpretation_howTo.Rows.Add(result);                
+            }
+            //return result;
+        }
+
+        private void dgv_interpretation_ct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnResultSave_Click(object sender, EventArgs e)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            string fileName = di.ToString() + "\\Result.info";
+
+            // 기존 파일 삭제
+            FileInfo fileDel = new FileInfo(fileName);
+            if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
+
+            // 새로 저장
+            StreamWriter sw = new StreamWriter(fileName, true);
+
+            //first line
+            string buff = dgv_interpretation_ct.Rows[0].Cells[2].FormattedValue.ToString();
+            for (int i = 1; i < 16; i++)
+            {
+                buff += "," + dgv_interpretation_ct.Rows[i].Cells[2].FormattedValue.ToString();
+            }
+            // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
+            
+            sw.WriteLine(buff);
+
+            sw.Close();
+        }
+
+        private void ResultLoad_Click(object sender, EventArgs e)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\Result.info";
+
+            string[] lines = File.ReadAllLines(fileName);
+            string[] result = new string[16];
+
+            int readNum = 1;
+            string temp = "";
+            for (int i = 0; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                char[] sep = { ',' };
+
+                result = temp.Split(sep);
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                dgv_interpretation_ct.Rows[i].Cells[2].Value = result[i];
+            }
         }
     }
     #endregion
