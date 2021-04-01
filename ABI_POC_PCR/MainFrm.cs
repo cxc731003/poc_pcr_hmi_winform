@@ -328,8 +328,8 @@ namespace ABI_POC_PCR
             //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
             
             updateDeviceStatus("Stop");
-            
 
+            sm.testName = "COVID";
             chkbox_use_standard_dev.Checked = true;
             chkBox_BaselineScale.Checked = true;
 
@@ -826,7 +826,7 @@ namespace ABI_POC_PCR
             {
                 for (int j = 0; j < Plotter.DYE_CNT; j++)
                 {
-                    temp[0] = FluoresenceValuesOne[j, 0];
+                    temp[0] = FluoresenceValuesOne[4*k + j, 0];
                     for (int i = 0; i < Plotter.COL_CNT; i++)
                     {
                         if (chkBox_baselineNoScale.Checked)
@@ -6890,14 +6890,16 @@ namespace ABI_POC_PCR
         {
             if (sm.testName == "COVID")
             {
-                dgv_testResult.ColumnCount = 2;
+                dgv_testResult.ColumnCount = 3;
                 dgv_testResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 dgv_testResult.RowHeadersVisible = false;
 
                 dgv_testResult.Columns[0].Name = "COVID";
-                dgv_testResult.Columns[0].MinimumWidth = 520;
-                dgv_testResult.Columns[1].Name = "FLU";
-                dgv_testResult.Columns[1].MinimumWidth = 520;
+                dgv_testResult.Columns[0].MinimumWidth = 320;
+                dgv_testResult.Columns[1].Name = "NEG";
+                dgv_testResult.Columns[1].MinimumWidth = 320;
+                dgv_testResult.Columns[2].Name = "RETEST";
+                dgv_testResult.Columns[2].MinimumWidth = 320;
 
                 dgv_testResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
                 dgv_testResult.MultiSelect = false;
@@ -7046,11 +7048,14 @@ namespace ABI_POC_PCR
                 dgv_interpretation_howTo.SelectionMode = DataGridViewSelectionMode.CellSelect;
                 dgv_interpretation_howTo.MultiSelect = false;
 
-                string[] Ct = { "COVID", "", "", "", "", "", "" };
-                string[] result = { "FLU", "", "", "", "", "", "" };
+                string[] covid = { "COVID", "+", "+", "+", "", "", "" };
+                string[] neg = { "NEG", "-", "-", "+", "", "", "" };
+                string[] again = { "RETEST", "-", "+", "-" };
+                
+                dgv_interpretation_howTo.Rows.Add(covid);
+                dgv_interpretation_howTo.Rows.Add(neg);
+                dgv_interpretation_howTo.Rows.Add(again);
 
-                dgv_interpretation_howTo.Rows.Add(Ct);
-                dgv_interpretation_howTo.Rows.Add(result);
 
                 int rowCnt = dgv_interpretation_howTo.Rows.GetRowCount(DataGridViewElementStates.Visible);
 
@@ -7061,8 +7066,6 @@ namespace ABI_POC_PCR
                     dgv_interpretation_howTo.Rows.RemoveAt(0);
                     //}
                 }
-
-
             }
             else if (sm.testName == "TB")
             {
@@ -7160,39 +7163,82 @@ namespace ABI_POC_PCR
 
         public void update_analytic_result()
         {
-            //MTC
-            if(dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
-                && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value)
+            if(sm.testName == "TB")
             {
-                dgv_testResult.Rows[0].Cells[0].Value = "+";
-            }
-            else
-            {
-                dgv_testResult.Rows[0].Cells[0].Value = "-";
+
+                //MTC
+                if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+                    && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value)
+                {
+                    dgv_testResult.Rows[0].Cells[0].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[0].Value = "-";
+                }
+
+                //NTM
+                if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+                    && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
+                    && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "-";
+                }
+
+                // N/A
+                if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
+                   && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
+                   && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
+                {
+                    dgv_testResult.Rows[0].Cells[2].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
             }
 
-            //NTM
-            if(dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
-                && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
-                && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
+            if(sm.testName == "COVID")
             {
-                dgv_testResult.Rows[0].Cells[1].Value = "+";
-            }
-            else
-            {
-                dgv_testResult.Rows[0].Cells[1].Value = "-";
-            }
+                //COVID
+                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+"
+                    && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+"
+                    && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[0].Cells[0].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[0].Value = "-";
+                }
 
-            // N/A
-            if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
-               && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value
-               && dgv_interpretation_howTo.Rows[1].Cells[1].Value == dgv_interpretation_ct.Rows[4].Cells[2].Value)
-            {
-                dgv_testResult.Rows[0].Cells[2].Value = "+";
-            }
-            else
-            {
-                dgv_testResult.Rows[0].Cells[2].Value = "-";
+                //NEG
+                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "-";
+                }
+
+                //RETEST
+                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
+                    || (dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
+                    || (dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[0].Cells[2].Value = "+";
+                }
+                else
+                {
+                    dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+
+
             }
 
         }
@@ -7275,6 +7321,78 @@ namespace ABI_POC_PCR
             Interpretation_Load();
         }
 
+        public void get_interpretation_info()
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\" + sm.testName + "_interpretation.csv";
+
+            string[] lines = File.ReadAllLines(fileName);
+            string[] result;
+
+            int readNum = 1;
+            string temp = "";
+
+            //column header 
+            temp = lines[0];
+            char[] sep = { ',' };
+            result = temp.Split(sep);
+
+            for (int j = 0; j < result.Length; j++)
+            {
+                sm.dyeArr[j] = result[j];
+            }
+                       
+
+            for (int i = 1; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                result = temp.Split(sep);
+
+                for (int j = 0; j < result.Length; j++)
+                {
+
+                    if (j == 0)
+                    {
+                        sm.diagnosisArr[i - 1] = result[j];
+                    }
+                    else
+                    {
+                        sm.howToInterpretationArr[i - 1, j - 1] = result[j];
+                    }
+                }
+                
+            }
+
+            // get result each dye 
+
+            System.IO.DirectoryInfo di2 = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di2.Exists) di2.Create();
+
+            string fileName2 = di2.ToString() + "\\Result.csv";
+
+            string[] lines2 = File.ReadAllLines(fileName2);
+            string[] result2 = new string[16];
+
+            int readNum2 = 1;
+            string temp2 = "";
+            for (int i = 0; i < lines2.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp2 = lines2[i];
+
+                char[] sep2 = { ',' };
+
+                result2 = temp2.Split(sep2);
+                for (int j = 0; j < result2.Length; j++)
+                {
+                    sm.resultArr[j] = result2[j];
+                }
+
+            }
+        }
+
         public void Interpretation_Load()
         {
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
@@ -7287,13 +7405,11 @@ namespace ABI_POC_PCR
 
             int readNum = 1;
             string temp = "";
-            
+
             for (int i = 1; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
             {
                 temp = lines[i];
-
                 char[] sep = { ',' };
-
                 result = temp.Split(sep);
                                 
                 if (dgv_interpretation_howTo.Rows.GetRowCount(DataGridViewElementStates.Visible) > 1)
@@ -7317,7 +7433,7 @@ namespace ABI_POC_PCR
             {
                 di.Create();
             }
-            string fileName = di.ToString() + "\\Result.info";
+            string fileName = di.ToString() + "\\Result.csv";
 
             // 기존 파일 삭제
             FileInfo fileDel = new FileInfo(fileName);
@@ -7344,7 +7460,7 @@ namespace ABI_POC_PCR
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
             if (!di.Exists) di.Create();
 
-            string fileName = di.ToString() + "\\Result.info";
+            string fileName = di.ToString() + "\\Result.csv";
 
             string[] lines = File.ReadAllLines(fileName);
             string[] result = new string[16];
@@ -7364,6 +7480,17 @@ namespace ABI_POC_PCR
             {
                 dgv_interpretation_ct.Rows[i].Cells[2].Value = result[i];
             }
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            get_interpretation_info();
+       
+        }
+
+        private void tp_engineer_Click(object sender, EventArgs e)
+        {
+
         }
     }
     #endregion

@@ -55,6 +55,11 @@ namespace ABI_POC_PCR
 
         private static SharedMemory _instance = null;
 
+        public string[,] howToInterpretationArr = new string[10, 10];
+        public string[] dyeArr = new string[16];
+        public string[] resultArr = new string[16];
+        public string[] diagnosisArr = new string[10];
+
         public static SharedMemory GetInstance()
         {
             if (_instance == null)
