@@ -163,7 +163,6 @@
             this.btn_save_interpretation = new System.Windows.Forms.Button();
             this.btn_SigmaScale_Load = new System.Windows.Forms.Button();
             this.btn_SigmaScale_Save = new System.Windows.Forms.Button();
-            this.pnl_interpretation = new System.Windows.Forms.Panel();
             this.tb_Test_Interpretation = new System.Windows.Forms.TextBox();
             this.btnDiagnosisFindAndLoad = new System.Windows.Forms.Button();
             this.btnDiagnosisLoad = new System.Windows.Forms.Button();
@@ -177,27 +176,6 @@
             this.dgvtbc_result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbc_Ct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_interpretation_howTo = new System.Windows.Forms.DataGridView();
-            this.dgv_diagnosis_FLU = new System.Windows.Forms.DataGridView();
-            this.dgv_diagnosis_COVID = new System.Windows.Forms.DataGridView();
-            this.Column52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column59 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column62 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column63 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column64 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column65 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column66 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column67 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column68 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column69 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column70 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cb_Test_Interpretation = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tp_pcr_options = new System.Windows.Forms.TabPage();
@@ -364,6 +342,7 @@
             this.dataGridViewTextBoxColumn177 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn178 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tp_simulation = new System.Windows.Forms.TabPage();
+            this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
@@ -777,8 +756,16 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button23 = new System.Windows.Forms.Button();
+            this.tp_simulation2 = new System.Windows.Forms.TabPage();
+            this.tb_HowToInterpretation = new System.Windows.Forms.TextBox();
+            this.btn_Save_Json = new System.Windows.Forms.Button();
+            this.btn_load_Json = new System.Windows.Forms.Button();
+            this.tb_HowToInterpretate = new System.Windows.Forms.TextBox();
             this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button24 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -799,8 +786,6 @@
             this.tp_Interpretation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_interpretation_ct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_interpretation_howTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_FLU)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_COVID)).BeginInit();
             this.tp_pcr_options.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CycleForBaseCalculation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_opticMeasurementCycleSelection)).BeginInit();
@@ -860,6 +845,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tp_simulation2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_Port_Main
@@ -1149,6 +1135,7 @@
             this.tabControl_Engineer.Controls.Add(this.tp_IOSetting);
             this.tabControl_Engineer.Controls.Add(this.tp_base_UserSelection);
             this.tabControl_Engineer.Controls.Add(this.tp_simulation);
+            this.tabControl_Engineer.Controls.Add(this.tp_simulation2);
             this.tabControl_Engineer.Location = new System.Drawing.Point(56, 24);
             this.tabControl_Engineer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabControl_Engineer.Multiline = true;
@@ -1962,7 +1949,6 @@
             this.tp_Interpretation.Controls.Add(this.btn_save_interpretation);
             this.tp_Interpretation.Controls.Add(this.btn_SigmaScale_Load);
             this.tp_Interpretation.Controls.Add(this.btn_SigmaScale_Save);
-            this.tp_Interpretation.Controls.Add(this.pnl_interpretation);
             this.tp_Interpretation.Controls.Add(this.tb_Test_Interpretation);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisFindAndLoad);
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisLoad);
@@ -1972,8 +1958,6 @@
             this.tp_Interpretation.Controls.Add(this.btnDiagnosisSave);
             this.tp_Interpretation.Controls.Add(this.dgv_interpretation_ct);
             this.tp_Interpretation.Controls.Add(this.dgv_interpretation_howTo);
-            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_FLU);
-            this.tp_Interpretation.Controls.Add(this.dgv_diagnosis_COVID);
             this.tp_Interpretation.Controls.Add(this.cb_Test_Interpretation);
             this.tp_Interpretation.Controls.Add(this.label5);
             this.tp_Interpretation.Location = new System.Drawing.Point(4, 34);
@@ -2010,7 +1994,7 @@
             this.btn_load_interpretation.Name = "btn_load_interpretation";
             this.btn_load_interpretation.Size = new System.Drawing.Size(256, 35);
             this.btn_load_interpretation.TabIndex = 48;
-            this.btn_load_interpretation.Text = "Load Interpretation (JSON)";
+            this.btn_load_interpretation.Text = "Load Interpretation (.CSV)";
             this.btn_load_interpretation.UseVisualStyleBackColor = true;
             this.btn_load_interpretation.Click += new System.EventHandler(this.btn_load_interpretation_Click);
             // 
@@ -2020,7 +2004,7 @@
             this.btn_save_interpretation.Name = "btn_save_interpretation";
             this.btn_save_interpretation.Size = new System.Drawing.Size(267, 35);
             this.btn_save_interpretation.TabIndex = 47;
-            this.btn_save_interpretation.Text = "Save Interpretation (JSON)";
+            this.btn_save_interpretation.Text = "Save Interpretation (.CSV)";
             this.btn_save_interpretation.UseVisualStyleBackColor = true;
             this.btn_save_interpretation.Click += new System.EventHandler(this.btn_save_interpretation_Click);
             // 
@@ -2043,13 +2027,6 @@
             this.btn_SigmaScale_Save.Text = "Sigma Scale Save";
             this.btn_SigmaScale_Save.UseVisualStyleBackColor = true;
             this.btn_SigmaScale_Save.Click += new System.EventHandler(this.btn_SigmaScale_Save_Click);
-            // 
-            // pnl_interpretation
-            // 
-            this.pnl_interpretation.Location = new System.Drawing.Point(377, 763);
-            this.pnl_interpretation.Name = "pnl_interpretation";
-            this.pnl_interpretation.Size = new System.Drawing.Size(84, 21);
-            this.pnl_interpretation.TabIndex = 44;
             // 
             // tb_Test_Interpretation
             // 
@@ -2170,142 +2147,9 @@
             this.dgv_interpretation_howTo.ReadOnly = true;
             this.dgv_interpretation_howTo.RowHeadersVisible = false;
             this.dgv_interpretation_howTo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(1080, 530);
+            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(1083, 533);
             this.dgv_interpretation_howTo.TabIndex = 6;
-            // 
-            // dgv_diagnosis_FLU
-            // 
-            this.dgv_diagnosis_FLU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_diagnosis_FLU.Location = new System.Drawing.Point(42, 763);
-            this.dgv_diagnosis_FLU.Name = "dgv_diagnosis_FLU";
-            this.dgv_diagnosis_FLU.Size = new System.Drawing.Size(312, 37);
-            this.dgv_diagnosis_FLU.TabIndex = 8;
-            this.dgv_diagnosis_FLU.Visible = false;
-            // 
-            // dgv_diagnosis_COVID
-            // 
-            this.dgv_diagnosis_COVID.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_diagnosis_COVID.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column52,
-            this.Column53,
-            this.Column54,
-            this.Column55,
-            this.Column56,
-            this.Column57,
-            this.Column58,
-            this.Column59,
-            this.Column60,
-            this.Column61,
-            this.Column62,
-            this.Column63,
-            this.Column64,
-            this.Column65,
-            this.Column66,
-            this.Column67,
-            this.Column68,
-            this.Column69,
-            this.Column70});
-            this.dgv_diagnosis_COVID.Location = new System.Drawing.Point(558, 763);
-            this.dgv_diagnosis_COVID.Name = "dgv_diagnosis_COVID";
-            this.dgv_diagnosis_COVID.RowHeadersVisible = false;
-            this.dgv_diagnosis_COVID.Size = new System.Drawing.Size(193, 28);
-            this.dgv_diagnosis_COVID.TabIndex = 7;
-            this.dgv_diagnosis_COVID.Visible = false;
-            // 
-            // Column52
-            // 
-            this.Column52.HeaderText = "";
-            this.Column52.Name = "Column52";
-            // 
-            // Column53
-            // 
-            this.Column53.HeaderText = "";
-            this.Column53.Name = "Column53";
-            // 
-            // Column54
-            // 
-            this.Column54.HeaderText = "";
-            this.Column54.Name = "Column54";
-            // 
-            // Column55
-            // 
-            this.Column55.HeaderText = "";
-            this.Column55.Name = "Column55";
-            // 
-            // Column56
-            // 
-            this.Column56.HeaderText = "";
-            this.Column56.Name = "Column56";
-            // 
-            // Column57
-            // 
-            this.Column57.HeaderText = "";
-            this.Column57.Name = "Column57";
-            // 
-            // Column58
-            // 
-            this.Column58.HeaderText = "";
-            this.Column58.Name = "Column58";
-            // 
-            // Column59
-            // 
-            this.Column59.HeaderText = "";
-            this.Column59.Name = "Column59";
-            // 
-            // Column60
-            // 
-            this.Column60.HeaderText = "";
-            this.Column60.Name = "Column60";
-            // 
-            // Column61
-            // 
-            this.Column61.HeaderText = "";
-            this.Column61.Name = "Column61";
-            // 
-            // Column62
-            // 
-            this.Column62.HeaderText = "";
-            this.Column62.Name = "Column62";
-            // 
-            // Column63
-            // 
-            this.Column63.HeaderText = "";
-            this.Column63.Name = "Column63";
-            // 
-            // Column64
-            // 
-            this.Column64.HeaderText = "";
-            this.Column64.Name = "Column64";
-            // 
-            // Column65
-            // 
-            this.Column65.HeaderText = "";
-            this.Column65.Name = "Column65";
-            // 
-            // Column66
-            // 
-            this.Column66.HeaderText = "";
-            this.Column66.Name = "Column66";
-            // 
-            // Column67
-            // 
-            this.Column67.HeaderText = "";
-            this.Column67.Name = "Column67";
-            // 
-            // Column68
-            // 
-            this.Column68.HeaderText = "";
-            this.Column68.Name = "Column68";
-            // 
-            // Column69
-            // 
-            this.Column69.HeaderText = "";
-            this.Column69.Name = "Column69";
-            // 
-            // Column70
-            // 
-            this.Column70.HeaderText = "";
-            this.Column70.Name = "Column70";
+            this.dgv_interpretation_howTo.Visible = false;
             // 
             // cb_Test_Interpretation
             // 
@@ -3923,6 +3767,16 @@
             this.tp_simulation.Text = "    simulation    ";
             this.tp_simulation.UseVisualStyleBackColor = true;
             // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(921, 557);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(182, 60);
+            this.button23.TabIndex = 39;
+            this.button23.Text = "Auto Diagnosis";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
             // button22
             // 
             this.button22.Location = new System.Drawing.Point(655, 484);
@@ -4877,7 +4731,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 546);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 492);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5332,7 +5186,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 425);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 371);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5787,7 +5641,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 246);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 192);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6252,7 +6106,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, 46);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -8);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8196,15 +8050,58 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button23
+            // tp_simulation2
             // 
-            this.button23.Location = new System.Drawing.Point(921, 557);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(182, 60);
-            this.button23.TabIndex = 39;
-            this.button23.Text = "Auto Diagnosis";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
+            this.tp_simulation2.Controls.Add(this.button24);
+            this.tp_simulation2.Controls.Add(this.label38);
+            this.tp_simulation2.Controls.Add(this.textBox2);
+            this.tp_simulation2.Controls.Add(this.label37);
+            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretate);
+            this.tp_simulation2.Controls.Add(this.btn_load_Json);
+            this.tp_simulation2.Controls.Add(this.btn_Save_Json);
+            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretation);
+            this.tp_simulation2.Location = new System.Drawing.Point(4, 34);
+            this.tp_simulation2.Name = "tp_simulation2";
+            this.tp_simulation2.Size = new System.Drawing.Size(1752, 812);
+            this.tp_simulation2.TabIndex = 6;
+            this.tp_simulation2.Text = "    simulation2    ";
+            this.tp_simulation2.UseVisualStyleBackColor = true;
+            // 
+            // tb_HowToInterpretation
+            // 
+            this.tb_HowToInterpretation.Location = new System.Drawing.Point(23, 61);
+            this.tb_HowToInterpretation.Multiline = true;
+            this.tb_HowToInterpretation.Name = "tb_HowToInterpretation";
+            this.tb_HowToInterpretation.Size = new System.Drawing.Size(693, 533);
+            this.tb_HowToInterpretation.TabIndex = 52;
+            // 
+            // btn_Save_Json
+            // 
+            this.btn_Save_Json.Location = new System.Drawing.Point(452, 17);
+            this.btn_Save_Json.Name = "btn_Save_Json";
+            this.btn_Save_Json.Size = new System.Drawing.Size(264, 38);
+            this.btn_Save_Json.TabIndex = 53;
+            this.btn_Save_Json.Text = "Save Json file";
+            this.btn_Save_Json.UseVisualStyleBackColor = true;
+            this.btn_Save_Json.Click += new System.EventHandler(this.btn_Save_Json_Click);
+            // 
+            // btn_load_Json
+            // 
+            this.btn_load_Json.Location = new System.Drawing.Point(452, 611);
+            this.btn_load_Json.Name = "btn_load_Json";
+            this.btn_load_Json.Size = new System.Drawing.Size(264, 38);
+            this.btn_load_Json.TabIndex = 54;
+            this.btn_load_Json.Text = "Load Json file";
+            this.btn_load_Json.UseVisualStyleBackColor = true;
+            this.btn_load_Json.Click += new System.EventHandler(this.btn_load_Json_Click);
+            // 
+            // tb_HowToInterpretate
+            // 
+            this.tb_HowToInterpretate.Location = new System.Drawing.Point(23, 655);
+            this.tb_HowToInterpretate.Multiline = true;
+            this.tb_HowToInterpretate.Name = "tb_HowToInterpretate";
+            this.tb_HowToInterpretate.Size = new System.Drawing.Size(693, 154);
+            this.tb_HowToInterpretate.TabIndex = 55;
             // 
             // progressBar_step
             // 
@@ -8218,6 +8115,41 @@
             this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar_step.TabIndex = 11;
             this.progressBar_step.Value = 50;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(18, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(171, 25);
+            this.label37.TabIndex = 56;
+            this.label37.Text = "How To Diagnosis";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(854, 28);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(66, 25);
+            this.label38.TabIndex = 58;
+            this.label38.Text = "Result";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(859, 61);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(693, 533);
+            this.textBox2.TabIndex = 57;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(1288, 17);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(264, 38);
+            this.button24.TabIndex = 59;
+            this.button24.Text = "Save Json file";
+            this.button24.UseVisualStyleBackColor = true;
             // 
             // MainFrm
             // 
@@ -8271,8 +8203,6 @@
             this.tp_Interpretation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_interpretation_ct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_interpretation_howTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_FLU)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_diagnosis_COVID)).EndInit();
             this.tp_pcr_options.ResumeLayout(false);
             this.tp_pcr_options.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CycleForBaseCalculation)).EndInit();
@@ -8355,6 +8285,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.tp_simulation2.ResumeLayout(false);
+            this.tp_simulation2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -8717,8 +8649,6 @@
         private System.Windows.Forms.DataGridView dgv_interpretation_howTo;
         private System.Windows.Forms.ComboBox cb_Test_Interpretation;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dgv_diagnosis_FLU;
-        private System.Windows.Forms.DataGridView dgv_diagnosis_COVID;
         private System.Windows.Forms.DataGridView dgv_interpretation_ct;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -8916,25 +8846,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column52;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column53;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column54;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column55;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column56;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column57;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column58;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column59;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column60;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column61;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column62;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column63;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column64;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column65;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column66;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column67;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column68;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column69;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column70;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox3;
@@ -9050,7 +8961,6 @@
         private System.Windows.Forms.DataGridView dgvCtTable2;
         private System.Windows.Forms.DataGridView dgvCtTable3;
         private System.Windows.Forms.DataGridView dgvCtTable4;
-        private System.Windows.Forms.Panel pnl_interpretation;
         private System.Windows.Forms.Button chkbox_use_deviation;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Fluorescence;
@@ -9079,6 +8989,15 @@
         private System.Windows.Forms.Button ResultLoad;
         private System.Windows.Forms.Button btnResultSave;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.TabPage tp_simulation2;
+        private System.Windows.Forms.Button btn_load_Json;
+        private System.Windows.Forms.Button btn_Save_Json;
+        private System.Windows.Forms.TextBox tb_HowToInterpretation;
+        private System.Windows.Forms.TextBox tb_HowToInterpretate;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label37;
     }
 }
 

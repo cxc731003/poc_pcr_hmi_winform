@@ -12,6 +12,7 @@ using ABI_POC_PCR.GraphPlot;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Data;
+using System.Net.Json;
 
 //public class ProgressBarEx : ProgressBar { 
 //    private SolidBrush brush = null; 
@@ -358,8 +359,7 @@ namespace ABI_POC_PCR
             cb_Test_Interpretation.SelectedIndex = 0;
 
             dgv_interpretation_howTo.Visible = true;
-            dgv_diagnosis_COVID.Visible = false;
-            dgv_diagnosis_FLU.Visible = false;
+        
 
             initDiagnosisCT();
             initBaseValue();
@@ -2226,7 +2226,7 @@ namespace ABI_POC_PCR
                 {
                     double tempCtline = Convert.ToDouble(MEASURED_DATA[i, (int)tempCt - 1]);
                     double delta = Math.Abs(((Convert.ToDouble(MEASURED_DATA[i, (int)tempCt]) - tempCtline)) / 100);
-                    delta *= scaleFactor[8];
+                    delta *= scaleFactor[i];
                     Plotter.CtCycles[i] = tempCt;
                     for (int k = 0; k < 100; k++)
                     {
@@ -2327,10 +2327,10 @@ namespace ABI_POC_PCR
 
                 CtCyclesCalculation();
 
-                drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
-                drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
-                drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
-                drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
+                drawDataGridView(dgvCtTable1, Plotter.CtCycles[0]+1, Plotter.CtCycles[1]+1, Plotter.CtCycles[2]+1, Plotter.CtCycles[3]+1);
+                drawDataGridView(dgvCtTable2, Plotter.CtCycles[4]+1, Plotter.CtCycles[5]+1, Plotter.CtCycles[6]+1, Plotter.CtCycles[7]+1);
+                drawDataGridView(dgvCtTable3, Plotter.CtCycles[8]+1, Plotter.CtCycles[9]+1, Plotter.CtCycles[10]+1, Plotter.CtCycles[11]+1);
+                drawDataGridView(dgvCtTable4, Plotter.CtCycles[12]+1, Plotter.CtCycles[13]+1, Plotter.CtCycles[14]+1, Plotter.CtCycles[15]+1);
 
                 setCtValueToDGV(dgv_interpretation_ct,Plotter.CtCycles);//setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
                 setCtResultToDGV(dgv_interpretation_ct);
@@ -2950,8 +2950,6 @@ namespace ABI_POC_PCR
             resetTesterInfo();
             resetCartridgeInfo();
            
-      
-
             presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
             presetDataGrid_ct(dgv_opticDatum_tube3, chamberName[2]);
@@ -5396,6 +5394,9 @@ namespace ABI_POC_PCR
             // 관련 변수들 초기화
             _reset_Process();
 
+            //last data update 
+            sm.DataUpdateFlag = true;
+
         }
 
 
@@ -6239,23 +6240,18 @@ namespace ABI_POC_PCR
             if(cb_Test_Interpretation.SelectedIndex == 0)
             {
                 dgv_interpretation_howTo.Visible = true;
-                dgv_diagnosis_COVID.Visible = false;
-                dgv_diagnosis_FLU.Visible = false;
+            
                 selectedDgv = dgv_interpretation_howTo;
             }
             else if(cb_Test_Interpretation.SelectedIndex == 1)
             {
                 dgv_interpretation_howTo.Visible = false;
-                dgv_diagnosis_COVID.Visible = true;
-                dgv_diagnosis_FLU.Visible = false;
-
-                selectedDgv = dgv_diagnosis_COVID;
+             
             }
             else if(cb_Test_Interpretation.SelectedIndex == 2)
             {
                 dgv_interpretation_howTo.Visible = false;
-                dgv_diagnosis_COVID.Visible = false;
-                dgv_diagnosis_FLU.Visible = true;
+              
             }
             
         }
@@ -6285,7 +6281,7 @@ namespace ABI_POC_PCR
             //OpenFileDialog dlg = new OpenFileDialog();
             //dlg.OpenFile(); 
           
-            selectedDgv = dgv_diagnosis_COVID;
+         
         }
 
         private void btnDiagnosisNew_Click(object sender, EventArgs e)
@@ -6644,10 +6640,10 @@ namespace ABI_POC_PCR
         {
             CtCyclesCalculation();
         
-            drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
-            drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
-            drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
-            drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
+            drawDataGridView(dgvCtTable1, Plotter.CtCycles[0]+1, Plotter.CtCycles[1]+1, Plotter.CtCycles[2]+1, Plotter.CtCycles[3]+1);
+            drawDataGridView(dgvCtTable2, Plotter.CtCycles[4]+1, Plotter.CtCycles[5]+1, Plotter.CtCycles[6]+1, Plotter.CtCycles[7]+1);
+            drawDataGridView(dgvCtTable3, Plotter.CtCycles[8]+1, Plotter.CtCycles[9]+1, Plotter.CtCycles[10]+1, Plotter.CtCycles[11]+1);
+            drawDataGridView(dgvCtTable4, Plotter.CtCycles[12]+1, Plotter.CtCycles[13]+1, Plotter.CtCycles[14]+1, Plotter.CtCycles[15]+1);
         }
 
         private void dgvCtTable3_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -7255,12 +7251,19 @@ namespace ABI_POC_PCR
             init_Analytic_Result();
         }
 
+        //현재 EXE 파일이 생성 되는 폴더 위치
+        
         private void btn_save_interpretation_Click(object sender, EventArgs e)
         {
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            
 
+            //CSV version
+            
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
             string fileName = di.ToString() + "\\" + sm.testName + "_interpretation.csv";
             Save_Csv_Interpretation(fileName, dgv_interpretation_howTo, true);//Save_Csv(fileName, dataGridView_Manage, true);
+            
+
         }
 
         private void Save_Csv_Interpretation(string fileName, DataGridView dgv, bool header)
@@ -7490,6 +7493,101 @@ namespace ABI_POC_PCR
 
         private void tp_engineer_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+      
+       
+
+        private void btn_Save_Json_Click(object sender, EventArgs e)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\data");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            string fileName = di.ToString() + "\\HowToDiagnosis.json";
+
+            // 기존 파일 삭제
+            FileInfo fileDel = new FileInfo(fileName);
+            if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
+
+            //Read interpretation csv file----------------------------------------------------------------
+            string fileName2 = di.ToString() + "\\" + sm.testName + "_interpretation.csv";
+
+            string[] lines2 = File.ReadAllLines(fileName2);
+            string[] result2;
+
+            int readNum2 = 1;
+            string temp2 = "";
+
+            for (int i = 1; i < lines2.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp2 = lines2[i];
+                //char[] sep = { ',' };
+                //result2 = temp2.Split(sep);
+            }
+            //--------------------------------------------------------------
+
+            JsonObjectCollection root = new JsonObjectCollection();
+            JsonArrayCollection[] diagnosis;// = new JsonArrayCollection[16];
+
+            temp2 = lines2[0];
+            char[] sep = { ',' };
+            result2 = temp2.Split(sep);
+
+            for(int i = 0; i < result2.Length; i++)
+            {
+                //diagnosis[i] = new JsonArrayCollection(result2[i]);
+            }
+
+            //JsonArrayCollection diagnosis = new JsonArrayCollection("MTC");
+
+
+            JsonObjectCollection sequence = new JsonObjectCollection();
+            sequence.Add(new JsonStringValue("FAM1", "+"));
+            sequence.Add(new JsonStringValue("HEX1", "+"));
+            sequence.Add(new JsonStringValue("CY51", "+/-"));
+            //diagnosis.Add(sequence);
+            //root.Add(diagnosis);
+
+            string strRoot = root.ToString();
+            tb_HowToInterpretation.Text = strRoot;
+            System.IO.File.WriteAllText(di.ToString() + "\\HowToDiagnosis.json", strRoot);
+            //System.IO.File.WriteAllText(@"\Data"+"\\HowToDiagnosis.json", strRoot);
+        }
+
+        private void btn_load_Json_Click(object sender, EventArgs e)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\data");
+            if (!di.Exists)
+            {
+                return; //di.Create();
+            }
+            string fileName = di.ToString() + "\\HowToDiagnosis.json";
+
+            string strReturnValue = System.IO.File.ReadAllText(fileName);
+
+            if (strReturnValue == "")
+            {
+                MessageBox.Show("load failure..."); return;
+            }
+
+            JsonTextParser jtr = new JsonTextParser();
+            JsonObject jo = jtr.Parse(strReturnValue);
+            JsonObjectCollection jac = (JsonObjectCollection)jo;
+            JsonArrayCollection arr1 = jac["MTC"] as JsonArrayCollection;
+            //JsonArrayCollection arr2 = jac["Test_Info"] as JsonArrayCollection;
+            tb_HowToInterpretate.Text = "";
+
+            foreach (JsonObjectCollection joc in arr1)
+            {
+                tb_HowToInterpretate.Text += "MTC" + System.Environment.NewLine;
+                tb_HowToInterpretate.Text += "FAM1: " + joc["FAM1"].GetValue().ToString() + System.Environment.NewLine;
+                tb_HowToInterpretate.Text += "HEX1: " + joc["HEX1"].GetValue().ToString() + System.Environment.NewLine;
+                tb_HowToInterpretate.Text += "CY51: " + joc["CY51"].GetValue().ToString() + System.Environment.NewLine;
+            }
 
         }
     }
