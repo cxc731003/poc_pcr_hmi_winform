@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using ABI_POC_PCR.SerialComm;
 using System.Threading;
+
 using System.Threading.Tasks;
 using ScottPlot;
 using ABI_POC_PCR.GraphPlot;
@@ -282,8 +283,14 @@ namespace ABI_POC_PCR
             cmd_dic.Add(":PRECOND_KEEPING_TIME_MIN", "");
 
             cmd_dic.Add(":RT_PRE_COND_SETPOINT", "");
-            cmd_dic.Add("RT_PRECOND_KEEPING_TIME_MIN", "");
+            cmd_dic.Add(":RT_PRECOND_KEEPING_TIME_MIN", "");
 
+            cmd_dic.Add(":OPTIC_CURRENT_FAM", "");
+            cmd_dic.Add(":OPTIC_CURRENT_ROX", "");
+            cmd_dic.Add(":OPTIC_CURRENT_HEX", "");
+            cmd_dic.Add(":OPTIC_CURRENT_CY5", "");
+
+            
             serial.ReceivedEvent += GetSerialString;
             serial.ReceivedPacketEvent += RxPacket_CallBack;
 
@@ -327,7 +334,9 @@ namespace ABI_POC_PCR
         private void Form1_Load(object sender, EventArgs e)
         {
             //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
-            
+            init_Test_Result();
+
+
             updateDeviceStatus("Stop");
 
             sm.testName = "COVID";
@@ -802,22 +811,22 @@ namespace ABI_POC_PCR
             //dataGridView5.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             string[,] FluoresenceValuesOne = new string[Plotter.DYE_CNT * Plotter.CH_CNT, Plotter.COL_CNT + 1];
-            FluoresenceValuesOne[0, 0] = "FAM1";
-            FluoresenceValuesOne[1, 0] = "ROX1";
-            FluoresenceValuesOne[2, 0] = "HEX1";
-            FluoresenceValuesOne[3, 0] = "CY51";
-            FluoresenceValuesOne[4, 0] = "FAM2";
-            FluoresenceValuesOne[5, 0] = "ROX2";
-            FluoresenceValuesOne[6, 0] = "HEX2";
-            FluoresenceValuesOne[7, 0] = "CY52";
-            FluoresenceValuesOne[8, 0] = "FAM3";
-            FluoresenceValuesOne[9, 0] = "ROX3";
-            FluoresenceValuesOne[10, 0] = "HEX3";
-            FluoresenceValuesOne[11, 0] = "CY53";
-            FluoresenceValuesOne[12, 0] = "FAM4";
-            FluoresenceValuesOne[13, 0] = "ROX4";
-            FluoresenceValuesOne[14, 0] = "HEX4";
-            FluoresenceValuesOne[15, 0] = "CY54";
+            FluoresenceValuesOne[0, 0] = "HEX1";
+            FluoresenceValuesOne[1, 0] = "CY51";
+            FluoresenceValuesOne[2, 0] = "FAM1";
+            FluoresenceValuesOne[3, 0] = "HEX1";
+            FluoresenceValuesOne[4, 0] = "HEX2";
+            FluoresenceValuesOne[5, 0] = "CY52";
+            FluoresenceValuesOne[6, 0] = "FAM2";
+            FluoresenceValuesOne[7, 0] = "HEX2";
+            FluoresenceValuesOne[8, 0] = "HEX3";
+            FluoresenceValuesOne[9, 0] = "CY53";
+            FluoresenceValuesOne[10, 0] = "FAM3";
+            FluoresenceValuesOne[11, 0] = "HEX3";
+            FluoresenceValuesOne[12, 0] = "HEX4";
+            FluoresenceValuesOne[13, 0] = "CY54";
+            FluoresenceValuesOne[14, 0] = "FAM4";
+            FluoresenceValuesOne[15, 0] = "HEX4";
 
             string[] temp = new string[Plotter.COL_CNT + 1];
             int[] iTemp = new int[Plotter.COL_CNT + 1];
@@ -958,22 +967,22 @@ namespace ABI_POC_PCR
             //dataGridView5.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
 
             string[,] FluoresenceValuesOne = new string[Plotter.DYE_CNT * Plotter.CH_CNT, Plotter.COL_CNT + 1];
-            FluoresenceValuesOne[0, 0] = "FAM1";
-            FluoresenceValuesOne[1, 0] = "ROX1";
-            FluoresenceValuesOne[2, 0] = "HEX1";
-            FluoresenceValuesOne[3, 0] = "CY51";
-            FluoresenceValuesOne[4, 0] = "FAM2";
-            FluoresenceValuesOne[5, 0] = "ROX2";
-            FluoresenceValuesOne[6, 0] = "HEX2";
-            FluoresenceValuesOne[7, 0] = "CY52";
-            FluoresenceValuesOne[8, 0] = "FAM3";
-            FluoresenceValuesOne[9, 0] = "ROX3";
-            FluoresenceValuesOne[10, 0] = "HEX3";
-            FluoresenceValuesOne[11, 0] = "CY53";
-            FluoresenceValuesOne[12, 0] = "FAM4";
-            FluoresenceValuesOne[13, 0] = "ROX4";
-            FluoresenceValuesOne[14, 0] = "HEX4";
-            FluoresenceValuesOne[15, 0] = "CY54";
+            FluoresenceValuesOne[0, 0] = "HEX1";
+            FluoresenceValuesOne[1, 0] = "CY51";
+            FluoresenceValuesOne[2, 0] = "FAM1";
+            FluoresenceValuesOne[3, 0] = "HEX1";
+            FluoresenceValuesOne[4, 0] = "HEX2";
+            FluoresenceValuesOne[5, 0] = "CY52";
+            FluoresenceValuesOne[6, 0] = "FAM2";
+            FluoresenceValuesOne[7, 0] = "HEX2";
+            FluoresenceValuesOne[8, 0] = "HEX3";
+            FluoresenceValuesOne[9, 0] = "CY53";
+            FluoresenceValuesOne[10, 0] = "FAM3";
+            FluoresenceValuesOne[11, 0] = "HEX3";
+            FluoresenceValuesOne[12, 0] = "HEX4";
+            FluoresenceValuesOne[13, 0] = "CY54";
+            FluoresenceValuesOne[14, 0] = "FAM4";
+            FluoresenceValuesOne[15, 0] = "HEX4";
 
             string[] temp = new string[Plotter.COL_CNT + 1];
             int[] iTemp = new int[Plotter.COL_CNT + 1];
@@ -1740,16 +1749,16 @@ namespace ABI_POC_PCR
             // 데이터 버퍼가 찼는지 확인하고 업데이트
             nTimerNo++;
 
-            if (processStep == 9 && nTimerNo % 100 == 0) // 5초 마다 업데이트
+            if (processStep == 9 && nTimerNo % 500 == 0) // 5초 마다 업데이트
             {
                 updateCycleCount();
 
                 FindCyclesForBaseCalculation();
-
+                sm.DataUpdateFlag = true;
                 updateDataNGraph();
                 nTimerNo = 0;
 
-                if (sm.ProcessEndFlag)
+                if (sm.ProcessEndFlag )// && isOpticDataLastBufferFilled())
                 {
                     sm.ProcessEndFlag = false;
                     _endProcess();
@@ -2242,7 +2251,14 @@ namespace ABI_POC_PCR
                         //}
                     }
 
-                    if (Plotter.CtCycles[i] < 12) Plotter.CtCycles[i] = 0;
+                    if (Plotter.CtCycles[i] < 12)
+                    {
+                        Plotter.CtCycles[i] = 0;
+                    }
+                    else
+                    {
+                        Plotter.CtCycles[i] += 1;
+                    }
                 }
 
             }
@@ -2327,10 +2343,10 @@ namespace ABI_POC_PCR
 
                 CtCyclesCalculation();
 
-                drawDataGridView(dgvCtTable1, Plotter.CtCycles[0]+1, Plotter.CtCycles[1]+1, Plotter.CtCycles[2]+1, Plotter.CtCycles[3]+1);
-                drawDataGridView(dgvCtTable2, Plotter.CtCycles[4]+1, Plotter.CtCycles[5]+1, Plotter.CtCycles[6]+1, Plotter.CtCycles[7]+1);
-                drawDataGridView(dgvCtTable3, Plotter.CtCycles[8]+1, Plotter.CtCycles[9]+1, Plotter.CtCycles[10]+1, Plotter.CtCycles[11]+1);
-                drawDataGridView(dgvCtTable4, Plotter.CtCycles[12]+1, Plotter.CtCycles[13]+1, Plotter.CtCycles[14]+1, Plotter.CtCycles[15]+1);
+                drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
+                drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
+                drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
+                drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
 
                 setCtValueToDGV(dgv_interpretation_ct,Plotter.CtCycles);//setBaseValueToDataGridView(dgv_interpretation_ct, CtlineVal);
                 setCtResultToDGV(dgv_interpretation_ct);
@@ -2424,22 +2440,25 @@ namespace ABI_POC_PCR
             //populate the rows
             //string[] sigmaScale = SigmaScaleLoad();
 
-            string[] row1 = new string[] { "FAM1", "10", "", "" };
-            string[] row2 = new string[] { "ROX1", "10", "", "" };
-            string[] row3 = new string[] { "HEX1", "10", "", "" };
-            string[] row4 = new string[] { "CY51", "10", "", "" };
-            string[] row5 = new string[] { "FAM2", "10", "", "" };
-            string[] row6 = new string[] { "ROX2", "10", "", "" };
-            string[] row7 = new string[] { "HEX2", "10", "", "" };
-            string[] row8 = new string[] { "CY52", "10", "", "" };
-            string[] row9 = new string[] { "FAM3", "10", "", "" };
-            string[] row10 = new string[] { "ROX3", "10", "", "" };
-            string[] row11 = new string[] { "HEX3", "10", "", "" };
-            string[] row12 = new string[] { "CY53", "10", "", "" };
-            string[] row13 = new string[] { "FAM4", "10", "", "" };
-            string[] row14 = new string[] { "ROX4", "10", "", "" };
-            string[] row15 = new string[] { "HEX4", "10", "", "" };
-            string[] row16 = new string[] { "CY54", "10", "", "" };
+            string[] row1 = new string[] { "HEX1", "10", "", "" };
+            string[] row2 = new string[] { "CY51", "10", "", "" };
+            string[] row3 = new string[] { "FAM1", "10", "", "" };
+            string[] row4 = new string[] { "HEX1", "10", "", "" };
+
+            string[] row5 = new string[] { "HEX2", "10", "", "" };
+            string[] row6 = new string[] { "CY52", "10", "", "" };
+            string[] row7 = new string[] { "FAM2", "10", "", "" };
+            string[] row8 = new string[] { "HEX2", "10", "", "" };
+
+            string[] row9 = new string[] { "HEX3", "10", "", "" };
+            string[] row10 = new string[] { "CY53", "10", "", "" };
+            string[] row11 = new string[] { "FAM3", "10", "", "" };
+            string[] row12 = new string[] { "HEX3", "10", "", "" };
+
+            string[] row13 = new string[] { "HEX4", "10", "", "" };
+            string[] row14 = new string[] { "CY54", "10", "", "" };
+            string[] row15 = new string[] { "FAM4", "10", "", "" };
+            string[] row16 = new string[] { "HEX4", "10", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2526,10 +2545,10 @@ namespace ABI_POC_PCR
             double val3 = Math.Truncate(three * 100) / 100;
             double val4 = Math.Truncate(four * 100) / 100;
 
-            dt.Rows.Add("FAM", val1.ToString());
-            dt.Rows.Add("ROX", val2.ToString());
-            dt.Rows.Add("HEX", val3.ToString());
-            dt.Rows.Add("CY5", val4.ToString());
+            dt.Rows.Add("HEX", val1.ToString());
+            dt.Rows.Add("CY5", val2.ToString());
+            dt.Rows.Add("FAM", val3.ToString());
+            dt.Rows.Add("HEX", val4.ToString());
 
             dgv.DataSource = dt;
 
@@ -2949,7 +2968,9 @@ namespace ABI_POC_PCR
             updateTestInfo();
             resetTesterInfo();
             resetCartridgeInfo();
-           
+
+            initAllScottPlot();
+
             presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
             presetDataGrid_ct(dgv_opticDatum_tube3, chamberName[2]);
@@ -3611,16 +3632,31 @@ namespace ABI_POC_PCR
                         }
                     }
                 }
-                else if (lines[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
-                    && processStep == 9
-                    && sm.measured_cnt == -1
-                    && !sm.DataUpdateFlag)
+                else if (lines[i].Contains("pel>Cycledone\n") || lines[i].Contains("pel>Cycledone"))
                 {
                     //_endProcess();
-                    sm.ProcessEndFlag = true;
+                    //sm.ProcessEndFlag = true;
                 }
             }
 
+        }
+
+        public bool isOpticDataLastBufferFilled()
+        {
+            int temp;
+            for (int i = 0; i < 16; i++)
+            {
+                Int32.TryParse(MEASURED_DATA[i, Plotter.COL_CNT-1], out temp);
+                if (  temp > 0 )
+                {
+                    //pass
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void MatchAndFindOpticDataForResultForRealTime()
@@ -3713,7 +3749,7 @@ namespace ABI_POC_PCR
                                 {
                                     //MEASURED_DATA[4 * (iTube_no - 1) + dye_idx, j] = "";
                                 }
-                                sm.DataUpdateFlag = true;
+                                //sm.DataUpdateFlag = true;
 
 
                                 if (iRoutine_cnt > sm.Routine_Cnt
@@ -3736,10 +3772,10 @@ namespace ABI_POC_PCR
                             }
                         }
                     }
-                    else if (allDataArray[i].Contains("pel>Cycledone\n") //lines[i].Contains("g_end_process") 
-                        && processStep == 9
-                        && sm.measured_cnt == -1
-                        && !sm.DataUpdateFlag)
+                    else if (allDataArray[i].Contains("pel>Cycledone\n") || allDataArray[i].Contains("pel>Cycledone")) //lines[i].Contains("g_end_process") 
+                        //&& processStep == 9
+                        //&& sm.measured_cnt == -1
+                        //&& !sm.DataUpdateFlag)
                     {
                         //_endProcess();
                         sm.ProcessEndFlag = true;
@@ -4336,6 +4372,10 @@ namespace ABI_POC_PCR
                     tb_OCDelaySec_Eng.Text = "-";
                     tb_OCHoldSec_Eng.Text = "-";
                     tb_FianlCycle_Eng.Text = "-";
+                    tb_OpticCurrentFAM.Text = "-";
+                    tb_OpticCurrentROX.Text = "-";
+                    tb_OpticCurrentHEX.Text = "-";
+                    tb_OpticCurrentCY5.Text = "-";
 
                     MessageBox.Show("레시피를 삭제하였습니다.", "레시피 삭제 안내", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
@@ -4371,7 +4411,7 @@ namespace ABI_POC_PCR
 
             string buff = tb_RT_PreTemp_Eng.Text + "," +tb_RT_PreHoldSec_Eng.Text + ","  + tb_PreTemp_Eng.Text + "," + tb_PreHoldSec_Eng.Text + "," + tb_1Temp_Eng.Text + "," + tb_1HoldSec_Eng.Text
                     + "," + tb_2Temp_Eng.Text + "," + tb_2HoldSec_Eng.Text + "," + tb_OCDelaySec_Eng.Text + "," + tb_OCHoldSec_Eng.Text
-                    + "," + tb_FianlCycle_Eng.Text;
+                    + "," + tb_FianlCycle_Eng.Text + "," + tb_OpticCurrentFAM.Text + "," + tb_OpticCurrentROX.Text + "," + tb_OpticCurrentHEX.Text + "," + tb_OpticCurrentCY5.Text;
 
             sw.WriteLine(buff);
             sw.Close();
@@ -4412,7 +4452,7 @@ namespace ABI_POC_PCR
             string[] result = temp.Split(sep);
 
 
-            tb_RT_PreTemp_Eng.Text = result[0]; ;
+            tb_RT_PreTemp_Eng.Text = result[0]; 
             tb_RT_PreHoldSec_Eng.Text = result[1];
             tb_PreTemp_Eng.Text = result[2];
             tb_PreHoldSec_Eng.Text = result[3];
@@ -4423,6 +4463,10 @@ namespace ABI_POC_PCR
             tb_OCDelaySec_Eng.Text = result[8];
             tb_OCHoldSec_Eng.Text = result[9];
             tb_FianlCycle_Eng.Text = result[10];
+            tb_OpticCurrentFAM.Text = result[11];
+            tb_OpticCurrentROX.Text = result[12];
+            tb_OpticCurrentHEX.Text = result[13];
+            tb_OpticCurrentCY5.Text = result[14];
         }
 
         private void btn_MCURead_Eng_Click(object sender, EventArgs e)
@@ -4645,7 +4689,11 @@ namespace ABI_POC_PCR
             || tb_2Temp_Eng.Text == "" || tb_2Temp_Eng.Text == "-"
             || tb_PreTemp_Eng.Text == "" || tb_PreTemp_Eng.Text == "-"
             || tb_RT_PreTemp_Eng.Text =="" || tb_RT_PreTemp_Eng.Text == "-"
-            || tb_RT_PreHoldSec_Eng.Text =="" || tb_RT_PreHoldSec_Eng.Text == "-")
+            || tb_RT_PreHoldSec_Eng.Text =="" || tb_RT_PreHoldSec_Eng.Text == "-"
+            || tb_OpticCurrentFAM.Text =="" || tb_OpticCurrentFAM.Text == "-"
+            || tb_OpticCurrentROX.Text =="" || tb_OpticCurrentROX.Text == "-"
+            || tb_OpticCurrentHEX.Text=="" || tb_OpticCurrentHEX.Text =="-"
+            || tb_OpticCurrentCY5.Text=="" || tb_OpticCurrentCY5.Text == "-")
             {
                 MessageBox.Show("설정한 값 중에 전송이 불가능한 값이 있습니다. 모두 숫자여야 합니다.", "설정 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -4667,6 +4715,11 @@ namespace ABI_POC_PCR
 
             cmd_dic[":RT_PRE_COND_SETPOINT"] = tb_RT_PreTemp_Eng.Text;
             cmd_dic[":RT_PRECOND_KEEPING_TIME_MIN"] = tb_RT_PreHoldSec_Eng.Text;
+
+            cmd_dic[":OPTIC_CURRENT_FAM"] = tb_OpticCurrentFAM.Text;
+            cmd_dic[":OPTIC_CURRENT_ROX"] = tb_OpticCurrentROX.Text;
+            cmd_dic[":OPTIC_CURRENT_HEX"] = tb_OpticCurrentHEX.Text;
+            cmd_dic[":OPTIC_CURRENT_CY5"] = tb_OpticCurrentCY5.Text;
 
 
             foreach (String cmd in cmd_dic.Keys)
@@ -4902,7 +4955,6 @@ namespace ABI_POC_PCR
                 if ((!string.IsNullOrEmpty(strData)) && (strData.Length > 0))
                 {
                     logToFile.Append(strData);
-                    
                 }
                
             
@@ -5060,6 +5112,27 @@ namespace ABI_POC_PCR
                     //tb_PreTempMCU_Eng.Text = commVar[1];
                     SetTextBox(tb_RT_PreHoldSecMCU_Eng, commVar[1]);
                 }
+                else if (commVar[0].Equals("g_optic_current_FAM"))
+                {
+                    //tb_PreTempMCU_Eng.Text = commVar[1];
+                    SetTextBox(tb_OpticCurrentFAM_MCU, commVar[1]);
+                }
+                else if (commVar[0].Equals("g_optic_current_ROX"))
+                {
+                    //tb_PreTempMCU_Eng.Text = commVar[1];
+                    SetTextBox(tb_OpticCurrentROX_MCU, commVar[1]);
+                }
+                else if (commVar[0].Equals("g_optic_current_HEX"))
+                {
+                    //tb_PreTempMCU_Eng.Text = commVar[1];
+                    SetTextBox(tb_OpticCurrentHEX_MCU, commVar[1]);
+                }
+                else if (commVar[0].Equals("g_optic_current_CY5"))
+                {
+                    //tb_PreTempMCU_Eng.Text = commVar[1];
+                    SetTextBox(tb_OpticCurrentCY5_MCU, commVar[1]);
+                }
+              
                 else if (commVar[0].Equals("g_rountine_cnt"))
                 {
                     //tb_PreTempMCU_Eng.Text = commVar[1];
@@ -5086,7 +5159,7 @@ namespace ABI_POC_PCR
             }
             else if (str.Equals("pel>Cycledone\n") || str.Equals("pel>Cycledone"))
             {
-                _endProcess();
+                //_endProcess();
                 //_check_Door();
                 //b_check_Door = true;
             }
@@ -5536,7 +5609,10 @@ namespace ABI_POC_PCR
         private void btn_Print_Click_1(object sender, EventArgs e)
         {
             string dt = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+
+
             // 결과 pdf 인쇄
+            /*
             string filePath = Application.StartupPath + @"\report";
             filePath += "/PCR " + dt + ".pdf";
 
@@ -5545,6 +5621,7 @@ namespace ABI_POC_PCR
             printDocument1.PrinterSettings.PrintFileName = filePath;
             printDocument1.PrinterSettings.PrintToFile = true;
             printDocument1.Print(); // 인쇄 시작
+            */
 
             // 결과 csv 저장
             string filePath2 = Application.StartupPath + @"\log";
@@ -6101,6 +6178,67 @@ namespace ABI_POC_PCR
             }
         }
 
+        private void btn_OpticCurrentFAM_Click(object sender, EventArgs e)
+        {
+            if (tb_OpticCurrentFAM != null && tb_OpticCurrentFAM.Text != "" && tb_OpticCurrentFAM.Text != "-")
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(":OPTIC_CURRENT_FAM");
+                sb.Append(" ");
+                sb.Append(tb_OpticCurrentFAM.Text);
+
+                String txt = sb.ToString();
+                //Apply_txt = txt;
+                serial.SendLine(txt);
+            }
+        }
+
+        private void btn_OpticCurrentROX_Click(object sender, EventArgs e)
+        {
+            if (tb_OpticCurrentROX != null && tb_OpticCurrentROX.Text != "" && tb_OpticCurrentROX.Text != "-")
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(":OPTIC_CURRENT_ROX");
+                sb.Append(" ");
+                sb.Append(tb_OpticCurrentROX.Text);
+
+                String txt = sb.ToString();
+                //Apply_txt = txt;
+                serial.SendLine(txt);
+            }
+        }
+
+        private void btn_OpticCurrentHEX_Click(object sender, EventArgs e)
+        {
+            if (tb_OpticCurrentHEX != null && tb_OpticCurrentHEX.Text != "" && tb_OpticCurrentHEX.Text != "-")
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(":OPTIC_CURRENT_HEX");
+                sb.Append(" ");
+                sb.Append(tb_OpticCurrentHEX.Text);
+
+                String txt = sb.ToString();
+                //Apply_txt = txt;
+                serial.SendLine(txt);
+            }
+        }
+
+        private void btn_OpticCurrentCY5_Click(object sender, EventArgs e)
+        {
+            if (tb_OpticCurrentCY5 != null && tb_OpticCurrentCY5.Text != "" && tb_OpticCurrentCY5.Text != "-")
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(":OPTIC_CURRENT_CY5");
+                sb.Append(" ");
+                sb.Append(tb_OpticCurrentCY5.Text);
+
+                String txt = sb.ToString();
+                //Apply_txt = txt;
+                serial.SendLine(txt);
+            }
+        }
+
+
         private void btn_PreTempMCU_Eng_Click(object sender, EventArgs e)
         {
 
@@ -6391,11 +6529,18 @@ namespace ABI_POC_PCR
 
         private void button7_Click(object sender, EventArgs e)
         {
+            initAllScottPlot();
+
+            //Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
+        }
+
+        public void initAllScottPlot()
+        {
             Plotter.ViewInit(formsPlot1);
             Plotter.ViewInit(formsPlot2);
             Plotter.ViewInit(formsPlot3);
             Plotter.ViewInit(formsPlot4);
-            
+
             Plotter.ch1DataDic["FAM"] = new List<double>();
             Plotter.ch1DataDic["ROX"] = new List<double>();
             Plotter.ch1DataDic["HEX"] = new List<double>();
@@ -6415,8 +6560,6 @@ namespace ABI_POC_PCR
             Plotter.ch4DataDic["ROX"] = new List<double>();
             Plotter.ch4DataDic["HEX"] = new List<double>();
             Plotter.ch4DataDic["CY5"] = new List<double>();
-
-            //Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -6429,7 +6572,7 @@ namespace ABI_POC_PCR
             if(cb_Recipe_Test.SelectedText == cb_Recipe_Eng.SelectedText 
                 && cb_Recipe_Test.SelectedText == cb_Test_Interpretation.SelectedText )
             {
-                cb_Recipe_Test.Text = sm.testName;
+                //cb_Recipe_Test.Text = sm.testName;
                 //pass
             }
             else
@@ -6631,7 +6774,7 @@ namespace ABI_POC_PCR
             tb_Test_Interpretation.Text = sm.testName;
             updateTestInfo();
 
-            init_Test_Result();
+            //init_Test_Result();
             init_Analytic_Result();
             init_Interpretation_howTo();
         }
@@ -6640,10 +6783,10 @@ namespace ABI_POC_PCR
         {
             CtCyclesCalculation();
         
-            drawDataGridView(dgvCtTable1, Plotter.CtCycles[0]+1, Plotter.CtCycles[1]+1, Plotter.CtCycles[2]+1, Plotter.CtCycles[3]+1);
-            drawDataGridView(dgvCtTable2, Plotter.CtCycles[4]+1, Plotter.CtCycles[5]+1, Plotter.CtCycles[6]+1, Plotter.CtCycles[7]+1);
-            drawDataGridView(dgvCtTable3, Plotter.CtCycles[8]+1, Plotter.CtCycles[9]+1, Plotter.CtCycles[10]+1, Plotter.CtCycles[11]+1);
-            drawDataGridView(dgvCtTable4, Plotter.CtCycles[12]+1, Plotter.CtCycles[13]+1, Plotter.CtCycles[14]+1, Plotter.CtCycles[15]+1);
+            drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
+            drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
+            drawDataGridView(dgvCtTable3, Plotter.CtCycles[8], Plotter.CtCycles[9], Plotter.CtCycles[10], Plotter.CtCycles[11]);
+            drawDataGridView(dgvCtTable4, Plotter.CtCycles[12], Plotter.CtCycles[13], Plotter.CtCycles[14], Plotter.CtCycles[15]);
         }
 
         private void dgvCtTable3_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -6886,19 +7029,40 @@ namespace ABI_POC_PCR
         {
             if (sm.testName == "COVID")
             {
-                dgv_testResult.ColumnCount = 3;
+                dgv_testResult.ColumnCount = 4;
                 dgv_testResult.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 dgv_testResult.RowHeadersVisible = false;
 
-                dgv_testResult.Columns[0].Name = "COVID";
+                dgv_testResult.Columns[0].Name = "";
                 dgv_testResult.Columns[0].MinimumWidth = 320;
-                dgv_testResult.Columns[1].Name = "NEG";
+                dgv_testResult.Columns[1].Name = "COVID";
                 dgv_testResult.Columns[1].MinimumWidth = 320;
                 dgv_testResult.Columns[2].Name = "RETEST";
                 dgv_testResult.Columns[2].MinimumWidth = 320;
 
                 dgv_testResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
                 dgv_testResult.MultiSelect = false;
+
+                int rowCnt = dgv_testResult.Rows.GetRowCount(DataGridViewElementStates.Visible);
+
+                for (int i = 1; i < rowCnt; i++)
+                {
+                    //if (dgvArr[j].Rows.GetRowCount(DataGridViewElementStates.Visible) != 0)
+                    //{
+                    dgv_testResult.Rows.RemoveAt(0);
+                    //}
+                }
+
+
+                string[] tube1 = { "tube1", "", "" };
+                string[] tube2 = { "tube2", "", "" };
+                string[] tube3 = { "tube3", "", "" };
+                string[] tube4 = { "tube4", "", "" };
+
+                dgv_testResult.Rows.Add(tube1);
+                dgv_testResult.Rows.Add(tube2);
+                dgv_testResult.Rows.Add(tube3);
+                dgv_testResult.Rows.Add(tube4);
 
             }
             else if (sm.testName == "TB")
@@ -7159,6 +7323,8 @@ namespace ABI_POC_PCR
 
         public void update_analytic_result()
         {
+            init_Test_Result();
+
             if(sm.testName == "TB")
             {
 
@@ -7200,28 +7366,75 @@ namespace ABI_POC_PCR
 
             if(sm.testName == "COVID")
             {
-                //COVID
-                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+"
-                    && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+"
-                    && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
-                {
-                    dgv_testResult.Rows[0].Cells[0].Value = "+";
-                }
-                else
-                {
-                    dgv_testResult.Rows[0].Cells[0].Value = "-";
-                }
-
-                //NEG
-                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
+                //tube1
+                if (dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[1].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[0].Cells[1].Value = "+";
+                    dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                else if((dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[1].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "-";
+                    dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 else
                 {
-                    dgv_testResult.Rows[0].Cells[1].Value = "-";
+                    dgv_testResult.Rows[0].Cells[2].Value = "+";
                 }
 
+                //tube2
+                if (dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[5].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[1].Cells[1].Value = "+";
+                    dgv_testResult.Rows[1].Cells[2].Value = "-";
+                }
+                else if ((dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[5].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[1].Cells[1].Value = "-";
+                    dgv_testResult.Rows[1].Cells[2].Value = "-";
+                }
+                else
+                {
+                    dgv_testResult.Rows[1].Cells[2].Value = "+";
+                }
+
+                //tube3
+                if (dgv_interpretation_ct.Rows[10].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[9].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[2].Cells[1].Value = "+";
+                    dgv_testResult.Rows[2].Cells[2].Value = "-";
+                }
+                else if ((dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[9].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[2].Cells[1].Value = "-";
+                    dgv_testResult.Rows[2].Cells[2].Value = "-";
+                }
+                else
+                {
+                    dgv_testResult.Rows[2].Cells[2].Value = "+";
+                }
+
+
+                //tube4
+                if (dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[13].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    dgv_testResult.Rows[3].Cells[2].Value = "-";
+                }
+                else if ((dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[13].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[3].Cells[1].Value = "-";
+                    dgv_testResult.Rows[3].Cells[2].Value = "-";
+                }
+                else
+                {
+                    dgv_testResult.Rows[3].Cells[2].Value = "+";
+                }
+
+
+
+
+                /*
                 //RETEST
                 if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
                     || (dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
@@ -7233,6 +7446,7 @@ namespace ABI_POC_PCR
                 {
                     dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
+                */
 
 
             }
@@ -7241,14 +7455,16 @@ namespace ABI_POC_PCR
 
         private void tp_TestReport_Enter(object sender, EventArgs e)
         {
-            init_Test_Result();
+            //init_Test_Result();
             init_Analytic_Result();
+            //update_analytic_result();
         }
 
         private void tp_tester_Enter(object sender, EventArgs e)
         {
-            init_Test_Result();
+            //init_Test_Result();
             init_Analytic_Result();
+            //update_analytic_result();
         }
 
         //현재 EXE 파일이 생성 되는 폴더 위치
@@ -7588,6 +7804,11 @@ namespace ABI_POC_PCR
                 tb_HowToInterpretate.Text += "HEX1: " + joc["HEX1"].GetValue().ToString() + System.Environment.NewLine;
                 tb_HowToInterpretate.Text += "CY51: " + joc["CY51"].GetValue().ToString() + System.Environment.NewLine;
             }
+
+        }
+
+        private void btn_2TempMCU_Eng_Click(object sender, EventArgs e)
+        {
 
         }
     }

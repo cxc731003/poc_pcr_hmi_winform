@@ -89,6 +89,24 @@
             this.tp_engineer = new System.Windows.Forms.TabPage();
             this.tabControl_Engineer = new System.Windows.Forms.TabControl();
             this.tp_CreateTest = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.tb_OpticCurrentCY5_MCU = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentCY5_MCU = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentHEX_MCU = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentHEX_MCU = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentROX_MCU = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentROX_MCU = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentFAM_MCU = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentFAM_MCU = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.tb_OpticCurrentCY5 = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentCY5 = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentHEX = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentHEX = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentROX = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentROX = new System.Windows.Forms.Button();
+            this.tb_OpticCurrentFAM = new System.Windows.Forms.TextBox();
+            this.btn_OpticCurrentFAM = new System.Windows.Forms.Button();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.tb_RT_PreHoldSecMCU_Eng = new System.Windows.Forms.TextBox();
             this.btn_RT_PreHoldSecMCU_Eng = new System.Windows.Forms.Button();
@@ -381,6 +399,15 @@
             this.btnSimul3 = new System.Windows.Forms.Button();
             this.btnSimul2 = new System.Windows.Forms.Button();
             this.btnSimul1 = new System.Windows.Forms.Button();
+            this.tp_simulation2 = new System.Windows.Forms.TabPage();
+            this.button24 = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tb_HowToInterpretate = new System.Windows.Forms.TextBox();
+            this.btn_load_Json = new System.Windows.Forms.Button();
+            this.btn_Save_Json = new System.Windows.Forms.Button();
+            this.tb_HowToInterpretation = new System.Windows.Forms.TextBox();
             this.tp_tester = new System.Windows.Forms.TabPage();
             this.btn_DoorOpen_Test = new System.Windows.Forms.Button();
             this.tb_Log = new System.Windows.Forms.TextBox();
@@ -422,6 +449,7 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -756,20 +784,12 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tp_simulation2 = new System.Windows.Forms.TabPage();
-            this.tb_HowToInterpretation = new System.Windows.Forms.TextBox();
-            this.btn_Save_Json = new System.Windows.Forms.Button();
-            this.btn_load_Json = new System.Windows.Forms.Button();
-            this.tb_HowToInterpretate = new System.Windows.Forms.TextBox();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button24 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
             this.tp_CreateTest.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -801,6 +821,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct1)).BeginInit();
             this.tp_simulation.SuspendLayout();
+            this.tp_simulation2.SuspendLayout();
             this.tp_tester.SuspendLayout();
             this.gb_CartridgeInfo.SuspendLayout();
             this.gb_TestInfo.SuspendLayout();
@@ -845,7 +866,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tp_simulation2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_Port_Main
@@ -1146,6 +1166,8 @@
             // 
             // tp_CreateTest
             // 
+            this.tp_CreateTest.Controls.Add(this.groupBox12);
+            this.tp_CreateTest.Controls.Add(this.groupBox11);
             this.tp_CreateTest.Controls.Add(this.groupBox21);
             this.tp_CreateTest.Controls.Add(this.groupBox20);
             this.tp_CreateTest.Controls.Add(this.tb_FianlCycle_Eng);
@@ -1183,6 +1205,208 @@
             this.tp_CreateTest.UseVisualStyleBackColor = true;
             this.tp_CreateTest.Click += new System.EventHandler(this.tabPage6_Click);
             // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.tb_OpticCurrentCY5_MCU);
+            this.groupBox12.Controls.Add(this.btn_OpticCurrentCY5_MCU);
+            this.groupBox12.Controls.Add(this.tb_OpticCurrentHEX_MCU);
+            this.groupBox12.Controls.Add(this.btn_OpticCurrentHEX_MCU);
+            this.groupBox12.Controls.Add(this.tb_OpticCurrentROX_MCU);
+            this.groupBox12.Controls.Add(this.btn_OpticCurrentROX_MCU);
+            this.groupBox12.Controls.Add(this.tb_OpticCurrentFAM_MCU);
+            this.groupBox12.Controls.Add(this.btn_OpticCurrentFAM_MCU);
+            this.groupBox12.Location = new System.Drawing.Point(1252, 487);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox12.Size = new System.Drawing.Size(280, 298);
+            this.groupBox12.TabIndex = 128;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Optic Current";
+            // 
+            // tb_OpticCurrentCY5_MCU
+            // 
+            this.tb_OpticCurrentCY5_MCU.Location = new System.Drawing.Point(135, 248);
+            this.tb_OpticCurrentCY5_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentCY5_MCU.Name = "tb_OpticCurrentCY5_MCU";
+            this.tb_OpticCurrentCY5_MCU.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentCY5_MCU.TabIndex = 7;
+            this.tb_OpticCurrentCY5_MCU.Text = "-";
+            this.tb_OpticCurrentCY5_MCU.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentCY5_MCU
+            // 
+            this.btn_OpticCurrentCY5_MCU.Location = new System.Drawing.Point(34, 238);
+            this.btn_OpticCurrentCY5_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentCY5_MCU.Name = "btn_OpticCurrentCY5_MCU";
+            this.btn_OpticCurrentCY5_MCU.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentCY5_MCU.TabIndex = 6;
+            this.btn_OpticCurrentCY5_MCU.Text = "CY5";
+            this.btn_OpticCurrentCY5_MCU.UseVisualStyleBackColor = true;
+            // 
+            // tb_OpticCurrentHEX_MCU
+            // 
+            this.tb_OpticCurrentHEX_MCU.Location = new System.Drawing.Point(135, 181);
+            this.tb_OpticCurrentHEX_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentHEX_MCU.Name = "tb_OpticCurrentHEX_MCU";
+            this.tb_OpticCurrentHEX_MCU.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentHEX_MCU.TabIndex = 5;
+            this.tb_OpticCurrentHEX_MCU.Text = "-";
+            this.tb_OpticCurrentHEX_MCU.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentHEX_MCU
+            // 
+            this.btn_OpticCurrentHEX_MCU.Location = new System.Drawing.Point(34, 171);
+            this.btn_OpticCurrentHEX_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentHEX_MCU.Name = "btn_OpticCurrentHEX_MCU";
+            this.btn_OpticCurrentHEX_MCU.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentHEX_MCU.TabIndex = 4;
+            this.btn_OpticCurrentHEX_MCU.Text = "HEX";
+            this.btn_OpticCurrentHEX_MCU.UseVisualStyleBackColor = true;
+            // 
+            // tb_OpticCurrentROX_MCU
+            // 
+            this.tb_OpticCurrentROX_MCU.Location = new System.Drawing.Point(135, 117);
+            this.tb_OpticCurrentROX_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentROX_MCU.Name = "tb_OpticCurrentROX_MCU";
+            this.tb_OpticCurrentROX_MCU.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentROX_MCU.TabIndex = 3;
+            this.tb_OpticCurrentROX_MCU.Text = "-";
+            this.tb_OpticCurrentROX_MCU.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentROX_MCU
+            // 
+            this.btn_OpticCurrentROX_MCU.Location = new System.Drawing.Point(34, 107);
+            this.btn_OpticCurrentROX_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentROX_MCU.Name = "btn_OpticCurrentROX_MCU";
+            this.btn_OpticCurrentROX_MCU.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentROX_MCU.TabIndex = 2;
+            this.btn_OpticCurrentROX_MCU.Text = "ROX";
+            this.btn_OpticCurrentROX_MCU.UseVisualStyleBackColor = true;
+            // 
+            // tb_OpticCurrentFAM_MCU
+            // 
+            this.tb_OpticCurrentFAM_MCU.Location = new System.Drawing.Point(135, 52);
+            this.tb_OpticCurrentFAM_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentFAM_MCU.Name = "tb_OpticCurrentFAM_MCU";
+            this.tb_OpticCurrentFAM_MCU.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentFAM_MCU.TabIndex = 1;
+            this.tb_OpticCurrentFAM_MCU.Text = "-";
+            this.tb_OpticCurrentFAM_MCU.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentFAM_MCU
+            // 
+            this.btn_OpticCurrentFAM_MCU.Location = new System.Drawing.Point(34, 42);
+            this.btn_OpticCurrentFAM_MCU.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentFAM_MCU.Name = "btn_OpticCurrentFAM_MCU";
+            this.btn_OpticCurrentFAM_MCU.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentFAM_MCU.TabIndex = 0;
+            this.btn_OpticCurrentFAM_MCU.Text = "FAM";
+            this.btn_OpticCurrentFAM_MCU.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.tb_OpticCurrentCY5);
+            this.groupBox11.Controls.Add(this.btn_OpticCurrentCY5);
+            this.groupBox11.Controls.Add(this.tb_OpticCurrentHEX);
+            this.groupBox11.Controls.Add(this.btn_OpticCurrentHEX);
+            this.groupBox11.Controls.Add(this.tb_OpticCurrentROX);
+            this.groupBox11.Controls.Add(this.btn_OpticCurrentROX);
+            this.groupBox11.Controls.Add(this.tb_OpticCurrentFAM);
+            this.groupBox11.Controls.Add(this.btn_OpticCurrentFAM);
+            this.groupBox11.Location = new System.Drawing.Point(1252, 127);
+            this.groupBox11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox11.Size = new System.Drawing.Size(295, 316);
+            this.groupBox11.TabIndex = 5;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Optic Current";
+            // 
+            // tb_OpticCurrentCY5
+            // 
+            this.tb_OpticCurrentCY5.Location = new System.Drawing.Point(135, 255);
+            this.tb_OpticCurrentCY5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentCY5.Name = "tb_OpticCurrentCY5";
+            this.tb_OpticCurrentCY5.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentCY5.TabIndex = 7;
+            this.tb_OpticCurrentCY5.Text = "-";
+            this.tb_OpticCurrentCY5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentCY5
+            // 
+            this.btn_OpticCurrentCY5.Location = new System.Drawing.Point(34, 252);
+            this.btn_OpticCurrentCY5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentCY5.Name = "btn_OpticCurrentCY5";
+            this.btn_OpticCurrentCY5.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentCY5.TabIndex = 6;
+            this.btn_OpticCurrentCY5.Text = "CY5";
+            this.btn_OpticCurrentCY5.UseVisualStyleBackColor = true;
+            this.btn_OpticCurrentCY5.Click += new System.EventHandler(this.btn_OpticCurrentCY5_Click);
+            // 
+            // tb_OpticCurrentHEX
+            // 
+            this.tb_OpticCurrentHEX.Location = new System.Drawing.Point(135, 190);
+            this.tb_OpticCurrentHEX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentHEX.Name = "tb_OpticCurrentHEX";
+            this.tb_OpticCurrentHEX.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentHEX.TabIndex = 5;
+            this.tb_OpticCurrentHEX.Text = "-";
+            this.tb_OpticCurrentHEX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentHEX
+            // 
+            this.btn_OpticCurrentHEX.Location = new System.Drawing.Point(34, 187);
+            this.btn_OpticCurrentHEX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentHEX.Name = "btn_OpticCurrentHEX";
+            this.btn_OpticCurrentHEX.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentHEX.TabIndex = 4;
+            this.btn_OpticCurrentHEX.Text = "HEX";
+            this.btn_OpticCurrentHEX.UseVisualStyleBackColor = true;
+            this.btn_OpticCurrentHEX.Click += new System.EventHandler(this.btn_OpticCurrentHEX_Click);
+            // 
+            // tb_OpticCurrentROX
+            // 
+            this.tb_OpticCurrentROX.Location = new System.Drawing.Point(135, 126);
+            this.tb_OpticCurrentROX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentROX.Name = "tb_OpticCurrentROX";
+            this.tb_OpticCurrentROX.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentROX.TabIndex = 3;
+            this.tb_OpticCurrentROX.Text = "-";
+            this.tb_OpticCurrentROX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentROX
+            // 
+            this.btn_OpticCurrentROX.Location = new System.Drawing.Point(34, 118);
+            this.btn_OpticCurrentROX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentROX.Name = "btn_OpticCurrentROX";
+            this.btn_OpticCurrentROX.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentROX.TabIndex = 2;
+            this.btn_OpticCurrentROX.Text = "ROX";
+            this.btn_OpticCurrentROX.UseVisualStyleBackColor = true;
+            this.btn_OpticCurrentROX.Click += new System.EventHandler(this.btn_OpticCurrentROX_Click);
+            // 
+            // tb_OpticCurrentFAM
+            // 
+            this.tb_OpticCurrentFAM.Location = new System.Drawing.Point(135, 55);
+            this.tb_OpticCurrentFAM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_OpticCurrentFAM.Name = "tb_OpticCurrentFAM";
+            this.tb_OpticCurrentFAM.Size = new System.Drawing.Size(125, 30);
+            this.tb_OpticCurrentFAM.TabIndex = 1;
+            this.tb_OpticCurrentFAM.Text = "-";
+            this.tb_OpticCurrentFAM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_OpticCurrentFAM
+            // 
+            this.btn_OpticCurrentFAM.Location = new System.Drawing.Point(34, 48);
+            this.btn_OpticCurrentFAM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_OpticCurrentFAM.Name = "btn_OpticCurrentFAM";
+            this.btn_OpticCurrentFAM.Size = new System.Drawing.Size(95, 40);
+            this.btn_OpticCurrentFAM.TabIndex = 0;
+            this.btn_OpticCurrentFAM.Text = "FAM";
+            this.btn_OpticCurrentFAM.UseVisualStyleBackColor = true;
+            this.btn_OpticCurrentFAM.Click += new System.EventHandler(this.btn_OpticCurrentFAM_Click);
+            // 
             // groupBox21
             // 
             this.groupBox21.Controls.Add(this.tb_RT_PreHoldSecMCU_Eng);
@@ -1193,14 +1417,14 @@
             this.groupBox21.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox21.Size = new System.Drawing.Size(401, 159);
+            this.groupBox21.Size = new System.Drawing.Size(295, 159);
             this.groupBox21.TabIndex = 50;
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "RT_Precondition";
             // 
             // tb_RT_PreHoldSecMCU_Eng
             // 
-            this.tb_RT_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(231, 100);
+            this.tb_RT_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(140, 107);
             this.tb_RT_PreHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_RT_PreHoldSecMCU_Eng.Name = "tb_RT_PreHoldSecMCU_Eng";
             this.tb_RT_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1213,14 +1437,14 @@
             this.btn_RT_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(34, 97);
             this.btn_RT_PreHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_RT_PreHoldSecMCU_Eng.Name = "btn_RT_PreHoldSecMCU_Eng";
-            this.btn_RT_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_RT_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreHoldSecMCU_Eng.TabIndex = 2;
             this.btn_RT_PreHoldSecMCU_Eng.Text = "Time(m)";
             this.btn_RT_PreHoldSecMCU_Eng.UseVisualStyleBackColor = true;
             // 
             // tb_RT_PreTempMCU_Eng
             // 
-            this.tb_RT_PreTempMCU_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_RT_PreTempMCU_Eng.Location = new System.Drawing.Point(139, 42);
             this.tb_RT_PreTempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_RT_PreTempMCU_Eng.Name = "tb_RT_PreTempMCU_Eng";
             this.tb_RT_PreTempMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1233,7 +1457,7 @@
             this.btn_RT_PreTempMCU_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_RT_PreTempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_RT_PreTempMCU_Eng.Name = "btn_RT_PreTempMCU_Eng";
-            this.btn_RT_PreTempMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_RT_PreTempMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreTempMCU_Eng.TabIndex = 0;
             this.btn_RT_PreTempMCU_Eng.Text = "Temp.";
             this.btn_RT_PreTempMCU_Eng.UseVisualStyleBackColor = true;
@@ -1248,14 +1472,14 @@
             this.groupBox20.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox20.Size = new System.Drawing.Size(401, 159);
+            this.groupBox20.Size = new System.Drawing.Size(290, 159);
             this.groupBox20.TabIndex = 4;
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "RT_Precondition";
             // 
             // tb_RT_PreHoldSec_Eng
             // 
-            this.tb_RT_PreHoldSec_Eng.Location = new System.Drawing.Point(231, 100);
+            this.tb_RT_PreHoldSec_Eng.Location = new System.Drawing.Point(147, 100);
             this.tb_RT_PreHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_RT_PreHoldSec_Eng.Name = "tb_RT_PreHoldSec_Eng";
             this.tb_RT_PreHoldSec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1268,7 +1492,7 @@
             this.btn_RT_PreHoldSec_Eng.Location = new System.Drawing.Point(34, 97);
             this.btn_RT_PreHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_RT_PreHoldSec_Eng.Name = "btn_RT_PreHoldSec_Eng";
-            this.btn_RT_PreHoldSec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_RT_PreHoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreHoldSec_Eng.TabIndex = 2;
             this.btn_RT_PreHoldSec_Eng.Text = "Time(m)";
             this.btn_RT_PreHoldSec_Eng.UseVisualStyleBackColor = true;
@@ -1276,7 +1500,7 @@
             // 
             // tb_RT_PreTemp_Eng
             // 
-            this.tb_RT_PreTemp_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_RT_PreTemp_Eng.Location = new System.Drawing.Point(147, 42);
             this.tb_RT_PreTemp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_RT_PreTemp_Eng.Name = "tb_RT_PreTemp_Eng";
             this.tb_RT_PreTemp_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1289,7 +1513,7 @@
             this.btn_RT_PreTemp_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_RT_PreTemp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_RT_PreTemp_Eng.Name = "btn_RT_PreTemp_Eng";
-            this.btn_RT_PreTemp_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_RT_PreTemp_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreTemp_Eng.TabIndex = 0;
             this.btn_RT_PreTemp_Eng.Text = "Temp.";
             this.btn_RT_PreTemp_Eng.UseVisualStyleBackColor = true;
@@ -1297,7 +1521,7 @@
             // 
             // tb_FianlCycle_Eng
             // 
-            this.tb_FianlCycle_Eng.Location = new System.Drawing.Point(1130, 389);
+            this.tb_FianlCycle_Eng.Location = new System.Drawing.Point(553, 146);
             this.tb_FianlCycle_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_FianlCycle_Eng.Name = "tb_FianlCycle_Eng";
             this.tb_FianlCycle_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1307,10 +1531,10 @@
             // 
             // btn_FianlCycle_Eng
             // 
-            this.btn_FianlCycle_Eng.Location = new System.Drawing.Point(932, 384);
+            this.btn_FianlCycle_Eng.Location = new System.Drawing.Point(448, 141);
             this.btn_FianlCycle_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FianlCycle_Eng.Name = "btn_FianlCycle_Eng";
-            this.btn_FianlCycle_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_FianlCycle_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_FianlCycle_Eng.TabIndex = 5;
             this.btn_FianlCycle_Eng.Text = "Final Cycle";
             this.btn_FianlCycle_Eng.UseVisualStyleBackColor = true;
@@ -1322,18 +1546,18 @@
             this.groupBox14.Controls.Add(this.btn_OCHoldSec_Eng);
             this.groupBox14.Controls.Add(this.tb_OCDelaySec_Eng);
             this.groupBox14.Controls.Add(this.btn_OCDelaySec_Eng);
-            this.groupBox14.Location = new System.Drawing.Point(63, 352);
+            this.groupBox14.Location = new System.Drawing.Point(58, 352);
             this.groupBox14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox14.Size = new System.Drawing.Size(817, 96);
+            this.groupBox14.Size = new System.Drawing.Size(588, 96);
             this.groupBox14.TabIndex = 4;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Optic Cycle";
             // 
             // tb_OCHoldSec_Eng
             // 
-            this.tb_OCHoldSec_Eng.Location = new System.Drawing.Point(652, 40);
+            this.tb_OCHoldSec_Eng.Location = new System.Drawing.Point(436, 47);
             this.tb_OCHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OCHoldSec_Eng.Name = "tb_OCHoldSec_Eng";
             this.tb_OCHoldSec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1343,10 +1567,10 @@
             // 
             // btn_OCHoldSec_Eng
             // 
-            this.btn_OCHoldSec_Eng.Location = new System.Drawing.Point(455, 37);
+            this.btn_OCHoldSec_Eng.Location = new System.Drawing.Point(327, 37);
             this.btn_OCHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_OCHoldSec_Eng.Name = "btn_OCHoldSec_Eng";
-            this.btn_OCHoldSec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_OCHoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_OCHoldSec_Eng.TabIndex = 2;
             this.btn_OCHoldSec_Eng.Text = "Time(s)";
             this.btn_OCHoldSec_Eng.UseVisualStyleBackColor = true;
@@ -1354,7 +1578,7 @@
             // 
             // tb_OCDelaySec_Eng
             // 
-            this.tb_OCDelaySec_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_OCDelaySec_Eng.Location = new System.Drawing.Point(140, 42);
             this.tb_OCDelaySec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OCDelaySec_Eng.Name = "tb_OCDelaySec_Eng";
             this.tb_OCDelaySec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1367,9 +1591,9 @@
             this.btn_OCDelaySec_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_OCDelaySec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_OCDelaySec_Eng.Name = "btn_OCDelaySec_Eng";
-            this.btn_OCDelaySec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_OCDelaySec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_OCDelaySec_Eng.TabIndex = 0;
-            this.btn_OCDelaySec_Eng.Text = "Optic delay(s)";
+            this.btn_OCDelaySec_Eng.Text = "delay(s)";
             this.btn_OCDelaySec_Eng.UseVisualStyleBackColor = true;
             this.btn_OCDelaySec_Eng.Click += new System.EventHandler(this.Before_exec);
             // 
@@ -1383,7 +1607,7 @@
             this.groupBox13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox13.Size = new System.Drawing.Size(822, 96);
+            this.groupBox13.Size = new System.Drawing.Size(593, 96);
             this.groupBox13.TabIndex = 125;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Optic Cycle";
@@ -1391,7 +1615,7 @@
             // tb_OCHoldSecMCU_Eng
             // 
             this.tb_OCHoldSecMCU_Eng.Enabled = false;
-            this.tb_OCHoldSecMCU_Eng.Location = new System.Drawing.Point(652, 40);
+            this.tb_OCHoldSecMCU_Eng.Location = new System.Drawing.Point(435, 46);
             this.tb_OCHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OCHoldSecMCU_Eng.Name = "tb_OCHoldSecMCU_Eng";
             this.tb_OCHoldSecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1402,10 +1626,10 @@
             // btn_OCHoldSecMCU_Eng
             // 
             this.btn_OCHoldSecMCU_Eng.Enabled = false;
-            this.btn_OCHoldSecMCU_Eng.Location = new System.Drawing.Point(455, 37);
+            this.btn_OCHoldSecMCU_Eng.Location = new System.Drawing.Point(332, 37);
             this.btn_OCHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_OCHoldSecMCU_Eng.Name = "btn_OCHoldSecMCU_Eng";
-            this.btn_OCHoldSecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_OCHoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_OCHoldSecMCU_Eng.TabIndex = 123;
             this.btn_OCHoldSecMCU_Eng.Text = "Time(s)";
             this.btn_OCHoldSecMCU_Eng.UseVisualStyleBackColor = true;
@@ -1413,7 +1637,7 @@
             // tb_OCDelaySecMCU_Eng
             // 
             this.tb_OCDelaySecMCU_Eng.Enabled = false;
-            this.tb_OCDelaySecMCU_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_OCDelaySecMCU_Eng.Location = new System.Drawing.Point(140, 45);
             this.tb_OCDelaySecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OCDelaySecMCU_Eng.Name = "tb_OCDelaySecMCU_Eng";
             this.tb_OCDelaySecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1427,9 +1651,9 @@
             this.btn_OCDelaySecMCU_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_OCDelaySecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_OCDelaySecMCU_Eng.Name = "btn_OCDelaySecMCU_Eng";
-            this.btn_OCDelaySecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_OCDelaySecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_OCDelaySecMCU_Eng.TabIndex = 121;
-            this.btn_OCDelaySecMCU_Eng.Text = "Optic delay(s)";
+            this.btn_OCDelaySecMCU_Eng.Text = "delay(s)";
             this.btn_OCDelaySecMCU_Eng.UseVisualStyleBackColor = true;
             // 
             // groupBox15
@@ -1438,18 +1662,18 @@
             this.groupBox15.Controls.Add(this.btn_2HoldSec_Eng);
             this.groupBox15.Controls.Add(this.tb_2Temp_Eng);
             this.groupBox15.Controls.Add(this.btn_2Temp_Eng);
-            this.groupBox15.Location = new System.Drawing.Point(1311, 187);
+            this.groupBox15.Location = new System.Drawing.Point(954, 187);
             this.groupBox15.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox15.Size = new System.Drawing.Size(401, 159);
+            this.groupBox15.Size = new System.Drawing.Size(290, 159);
             this.groupBox15.TabIndex = 3;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "2nd Cycle";
             // 
             // tb_2HoldSec_Eng
             // 
-            this.tb_2HoldSec_Eng.Location = new System.Drawing.Point(234, 100);
+            this.tb_2HoldSec_Eng.Location = new System.Drawing.Point(145, 100);
             this.tb_2HoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_2HoldSec_Eng.Name = "tb_2HoldSec_Eng";
             this.tb_2HoldSec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1462,7 +1686,7 @@
             this.btn_2HoldSec_Eng.Location = new System.Drawing.Point(37, 97);
             this.btn_2HoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_2HoldSec_Eng.Name = "btn_2HoldSec_Eng";
-            this.btn_2HoldSec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_2HoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_2HoldSec_Eng.TabIndex = 2;
             this.btn_2HoldSec_Eng.Text = "Time(s)";
             this.btn_2HoldSec_Eng.UseVisualStyleBackColor = true;
@@ -1470,7 +1694,7 @@
             // 
             // tb_2Temp_Eng
             // 
-            this.tb_2Temp_Eng.Location = new System.Drawing.Point(234, 42);
+            this.tb_2Temp_Eng.Location = new System.Drawing.Point(145, 42);
             this.tb_2Temp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_2Temp_Eng.Name = "tb_2Temp_Eng";
             this.tb_2Temp_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1483,7 +1707,7 @@
             this.btn_2Temp_Eng.Location = new System.Drawing.Point(37, 35);
             this.btn_2Temp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_2Temp_Eng.Name = "btn_2Temp_Eng";
-            this.btn_2Temp_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_2Temp_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_2Temp_Eng.TabIndex = 0;
             this.btn_2Temp_Eng.Text = "Temp.";
             this.btn_2Temp_Eng.UseVisualStyleBackColor = true;
@@ -1495,18 +1719,18 @@
             this.groupBox16.Controls.Add(this.btn_1HoldSec_Eng);
             this.groupBox16.Controls.Add(this.tb_1Temp_Eng);
             this.groupBox16.Controls.Add(this.btn_1Temp_Eng);
-            this.groupBox16.Location = new System.Drawing.Point(895, 187);
+            this.groupBox16.Location = new System.Drawing.Point(655, 187);
             this.groupBox16.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox16.Size = new System.Drawing.Size(401, 159);
+            this.groupBox16.Size = new System.Drawing.Size(290, 159);
             this.groupBox16.TabIndex = 2;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "1st Cycle";
             // 
             // tb_1HoldSec_Eng
             // 
-            this.tb_1HoldSec_Eng.Location = new System.Drawing.Point(236, 100);
+            this.tb_1HoldSec_Eng.Location = new System.Drawing.Point(144, 100);
             this.tb_1HoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_1HoldSec_Eng.Name = "tb_1HoldSec_Eng";
             this.tb_1HoldSec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1519,7 +1743,7 @@
             this.btn_1HoldSec_Eng.Location = new System.Drawing.Point(39, 97);
             this.btn_1HoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_1HoldSec_Eng.Name = "btn_1HoldSec_Eng";
-            this.btn_1HoldSec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_1HoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_1HoldSec_Eng.TabIndex = 2;
             this.btn_1HoldSec_Eng.Text = "Time(s)";
             this.btn_1HoldSec_Eng.UseVisualStyleBackColor = true;
@@ -1527,7 +1751,7 @@
             // 
             // tb_1Temp_Eng
             // 
-            this.tb_1Temp_Eng.Location = new System.Drawing.Point(236, 42);
+            this.tb_1Temp_Eng.Location = new System.Drawing.Point(144, 42);
             this.tb_1Temp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_1Temp_Eng.Name = "tb_1Temp_Eng";
             this.tb_1Temp_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1540,7 +1764,7 @@
             this.btn_1Temp_Eng.Location = new System.Drawing.Point(39, 35);
             this.btn_1Temp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_1Temp_Eng.Name = "btn_1Temp_Eng";
-            this.btn_1Temp_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_1Temp_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_1Temp_Eng.TabIndex = 0;
             this.btn_1Temp_Eng.Text = "Temp.";
             this.btn_1Temp_Eng.UseVisualStyleBackColor = true;
@@ -1552,18 +1776,18 @@
             this.groupBox17.Controls.Add(this.btn_PreHoldSec_Eng);
             this.groupBox17.Controls.Add(this.tb_PreTemp_Eng);
             this.groupBox17.Controls.Add(this.btn_PreTemp_Eng);
-            this.groupBox17.Location = new System.Drawing.Point(479, 187);
+            this.groupBox17.Location = new System.Drawing.Point(356, 187);
             this.groupBox17.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox17.Size = new System.Drawing.Size(401, 159);
+            this.groupBox17.Size = new System.Drawing.Size(290, 159);
             this.groupBox17.TabIndex = 1;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "Precondition";
             // 
             // tb_PreHoldSec_Eng
             // 
-            this.tb_PreHoldSec_Eng.Location = new System.Drawing.Point(231, 100);
+            this.tb_PreHoldSec_Eng.Location = new System.Drawing.Point(143, 100);
             this.tb_PreHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_PreHoldSec_Eng.Name = "tb_PreHoldSec_Eng";
             this.tb_PreHoldSec_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1576,7 +1800,7 @@
             this.btn_PreHoldSec_Eng.Location = new System.Drawing.Point(34, 97);
             this.btn_PreHoldSec_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_PreHoldSec_Eng.Name = "btn_PreHoldSec_Eng";
-            this.btn_PreHoldSec_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_PreHoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreHoldSec_Eng.TabIndex = 2;
             this.btn_PreHoldSec_Eng.Text = "Time(m)";
             this.btn_PreHoldSec_Eng.UseVisualStyleBackColor = true;
@@ -1584,7 +1808,7 @@
             // 
             // tb_PreTemp_Eng
             // 
-            this.tb_PreTemp_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_PreTemp_Eng.Location = new System.Drawing.Point(143, 42);
             this.tb_PreTemp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_PreTemp_Eng.Name = "tb_PreTemp_Eng";
             this.tb_PreTemp_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1597,7 +1821,7 @@
             this.btn_PreTemp_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_PreTemp_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_PreTemp_Eng.Name = "btn_PreTemp_Eng";
-            this.btn_PreTemp_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_PreTemp_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreTemp_Eng.TabIndex = 0;
             this.btn_PreTemp_Eng.Text = "Temp.";
             this.btn_PreTemp_Eng.UseVisualStyleBackColor = true;
@@ -1606,7 +1830,7 @@
             // tb_FianlCycleMCU_Eng
             // 
             this.tb_FianlCycleMCU_Eng.Enabled = false;
-            this.tb_FianlCycleMCU_Eng.Location = new System.Drawing.Point(1132, 756);
+            this.tb_FianlCycleMCU_Eng.Location = new System.Drawing.Point(562, 506);
             this.tb_FianlCycleMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_FianlCycleMCU_Eng.Name = "tb_FianlCycleMCU_Eng";
             this.tb_FianlCycleMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1617,10 +1841,10 @@
             // btn_FianlCycleMCU_Eng
             // 
             this.btn_FianlCycleMCU_Eng.Enabled = false;
-            this.btn_FianlCycleMCU_Eng.Location = new System.Drawing.Point(934, 749);
+            this.btn_FianlCycleMCU_Eng.Location = new System.Drawing.Point(448, 496);
             this.btn_FianlCycleMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FianlCycleMCU_Eng.Name = "btn_FianlCycleMCU_Eng";
-            this.btn_FianlCycleMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_FianlCycleMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_FianlCycleMCU_Eng.TabIndex = 126;
             this.btn_FianlCycleMCU_Eng.Text = "Final Cycle";
             this.btn_FianlCycleMCU_Eng.UseVisualStyleBackColor = true;
@@ -1631,11 +1855,11 @@
             this.groupBox4.Controls.Add(this.btn_2HoldSecMCU_Eng);
             this.groupBox4.Controls.Add(this.tb_2TempMCU_Eng);
             this.groupBox4.Controls.Add(this.btn_2TempMCU_Eng);
-            this.groupBox4.Location = new System.Drawing.Point(1311, 540);
+            this.groupBox4.Location = new System.Drawing.Point(954, 541);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox4.Size = new System.Drawing.Size(401, 161);
+            this.groupBox4.Size = new System.Drawing.Size(295, 161);
             this.groupBox4.TabIndex = 125;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "2nd Cycle";
@@ -1643,7 +1867,7 @@
             // tb_2HoldSecMCU_Eng
             // 
             this.tb_2HoldSecMCU_Eng.Enabled = false;
-            this.tb_2HoldSecMCU_Eng.Location = new System.Drawing.Point(234, 100);
+            this.tb_2HoldSecMCU_Eng.Location = new System.Drawing.Point(140, 107);
             this.tb_2HoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_2HoldSecMCU_Eng.Name = "tb_2HoldSecMCU_Eng";
             this.tb_2HoldSecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1657,7 +1881,7 @@
             this.btn_2HoldSecMCU_Eng.Location = new System.Drawing.Point(37, 97);
             this.btn_2HoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_2HoldSecMCU_Eng.Name = "btn_2HoldSecMCU_Eng";
-            this.btn_2HoldSecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_2HoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_2HoldSecMCU_Eng.TabIndex = 127;
             this.btn_2HoldSecMCU_Eng.Text = "Time(s)";
             this.btn_2HoldSecMCU_Eng.UseVisualStyleBackColor = true;
@@ -1665,7 +1889,7 @@
             // tb_2TempMCU_Eng
             // 
             this.tb_2TempMCU_Eng.Enabled = false;
-            this.tb_2TempMCU_Eng.Location = new System.Drawing.Point(234, 42);
+            this.tb_2TempMCU_Eng.Location = new System.Drawing.Point(140, 45);
             this.tb_2TempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_2TempMCU_Eng.Name = "tb_2TempMCU_Eng";
             this.tb_2TempMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1679,10 +1903,11 @@
             this.btn_2TempMCU_Eng.Location = new System.Drawing.Point(37, 35);
             this.btn_2TempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_2TempMCU_Eng.Name = "btn_2TempMCU_Eng";
-            this.btn_2TempMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_2TempMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_2TempMCU_Eng.TabIndex = 125;
             this.btn_2TempMCU_Eng.Text = "Temp.";
             this.btn_2TempMCU_Eng.UseVisualStyleBackColor = true;
+            this.btn_2TempMCU_Eng.Click += new System.EventHandler(this.btn_2TempMCU_Eng_Click);
             // 
             // groupBox3
             // 
@@ -1690,11 +1915,11 @@
             this.groupBox3.Controls.Add(this.btn_1HoldSecMCU_Eng);
             this.groupBox3.Controls.Add(this.tb_1TempMCU_Eng);
             this.groupBox3.Controls.Add(this.btn_1TempMCU_Eng);
-            this.groupBox3.Location = new System.Drawing.Point(895, 540);
+            this.groupBox3.Location = new System.Drawing.Point(655, 543);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(401, 161);
+            this.groupBox3.Size = new System.Drawing.Size(295, 161);
             this.groupBox3.TabIndex = 125;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "1st Cycle";
@@ -1703,7 +1928,7 @@
             // tb_1HoldSecMCU_Eng
             // 
             this.tb_1HoldSecMCU_Eng.Enabled = false;
-            this.tb_1HoldSecMCU_Eng.Location = new System.Drawing.Point(236, 100);
+            this.tb_1HoldSecMCU_Eng.Location = new System.Drawing.Point(145, 100);
             this.tb_1HoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_1HoldSecMCU_Eng.Name = "tb_1HoldSecMCU_Eng";
             this.tb_1HoldSecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1717,7 +1942,7 @@
             this.btn_1HoldSecMCU_Eng.Location = new System.Drawing.Point(39, 97);
             this.btn_1HoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_1HoldSecMCU_Eng.Name = "btn_1HoldSecMCU_Eng";
-            this.btn_1HoldSecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_1HoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_1HoldSecMCU_Eng.TabIndex = 127;
             this.btn_1HoldSecMCU_Eng.Text = "Time(s)";
             this.btn_1HoldSecMCU_Eng.UseVisualStyleBackColor = true;
@@ -1725,7 +1950,7 @@
             // tb_1TempMCU_Eng
             // 
             this.tb_1TempMCU_Eng.Enabled = false;
-            this.tb_1TempMCU_Eng.Location = new System.Drawing.Point(236, 42);
+            this.tb_1TempMCU_Eng.Location = new System.Drawing.Point(145, 42);
             this.tb_1TempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_1TempMCU_Eng.Name = "tb_1TempMCU_Eng";
             this.tb_1TempMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1739,7 +1964,7 @@
             this.btn_1TempMCU_Eng.Location = new System.Drawing.Point(39, 35);
             this.btn_1TempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_1TempMCU_Eng.Name = "btn_1TempMCU_Eng";
-            this.btn_1TempMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_1TempMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_1TempMCU_Eng.TabIndex = 125;
             this.btn_1TempMCU_Eng.Text = "Temp.";
             this.btn_1TempMCU_Eng.UseVisualStyleBackColor = true;
@@ -1750,11 +1975,11 @@
             this.groupBox2.Controls.Add(this.btn_PreHoldSecMCU_Eng);
             this.groupBox2.Controls.Add(this.tb_PreTempMCU_Eng);
             this.groupBox2.Controls.Add(this.btn_PreTempMCU_Eng);
-            this.groupBox2.Location = new System.Drawing.Point(479, 540);
+            this.groupBox2.Location = new System.Drawing.Point(356, 543);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(401, 161);
+            this.groupBox2.Size = new System.Drawing.Size(295, 161);
             this.groupBox2.TabIndex = 118;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Precondition";
@@ -1762,7 +1987,7 @@
             // tb_PreHoldSecMCU_Eng
             // 
             this.tb_PreHoldSecMCU_Eng.Enabled = false;
-            this.tb_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(231, 100);
+            this.tb_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(137, 110);
             this.tb_PreHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_PreHoldSecMCU_Eng.Name = "tb_PreHoldSecMCU_Eng";
             this.tb_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1776,7 +2001,7 @@
             this.btn_PreHoldSecMCU_Eng.Location = new System.Drawing.Point(34, 97);
             this.btn_PreHoldSecMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_PreHoldSecMCU_Eng.Name = "btn_PreHoldSecMCU_Eng";
-            this.btn_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreHoldSecMCU_Eng.TabIndex = 123;
             this.btn_PreHoldSecMCU_Eng.Text = "Time(m)";
             this.btn_PreHoldSecMCU_Eng.UseVisualStyleBackColor = true;
@@ -1784,7 +2009,7 @@
             // tb_PreTempMCU_Eng
             // 
             this.tb_PreTempMCU_Eng.Enabled = false;
-            this.tb_PreTempMCU_Eng.Location = new System.Drawing.Point(231, 42);
+            this.tb_PreTempMCU_Eng.Location = new System.Drawing.Point(137, 43);
             this.tb_PreTempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_PreTempMCU_Eng.Name = "tb_PreTempMCU_Eng";
             this.tb_PreTempMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1798,7 +2023,7 @@
             this.btn_PreTempMCU_Eng.Location = new System.Drawing.Point(34, 35);
             this.btn_PreTempMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_PreTempMCU_Eng.Name = "btn_PreTempMCU_Eng";
-            this.btn_PreTempMCU_Eng.Size = new System.Drawing.Size(190, 40);
+            this.btn_PreTempMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreTempMCU_Eng.TabIndex = 121;
             this.btn_PreTempMCU_Eng.Text = "Temp.";
             this.btn_PreTempMCU_Eng.UseVisualStyleBackColor = true;
@@ -4153,6 +4378,94 @@
             this.btnSimul1.UseVisualStyleBackColor = true;
             this.btnSimul1.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tp_simulation2
+            // 
+            this.tp_simulation2.Controls.Add(this.button24);
+            this.tp_simulation2.Controls.Add(this.label38);
+            this.tp_simulation2.Controls.Add(this.textBox2);
+            this.tp_simulation2.Controls.Add(this.label37);
+            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretate);
+            this.tp_simulation2.Controls.Add(this.btn_load_Json);
+            this.tp_simulation2.Controls.Add(this.btn_Save_Json);
+            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretation);
+            this.tp_simulation2.Location = new System.Drawing.Point(4, 34);
+            this.tp_simulation2.Name = "tp_simulation2";
+            this.tp_simulation2.Size = new System.Drawing.Size(1752, 812);
+            this.tp_simulation2.TabIndex = 6;
+            this.tp_simulation2.Text = "    simulation2    ";
+            this.tp_simulation2.UseVisualStyleBackColor = true;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(1288, 17);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(264, 38);
+            this.button24.TabIndex = 59;
+            this.button24.Text = "Save Json file";
+            this.button24.UseVisualStyleBackColor = true;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(854, 28);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(66, 25);
+            this.label38.TabIndex = 58;
+            this.label38.Text = "Result";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(859, 61);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(693, 533);
+            this.textBox2.TabIndex = 57;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(18, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(171, 25);
+            this.label37.TabIndex = 56;
+            this.label37.Text = "How To Diagnosis";
+            // 
+            // tb_HowToInterpretate
+            // 
+            this.tb_HowToInterpretate.Location = new System.Drawing.Point(23, 655);
+            this.tb_HowToInterpretate.Multiline = true;
+            this.tb_HowToInterpretate.Name = "tb_HowToInterpretate";
+            this.tb_HowToInterpretate.Size = new System.Drawing.Size(693, 154);
+            this.tb_HowToInterpretate.TabIndex = 55;
+            // 
+            // btn_load_Json
+            // 
+            this.btn_load_Json.Location = new System.Drawing.Point(452, 611);
+            this.btn_load_Json.Name = "btn_load_Json";
+            this.btn_load_Json.Size = new System.Drawing.Size(264, 38);
+            this.btn_load_Json.TabIndex = 54;
+            this.btn_load_Json.Text = "Load Json file";
+            this.btn_load_Json.UseVisualStyleBackColor = true;
+            this.btn_load_Json.Click += new System.EventHandler(this.btn_load_Json_Click);
+            // 
+            // btn_Save_Json
+            // 
+            this.btn_Save_Json.Location = new System.Drawing.Point(452, 17);
+            this.btn_Save_Json.Name = "btn_Save_Json";
+            this.btn_Save_Json.Size = new System.Drawing.Size(264, 38);
+            this.btn_Save_Json.TabIndex = 53;
+            this.btn_Save_Json.Text = "Save Json file";
+            this.btn_Save_Json.UseVisualStyleBackColor = true;
+            this.btn_Save_Json.Click += new System.EventHandler(this.btn_Save_Json_Click);
+            // 
+            // tb_HowToInterpretation
+            // 
+            this.tb_HowToInterpretation.Location = new System.Drawing.Point(23, 61);
+            this.tb_HowToInterpretation.Multiline = true;
+            this.tb_HowToInterpretation.Name = "tb_HowToInterpretation";
+            this.tb_HowToInterpretation.Size = new System.Drawing.Size(693, 533);
+            this.tb_HowToInterpretation.TabIndex = 52;
+            // 
             // tp_tester
             // 
             this.tp_tester.Controls.Add(this.btn_DoorOpen_Test);
@@ -4343,6 +4656,7 @@
             // 
             // tp_TestReport
             // 
+            this.tp_TestReport.Controls.Add(this.label42);
             this.tp_TestReport.Controls.Add(this.dgv_analyticResult);
             this.tp_TestReport.Controls.Add(this.dgv_testResult);
             this.tp_TestReport.Controls.Add(this.lbl_CycleCount);
@@ -4350,7 +4664,6 @@
             this.tp_TestReport.Controls.Add(this.lbl_Status);
             this.tp_TestReport.Controls.Add(this.label15);
             this.tp_TestReport.Controls.Add(this.progressBar_Tester);
-            this.tp_TestReport.Controls.Add(this.label42);
             this.tp_TestReport.Controls.Add(this.label31);
             this.tp_TestReport.Controls.Add(this.label30);
             this.tp_TestReport.Controls.Add(this.listView_PatientInfo);
@@ -4372,10 +4685,11 @@
             // dgv_analyticResult
             // 
             this.dgv_analyticResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_analyticResult.Location = new System.Drawing.Point(26, 584);
+            this.dgv_analyticResult.Location = new System.Drawing.Point(26, 706);
             this.dgv_analyticResult.Name = "dgv_analyticResult";
-            this.dgv_analyticResult.Size = new System.Drawing.Size(1300, 136);
+            this.dgv_analyticResult.Size = new System.Drawing.Size(1300, 14);
             this.dgv_analyticResult.TabIndex = 32;
+            this.dgv_analyticResult.Visible = false;
             // 
             // dgv_testResult
             // 
@@ -4383,7 +4697,7 @@
             this.dgv_testResult.Location = new System.Drawing.Point(26, 463);
             this.dgv_testResult.Name = "dgv_testResult";
             this.dgv_testResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgv_testResult.Size = new System.Drawing.Size(1300, 65);
+            this.dgv_testResult.Size = new System.Drawing.Size(1300, 237);
             this.dgv_testResult.TabIndex = 31;
             // 
             // lbl_CycleCount
@@ -4435,11 +4749,12 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(26, 557);
+            this.label42.Location = new System.Drawing.Point(9, 704);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(140, 25);
             this.label42.TabIndex = 9;
             this.label42.Text = "Analytic Result";
+            this.label42.Visible = false;
             // 
             // label31
             // 
@@ -4607,6 +4922,19 @@
             this.btn_OpenDoor_Test.Text = "1. Test Preparation";
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
+            // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
             // 
             // tabControl1
             // 
@@ -8050,107 +8378,6 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // tp_simulation2
-            // 
-            this.tp_simulation2.Controls.Add(this.button24);
-            this.tp_simulation2.Controls.Add(this.label38);
-            this.tp_simulation2.Controls.Add(this.textBox2);
-            this.tp_simulation2.Controls.Add(this.label37);
-            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretate);
-            this.tp_simulation2.Controls.Add(this.btn_load_Json);
-            this.tp_simulation2.Controls.Add(this.btn_Save_Json);
-            this.tp_simulation2.Controls.Add(this.tb_HowToInterpretation);
-            this.tp_simulation2.Location = new System.Drawing.Point(4, 34);
-            this.tp_simulation2.Name = "tp_simulation2";
-            this.tp_simulation2.Size = new System.Drawing.Size(1752, 812);
-            this.tp_simulation2.TabIndex = 6;
-            this.tp_simulation2.Text = "    simulation2    ";
-            this.tp_simulation2.UseVisualStyleBackColor = true;
-            // 
-            // tb_HowToInterpretation
-            // 
-            this.tb_HowToInterpretation.Location = new System.Drawing.Point(23, 61);
-            this.tb_HowToInterpretation.Multiline = true;
-            this.tb_HowToInterpretation.Name = "tb_HowToInterpretation";
-            this.tb_HowToInterpretation.Size = new System.Drawing.Size(693, 533);
-            this.tb_HowToInterpretation.TabIndex = 52;
-            // 
-            // btn_Save_Json
-            // 
-            this.btn_Save_Json.Location = new System.Drawing.Point(452, 17);
-            this.btn_Save_Json.Name = "btn_Save_Json";
-            this.btn_Save_Json.Size = new System.Drawing.Size(264, 38);
-            this.btn_Save_Json.TabIndex = 53;
-            this.btn_Save_Json.Text = "Save Json file";
-            this.btn_Save_Json.UseVisualStyleBackColor = true;
-            this.btn_Save_Json.Click += new System.EventHandler(this.btn_Save_Json_Click);
-            // 
-            // btn_load_Json
-            // 
-            this.btn_load_Json.Location = new System.Drawing.Point(452, 611);
-            this.btn_load_Json.Name = "btn_load_Json";
-            this.btn_load_Json.Size = new System.Drawing.Size(264, 38);
-            this.btn_load_Json.TabIndex = 54;
-            this.btn_load_Json.Text = "Load Json file";
-            this.btn_load_Json.UseVisualStyleBackColor = true;
-            this.btn_load_Json.Click += new System.EventHandler(this.btn_load_Json_Click);
-            // 
-            // tb_HowToInterpretate
-            // 
-            this.tb_HowToInterpretate.Location = new System.Drawing.Point(23, 655);
-            this.tb_HowToInterpretate.Multiline = true;
-            this.tb_HowToInterpretate.Name = "tb_HowToInterpretate";
-            this.tb_HowToInterpretate.Size = new System.Drawing.Size(693, 154);
-            this.tb_HowToInterpretate.TabIndex = 55;
-            // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(18, 17);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(171, 25);
-            this.label37.TabIndex = 56;
-            this.label37.Text = "How To Diagnosis";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(854, 28);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(66, 25);
-            this.label38.TabIndex = 58;
-            this.label38.Text = "Result";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(859, 61);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(693, 533);
-            this.textBox2.TabIndex = 57;
-            // 
-            // button24
-            // 
-            this.button24.Location = new System.Drawing.Point(1288, 17);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(264, 38);
-            this.button24.TabIndex = 59;
-            this.button24.Text = "Save Json file";
-            this.button24.UseVisualStyleBackColor = true;
-            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -8176,6 +8403,10 @@
             this.tabControl_Engineer.ResumeLayout(false);
             this.tp_CreateTest.ResumeLayout(false);
             this.tp_CreateTest.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.groupBox20.ResumeLayout(false);
@@ -8226,6 +8457,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ct1)).EndInit();
             this.tp_simulation.ResumeLayout(false);
             this.tp_simulation.PerformLayout();
+            this.tp_simulation2.ResumeLayout(false);
+            this.tp_simulation2.PerformLayout();
             this.tp_tester.ResumeLayout(false);
             this.tp_tester.PerformLayout();
             this.gb_CartridgeInfo.ResumeLayout(false);
@@ -8285,8 +8518,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.tp_simulation2.ResumeLayout(false);
-            this.tp_simulation2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -8998,6 +9229,24 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.TextBox tb_OpticCurrentROX_MCU;
+        private System.Windows.Forms.Button btn_OpticCurrentROX_MCU;
+        private System.Windows.Forms.TextBox tb_OpticCurrentFAM_MCU;
+        private System.Windows.Forms.Button btn_OpticCurrentFAM_MCU;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.TextBox tb_OpticCurrentROX;
+        private System.Windows.Forms.Button btn_OpticCurrentROX;
+        private System.Windows.Forms.TextBox tb_OpticCurrentFAM;
+        private System.Windows.Forms.Button btn_OpticCurrentFAM;
+        private System.Windows.Forms.TextBox tb_OpticCurrentCY5_MCU;
+        private System.Windows.Forms.Button btn_OpticCurrentCY5_MCU;
+        private System.Windows.Forms.TextBox tb_OpticCurrentHEX_MCU;
+        private System.Windows.Forms.Button btn_OpticCurrentHEX_MCU;
+        private System.Windows.Forms.TextBox tb_OpticCurrentCY5;
+        private System.Windows.Forms.Button btn_OpticCurrentCY5;
+        private System.Windows.Forms.TextBox tb_OpticCurrentHEX;
+        private System.Windows.Forms.Button btn_OpticCurrentHEX;
     }
 }
 
