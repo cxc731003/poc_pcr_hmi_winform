@@ -135,23 +135,23 @@ namespace ABI_POC_PCR.GraphPlot
 
             if (chDataDic["FAM"].Count > 0)
             {
-                chFAMArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["FAM"].ToArray(), label: "HEX", lineWidth:0); //ROX, HEX, CYS
+                chFAMArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["FAM"].ToArray(), label: "FAM", lineWidth:0); //ROX, HEX, CYS
                 chFAMArray[chamberNum].visible = chFAMIsCheck[chamberNum];
 
             }
             if (chDataDic["ROX"].Count > 0)
             {
-                chROXArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["ROX"].ToArray(), label: "CY5", lineWidth: 0); //ROX, HEX, CYS
+                chROXArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["ROX"].ToArray(), label: "ROX", lineWidth: 0); //ROX, HEX, CYS
                 chROXArray[chamberNum].visible = chROXIsCheck[chamberNum];
             }
             if (chDataDic["HEX"].Count > 0)
             {
-                chHEXArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["HEX"].ToArray(), label: "FAM", lineWidth: 0); //ROX, HEX, CYS
+                chHEXArray[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["HEX"].ToArray(), label: "HEX", lineWidth: 0); //ROX, HEX, CYS
                 chHEXArray[chamberNum].visible = chHEXIsCheck[chamberNum];
             }
             if (chDataDic["CY5"].Count > 0)
             {
-                chCY5Array[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["CY5"].ToArray(), label: "HEX", lineWidth: 0); //ROX, HEX, CYS
+                chCY5Array[chamberNum] = formsPlot.plt.PlotScatter(dataXList.ToArray(), chDataDic["CY5"].ToArray(), label: "CY5", lineWidth: 0); //ROX, HEX, CYS
                 chCY5Array[chamberNum].visible = chCY5IsCheck[chamberNum];
             }
 
@@ -207,10 +207,10 @@ namespace ABI_POC_PCR.GraphPlot
             formsPlot.plt.Layout(xLabelHeight:40);
             formsPlot.Configure(recalculateLayoutOnMouseUp: false);
             
-            formsPlot.plt.PlotHLine(y: Ct_FAM, label: "HEX baseline");
-            formsPlot.plt.PlotHLine(y: Ct_ROX, label: "CY5 baseline");
-            formsPlot.plt.PlotHLine(y: Ct_HEX, label: "FAM baseline");
-            formsPlot.plt.PlotHLine(y: Ct_CY5, label: "HEX baseline");
+            formsPlot.plt.PlotHLine(y: Ct_FAM, label: "FAM baseline");
+            formsPlot.plt.PlotHLine(y: Ct_ROX, label: "ROX baseline");
+            formsPlot.plt.PlotHLine(y: Ct_HEX, label: "HEX baseline");
+            formsPlot.plt.PlotHLine(y: Ct_CY5, label: "CY5 baseline");
             //formsPlot.plt.TightenLayout(padding: 40);
             formsPlot.Render();
         }

@@ -425,6 +425,7 @@
             this.label34 = new System.Windows.Forms.Label();
             this.tabControl_Tester = new System.Windows.Forms.TabControl();
             this.tp_TestReport = new System.Windows.Forms.TabPage();
+            this.label42 = new System.Windows.Forms.Label();
             this.dgv_analyticResult = new System.Windows.Forms.DataGridView();
             this.dgv_testResult = new System.Windows.Forms.DataGridView();
             this.lbl_CycleCount = new System.Windows.Forms.Label();
@@ -432,7 +433,6 @@
             this.lbl_Status = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.progressBar_Tester = new System.Windows.Forms.ProgressBar();
-            this.label42 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.listView_PatientInfo = new System.Windows.Forms.ListView();
@@ -1281,7 +1281,7 @@
             this.btn_OpticCurrentROX_MCU.Name = "btn_OpticCurrentROX_MCU";
             this.btn_OpticCurrentROX_MCU.Size = new System.Drawing.Size(95, 40);
             this.btn_OpticCurrentROX_MCU.TabIndex = 2;
-            this.btn_OpticCurrentROX_MCU.Text = "ROX";
+            this.btn_OpticCurrentROX_MCU.Text = "HEX";
             this.btn_OpticCurrentROX_MCU.UseVisualStyleBackColor = true;
             // 
             // tb_OpticCurrentFAM_MCU
@@ -1439,7 +1439,7 @@
             this.btn_RT_PreHoldSecMCU_Eng.Name = "btn_RT_PreHoldSecMCU_Eng";
             this.btn_RT_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreHoldSecMCU_Eng.TabIndex = 2;
-            this.btn_RT_PreHoldSecMCU_Eng.Text = "Time(m)";
+            this.btn_RT_PreHoldSecMCU_Eng.Text = "Time(s)";
             this.btn_RT_PreHoldSecMCU_Eng.UseVisualStyleBackColor = true;
             // 
             // tb_RT_PreTempMCU_Eng
@@ -1494,7 +1494,7 @@
             this.btn_RT_PreHoldSec_Eng.Name = "btn_RT_PreHoldSec_Eng";
             this.btn_RT_PreHoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_RT_PreHoldSec_Eng.TabIndex = 2;
-            this.btn_RT_PreHoldSec_Eng.Text = "Time(m)";
+            this.btn_RT_PreHoldSec_Eng.Text = "Time(s)";
             this.btn_RT_PreHoldSec_Eng.UseVisualStyleBackColor = true;
             this.btn_RT_PreHoldSec_Eng.Click += new System.EventHandler(this.btn_RT_PreHoldSec_Eng_Click);
             // 
@@ -1802,7 +1802,7 @@
             this.btn_PreHoldSec_Eng.Name = "btn_PreHoldSec_Eng";
             this.btn_PreHoldSec_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreHoldSec_Eng.TabIndex = 2;
-            this.btn_PreHoldSec_Eng.Text = "Time(m)";
+            this.btn_PreHoldSec_Eng.Text = "Time(s)";
             this.btn_PreHoldSec_Eng.UseVisualStyleBackColor = true;
             this.btn_PreHoldSec_Eng.Click += new System.EventHandler(this.Peltier_exec);
             // 
@@ -2003,7 +2003,7 @@
             this.btn_PreHoldSecMCU_Eng.Name = "btn_PreHoldSecMCU_Eng";
             this.btn_PreHoldSecMCU_Eng.Size = new System.Drawing.Size(95, 40);
             this.btn_PreHoldSecMCU_Eng.TabIndex = 123;
-            this.btn_PreHoldSecMCU_Eng.Text = "Time(m)";
+            this.btn_PreHoldSecMCU_Eng.Text = "Time(s)";
             this.btn_PreHoldSecMCU_Eng.UseVisualStyleBackColor = true;
             // 
             // tb_PreTempMCU_Eng
@@ -4682,6 +4682,16 @@
             this.tp_TestReport.Click += new System.EventHandler(this.tabPage_Result_Click);
             this.tp_TestReport.Enter += new System.EventHandler(this.tp_TestReport_Enter);
             // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(9, 704);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(140, 25);
+            this.label42.TabIndex = 9;
+            this.label42.Text = "Analytic Result";
+            this.label42.Visible = false;
+            // 
             // dgv_analyticResult
             // 
             this.dgv_analyticResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -4745,16 +4755,6 @@
             this.progressBar_Tester.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar_Tester.TabIndex = 26;
             this.progressBar_Tester.Click += new System.EventHandler(this.progressBar_Tester_Click_1);
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(9, 704);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(140, 25);
-            this.label42.TabIndex = 9;
-            this.label42.Text = "Analytic Result";
-            this.label42.Visible = false;
             // 
             // label31
             // 
@@ -5059,7 +5059,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 492);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 324);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5514,7 +5514,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 371);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 203);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5969,7 +5969,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 192);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 24);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6434,7 +6434,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -8);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -176);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
