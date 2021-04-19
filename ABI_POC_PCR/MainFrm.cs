@@ -2440,25 +2440,25 @@ namespace ABI_POC_PCR
             //populate the rows
             //string[] sigmaScale = SigmaScaleLoad();
 
-            string[] row1 = new string[] { "HEX1", "10", "", "" };
-            string[] row2 = new string[] { "CY51", "10", "", "" };
-            string[] row3 = new string[] { "FAM1", "10", "", "" };
-            string[] row4 = new string[] { "HEX1", "10", "", "" };
+            string[] row1 = new string[] { "FAM1", "10", "", "" };
+            string[] row2 = new string[] { "ROX1", "10", "", "" };
+            string[] row3 = new string[] { "HEX1", "10", "", "" };
+            string[] row4 = new string[] { "CY51", "10", "", "" };
 
-            string[] row5 = new string[] { "HEX2", "10", "", "" };
-            string[] row6 = new string[] { "CY52", "10", "", "" };
-            string[] row7 = new string[] { "FAM2", "10", "", "" };
-            string[] row8 = new string[] { "HEX2", "10", "", "" };
+            string[] row5 = new string[] { "FAM2", "10", "", "" };
+            string[] row6 = new string[] { "ROX2", "10", "", "" };
+            string[] row7 = new string[] { "HEX2", "10", "", "" };
+            string[] row8 = new string[] { "CY52", "10", "", "" };
 
-            string[] row9 = new string[] { "HEX3", "10", "", "" };
-            string[] row10 = new string[] { "CY53", "10", "", "" };
-            string[] row11 = new string[] { "FAM3", "10", "", "" };
-            string[] row12 = new string[] { "HEX3", "10", "", "" };
+            string[] row9 = new string[] { "FAM3", "10", "", "" };
+            string[] row10 = new string[] { "ROX3", "10", "", "" };
+            string[] row11 = new string[] { "HEX3", "10", "", "" };
+            string[] row12 = new string[] { "CY53", "10", "", "" };
 
-            string[] row13 = new string[] { "HEX4", "10", "", "" };
-            string[] row14 = new string[] { "CY54", "10", "", "" };
-            string[] row15 = new string[] { "FAM4", "10", "", "" };
-            string[] row16 = new string[] { "HEX4", "10", "", "" };
+            string[] row13 = new string[] { "FAM4", "10", "", "" };
+            string[] row14 = new string[] { "ROX4", "10", "", "" };
+            string[] row15 = new string[] { "HEX4", "10", "", "" };
+            string[] row16 = new string[] { "CY54", "10", "", "" };
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2545,10 +2545,10 @@ namespace ABI_POC_PCR
             double val3 = Math.Truncate(three * 100) / 100;
             double val4 = Math.Truncate(four * 100) / 100;
 
-            dt.Rows.Add("HEX", val1.ToString());
-            dt.Rows.Add("CY5", val2.ToString());
-            dt.Rows.Add("FAM", val3.ToString());
-            dt.Rows.Add("HEX", val4.ToString());
+            dt.Rows.Add("FAM", val1.ToString());
+            dt.Rows.Add("ROX", val2.ToString());
+            dt.Rows.Add("HEX", val3.ToString());
+            dt.Rows.Add("CY5", val4.ToString());
 
             dgv.DataSource = dt;
 
@@ -7035,10 +7035,14 @@ namespace ABI_POC_PCR
 
                 dgv_testResult.Columns[0].Name = "";
                 dgv_testResult.Columns[0].MinimumWidth = 320;
-                dgv_testResult.Columns[1].Name = "COVID";
+                dgv_testResult.Columns[1].Name = "COVID (POS or NEG)";
                 dgv_testResult.Columns[1].MinimumWidth = 320;
-                dgv_testResult.Columns[2].Name = "RETEST";
+                dgv_testResult.Columns[2].Name = "Presumptive POS";
                 dgv_testResult.Columns[2].MinimumWidth = 320;
+                dgv_testResult.Columns[3].Name = "Invalid Test";
+                dgv_testResult.Columns[3].MinimumWidth = 320;
+
+
 
                 dgv_testResult.SelectionMode = DataGridViewSelectionMode.CellSelect;
                 dgv_testResult.MultiSelect = false;
@@ -7366,69 +7370,136 @@ namespace ABI_POC_PCR
 
             if(sm.testName == "COVID")
             {
-                //tube1
-                if (dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[1].Cells[2].Value == "+")
+                //tube1 - covid (pos or neg)
+                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[0].Cells[1].Value = "+";
-                    dgv_testResult.Rows[0].Cells[2].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if((dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[1].Cells[2].Value == "+"))
+                else if((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
                 {
-                    dgv_testResult.Rows[0].Cells[1].Value = "-";
-                    dgv_testResult.Rows[0].Cells[2].Value = "-";
+                    dgv_testResult.Rows[0].Cells[1].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
-                else
+                //presumtive pos
+                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[0].Cells[2].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
+                //NEG
+                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[0].Cells[1].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //invalid
+                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[0].Cells[3].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+
+
+
 
                 //tube2
-                if (dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[5].Cells[2].Value == "+")
+                if (dgv_interpretation_ct.Rows[4].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[1].Cells[1].Value = "+";
-                    dgv_testResult.Rows[1].Cells[2].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if ((dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[5].Cells[2].Value == "+"))
+                else if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+"))
                 {
-                    dgv_testResult.Rows[1].Cells[1].Value = "-";
-                    dgv_testResult.Rows[1].Cells[2].Value = "-";
+                    dgv_testResult.Rows[1].Cells[1].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
-                else
+                //presumtive pos
+                 if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[1].Cells[2].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //NEG
+                if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[1].Cells[1].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                
+                //invalid
+                if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[1].Cells[3].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                else if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[1].Cells[3].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
+
+
                 //tube3
-                if (dgv_interpretation_ct.Rows[10].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[9].Cells[2].Value == "+")
+                if (dgv_interpretation_ct.Rows[8].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[2].Cells[1].Value = "+";
-                    dgv_testResult.Rows[2].Cells[2].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if ((dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[9].Cells[2].Value == "+"))
+                else if ((dgv_interpretation_ct.Rows[8].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+"))
                 {
-                    dgv_testResult.Rows[2].Cells[1].Value = "-";
-                    dgv_testResult.Rows[2].Cells[2].Value = "-";
+                    dgv_testResult.Rows[2].Cells[1].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
-                else
+                //presumtive pos
+                if ((dgv_interpretation_ct.Rows[8].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[2].Cells[2].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //NEG
+                if ((dgv_interpretation_ct.Rows[8].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[2].Cells[1].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //invalid
+                if ((dgv_interpretation_ct.Rows[8].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[2].Cells[3].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
 
                 //tube4
-                if (dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[13].Cells[2].Value == "+")
+                if (dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
-                    dgv_testResult.Rows[3].Cells[2].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if ((dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[13].Cells[2].Value == "+"))
+                else if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
-                    dgv_testResult.Rows[3].Cells[1].Value = "-";
-                    dgv_testResult.Rows[3].Cells[2].Value = "-";
+                    dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
-                else
+                //presumtive pos
+                if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[3].Cells[2].Value = "+";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //NEG
+                if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
+                {
+                    dgv_testResult.Rows[3].Cells[1].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
+                }
+                //invalid
+                if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "-"))
+                {
+                    dgv_testResult.Rows[3].Cells[3].Value = "-";
+                    //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
 
