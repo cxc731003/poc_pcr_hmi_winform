@@ -184,7 +184,6 @@ namespace ABI_POC_PCR
         {
             InitializeComponent();
             
-
             //프로그램 실행시 Data 폴더 확인 및 없을경우 Data 폴더 생성
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\data");
             if (!di.Exists) { di.Create(); }
@@ -329,6 +328,8 @@ namespace ABI_POC_PCR
             //SetScottPlot();
 
             serialBarcode.ReceivedEvent += GetSerialStringBarcode;
+
+            record_load();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -336,6 +337,8 @@ namespace ABI_POC_PCR
             //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
             init_Test_Result();
 
+            ctLimit_Load();
+           
 
             updateDeviceStatus("Stop");
 
@@ -1871,8 +1874,10 @@ namespace ABI_POC_PCR
                 Int32.TryParse(d4[q], out iD4[q]);
             }
 
-            //for(int i = 0; i < sm.measured_cnt; i++)
-            for (int i = 0; i < Plotter.COL_CNT; i++)
+
+            //for (int i = 0; i < Plotter.COL_CNT; i++)
+
+            for(int i = 0; i < sm.measured_cnt; i++)
             {
                 switch (tube_idx + 1)
                 {
@@ -1951,20 +1956,31 @@ namespace ABI_POC_PCR
         {
             //dgv_CycleForBaseCalculation.Rows[0].Cells[0].Value = "";
             //Plotter.isThisCycleWouldbeUsedForBaseCal[0] = dgv_CycleForBaseCalculation.Rows[0].Cells[0].FormattedValue.ToString();
-            Plotter.CycleCntForBaseCal = 0;
-            for (int i = 0; i < 45; i++)
+            try
             {
-                if (dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "v"
-                    || dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "V")
+                Plotter.CycleCntForBaseCal = 0;
+                for (int i = 0; i < 45; i++)
                 {
-                    Plotter.CycleCntForBaseCal++;
-                    Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 1;
-                }
-                else
-                {
-                    Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 0;
+                    if (dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "v"
+                        || dgv_CycleForBaseCalculation.Rows[0].Cells[i].FormattedValue.ToString() == "V")
+                    {
+                        Plotter.CycleCntForBaseCal++;
+                        Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 1;
+                        Plotter.MaxCycleForBaseCal = i;
+                    }
+                    else
+                    {
+                        Plotter.isThisCycleWouldbeUsedForBaseCal[i] = 0;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+
+            }
+
+
+            
         }
 
         public double CtCycleCal()
@@ -2020,7 +2036,7 @@ namespace ABI_POC_PCR
                     }
                 }
 
-                base_avg[i] = (base_avg[i] - min - max) / (Plotter.CycleCntForBaseCal - 2);
+                base_avg[i] = (base_avg[i]) / (Plotter.CycleCntForBaseCal);
 
 
                 for (int m = 0; m < Plotter.COL_CNT; m++)
@@ -2050,6 +2066,10 @@ namespace ABI_POC_PCR
             double[] base_temp = new double[Plotter.COL_CNT];
             double[] base_deviation = new double[Plotter.CH_CNT * Plotter.DYE_CNT];
 
+            double[] temp_max = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            double[] temp_min = new double[16] { 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500 };
+            double[] temp_pre = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 
             for (int l = 0; l < Plotter.COL_CNT; l++)
             {
@@ -2077,18 +2097,24 @@ namespace ABI_POC_PCR
                         if (j > Plotter.MaxCycleForBaseCalculation)
                             Plotter.MaxCycleForBaseCalculation = j;
 
+
                         base_temp[j] = Convert.ToDouble(MEASURED_DATA[i, j]);
+                        if (base_temp[j] > temp_max[i]) temp_max[i] = base_temp[j];
+                        if (base_temp[j] < temp_min[i]) temp_min[i] = base_temp[j];
 
                         //Int32.TryParse(MEASURED_DATA[i, j], out temp);
                         base_avg[i] += base_temp[j];
+
                     }
                     else
                     {
                         base_temp[j] = 0;
                     }
                 }
+                base_avg[i] -= temp_max[i];
+                base_avg[i] -= temp_min[i];
 
-                base_avg[i] = (base_avg[i]) / (Plotter.CycleCntForBaseCal);
+                base_avg[i] = (base_avg[i] ) / (Plotter.CycleCntForBaseCal -2 );
                 BaselineVal[i] = base_avg[i];
 
                 for (int m = 0; m < Plotter.COL_CNT; m++)
@@ -2100,7 +2126,11 @@ namespace ABI_POC_PCR
                         base_deviation[i] += (base_temp[m] - base_avg[i]) * (base_temp[m] - base_avg[i]);
                     }
                 }
-                base_deviation[i] /= Plotter.CycleCntForBaseCal;
+
+                base_deviation[i] -= ((temp_max[i] - base_avg[i]) * (temp_max[i] - base_avg[i]));
+                base_deviation[i] -= ((temp_min[i] - base_avg[i]) * (temp_min[i] - base_avg[i]));
+
+                base_deviation[i] /= (Plotter.CycleCntForBaseCal-2);
                 base_deviation[i] = Math.Pow(base_deviation[i], 0.5);
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
                 //CtlineVal[i] = (double)(iCt_temp * BaselineVal[i]);
@@ -2114,6 +2144,10 @@ namespace ABI_POC_PCR
         public void baseCalculationAverage()
         {
             int temp;
+            double temp_max = 0;
+            double temp_min = 0;
+            double temp_pre = 0;
+            
             for (int k = 0; k < 16; k++)
             {
                 BaselineVal[k] = 0;
@@ -2143,11 +2177,22 @@ namespace ABI_POC_PCR
                         double data_temp;
 
                         data_temp = Convert.ToDouble(MEASURED_DATA[i, j]);
+                        if (data_temp > temp_pre)
+                        {
+                            temp_max = data_temp;
+                        }
+
+                        if(data_temp < temp_pre)
+                        {
+                            temp_min = data_temp;
+                        }
+                        temp_pre = data_temp;
+                        
                         //Int32.TryParse(MEASURED_DATA[i, j], out temp);
                         BaselineVal[i] += data_temp;
                     }
                 }
-                BaselineVal[i] = BaselineVal[i] / Plotter.CycleCntForBaseCal;
+                BaselineVal[i] = ( BaselineVal[i]) / (Plotter.CycleCntForBaseCal ); // 2: min, max    two 
                 //Int32.TryParse(MEASURED_DATA[i, 0], out ic_value[i]);
                 //CtlineVal[i] = (double)(iCt_scale * BaselineVal[i]);
                 //ic_value[i] = MEASURED_DATA[i, 0];
@@ -2208,6 +2253,15 @@ namespace ABI_POC_PCR
             double tempCt = 0;
             double value = 0;
 
+            int baseCalculationMaxCycle = 0;
+
+            for(int k = 0; k < Plotter.CYCLE_CNT - 1; k++)
+            {
+                if (Plotter.isThisCycleWouldbeUsedForBaseCal[k] == 1)
+                    baseCalculationMaxCycle = k + 3;
+            }
+                
+
             for (int i = 0; i < 16; i++)
             {
                 tempCt = 0;
@@ -2216,22 +2270,24 @@ namespace ABI_POC_PCR
                     value = (Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i]) * scaleFactor[i];
                     if (value < 0) value = 0;
                     //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
-                    if (value > (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i])
+                    if (value > (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i] && (value > Convert.ToDouble(sm.ct_Limit[i])))//bigger than baseline that is calculated ( subtracted from ct line and multiplied by deviation )
                     {
                         Plotter.CtCycles[i] = j; // start at 3 cycles
                         tempCt = j;
-                        break;
+                        if(tempCt > baseCalculationMaxCycle) break; //  if CT line timing is earier than baseline Calculation period, we must pass that. 
                     }
                     else if (value < (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i])
                     {
                         Plotter.CtCycles[i] = 0;
                     }
                 }
-                if (tempCt < 10)
-                {
 
-                }
-                else
+                //if (tempCt < 10)
+                //{
+
+                //}
+
+                if( tempCt > baseCalculationMaxCycle)
                 {
                     double tempCtline = Convert.ToDouble(MEASURED_DATA[i, (int)tempCt - 1]);
                     double delta = Math.Abs(((Convert.ToDouble(MEASURED_DATA[i, (int)tempCt]) - tempCtline)) / 100);
@@ -2306,8 +2362,15 @@ namespace ABI_POC_PCR
 
         public void updateDataNGraph()
         {
-            MatchAndFindOpticDataForResultForRealTime();
-            //MatchAndFindOpticDataForResult();
+
+            if(checkBox3.Checked)
+            {
+                MatchAndFindOpticDataForResult();
+            }
+            else
+            {
+                MatchAndFindOpticDataForResultForRealTime();
+            }
 
             if (sm.DataUpdateFlag)
             {
@@ -2327,21 +2390,26 @@ namespace ABI_POC_PCR
                 sm.isFirstUpdate = false;
                 FindCyclesForBaseCalculation();
 
-                if (chkbox_use_avg.Checked)
+                if(Plotter.MaxCycleForBaseCal < sm.Routine_Cnt) //routine_cnt)
                 {
-                    baseCalculationAverage();//baseCalculation();
+
+                    if (chkbox_use_avg.Checked)
+                    {
+                        baseCalculationAverage();//baseCalculation();
+
+                    }
+                    else if (chkbox_use_standard_dev.Checked)
+                    {
+                        baseCalculationAverage();
+                        baseCalculationDeviation();
+                    }
+
+                    //scale factor calculation
+                    scaleFactorCalculation();
+
+                    CtCyclesCalculation();
 
                 }
-                else if (chkbox_use_standard_dev.Checked)
-                {
-                    baseCalculationAverage();
-                    baseCalculationDeviation();
-                }
-
-                //scale factor calculation
-                scaleFactorCalculation();
-
-                CtCyclesCalculation();
 
                 drawDataGridView(dgvCtTable1, Plotter.CtCycles[0], Plotter.CtCycles[1], Plotter.CtCycles[2], Plotter.CtCycles[3]);
                 drawDataGridView(dgvCtTable2, Plotter.CtCycles[4], Plotter.CtCycles[5], Plotter.CtCycles[6], Plotter.CtCycles[7]);
@@ -2419,7 +2487,7 @@ namespace ABI_POC_PCR
 
         public void initDiagnosisCT()
         {
-            dgv_interpretation_ct.ColumnCount = 4;
+            dgv_interpretation_ct.ColumnCount = 5;
             dgv_interpretation_ct.ColumnHeadersVisible = true;
 
             //DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -2433,6 +2501,7 @@ namespace ABI_POC_PCR
             dgv_interpretation_ct.Columns[1].Name = "Threshold";
             dgv_interpretation_ct.Columns[2].Name = "Result";
             dgv_interpretation_ct.Columns[3].Name = "Bases";
+            dgv_interpretation_ct.Columns[4].Name = "Ct limit";
             //dataGridView_Diagnosis.Columns[9].Name = "INH";
 
             //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
@@ -2440,25 +2509,25 @@ namespace ABI_POC_PCR
             //populate the rows
             //string[] sigmaScale = SigmaScaleLoad();
 
-            string[] row1 = new string[] { "FAM1", "10", "", "" };
-            string[] row2 = new string[] { "ROX1", "10", "", "" };
-            string[] row3 = new string[] { "HEX1", "10", "", "" };
-            string[] row4 = new string[] { "CY51", "10", "", "" };
+            string[] row1 = new string[] { "FAM1", "10", "", "","" };
+            string[] row2 = new string[] { "ROX1", "10", "", "","" };
+            string[] row3 = new string[] { "HEX1", "10", "", "" ,""};
+            string[] row4 = new string[] { "CY51", "10", "", "" ,""};
 
-            string[] row5 = new string[] { "FAM2", "10", "", "" };
-            string[] row6 = new string[] { "ROX2", "10", "", "" };
-            string[] row7 = new string[] { "HEX2", "10", "", "" };
-            string[] row8 = new string[] { "CY52", "10", "", "" };
+            string[] row5 = new string[] { "FAM2", "10", "", "" ,""};
+            string[] row6 = new string[] { "ROX2", "10", "", "" ,""};
+            string[] row7 = new string[] { "HEX2", "10", "", "" ,""};
+            string[] row8 = new string[] { "CY52", "10", "", "" ,""};
 
-            string[] row9 = new string[] { "FAM3", "10", "", "" };
-            string[] row10 = new string[] { "ROX3", "10", "", "" };
-            string[] row11 = new string[] { "HEX3", "10", "", "" };
-            string[] row12 = new string[] { "CY53", "10", "", "" };
+            string[] row9 = new string[] { "FAM3", "10", "", "" ,""};
+            string[] row10 = new string[] { "ROX3", "10", "", "" ,""};
+            string[] row11 = new string[] { "HEX3", "10", "", "" ,""};
+            string[] row12 = new string[] { "CY53", "10", "", "" ,""};
 
-            string[] row13 = new string[] { "FAM4", "10", "", "" };
-            string[] row14 = new string[] { "ROX4", "10", "", "" };
-            string[] row15 = new string[] { "HEX4", "10", "", "" };
-            string[] row16 = new string[] { "CY54", "10", "", "" };
+            string[] row13 = new string[] { "FAM4", "10", "", "" ,""};
+            string[] row14 = new string[] { "ROX4", "10", "", "" ,""};
+            string[] row15 = new string[] { "HEX4", "10", "", "" ,""};
+            string[] row16 = new string[] { "CY54", "10", "", "" ,""};
 
             object[] rows = new object[] { row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15, row16 };
 
@@ -2970,6 +3039,10 @@ namespace ABI_POC_PCR
             resetCartridgeInfo();
 
             initAllScottPlot();
+            removeAlldgv();
+                      
+            logToFile.MakeNewFile();
+
 
             presetDataGrid_ct(dgv_opticDatum_tube1, chamberName[0]);
             presetDataGrid_ct(dgv_opticDatum_tube2, chamberName[1]);
@@ -3188,6 +3261,12 @@ namespace ABI_POC_PCR
 
             routine_cnt = 0;
             processStep = 0;
+
+            sm.COVID_RESULT1 = new string[3];
+            sm.COVID_RESULT2 = new string[3];
+            sm.COVID_RESULT3 = new string[3];
+            sm.COVID_RESULT4 = new string[3];
+
         }
         private void _start_Process()
         {
@@ -3197,7 +3276,7 @@ namespace ABI_POC_PCR
             setProcessMode(9);
 
             bSaveLog = true;
-            logToFile.MakeNewFile();
+           
 
             // 시작 명령 전송
             serial.SendLine(":start");
@@ -3617,7 +3696,7 @@ namespace ABI_POC_PCR
 
                                 if (sm.measured_cnt < Plotter.COL_CNT - 1)
                                 {
-                                    ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                    //++sm.measured_cnt;//sm.measured_cnt = -1;
                                 }
                                 else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
                                 {
@@ -3760,7 +3839,7 @@ namespace ABI_POC_PCR
 
                                     if (sm.measured_cnt < Plotter.COL_CNT - 1)
                                     {
-                                        ++sm.measured_cnt;//sm.measured_cnt = -1;
+                                        //++sm.measured_cnt;//sm.measured_cnt = -1;
                                     }
                                     else if (sm.measured_cnt >= Plotter.COL_CNT - 1)
                                     {
@@ -5138,6 +5217,16 @@ namespace ABI_POC_PCR
                     //tb_PreTempMCU_Eng.Text = commVar[1];
                     //SetTextBox(tb_PreTempMCU_Eng, commVar[1]);
                     Int32.TryParse(commVar[1], out routine_cnt);
+                    sm.Routine_Cnt = routine_cnt;
+
+                    for(int i = 0;  i < Plotter.COL_CNT; i++)
+                    {
+                        if(sm.Routine_Cnt == Plotter.Optic_Measure_Idx[i])
+                        {
+                            sm.measured_cnt++;
+                        }
+                    }
+
                 }
 
             }
@@ -5472,123 +5561,98 @@ namespace ABI_POC_PCR
 
         }
 
+        enum RECORD_IDX
+        {
+            DATE = 0, MC_NO = 1, TEST_NAME = 2, START_TIME = 3, END_TIME = 4, CARTRIDGE_ID = 5, SAMPLE_ID = 6, RESULT = 7, FILENAME = 8, USER_NAME = 9, USER_ID = 10, CT = 11,
+
+        }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
 
             // 배경 이미지를 인쇄
-            System.Drawing.Image img = System.Drawing.Image.FromFile("data\\ABI출력폼.bmp");
+            //System.Drawing.Image img = System.Drawing.Image.FromFile("data\\ABI출력폼.bmp");
+
+            System.Drawing.Image img = System.Drawing.Image.FromFile("data\\TestReport.bmp");
+
             Point loc = new Point(0, 0);
             e.Graphics.DrawImage(img, loc);
 
 
-            ////////////////////////////////////////////////////////////////////////////
-            /// 검사 정보
-            float x_org = 210.0F;
-            float y_org = 289.0F;
-            float x_offset = 340.0F;
-            float y_offset = 31.0F;
+            float x_org = 105.0F;
+            float y_org = 95.0F;
 
-            // 검사 시작시간 인쇄
-            myStringPrint(g, "2020년9월2일 오후 6:12", x_org, y_org);
-
-            // 검사 종료시간 인쇄
-            myStringPrint(g, "2020년9월2일 오후 8:22", x_org + x_offset, y_org); //myStringPrint(g, );
-
-            // 검사 담당자 
-            myStringPrint(g, "홍길동", x_org, y_org + y_offset); //sm.userName
-
-            // 피검사자ID 담당자 
-            myStringPrint(g, "피검사자ID", x_org + x_offset, y_org + y_offset); //sm.userID
-
-            // 담당자ID 
-            myStringPrint(g, "담당자ID", x_org, y_org + y_offset * 2); 
-
-            // 샘플ID 담당자 
-            myStringPrint(g, "샘플ID", x_org + x_offset, y_org + y_offset * 2);
-
-            // 검사종류 
-            myStringPrint(g, "검사종류", x_org, y_org + y_offset * 3);
-
-            // 카트리지ID 담당자 
-            myStringPrint(g, "카트리지ID", x_org + x_offset, y_org + y_offset * 3);
-
-            ////////////////////////////////////////////////////////////////////////////
-            /// 분석결과
-            // 챔버1
-            x_org = 210.0F;
-            y_org = 584.0F;
-            x_offset = 136.0F;
-            y_offset = 31.0F;
-
-            myStringPrint(g, "FAM", x_org + 10, y_org);
-            myStringPrint(g, "FAM", x_org + x_offset / 2 + 10, y_org);
-
-            myStringPrint(g, "ROX", x_org + 10 + x_offset, y_org);
-            myStringPrint(g, "ROX", x_org + x_offset / 2 + 10 + x_offset, y_org);
-
-            myStringPrint(g, "HEX", x_org + 10 + x_offset * 2, y_org);
-            myStringPrint(g, "HEX", x_org + x_offset / 2 + 10 + x_offset * 2, y_org);
-
-            myStringPrint(g, "CY5", x_org + 10 + x_offset * 3, y_org);
-            myStringPrint(g, "CY5", x_org + x_offset / 2 + 10 + x_offset * 3, y_org);
-
-            // 챔버2
-            x_org = 210.0F;
-            y_org = 584.0F + 155.0F;
-            x_offset = 136.0F;
-            y_offset = 31.0F;
-
-            myStringPrint(g, "FAM", x_org + 10, y_org);
-            myStringPrint(g, "FAM", x_org + x_offset / 2 + 10, y_org);
-
-            myStringPrint(g, "ROX", x_org + 10 + x_offset, y_org);
-            myStringPrint(g, "ROX", x_org + x_offset / 2 + 10 + x_offset, y_org);
-
-            myStringPrint(g, "HEX", x_org + 10 + x_offset * 2, y_org);
-            myStringPrint(g, "HEX", x_org + x_offset / 2 + 10 + x_offset * 2, y_org);
-
-            myStringPrint(g, "CY5", x_org + 10 + x_offset * 3, y_org);
-            myStringPrint(g, "CY5", x_org + x_offset / 2 + 10 + x_offset * 3, y_org);
+            //sm.RecordInfoArr[0] = dgv_test_records.Rows[index].Cells[0].FormattedValue.ToString(); // Date
+            //sm.RecordInfoArr[1] = dgv_test_records.Rows[index].Cells[1].FormattedValue.ToString(); // Machine Number
+            //sm.RecordInfoArr[2] = dgv_test_records.Rows[index].Cells[2].FormattedValue.ToString(); // TestName
+            //sm.RecordInfoArr[3] = dgv_test_records.Rows[index].Cells[3].FormattedValue.ToString(); // StartTime
+            //sm.RecordInfoArr[4] = dgv_test_records.Rows[index].Cells[4].FormattedValue.ToString(); // EndTime
+            //sm.RecordInfoArr[5] = dgv_test_records.Rows[index].Cells[5].FormattedValue.ToString(); // Cartridge ID
+            //sm.RecordInfoArr[6] = dgv_test_records.Rows[index].Cells[6].FormattedValue.ToString(); // Sample ID
+            //sm.RecordInfoArr[7] = dgv_test_records.Rows[index].Cells[7].FormattedValue.ToString(); // Result
+            //sm.RecordInfoArr[8] = dgv_test_records.Rows[index].Cells[8].FormattedValue.ToString(); // fileName 
 
 
-            // 챔버3
-            x_org = 210.0F;
-            y_org = 584.0F + 155.0F * 2;
-            x_offset = 136.0F;
-            y_offset = 31.0F;
+            //test Name 
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.TEST_NAME], x_org, y_org);
 
-            myStringPrint(g, "FAM", x_org + 10, y_org);
-            myStringPrint(g, "FAM", x_org + x_offset / 2 + 10, y_org);
+            //Start time
+            if (sm.StartTime == null)
+            {
+                //sm.StartTime = DateTime.Now.ToString();
+                myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.START_TIME], x_org, y_org + 32);
+            }
+            else
+            {
+                myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.START_TIME], x_org, y_org + 32);
+            }
 
-            myStringPrint(g, "ROX", x_org + 10 + x_offset, y_org);
-            myStringPrint(g, "ROX", x_org + x_offset / 2 + 10 + x_offset, y_org);
+            //End Time
+            if (sm.EndTime == null)
+            {
+                myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.END_TIME], x_org, y_org + 64);
+            }
+            else
+            {
+                myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.END_TIME], x_org, y_org + 64);
+            }
 
-            myStringPrint(g, "HEX", x_org + 10 + x_offset * 2, y_org);
-            myStringPrint(g, "HEX", x_org + x_offset / 2 + 10 + x_offset * 2, y_org);
+            //tester Name
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.USER_NAME], x_org + 15, y_org + 160);
 
-            myStringPrint(g, "CY5", x_org + 10 + x_offset * 3, y_org);
-            myStringPrint(g, "CY5", x_org + x_offset / 2 + 10 + x_offset * 3, y_org);
+            //tester ID
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.USER_ID], x_org + 15, y_org + 192);
 
+            //Sample ID 
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.SAMPLE_ID], x_org + 15, y_org + 292);
 
-            // 챔버4
-            x_org = 210.0F;
-            y_org = 584.0F + 155.0F * 3;
-            x_offset = 136.0F;
-            y_offset = 31.0F;
+            //CartridgeID
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.CARTRIDGE_ID], x_org + 15, y_org + 324);
 
-            myStringPrint(g, "FAM", x_org + 10, y_org);
-            myStringPrint(g, "FAM", x_org + x_offset / 2 + 10, y_org);
+            //Result
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.RESULT], x_org + 115, y_org + 440);
 
-            myStringPrint(g, "ROX", x_org + 10 + x_offset, y_org);
-            myStringPrint(g, "ROX", x_org + x_offset / 2 + 10 + x_offset, y_org);
+            //CT Values
+            myStringPrint(g, sm.RecordInfoArr[(int)RECORD_IDX.CT], x_org + 55, y_org + 540);
+            myStringPrint(g, sm.RecordInfoArr[12], x_org + 55, y_org + 562);
+            myStringPrint(g, sm.RecordInfoArr[13], x_org + 55, y_org + 584);
+            myStringPrint(g, sm.RecordInfoArr[14], x_org + 55, y_org + 606);
 
-            myStringPrint(g, "HEX", x_org + 10 + x_offset * 2, y_org);
-            myStringPrint(g, "HEX", x_org + x_offset / 2 + 10 + x_offset * 2, y_org);
+            myStringPrint(g, sm.RecordInfoArr[15], x_org + 170, y_org + 540);
+            myStringPrint(g, sm.RecordInfoArr[16], x_org + 170, y_org + 562);
+            myStringPrint(g, sm.RecordInfoArr[17], x_org + 170, y_org + 584);
+            myStringPrint(g, sm.RecordInfoArr[18], x_org + 170, y_org + 606);
 
-            myStringPrint(g, "CY5", x_org + 10 + x_offset * 3, y_org);
-            myStringPrint(g, "CY5", x_org + x_offset / 2 + 10 + x_offset * 3, y_org);
+            myStringPrint(g, sm.RecordInfoArr[19], x_org + 285, y_org + 540);
+            myStringPrint(g, sm.RecordInfoArr[20], x_org + 285, y_org + 562);
+            myStringPrint(g, sm.RecordInfoArr[21], x_org + 285, y_org + 584);
+            myStringPrint(g, sm.RecordInfoArr[22], x_org + 285, y_org + 606);
+
+            myStringPrint(g, sm.RecordInfoArr[23], x_org + 400, y_org + 540);
+            myStringPrint(g, sm.RecordInfoArr[24], x_org + 400, y_org + 562);
+            myStringPrint(g, sm.RecordInfoArr[25], x_org + 400, y_org + 584);
+            myStringPrint(g, sm.RecordInfoArr[26], x_org + 400, y_org + 606);
         }
 
 
@@ -5726,9 +5790,7 @@ namespace ABI_POC_PCR
                         process.Kill();
                     }
                 }
-
-            
-
+                
             }
             else   // 취소
             {
@@ -6280,6 +6342,14 @@ namespace ABI_POC_PCR
         private void btnSimul3_Click(object sender, EventArgs e)
         {
             sm.Routine_Cnt++;
+
+            for (int i = 0; i < Plotter.COL_CNT; i++)
+            {
+                if (sm.Routine_Cnt == Plotter.Optic_Measure_Idx[i])
+                {
+                    sm.measured_cnt++;
+                }
+            }
             /*        
             int rand = 0;
             for (int i = 0; i< 16; i++)
@@ -6289,7 +6359,7 @@ namespace ABI_POC_PCR
                 
             }
             */
-         }
+        }
 
         private void btnSimul4_Click(object sender, EventArgs e)
         {
@@ -6399,6 +6469,8 @@ namespace ABI_POC_PCR
             setCtValueToDGV(dgv_interpretation_ct, Plotter.CtCycles);
             setCtResultToDGV(dgv_interpretation_ct);
             update_analytic_result();
+
+            update_testResult_final();
             //updateAnalyticResult(selectedDgv);
         }
 
@@ -6617,27 +6689,36 @@ namespace ABI_POC_PCR
 
         private void button11_Click(object sender, EventArgs e)
         {
+            sm.measured_cnt = Plotter.COL_CNT;
             updateAllPlots();
         }
 
         public void updateAllPlots()
         {
-            Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
-            for (int i = 0; i < Plotter.CH_CNT; i++)
+            try
             {
-                if (chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
+                Plotter.ResetAllPlots(formsPlot1, formsPlot2, formsPlot3, formsPlot4);
+                for (int i = 0; i < Plotter.CH_CNT; i++)
                 {
-                    for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+                    if (chkBox_baselineNoScale.Checked || chkBox_BaselineScale.Checked)
                     {
-                        zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j]) * scaleFactor[j];
+                        for (int j = 0; j < Plotter.CH_CNT * Plotter.DYE_CNT; j++)
+                        {
+                            zerosetValArray[j] = (CtlineVal[j] - BaselineVal[j]) * scaleFactor[j];
+                        }
+                        updateScottPlot(i, zerosetValArray);
                     }
-                    updateScottPlot(i, zerosetValArray);
-                }
-                else
-                {
-                    updateScottPlot(i, CtlineVal);
+                    else
+                    {
+                        updateScottPlot(i, CtlineVal);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                ex.StackTrace.ToString();
+            }
+            
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -7016,6 +7097,11 @@ namespace ABI_POC_PCR
           
             init_Interpretation_howTo();
 
+            for (int i = 0; i < 16; i++)
+            {
+                dgv_interpretation_ct.Rows[i].Cells[4].Value = sm.ct_Limit[i];
+            }
+
 
         }
 
@@ -7331,7 +7417,6 @@ namespace ABI_POC_PCR
 
             if(sm.testName == "TB")
             {
-
                 //MTC
                 if (dgv_interpretation_howTo.Rows[0].Cells[1].Value == dgv_interpretation_ct.Rows[0].Cells[2].Value
                     && dgv_interpretation_howTo.Rows[0].Cells[2].Value == dgv_interpretation_ct.Rows[3].Cells[2].Value)
@@ -7371,12 +7456,14 @@ namespace ABI_POC_PCR
             if(sm.testName == "COVID")
             {
                 //tube1 - covid (pos or neg)
-                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")
+                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" //FAM
+                    && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" //HEX 
+                    && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")//CY5
                 {
                     dgv_testResult.Rows[0].Cells[1].Value = "+";
                     //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
+                else if((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")) 
                 {
                     dgv_testResult.Rows[0].Cells[1].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
@@ -7394,9 +7481,10 @@ namespace ABI_POC_PCR
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 //invalid
-                if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-"))
+                if ((dgv_interpretation_ct.Rows[3].Cells[2].Value == "-")
+                    || (dgv_interpretation_ct.Rows[0].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "-"))
                 {
-                    dgv_testResult.Rows[0].Cells[3].Value = "-";
+                    dgv_testResult.Rows[0].Cells[3].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
@@ -7428,17 +7516,19 @@ namespace ABI_POC_PCR
                 }
                 
                 //invalid
-                if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"))
+                if (dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"||
+                    (dgv_interpretation_ct.Rows[4].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"))
                 {
                     dgv_testResult.Rows[1].Cells[3].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
+                /*
                 else if ((dgv_interpretation_ct.Rows[4].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[6].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[7].Cells[2].Value == "-"))
                 {
                     dgv_testResult.Rows[1].Cells[3].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
-
+                */
 
 
                 //tube3
@@ -7465,9 +7555,10 @@ namespace ABI_POC_PCR
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 //invalid
-                if ((dgv_interpretation_ct.Rows[8].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "-"))
+                if (dgv_interpretation_ct.Rows[11].Cells[2].Value == "-" ||
+                    (dgv_interpretation_ct.Rows[8].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[10].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[11].Cells[2].Value == "-"))
                 {
-                    dgv_testResult.Rows[2].Cells[3].Value = "-";
+                    dgv_testResult.Rows[2].Cells[3].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
@@ -7476,29 +7567,35 @@ namespace ABI_POC_PCR
                 if (dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
                 else if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 //presumtive pos
                 if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[3].Cells[2].Value = "+";
+                    sm.COVID_RESULT4[1] = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 //NEG
                 if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
+                    sm.COVID_RESULT4[0] = "-";
                     dgv_testResult.Rows[3].Cells[1].Value = "-";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
                 //invalid
-                if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "-"))
+                if (dgv_interpretation_ct.Rows[15].Cells[2].Value == "-" ||
+                    (dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "-"))
                 {
-                    dgv_testResult.Rows[3].Cells[3].Value = "-";
+                    sm.COVID_RESULT4[2] = "+";
+                    dgv_testResult.Rows[3].Cells[3].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
 
@@ -7879,6 +7976,348 @@ namespace ABI_POC_PCR
         }
 
         private void btn_2TempMCU_Eng_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_OCHoldSec_Eng_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_pdf_print_Click(object sender, EventArgs e)
+        {
+            printReport();
+        }
+        public void printReport()
+        {
+            //string filename = Application.StartupPath + @"\TestResult"; 
+
+            try
+            {
+                string filename = sm.resultFileName.Replace("csv", "pdf");
+                /*
+                //printDocument1_PrintPage(null, null);
+                string dt = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+                // 결과 pdf 인쇄
+                string filePath = Application.StartupPath + @"\TestResult";
+
+                filePath += "/PCR " + dt + ".pdf";
+                */
+                printDocument1.DocumentName = "PCR report printing...";
+                printDocument1.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                printDocument1.PrinterSettings.PrintFileName = filename;
+                printDocument1.PrinterSettings.PrintToFile = true;
+                printDocument1.Print(); // 인쇄 시작
+
+              
+
+                
+            }
+            catch (Exception ex)
+            {
+                //MsgBox msgbox = new MsgBox("Info", "Please select a item", "", "OK", "");
+                //msgbox.ShowDialog();
+                //MessageBox.Show("Please reselect item.", "Info" , MessageBoxButtons.OK, MessageBoxIcon.Information );
+            }
+
+        }
+
+        public void record_load()
+        {
+            string sourceDir = Application.StartupPath + @"\TestResult";
+
+            string[] picList = Directory.GetFiles(sourceDir, "*.csv");
+            string[,] resultArr = new string[65535, 12]; // 6만개 까지 저장됨 
+            string[] result = new string[12];
+
+            for (int j = 0; j < picList.Length; j++)
+            {
+                string[] lines = File.ReadAllLines(picList[j]);
+
+                string temp = "";
+
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    temp = lines[i];
+                    char[] separator = { ',' };
+                    result = temp.Split(separator);
+                }
+                for (int k = 0; k < result.Length; k++)
+                {
+                    resultArr[j, k] = result[k];
+                }
+
+                if (dgv_test_records.Rows.GetRowCount(DataGridViewElementStates.Visible) > 1)
+                {
+                    dgv_test_records.Rows.RemoveAt(0);
+                }
+
+            }
+
+
+            dgv_test_records.ColumnCount = 12;
+            dgv_test_records.ColumnHeadersVisible = true;
+
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+
+            columnHeaderStyle.BackColor = Color.Beige;
+            columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            dgv_test_records.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            //set the column header names.
+            dgv_test_records.Columns[0].Name = "Date";
+            dgv_test_records.Columns[0].MinimumWidth = 100;
+            dgv_test_records.Columns[1].Name = "M/C No.";
+            dgv_test_records.Columns[2].Name = "Test Name";
+            dgv_test_records.Columns[3].Name = "Start Time";
+            dgv_test_records.Columns[4].Name = "End Time";
+            dgv_test_records.Columns[5].Name = "CartridgeID";
+            dgv_test_records.Columns[5].MinimumWidth = 200;
+            dgv_test_records.Columns[6].Name = "SampleID";
+            dgv_test_records.Columns[6].MinimumWidth = 200;
+            dgv_test_records.Columns[7].Name = "Result";
+            dgv_test_records.Columns[7].MinimumWidth = 200;
+            dgv_test_records.Columns[8].Name = "FileName";
+            dgv_test_records.Columns[9].Name = "userName";
+            dgv_test_records.Columns[10].Name = "userID";
+            dgv_test_records.Columns[11].Name = "CT Values";
+
+            string[] record_rows = new string[12];
+            //dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.AliceBlue;
+            for (int l = 0; l < picList.Length; l++)
+            {
+                for (int m = 0; m < 12; m++)
+                {
+                    record_rows[m] = resultArr[l, m];
+                }
+                dgv_test_records.Rows.Add(record_rows);
+            }
+
+            
+
+
+        }
+        public void update_testResult_final()
+        {
+            string[] row = { "", "", sm.testName, sm.StartTime, sm.EndTime, sm.CartridgeID, sm.SampleID, "", "", "", "" };
+            dgv_testResult_final.Rows.Add(row);
+
+
+            dgv_testResult_final.Rows[0].Cells[0].Value = DateTime.Now.ToShortDateString();
+            dgv_testResult_final.Rows[0].Cells[1].Value = sm.machineNumber;
+            dgv_testResult_final.Rows[0].Cells[2].Value = sm.testName;
+            dgv_testResult_final.Rows[0].Cells[3].Value = sm.StartTime;
+            dgv_testResult_final.Rows[0].Cells[4].Value = sm.EndTime;
+            dgv_testResult_final.Rows[0].Cells[5].Value = sm.CartridgeID;
+            dgv_testResult_final.Rows[0].Cells[6].Value = sm.SampleID;
+
+            if (sm.COVID_RESULT4[0] == "+") dgv_testResult_final.Rows[0].Cells[7].Value = "P";//sm.COVID_RESULT1[0];
+            else if (sm.COVID_RESULT4[0] == "-") dgv_testResult_final.Rows[0].Cells[7].Value = "N";
+            else if (sm.COVID_RESULT4[1] == "+") dgv_testResult_final.Rows[0].Cells[7].Value = "Presumptive Positive";
+            else
+            {
+                dgv_testResult_final.Rows[0].Cells[7].Value = "Invalid";
+            }
+            dgv_testResult_final.Rows[0].Cells[8].Value = sm.resultFileName;
+            dgv_testResult_final.Rows[0].Cells[9].Value = sm.userName;
+            dgv_testResult_final.Rows[0].Cells[10].Value = sm.userID;
+
+            dgv_testResult_final.Rows[0].Cells[11].Value = Plotter.CtCycles[0].ToString() + " "
+                + Plotter.CtCycles[1].ToString() + " "
+                + Plotter.CtCycles[2].ToString() + " "
+                + Plotter.CtCycles[3].ToString() + " "
+                + Plotter.CtCycles[4].ToString() + " "
+                + Plotter.CtCycles[5].ToString() + " "
+                + Plotter.CtCycles[6].ToString() + " "
+                + Plotter.CtCycles[7].ToString() + " "
+                + Plotter.CtCycles[8].ToString() + " "
+                + Plotter.CtCycles[9].ToString() + " "
+                + Plotter.CtCycles[10].ToString() + " "
+                + Plotter.CtCycles[11].ToString() + " "
+                + Plotter.CtCycles[12].ToString() + " "
+                + Plotter.CtCycles[13].ToString() + " "
+                + Plotter.CtCycles[14].ToString() + " "
+                + Plotter.CtCycles[15].ToString();
+
+            dgv_testResult_final.Update();
+
+            string dt = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            string filePath2 = Application.StartupPath + @"\TestResult";
+            filePath2 += "/TestResult " + dt + ".csv";
+
+            dgv_testResult_final.Rows[0].Cells[8].Value = filePath2;
+            Save_GridCsv_dgv(filePath2, dgv_testResult_final);
+        }
+
+        private void Save_GridCsv_dgv(string fileName, DataGridView dgvArr)
+        {
+            //DataGridView[] dgvArr = { dataGridView1_Engineer, dataGridView2_Engineer, dataGridView3_Engineer, dataGridView4_Engineer };
+            //DataGridView[] dgvArr = { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
+
+            // 그리드뷰를 파일로 저장함
+            string delimiter = ",";  // 구분자
+            FileStream fs = new FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+            StreamWriter csvExport = new StreamWriter(fs, System.Text.Encoding.UTF8);
+
+            if (dgvArr.Rows.Count == 0) return;
+
+            // 헤더정보 출력
+            if (true)
+            {
+                for (int i = 0; i < dgvArr.Columns.Count; i++)
+                {
+                    csvExport.Write(dgvArr.Columns[i].HeaderText);
+                    if (i != dgvArr.Columns.Count - 1)
+                    {
+                        csvExport.Write(delimiter);
+                    }
+                }
+            }
+            csvExport.Write(csvExport.NewLine); // add new line
+
+            // 데이터 출력
+            foreach (DataGridViewRow row in dgvArr.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    for (int i = 0; i < dgvArr.Columns.Count; i++)
+                    {
+                        csvExport.Write(row.Cells[i].Value);
+                        if (i != dgvArr.Columns.Count - 1)
+                        {
+                            csvExport.Write(delimiter);
+                        }
+                    }
+                    csvExport.Write(csvExport.NewLine); // write new line
+                }
+            }
+            csvExport.Flush(); // flush from the buffers.
+            csvExport.Close();
+            fs.Close();
+        }
+
+        private void tabControl_Tester_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            record_load();
+        }
+
+        private void btn_ct_Limit_save_Click(object sender, EventArgs e)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            string fileName = di.ToString() + "\\ctLimit.info";
+
+            // 기존 파일 삭제
+            FileInfo fileDel = new FileInfo(fileName);
+            if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
+
+            // 새로 저장
+            StreamWriter sw = new StreamWriter(fileName, true);
+
+            //first line
+            string buff = dgv_interpretation_ct.Rows[0].Cells[4].FormattedValue.ToString();
+            for (int i = 1; i < 16; i++)
+            {
+                buff += "," + dgv_interpretation_ct.Rows[i].Cells[4].FormattedValue.ToString();
+            }
+            // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
+
+            sw.WriteLine(buff);
+
+            sw.Close();
+        }
+
+        private void btn_ct_limit_load_Click(object sender, EventArgs e)
+        {
+            ctLimit_Load();
+            for (int i = 0; i < 16; i++)
+            {
+                dgv_interpretation_ct.Rows[i].Cells[4].Value = sm.ct_Limit[i];
+            }
+
+        }
+
+        public void ctLimit_Load()
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+            if (!di.Exists) di.Create();
+
+            string fileName = di.ToString() + "\\ctLimit.info";
+
+            string[] lines = File.ReadAllLines(fileName);
+            string[] result = new string[16];
+
+            int readNum = 1;
+            string temp = "";
+            for (int i = 0; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            {
+                temp = lines[i];
+
+                char[] sep = { ',' };
+
+                result = temp.Split(sep);
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                sm.ct_Limit[i] = result[i];
+                //sm.ct_Limit[i] = result[i];
+
+                //dgv_interpretation_ct.Rows[i].Cells[4].Value = result[i];
+            }
+
+           
+        }
+
+        private void tp_testRecords_Enter(object sender, EventArgs e)
+        {
+            //record_load();
+        }
+
+        private void dgv_test_records_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                int index = dgv_test_records.SelectedRows[0].Index;
+                sm.resultFileName = dgv_test_records.Rows[index].Cells[8].FormattedValue.ToString();
+
+                sm.RecordInfoArr = new string[27];
+                sm.RecordInfoArr[0] = dgv_test_records.Rows[index].Cells[0].FormattedValue.ToString(); //Date
+                sm.RecordInfoArr[1] = dgv_test_records.Rows[index].Cells[1].FormattedValue.ToString(); //Machine Number
+                sm.RecordInfoArr[2] = dgv_test_records.Rows[index].Cells[2].FormattedValue.ToString(); // TestName
+                sm.RecordInfoArr[3] = dgv_test_records.Rows[index].Cells[3].FormattedValue.ToString(); //StartTime
+                sm.RecordInfoArr[4] = dgv_test_records.Rows[index].Cells[4].FormattedValue.ToString(); // EndTime
+                sm.RecordInfoArr[5] = dgv_test_records.Rows[index].Cells[5].FormattedValue.ToString(); // Cartridge ID
+                sm.RecordInfoArr[6] = dgv_test_records.Rows[index].Cells[6].FormattedValue.ToString(); // Sample ID
+                sm.RecordInfoArr[7] = dgv_test_records.Rows[index].Cells[7].FormattedValue.ToString(); // Result
+                sm.RecordInfoArr[8] = dgv_test_records.Rows[index].Cells[8].FormattedValue.ToString(); // fileName 
+
+                sm.RecordInfoArr[9] = dgv_test_records.Rows[index].Cells[9].FormattedValue.ToString(); //userName
+                sm.RecordInfoArr[10] = dgv_test_records.Rows[index].Cells[10].FormattedValue.ToString(); //userID
+
+                string temp = dgv_test_records.Rows[index].Cells[11].FormattedValue.ToString(); //CT values
+                char[] separator = { ' ' };
+                string[] result = temp.Split(separator);
+
+                for (int i = 0; i < 16; i++)
+                {
+                    sm.RecordInfoArr[11 + i] = result[i];
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("검사결과를 선택하세요.", "안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+ 
+            
+        }
+
+        private void dgv_testResult_final_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

@@ -8,6 +8,11 @@ namespace ABI_POC_PCR
 {
     public class SharedMemory
     {
+        public string[] RecordInfoArr { get; set; }
+        public string resultFileName { get; set; }
+
+
+        public int machineNumber { get; set; }
         public int logLineCnt { get; set; }
         public string userID { get; set; } // Tester ID = login ID at first
         public string userPW { get; set; }  // Tester PW = login PW at first
@@ -22,15 +27,24 @@ namespace ABI_POC_PCR
         public string CartridgeID { get; set; }
         public string QualityControl { get; set; }
        
-
-
+        
+        
         public string userAccessibility { get; set; }
         public bool isLoginSucceeded { get; set; }
 
+        public string[] ct_Limit = new string[16];
 
         public string currentLogFileName { get; set; }
 
+        public string[] TB_RESULT1 = new string[3] { "", "", "" }; //MTC, NTM, RIF
+        public string[] TB_RESULT2 = new string[3] { "", "", "" }; //MTC, NTM, RIF
+        public string[] TB_RESULT3 = new string[3] { "", "", "" }; //MTC, NTM, RIF
+        public string[] TB_RESULT4 = new string[3] { "", "", "" }; //MTC, NTM, RIF
 
+        public string[] COVID_RESULT1 = new string[3] { "", "", "" }; //COVID, PRESUMPTIVE POS, INVALID
+        public string[] COVID_RESULT2 = new string[3] { "", "", "" };
+        public string[] COVID_RESULT3 = new string[3] { "", "", "" };
+        public string[] COVID_RESULT4 = new string[3] { "", "", "" };
 
         public int criticalThreshold { get; set; }
         public bool opticReceivedFlag { get; set; }

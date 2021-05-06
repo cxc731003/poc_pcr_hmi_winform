@@ -21,10 +21,7 @@ namespace ABI_POC_PCR
 
         public LogIn()
         {
-            InitializeComponent();
-          
-          
-            
+            InitializeComponent();                     
         }
 
         private void LogIn_Load(object sender, EventArgs e)

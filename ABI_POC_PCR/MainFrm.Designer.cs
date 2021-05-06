@@ -175,6 +175,8 @@
             this.btn_MCURead_Eng = new System.Windows.Forms.Button();
             this.btn_NewRecipe_Eng = new System.Windows.Forms.Button();
             this.tp_Interpretation = new System.Windows.Forms.TabPage();
+            this.btn_ct_limit_load = new System.Windows.Forms.Button();
+            this.btn_ct_Limit_save = new System.Windows.Forms.Button();
             this.ResultLoad = new System.Windows.Forms.Button();
             this.btnResultSave = new System.Windows.Forms.Button();
             this.btn_load_interpretation = new System.Windows.Forms.Button();
@@ -193,6 +195,7 @@
             this.dgvtbc_scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbc_result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbc_Ct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_interpretation_howTo = new System.Windows.Forms.DataGridView();
             this.cb_Test_Interpretation = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -201,8 +204,6 @@
             this.btnBaseCycleSelection_Save = new System.Windows.Forms.Button();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.dgv_CycleForBaseCalculation = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn199 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn200 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn229 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn230 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn231 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -441,6 +442,23 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.lv_testInfo = new System.Windows.Forms.ListView();
+            this.tp_testRecords = new System.Windows.Forms.TabPage();
+            this.dgv_testResult_final = new System.Windows.Forms.DataGridView();
+            this.col0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn199 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn200 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn272 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.E = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn273 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn274 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn275 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn276 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CTs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label39 = new System.Windows.Forms.Label();
+            this.btn_pdf_print = new System.Windows.Forms.Button();
+            this.dgv_test_records = new System.Windows.Forms.DataGridView();
             this.tabPage_rawData = new System.Windows.Forms.TabPage();
             this.label35 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -829,6 +847,9 @@
             this.tp_TestReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_analyticResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult)).BeginInit();
+            this.tp_testRecords.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult_final)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_test_records)).BeginInit();
             this.tabPage_rawData.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1564,6 +1585,7 @@
             this.tb_OCHoldSec_Eng.TabIndex = 3;
             this.tb_OCHoldSec_Eng.Text = "-";
             this.tb_OCHoldSec_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_OCHoldSec_Eng.TextChanged += new System.EventHandler(this.tb_OCHoldSec_Eng_TextChanged);
             // 
             // btn_OCHoldSec_Eng
             // 
@@ -2168,6 +2190,8 @@
             // 
             // tp_Interpretation
             // 
+            this.tp_Interpretation.Controls.Add(this.btn_ct_limit_load);
+            this.tp_Interpretation.Controls.Add(this.btn_ct_Limit_save);
             this.tp_Interpretation.Controls.Add(this.ResultLoad);
             this.tp_Interpretation.Controls.Add(this.btnResultSave);
             this.tp_Interpretation.Controls.Add(this.btn_load_interpretation);
@@ -2193,9 +2217,29 @@
             this.tp_Interpretation.UseVisualStyleBackColor = true;
             this.tp_Interpretation.Enter += new System.EventHandler(this.tp_Interpretation_Enter);
             // 
+            // btn_ct_limit_load
+            // 
+            this.btn_ct_limit_load.Location = new System.Drawing.Point(1372, 774);
+            this.btn_ct_limit_load.Name = "btn_ct_limit_load";
+            this.btn_ct_limit_load.Size = new System.Drawing.Size(200, 35);
+            this.btn_ct_limit_load.TabIndex = 52;
+            this.btn_ct_limit_load.Text = "Ct limit Load";
+            this.btn_ct_limit_load.UseVisualStyleBackColor = true;
+            this.btn_ct_limit_load.Click += new System.EventHandler(this.btn_ct_limit_load_Click);
+            // 
+            // btn_ct_Limit_save
+            // 
+            this.btn_ct_Limit_save.Location = new System.Drawing.Point(1372, 723);
+            this.btn_ct_Limit_save.Name = "btn_ct_Limit_save";
+            this.btn_ct_Limit_save.Size = new System.Drawing.Size(200, 35);
+            this.btn_ct_Limit_save.TabIndex = 51;
+            this.btn_ct_Limit_save.Text = "Ct limit Save";
+            this.btn_ct_Limit_save.UseVisualStyleBackColor = true;
+            this.btn_ct_Limit_save.Click += new System.EventHandler(this.btn_ct_Limit_save_Click);
+            // 
             // ResultLoad
             // 
-            this.ResultLoad.Location = new System.Drawing.Point(1372, 763);
+            this.ResultLoad.Location = new System.Drawing.Point(911, 774);
             this.ResultLoad.Name = "ResultLoad";
             this.ResultLoad.Size = new System.Drawing.Size(200, 35);
             this.ResultLoad.TabIndex = 50;
@@ -2205,7 +2249,7 @@
             // 
             // btnResultSave
             // 
-            this.btnResultSave.Location = new System.Drawing.Point(1146, 765);
+            this.btnResultSave.Location = new System.Drawing.Point(911, 723);
             this.btnResultSave.Name = "btnResultSave";
             this.btnResultSave.Size = new System.Drawing.Size(200, 35);
             this.btnResultSave.TabIndex = 49;
@@ -2235,7 +2279,7 @@
             // 
             // btn_SigmaScale_Load
             // 
-            this.btn_SigmaScale_Load.Location = new System.Drawing.Point(1372, 723);
+            this.btn_SigmaScale_Load.Location = new System.Drawing.Point(1146, 774);
             this.btn_SigmaScale_Load.Name = "btn_SigmaScale_Load";
             this.btn_SigmaScale_Load.Size = new System.Drawing.Size(200, 35);
             this.btn_SigmaScale_Load.TabIndex = 46;
@@ -2327,11 +2371,12 @@
             this.dgvtbc_Fluorescence,
             this.dgvtbc_scale,
             this.dgvtbc_result,
-            this.dgvtbc_Ct});
-            this.dgv_interpretation_ct.Location = new System.Drawing.Point(1146, 170);
+            this.dgvtbc_Ct,
+            this.Column23});
+            this.dgv_interpretation_ct.Location = new System.Drawing.Point(1044, 170);
             this.dgv_interpretation_ct.Name = "dgv_interpretation_ct";
             this.dgv_interpretation_ct.RowHeadersVisible = false;
-            this.dgv_interpretation_ct.Size = new System.Drawing.Size(587, 533);
+            this.dgv_interpretation_ct.Size = new System.Drawing.Size(689, 533);
             this.dgv_interpretation_ct.TabIndex = 33;
             this.dgv_interpretation_ct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_interpretation_ct_CellContentClick);
             // 
@@ -2361,6 +2406,12 @@
             this.dgvtbc_Ct.ReadOnly = true;
             this.dgvtbc_Ct.Width = 57;
             // 
+            // Column23
+            // 
+            this.Column23.HeaderText = "Ct_Limit";
+            this.Column23.Name = "Column23";
+            this.Column23.Width = 108;
+            // 
             // dgv_interpretation_howTo
             // 
             this.dgv_interpretation_howTo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -2372,7 +2423,7 @@
             this.dgv_interpretation_howTo.ReadOnly = true;
             this.dgv_interpretation_howTo.RowHeadersVisible = false;
             this.dgv_interpretation_howTo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(1083, 533);
+            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(975, 533);
             this.dgv_interpretation_howTo.TabIndex = 6;
             this.dgv_interpretation_howTo.Visible = false;
             // 
@@ -2455,8 +2506,6 @@
             this.dgv_CycleForBaseCalculation.AllowUserToResizeRows = false;
             this.dgv_CycleForBaseCalculation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_CycleForBaseCalculation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn199,
-            this.dataGridViewTextBoxColumn200,
             this.dataGridViewTextBoxColumn229,
             this.dataGridViewTextBoxColumn230,
             this.dataGridViewTextBoxColumn231,
@@ -2510,20 +2559,6 @@
             this.dgv_CycleForBaseCalculation.Size = new System.Drawing.Size(1710, 95);
             this.dgv_CycleForBaseCalculation.TabIndex = 3;
             this.dgv_CycleForBaseCalculation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CycleForBaseCalculation_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn199
-            // 
-            this.dataGridViewTextBoxColumn199.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn199.HeaderText = "1";
-            this.dataGridViewTextBoxColumn199.Name = "dataGridViewTextBoxColumn199";
-            this.dataGridViewTextBoxColumn199.Width = 48;
-            // 
-            // dataGridViewTextBoxColumn200
-            // 
-            this.dataGridViewTextBoxColumn200.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn200.HeaderText = "2";
-            this.dataGridViewTextBoxColumn200.Name = "dataGridViewTextBoxColumn200";
-            this.dataGridViewTextBoxColumn200.Width = 48;
             // 
             // dataGridViewTextBoxColumn229
             // 
@@ -4645,6 +4680,7 @@
             // tabControl_Tester
             // 
             this.tabControl_Tester.Controls.Add(this.tp_TestReport);
+            this.tabControl_Tester.Controls.Add(this.tp_testRecords);
             this.tabControl_Tester.Controls.Add(this.tabPage_rawData);
             this.tabControl_Tester.Location = new System.Drawing.Point(46, 108);
             this.tabControl_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -4652,6 +4688,7 @@
             this.tabControl_Tester.SelectedIndex = 0;
             this.tabControl_Tester.Size = new System.Drawing.Size(1360, 770);
             this.tabControl_Tester.TabIndex = 6;
+            this.tabControl_Tester.SelectedIndexChanged += new System.EventHandler(this.tabControl_Tester_SelectedIndexChanged);
             this.tabControl_Tester.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl4_Selected);
             // 
             // tp_TestReport
@@ -4831,6 +4868,144 @@
             this.lv_testInfo.Size = new System.Drawing.Size(1300, 65);
             this.lv_testInfo.TabIndex = 0;
             this.lv_testInfo.UseCompatibleStateImageBehavior = false;
+            // 
+            // tp_testRecords
+            // 
+            this.tp_testRecords.Controls.Add(this.dgv_testResult_final);
+            this.tp_testRecords.Controls.Add(this.label39);
+            this.tp_testRecords.Controls.Add(this.btn_pdf_print);
+            this.tp_testRecords.Controls.Add(this.dgv_test_records);
+            this.tp_testRecords.Location = new System.Drawing.Point(4, 34);
+            this.tp_testRecords.Name = "tp_testRecords";
+            this.tp_testRecords.Size = new System.Drawing.Size(1352, 732);
+            this.tp_testRecords.TabIndex = 6;
+            this.tp_testRecords.Text = "    Records    ";
+            this.tp_testRecords.UseVisualStyleBackColor = true;
+            this.tp_testRecords.Enter += new System.EventHandler(this.tp_testRecords_Enter);
+            // 
+            // dgv_testResult_final
+            // 
+            this.dgv_testResult_final.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgv_testResult_final.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_testResult_final.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col0,
+            this.dataGridViewTextBoxColumn199,
+            this.dataGridViewTextBoxColumn200,
+            this.dataGridViewTextBoxColumn272,
+            this.E,
+            this.dataGridViewTextBoxColumn273,
+            this.dataGridViewTextBoxColumn274,
+            this.dataGridViewTextBoxColumn275,
+            this.dataGridViewTextBoxColumn276,
+            this.userName,
+            this.userID,
+            this.CTs});
+            this.dgv_testResult_final.Location = new System.Drawing.Point(211, 7);
+            this.dgv_testResult_final.Name = "dgv_testResult_final";
+            this.dgv_testResult_final.RowHeadersVisible = false;
+            this.dgv_testResult_final.Size = new System.Drawing.Size(863, 90);
+            this.dgv_testResult_final.TabIndex = 65;
+            this.dgv_testResult_final.Visible = false;
+            this.dgv_testResult_final.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_testResult_final_CellContentClick);
+            // 
+            // col0
+            // 
+            this.col0.HeaderText = "Date";
+            this.col0.Name = "col0";
+            this.col0.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn199
+            // 
+            this.dataGridViewTextBoxColumn199.HeaderText = "M/C No.";
+            this.dataGridViewTextBoxColumn199.Name = "dataGridViewTextBoxColumn199";
+            this.dataGridViewTextBoxColumn199.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn200
+            // 
+            this.dataGridViewTextBoxColumn200.HeaderText = "TestName";
+            this.dataGridViewTextBoxColumn200.Name = "dataGridViewTextBoxColumn200";
+            this.dataGridViewTextBoxColumn200.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn272
+            // 
+            this.dataGridViewTextBoxColumn272.HeaderText = "StartTime";
+            this.dataGridViewTextBoxColumn272.Name = "dataGridViewTextBoxColumn272";
+            this.dataGridViewTextBoxColumn272.Width = 50;
+            // 
+            // E
+            // 
+            this.E.HeaderText = "EndTime";
+            this.E.Name = "E";
+            this.E.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn273
+            // 
+            this.dataGridViewTextBoxColumn273.HeaderText = "CartridgeID";
+            this.dataGridViewTextBoxColumn273.Name = "dataGridViewTextBoxColumn273";
+            this.dataGridViewTextBoxColumn273.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn274
+            // 
+            this.dataGridViewTextBoxColumn274.HeaderText = "SampleID";
+            this.dataGridViewTextBoxColumn274.Name = "dataGridViewTextBoxColumn274";
+            this.dataGridViewTextBoxColumn274.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn275
+            // 
+            this.dataGridViewTextBoxColumn275.HeaderText = "Result";
+            this.dataGridViewTextBoxColumn275.Name = "dataGridViewTextBoxColumn275";
+            this.dataGridViewTextBoxColumn275.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn276
+            // 
+            this.dataGridViewTextBoxColumn276.HeaderText = "FileName";
+            this.dataGridViewTextBoxColumn276.Name = "dataGridViewTextBoxColumn276";
+            this.dataGridViewTextBoxColumn276.Width = 50;
+            // 
+            // userName
+            // 
+            this.userName.HeaderText = "userName";
+            this.userName.Name = "userName";
+            // 
+            // userID
+            // 
+            this.userID.HeaderText = "userID";
+            this.userID.Name = "userID";
+            // 
+            // CTs
+            // 
+            this.CTs.HeaderText = "CTs";
+            this.CTs.Name = "CTs";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(28, 45);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(177, 31);
+            this.label39.TabIndex = 34;
+            this.label39.Text = "Test Records";
+            // 
+            // btn_pdf_print
+            // 
+            this.btn_pdf_print.Location = new System.Drawing.Point(1119, 21);
+            this.btn_pdf_print.Name = "btn_pdf_print";
+            this.btn_pdf_print.Size = new System.Drawing.Size(200, 60);
+            this.btn_pdf_print.TabIndex = 2;
+            this.btn_pdf_print.Text = "PDF Print";
+            this.btn_pdf_print.UseVisualStyleBackColor = true;
+            this.btn_pdf_print.Click += new System.EventHandler(this.btn_pdf_print_Click);
+            // 
+            // dgv_test_records
+            // 
+            this.dgv_test_records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_test_records.Location = new System.Drawing.Point(34, 103);
+            this.dgv_test_records.Name = "dgv_test_records";
+            this.dgv_test_records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_test_records.Size = new System.Drawing.Size(1285, 617);
+            this.dgv_test_records.TabIndex = 1;
+            this.dgv_test_records.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_test_records_CellClick);
             // 
             // tabPage_rawData
             // 
@@ -5059,7 +5234,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 324);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 470);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5514,7 +5689,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 203);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 295);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -5969,7 +6144,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 24);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 116);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6434,7 +6609,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -176);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -70);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8470,6 +8645,10 @@
             this.tp_TestReport.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_analyticResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult)).EndInit();
+            this.tp_testRecords.ResumeLayout(false);
+            this.tp_testRecords.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult_final)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_test_records)).EndInit();
             this.tabPage_rawData.ResumeLayout(false);
             this.tabPage_rawData.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -9086,51 +9265,6 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TabPage tp_pcr_options;
         private System.Windows.Forms.DataGridView dgv_CycleForBaseCalculation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn199;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn200;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn229;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn230;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn231;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn232;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn233;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn234;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn235;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn236;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn237;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn238;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn239;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn240;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn241;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn242;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn243;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn244;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn245;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn246;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn247;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn248;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn249;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn250;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn251;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn252;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn253;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn254;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn255;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn256;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn257;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn258;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn259;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn260;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn261;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn262;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn263;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn264;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn265;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn266;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn267;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn268;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn269;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn270;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn271;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lb_opticMeasurementCycleSelection;
         private System.Windows.Forms.DataGridView dgv_opticMeasurementCycleSelection;
@@ -9194,10 +9328,6 @@
         private System.Windows.Forms.DataGridView dgvCtTable4;
         private System.Windows.Forms.Button chkbox_use_deviation;
         private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Fluorescence;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_scale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_result;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Ct;
         private System.Windows.Forms.CheckBox chkbox_use_avg;
         private System.Windows.Forms.CheckBox chkbox_use_standard_dev;
         private System.Windows.Forms.Button button15;
@@ -9247,6 +9377,73 @@
         private System.Windows.Forms.Button btn_OpticCurrentCY5;
         private System.Windows.Forms.TextBox tb_OpticCurrentHEX;
         private System.Windows.Forms.Button btn_OpticCurrentHEX;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn229;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn230;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn231;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn232;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn233;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn234;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn235;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn236;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn237;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn238;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn239;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn240;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn241;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn242;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn243;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn244;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn245;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn246;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn247;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn248;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn249;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn250;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn251;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn252;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn253;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn254;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn255;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn256;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn257;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn258;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn259;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn260;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn261;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn262;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn263;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn264;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn265;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn266;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn267;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn268;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn269;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn270;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn271;
+        private System.Windows.Forms.TabPage tp_testRecords;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button btn_pdf_print;
+        private System.Windows.Forms.DataGridView dgv_test_records;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Fluorescence;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_scale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_result;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbc_Ct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
+        private System.Windows.Forms.Button btn_ct_limit_load;
+        private System.Windows.Forms.Button btn_ct_Limit_save;
+        private System.Windows.Forms.DataGridView dgv_testResult_final;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn199;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn200;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn272;
+        private System.Windows.Forms.DataGridViewTextBoxColumn E;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn273;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn274;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn275;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn276;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CTs;
     }
 }
 
