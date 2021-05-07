@@ -38,8 +38,6 @@
             this.tb_LoginID = new System.Windows.Forms.TextBox();
             this.tb_LoginPW = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.cb_Port_Main = new System.Windows.Forms.ComboBox();
-            this.btn_Connect_Main = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
@@ -135,36 +133,12 @@
             this.pictureBox3.TabIndex = 12;
             this.pictureBox3.TabStop = false;
             // 
-            // cb_Port_Main
-            // 
-            this.cb_Port_Main.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.cb_Port_Main.FormattingEnabled = true;
-            this.cb_Port_Main.Location = new System.Drawing.Point(74, 468);
-            this.cb_Port_Main.Name = "cb_Port_Main";
-            this.cb_Port_Main.Size = new System.Drawing.Size(214, 33);
-            this.cb_Port_Main.TabIndex = 10;
-            this.cb_Port_Main.Visible = false;
-            // 
-            // btn_Connect_Main
-            // 
-            this.btn_Connect_Main.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btn_Connect_Main.Location = new System.Drawing.Point(56, 436);
-            this.btn_Connect_Main.Name = "btn_Connect_Main";
-            this.btn_Connect_Main.Size = new System.Drawing.Size(112, 48);
-            this.btn_Connect_Main.TabIndex = 11;
-            this.btn_Connect_Main.Text = "Connect";
-            this.btn_Connect_Main.UseSelectable = true;
-            this.btn_Connect_Main.Visible = false;
-            this.btn_Connect_Main.Click += new System.EventHandler(this.btn_Connect_Main_Click);
-            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 500);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.btn_Connect_Main);
-            this.Controls.Add(this.cb_Port_Main);
             this.Controls.Add(this.tb_LoginPW);
             this.Controls.Add(this.tb_LoginID);
             this.Controls.Add(this.btnLogin);
@@ -192,7 +166,5 @@
         private System.Windows.Forms.TextBox tb_LoginID;
         private System.Windows.Forms.TextBox tb_LoginPW;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.ComboBox cb_Port_Main;
-        private MetroFramework.Controls.MetroButton btn_Connect_Main;
     }
 }

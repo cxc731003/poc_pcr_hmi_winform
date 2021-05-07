@@ -8102,6 +8102,8 @@ namespace ABI_POC_PCR
             columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
             dgv_test_records.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
+            dgv_test_records.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+
             //set the column header names.
             dgv_test_records.Columns[0].Name = "Date";
             dgv_test_records.Columns[0].MinimumWidth = 100;

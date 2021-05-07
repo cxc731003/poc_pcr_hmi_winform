@@ -15,7 +15,7 @@ namespace ABI_POC_PCR
     public partial class LogIn : MetroFramework.Forms.MetroForm
     {
         SharedMemory sm = SharedMemory.GetInstance();
-        PcrProtocol serial = PcrProtocol.GetInstance();
+        
 
         bool isConnected = false;
 
@@ -28,15 +28,7 @@ namespace ABI_POC_PCR
         {
             // combo_comList = 콤보 박스
             //COM Port 리스트 얻어 오기
-            string[] comlist = System.IO.Ports.SerialPort.GetPortNames();
-
-            //COM Port가 있는 경우에만 콤보 박스에 추가.
-            if (comlist.Length > 0)
-            {
-                cb_Port_Main.Items.AddRange(comlist);
-                //제일 처음에 위치한 녀석을 선택
-                cb_Port_Main.SelectedIndex = 0;
-            }
+            
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -86,8 +78,6 @@ namespace ABI_POC_PCR
                     MainFrm dlg = new MainFrm();
                     dlg.Owner = this;
                     dlg.ShowDialog();
-
-
                 }
                 //dataGridView_Manage.Rows.Add(data6);
             }
@@ -107,91 +97,10 @@ namespace ABI_POC_PCR
             // 컴포트 선택 후 연결 버튼 클릭하면 ID, PW 입력창이 활성화됨
             //showLog("장치와 연결 동작");
 
-            //컴포트 연결시도
-            bool flag = Open_exec();
-
-
-            //added by dahunj
-            //tb_Log.Visible = true;
-
-            //연결에 성공하면
-            if (flag)
-            {
-                tb_LoginPW.BackColor = Color.WhiteSmoke;
-                tb_LoginID.BackColor = Color.WhiteSmoke;
-
-                tb_LoginPW.Enabled = true;
-                tb_LoginID.Enabled = true;
-                btnLogin.Enabled = true;
-                //tb_ID_Main.Enabled = true;
-                //tb_PW_Main.Enabled = true;
-                //btn_Login_Main.Enabled = true;
-                btn_Connect_Main.Text = "Disconnect";
-            }
-            else
-            {
-                tb_LoginPW.BackColor = Color.LightPink;
-                tb_LoginID.BackColor = Color.LightPink;
-                btnLogin.BackColor = Color.LightPink;
-                tb_LoginPW.Enabled = false;
-                tb_LoginID.Enabled = false;
-                btnLogin.Enabled = false;
-                //tb_ID_Main.Enabled = false;
-                //tb_PW_Main.Enabled = false;
-                //btn_Login_Main.Enabled = false;
-                btn_Connect_Main.Text = "Connect";
-            }
+          
         }
 
-        private bool Open_exec()
-        {
-            if (isConnected)
-            {
-                serial.Close();
-                isConnected = false;
-                //ConnectChanged(this, EventArgs.Empty);
-                return false;
-            }
-            else
-            {
-                bool success = false;
-
-                if ((serial != null) && (serial.IsConnect() == false))
-                {
-                    bool tryConnect = false;
-
-                    try
-                    {
-                        tryConnect = serial.Connect(cb_Port_Main.SelectedItem.ToString());
-                    }
-                    catch
-                    { }
-
-                    if (tryConnect)
-                    {
-                        if (true)
-                        {
-                            //Open_cmd.CanSet = false;
-                            isConnected = true;
-                            success = true;
-                            return true;
-                        }
-                    }
-                }
-
-                if (success != true)
-                {
-
-                }
-                else
-                {
-
-                }
-
-                return false;
-            }
-        }
-
+        
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
