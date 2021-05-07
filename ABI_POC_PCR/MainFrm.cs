@@ -289,6 +289,9 @@ namespace ABI_POC_PCR
             cmd_dic.Add(":OPTIC_CURRENT_HEX", "");
             cmd_dic.Add(":OPTIC_CURRENT_CY5", "");
 
+            cmd_dic.Add(":MACHINE_NUM", "");
+
+
             
             serial.ReceivedEvent += GetSerialString;
             serial.ReceivedPacketEvent += RxPacket_CallBack;
@@ -1745,77 +1748,84 @@ namespace ABI_POC_PCR
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            string cTime = DateTime.Now.ToLongTimeString();
-            string cDate = DateTime.Now.ToLongDateString();
-            this.Text = "ABI POC PCR ver. 2.0.0     [" + cDate + " | " + cTime + "]";
-
-            // 데이터 버퍼가 찼는지 확인하고 업데이트
-            nTimerNo++;
-
-            if (processStep == 9 && nTimerNo % 500 == 0) // 5초 마다 업데이트
+            try
             {
-                updateCycleCount();
+                string cTime = DateTime.Now.ToLongTimeString();
+                string cDate = DateTime.Now.ToLongDateString();
+                this.Text = "ABI POC PCR ver. 2.0.0     [" + cDate + " | " + cTime + "]";
 
-                FindCyclesForBaseCalculation();
-                sm.DataUpdateFlag = true;
-                updateDataNGraph();
-                nTimerNo = 0;
+                // 데이터 버퍼가 찼는지 확인하고 업데이트
+                nTimerNo++;
 
-                if (sm.ProcessEndFlag )// && isOpticDataLastBufferFilled())
+                if (processStep == 9 && nTimerNo % 500 == 0) // 5초 마다 업데이트
                 {
-                    sm.ProcessEndFlag = false;
-                    _endProcess();
+                    updateCycleCount();
+
+                    FindCyclesForBaseCalculation();
+                    sm.DataUpdateFlag = true;
+                    updateDataNGraph();
+                    nTimerNo = 0;
+
+                    if (sm.ProcessEndFlag)// && isOpticDataLastBufferFilled())
+                    {
+                        sm.ProcessEndFlag = false;
+                        _endProcess();
+                    }
                 }
+
+
+                if (processStep == 9 && routine_cnt > 0 && nTimerNo % 100 == 0) // 5초 마다 업데이트
+                {
+                    //nTimerNo = 0;
+                    //if(routine_cnt == 7 || routine_cnt == 8  )
+                    //    btnSetBaseData_Click(null, null);
+                    //else if (routine_cnt > 8)
+                    //    btnSetFinalData_Click(null, null);
+                }
+
+                if (processStep == 9) // 5초 마다 업데이트
+                {
+                    // 상태바 업데이트 - 시작을 20%에서 시작함
+                    sm.progressSecond = (int)(routine_cnt * 2);
+                    progressBar_Tester.Value = sm.progressFirst + sm.progressSecond; //(int)(routine_cnt * 2);
+                    progressBar_Manager.Value = sm.progressFirst + sm.progressSecond;// (int)(routine_cnt * 2);
+                }
+
+                // 버퍼에 쓰레기가 있을 경우 체크해서 클리어
+                if (waitData.Length != 0)
+                    if (waitData[0].Equals('-') || waitData[0].Equals('<') || waitData[0].Equals('>'))
+                        waitData = "";
+
+                if (waitData.Length > 100) waitData = "";
+
+
+                if (b_start_Process && processStep != 9)
+                {
+                    b_start_Process = false;
+                    _start_Process();
+                }
+
+                if (b_check_Door)
+                {
+                    b_check_Door = false;
+                    _check_Door();
+                }
+
+                if (b_GUI_Init)
+                {
+                    // 검사단계 초기화
+                    setProcessMode(0);
+                    setProgressInfo(-1);
+                    btn_Start_Test.Text = "Test Start";
+
+                    b_GUI_Init = false;
+                }
+                //testButton.Text = routine_cnt.ToString();
             }
-
-
-            if (processStep == 9 && routine_cnt > 0 && nTimerNo % 100 == 0) // 5초 마다 업데이트
+            catch (Exception ex)
             {
-                //nTimerNo = 0;
-                //if(routine_cnt == 7 || routine_cnt == 8  )
-                //    btnSetBaseData_Click(null, null);
-                //else if (routine_cnt > 8)
-                //    btnSetFinalData_Click(null, null);
+                ex.StackTrace.ToString();
             }
-
-            if (processStep == 9) // 5초 마다 업데이트
-            {
-                // 상태바 업데이트 - 시작을 20%에서 시작함
-                sm.progressSecond = (int)(routine_cnt * 2);
-                progressBar_Tester.Value = sm.progressFirst + sm.progressSecond; //(int)(routine_cnt * 2);
-                progressBar_Manager.Value = sm.progressFirst + sm.progressSecond;// (int)(routine_cnt * 2);
-            }
-
-            // 버퍼에 쓰레기가 있을 경우 체크해서 클리어
-            if (waitData.Length != 0)
-                if (waitData[0].Equals('-') || waitData[0].Equals('<') || waitData[0].Equals('>'))
-                    waitData = "";
-
-            if (waitData.Length > 100) waitData = "";
-
-
-            if (b_start_Process && processStep != 9)
-            {
-                b_start_Process = false;
-                _start_Process();
-            }
-
-            if (b_check_Door)
-            {
-                b_check_Door = false;
-                _check_Door();
-            }
-
-            if (b_GUI_Init)
-            {
-                // 검사단계 초기화
-                setProcessMode(0);
-                setProgressInfo(-1);
-                btn_Start_Test.Text = "Test Start";
-
-                b_GUI_Init = false;
-            }
-            //testButton.Text = routine_cnt.ToString();
         }
 
         private void updateScottPlot(int tube_idx, double[] hValue)
@@ -3232,6 +3242,9 @@ namespace ABI_POC_PCR
 
         private void _reset_Process()
         {
+            //log data 
+            allDataArray = new string[] { };
+
             // MCU 장비 초기화
             serial.SendLine(":stop");
 
@@ -4455,6 +4468,7 @@ namespace ABI_POC_PCR
                     tb_OpticCurrentROX.Text = "-";
                     tb_OpticCurrentHEX.Text = "-";
                     tb_OpticCurrentCY5.Text = "-";
+                    tb_MachineNum_Eng.Text = "-";
 
                     MessageBox.Show("레시피를 삭제하였습니다.", "레시피 삭제 안내", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
@@ -4488,7 +4502,7 @@ namespace ABI_POC_PCR
             // 새로 저장
             StreamWriter sw = new StreamWriter(fileName, true);
 
-            string buff = tb_RT_PreTemp_Eng.Text + "," +tb_RT_PreHoldSec_Eng.Text + ","  + tb_PreTemp_Eng.Text + "," + tb_PreHoldSec_Eng.Text + "," + tb_1Temp_Eng.Text + "," + tb_1HoldSec_Eng.Text
+            string buff = tb_MachineNum_Eng.Text + "," + tb_RT_PreTemp_Eng.Text + "," +tb_RT_PreHoldSec_Eng.Text + ","  + tb_PreTemp_Eng.Text + "," + tb_PreHoldSec_Eng.Text + "," + tb_1Temp_Eng.Text + "," + tb_1HoldSec_Eng.Text
                     + "," + tb_2Temp_Eng.Text + "," + tb_2HoldSec_Eng.Text + "," + tb_OCDelaySec_Eng.Text + "," + tb_OCHoldSec_Eng.Text
                     + "," + tb_FianlCycle_Eng.Text + "," + tb_OpticCurrentFAM.Text + "," + tb_OpticCurrentROX.Text + "," + tb_OpticCurrentHEX.Text + "," + tb_OpticCurrentCY5.Text;
 
@@ -4530,22 +4544,22 @@ namespace ABI_POC_PCR
 
             string[] result = temp.Split(sep);
 
-
-            tb_RT_PreTemp_Eng.Text = result[0]; 
-            tb_RT_PreHoldSec_Eng.Text = result[1];
-            tb_PreTemp_Eng.Text = result[2];
-            tb_PreHoldSec_Eng.Text = result[3];
-            tb_1Temp_Eng.Text = result[4];
-            tb_1HoldSec_Eng.Text = result[5];
-            tb_2Temp_Eng.Text = result[6];
-            tb_2HoldSec_Eng.Text = result[7];
-            tb_OCDelaySec_Eng.Text = result[8];
-            tb_OCHoldSec_Eng.Text = result[9];
-            tb_FianlCycle_Eng.Text = result[10];
-            tb_OpticCurrentFAM.Text = result[11];
-            tb_OpticCurrentROX.Text = result[12];
-            tb_OpticCurrentHEX.Text = result[13];
-            tb_OpticCurrentCY5.Text = result[14];
+            tb_MachineNum_Eng.Text = result[0];
+            tb_RT_PreTemp_Eng.Text = result[1]; 
+            tb_RT_PreHoldSec_Eng.Text = result[2];
+            tb_PreTemp_Eng.Text = result[3];
+            tb_PreHoldSec_Eng.Text = result[4];
+            tb_1Temp_Eng.Text = result[5];
+            tb_1HoldSec_Eng.Text = result[6];
+            tb_2Temp_Eng.Text = result[7];
+            tb_2HoldSec_Eng.Text = result[8];
+            tb_OCDelaySec_Eng.Text = result[9];
+            tb_OCHoldSec_Eng.Text = result[10];
+            tb_FianlCycle_Eng.Text = result[11];
+            tb_OpticCurrentFAM.Text = result[12];
+            tb_OpticCurrentROX.Text = result[13];
+            tb_OpticCurrentHEX.Text = result[14];
+            tb_OpticCurrentCY5.Text = result[15];
         }
 
         private void btn_MCURead_Eng_Click(object sender, EventArgs e)
@@ -4772,7 +4786,8 @@ namespace ABI_POC_PCR
             || tb_OpticCurrentFAM.Text =="" || tb_OpticCurrentFAM.Text == "-"
             || tb_OpticCurrentROX.Text =="" || tb_OpticCurrentROX.Text == "-"
             || tb_OpticCurrentHEX.Text=="" || tb_OpticCurrentHEX.Text =="-"
-            || tb_OpticCurrentCY5.Text=="" || tb_OpticCurrentCY5.Text == "-")
+            || tb_OpticCurrentCY5.Text=="" || tb_OpticCurrentCY5.Text == "-"
+            || tb_MachineNum_Eng.Text=="" || tb_MachineNum_Eng.Text=="-")
             {
                 MessageBox.Show("설정한 값 중에 전송이 불가능한 값이 있습니다. 모두 숫자여야 합니다.", "설정 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -4799,6 +4814,9 @@ namespace ABI_POC_PCR
             cmd_dic[":OPTIC_CURRENT_ROX"] = tb_OpticCurrentROX.Text;
             cmd_dic[":OPTIC_CURRENT_HEX"] = tb_OpticCurrentHEX.Text;
             cmd_dic[":OPTIC_CURRENT_CY5"] = tb_OpticCurrentCY5.Text;
+
+            cmd_dic[":MACHINE_NUM"] = tb_MachineNum_Eng.Text;
+            
 
 
             foreach (String cmd in cmd_dic.Keys)
@@ -5548,16 +5566,20 @@ namespace ABI_POC_PCR
             update_analytic_result();//updateAnalyticResult(selectedDgv);
             update_IC_result();
 
-            MessageBox.Show("검사가 끝났습니다. 결과를 확인해 주세요.", "검사 종료 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // 결과 인쇄(pdf)
-            btn_Print_Click_1(null, null);
-
-            // 관련 변수들 초기화
             _reset_Process();
 
             //last data update 
             sm.DataUpdateFlag = true;
+
+            MessageBox.Show("검사가 끝났습니다. 결과를 확인해 주세요.", "검사 종료 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // 결과 인쇄(pdf)
+            //btn_Print_Click_1(null, null);
+
+            // 관련 변수들 초기화
+            
+
+            
 
         }
 
@@ -6233,6 +6255,21 @@ namespace ABI_POC_PCR
                 sb.Append(":RT_PRECOND_KEEPING_TIME_MIN");
                 sb.Append(" ");
                 sb.Append(tb_RT_PreHoldSec_Eng.Text);
+
+                String txt = sb.ToString();
+                //Apply_txt = txt;
+                serial.SendLine(txt);
+            }
+        }
+
+        private void btn_MachineNum_Eng_Click(object sender, EventArgs e)
+        {
+            if (tb_MachineNum_Eng != null && tb_MachineNum_Eng.Text != "" && tb_MachineNum_Eng.Text != "-")
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(":MACHINE_NUM");
+                sb.Append(" ");
+                sb.Append(tb_MachineNum_Eng.Text);
 
                 String txt = sb.ToString();
                 //Apply_txt = txt;
@@ -8321,6 +8358,50 @@ namespace ABI_POC_PCR
         {
 
         }
+
+        private void btn_pdf_open_Click(object sender, EventArgs e)
+        {
+            /*
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "PDF Files|*.pdf";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (fileDialog.FileName.Length > 0)
+                {
+                   
+                    //axAcroPDF1.LoadFile(fileDialog.FileName);
+                }
+            }
+            */
+           
+        }
+
+        private void btn_pdf_close_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void tp_ReportViewer_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                string filename = sm.resultFileName.Replace("csv", "pdf");
+                axAcroPDF1.LoadFile(filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("PDF를 프린트 해주세요.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+
+        private void tp_ReportViewer_Leave(object sender, EventArgs e)
+        {
+            //axAcroPDF1.Dispose();
+        }
+
+       
     }
     #endregion
 

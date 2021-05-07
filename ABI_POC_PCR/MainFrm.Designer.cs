@@ -467,7 +467,6 @@
             this.cb_Recipe_Test = new System.Windows.Forms.ComboBox();
             this.btn_Start_Test = new System.Windows.Forms.Button();
             this.btn_OpenDoor_Test = new System.Windows.Forms.Button();
-            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_administrator = new System.Windows.Forms.TabPage();
             this.tabControl_admin = new System.Windows.Forms.TabControl();
@@ -802,6 +801,15 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tp_ReportViewer = new System.Windows.Forms.TabPage();
+            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
+            this.btn_pdf_open = new System.Windows.Forms.Button();
+            this.btn_pdf_close = new System.Windows.Forms.Button();
+            this.tb_MachineNum_Eng = new System.Windows.Forms.TextBox();
+            this.btn_MachineNum_Eng = new System.Windows.Forms.Button();
+            this.tb_MachineNumMCU_Eng = new System.Windows.Forms.TextBox();
+            this.btn_MachineNumMCU_Eng = new System.Windows.Forms.Button();
+            this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
             this.tabControl_Engineer.SuspendLayout();
@@ -887,6 +895,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tp_ReportViewer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_Port_Main
@@ -1187,6 +1197,10 @@
             // 
             // tp_CreateTest
             // 
+            this.tp_CreateTest.Controls.Add(this.tb_MachineNumMCU_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_MachineNumMCU_Eng);
+            this.tp_CreateTest.Controls.Add(this.tb_MachineNum_Eng);
+            this.tp_CreateTest.Controls.Add(this.btn_MachineNum_Eng);
             this.tp_CreateTest.Controls.Add(this.groupBox12);
             this.tp_CreateTest.Controls.Add(this.groupBox11);
             this.tp_CreateTest.Controls.Add(this.groupBox21);
@@ -1542,7 +1556,7 @@
             // 
             // tb_FianlCycle_Eng
             // 
-            this.tb_FianlCycle_Eng.Location = new System.Drawing.Point(553, 146);
+            this.tb_FianlCycle_Eng.Location = new System.Drawing.Point(828, 140);
             this.tb_FianlCycle_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_FianlCycle_Eng.Name = "tb_FianlCycle_Eng";
             this.tb_FianlCycle_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1552,7 +1566,7 @@
             // 
             // btn_FianlCycle_Eng
             // 
-            this.btn_FianlCycle_Eng.Location = new System.Drawing.Point(448, 141);
+            this.btn_FianlCycle_Eng.Location = new System.Drawing.Point(723, 135);
             this.btn_FianlCycle_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FianlCycle_Eng.Name = "btn_FianlCycle_Eng";
             this.btn_FianlCycle_Eng.Size = new System.Drawing.Size(95, 40);
@@ -1852,7 +1866,7 @@
             // tb_FianlCycleMCU_Eng
             // 
             this.tb_FianlCycleMCU_Eng.Enabled = false;
-            this.tb_FianlCycleMCU_Eng.Location = new System.Drawing.Point(562, 506);
+            this.tb_FianlCycleMCU_Eng.Location = new System.Drawing.Point(837, 506);
             this.tb_FianlCycleMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_FianlCycleMCU_Eng.Name = "tb_FianlCycleMCU_Eng";
             this.tb_FianlCycleMCU_Eng.Size = new System.Drawing.Size(125, 30);
@@ -1863,7 +1877,7 @@
             // btn_FianlCycleMCU_Eng
             // 
             this.btn_FianlCycleMCU_Eng.Enabled = false;
-            this.btn_FianlCycleMCU_Eng.Location = new System.Drawing.Point(448, 496);
+            this.btn_FianlCycleMCU_Eng.Location = new System.Drawing.Point(723, 496);
             this.btn_FianlCycleMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_FianlCycleMCU_Eng.Name = "btn_FianlCycleMCU_Eng";
             this.btn_FianlCycleMCU_Eng.Size = new System.Drawing.Size(95, 40);
@@ -4681,6 +4695,7 @@
             // 
             this.tabControl_Tester.Controls.Add(this.tp_TestReport);
             this.tabControl_Tester.Controls.Add(this.tp_testRecords);
+            this.tabControl_Tester.Controls.Add(this.tp_ReportViewer);
             this.tabControl_Tester.Controls.Add(this.tabPage_rawData);
             this.tabControl_Tester.Location = new System.Drawing.Point(46, 108);
             this.tabControl_Tester.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -5098,19 +5113,6 @@
             this.btn_OpenDoor_Test.UseVisualStyleBackColor = true;
             this.btn_OpenDoor_Test.Click += new System.EventHandler(this.btn_OpenDoor_Test_Click);
             // 
-            // progressBar_step
-            // 
-            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
-            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.progressBar_step.Name = "progressBar_step";
-            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
-            this.progressBar_step.Step = 5;
-            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar_step.TabIndex = 11;
-            this.progressBar_step.Value = 50;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tp_tester);
@@ -5234,7 +5236,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 470);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 398);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5689,7 +5691,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 295);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 223);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -6144,7 +6146,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 116);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 44);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6609,7 +6611,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -70);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -142);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8553,6 +8555,107 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // tp_ReportViewer
+            // 
+            this.tp_ReportViewer.Controls.Add(this.btn_pdf_close);
+            this.tp_ReportViewer.Controls.Add(this.btn_pdf_open);
+            this.tp_ReportViewer.Controls.Add(this.axAcroPDF1);
+            this.tp_ReportViewer.Location = new System.Drawing.Point(4, 34);
+            this.tp_ReportViewer.Name = "tp_ReportViewer";
+            this.tp_ReportViewer.Size = new System.Drawing.Size(1352, 732);
+            this.tp_ReportViewer.TabIndex = 7;
+            this.tp_ReportViewer.Text = "    Report Viewer    ";
+            this.tp_ReportViewer.UseVisualStyleBackColor = true;
+            this.tp_ReportViewer.Enter += new System.EventHandler(this.tp_ReportViewer_Enter);
+            this.tp_ReportViewer.Leave += new System.EventHandler(this.tp_ReportViewer_Leave);
+            // 
+            // axAcroPDF1
+            // 
+            this.axAcroPDF1.Enabled = true;
+            this.axAcroPDF1.Location = new System.Drawing.Point(20, 19);
+            this.axAcroPDF1.Name = "axAcroPDF1";
+            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
+            this.axAcroPDF1.Size = new System.Drawing.Size(1310, 693);
+            this.axAcroPDF1.TabIndex = 0;
+            // 
+            // btn_pdf_open
+            // 
+            this.btn_pdf_open.Location = new System.Drawing.Point(859, 131);
+            this.btn_pdf_open.Name = "btn_pdf_open";
+            this.btn_pdf_open.Size = new System.Drawing.Size(215, 51);
+            this.btn_pdf_open.TabIndex = 1;
+            this.btn_pdf_open.Text = "PDF Open";
+            this.btn_pdf_open.UseVisualStyleBackColor = true;
+            this.btn_pdf_open.Visible = false;
+            this.btn_pdf_open.Click += new System.EventHandler(this.btn_pdf_open_Click);
+            // 
+            // btn_pdf_close
+            // 
+            this.btn_pdf_close.Location = new System.Drawing.Point(1099, 131);
+            this.btn_pdf_close.Name = "btn_pdf_close";
+            this.btn_pdf_close.Size = new System.Drawing.Size(215, 51);
+            this.btn_pdf_close.TabIndex = 2;
+            this.btn_pdf_close.Text = "PDF Close";
+            this.btn_pdf_close.UseVisualStyleBackColor = true;
+            this.btn_pdf_close.Visible = false;
+            this.btn_pdf_close.Click += new System.EventHandler(this.btn_pdf_close_Click);
+            // 
+            // tb_MachineNum_Eng
+            // 
+            this.tb_MachineNum_Eng.Location = new System.Drawing.Point(565, 140);
+            this.tb_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_MachineNum_Eng.Name = "tb_MachineNum_Eng";
+            this.tb_MachineNum_Eng.Size = new System.Drawing.Size(125, 30);
+            this.tb_MachineNum_Eng.TabIndex = 130;
+            this.tb_MachineNum_Eng.Text = "-";
+            this.tb_MachineNum_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_MachineNum_Eng
+            // 
+            this.btn_MachineNum_Eng.Location = new System.Drawing.Point(460, 135);
+            this.btn_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_MachineNum_Eng.Name = "btn_MachineNum_Eng";
+            this.btn_MachineNum_Eng.Size = new System.Drawing.Size(95, 40);
+            this.btn_MachineNum_Eng.TabIndex = 129;
+            this.btn_MachineNum_Eng.Text = "MC NO.";
+            this.btn_MachineNum_Eng.UseVisualStyleBackColor = true;
+            this.btn_MachineNum_Eng.Click += new System.EventHandler(this.btn_MachineNum_Eng_Click);
+            // 
+            // tb_MachineNumMCU_Eng
+            // 
+            this.tb_MachineNumMCU_Eng.Enabled = false;
+            this.tb_MachineNumMCU_Eng.Location = new System.Drawing.Point(565, 501);
+            this.tb_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_MachineNumMCU_Eng.Name = "tb_MachineNumMCU_Eng";
+            this.tb_MachineNumMCU_Eng.Size = new System.Drawing.Size(125, 30);
+            this.tb_MachineNumMCU_Eng.TabIndex = 132;
+            this.tb_MachineNumMCU_Eng.Text = "-";
+            this.tb_MachineNumMCU_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_MachineNumMCU_Eng
+            // 
+            this.btn_MachineNumMCU_Eng.Enabled = false;
+            this.btn_MachineNumMCU_Eng.Location = new System.Drawing.Point(460, 496);
+            this.btn_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_MachineNumMCU_Eng.Name = "btn_MachineNumMCU_Eng";
+            this.btn_MachineNumMCU_Eng.Size = new System.Drawing.Size(95, 40);
+            this.btn_MachineNumMCU_Eng.TabIndex = 131;
+            this.btn_MachineNumMCU_Eng.Text = "MC NO.";
+            this.btn_MachineNumMCU_Eng.UseVisualStyleBackColor = true;
+            // 
+            // progressBar_step
+            // 
+            this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.progressBar_step.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.progressBar_step.Location = new System.Drawing.Point(-2, 63);
+            this.progressBar_step.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.progressBar_step.Name = "progressBar_step";
+            this.progressBar_step.Size = new System.Drawing.Size(1360, 10);
+            this.progressBar_step.Step = 5;
+            this.progressBar_step.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_step.TabIndex = 11;
+            this.progressBar_step.Value = 50;
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -8697,6 +8800,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.tp_ReportViewer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -9444,6 +9549,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userName;
         private System.Windows.Forms.DataGridViewTextBoxColumn userID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CTs;
+        private System.Windows.Forms.TabPage tp_ReportViewer;
+        private System.Windows.Forms.Button btn_pdf_open;
+        private AxAcroPDFLib.AxAcroPDF axAcroPDF1;
+        private System.Windows.Forms.Button btn_pdf_close;
+        private System.Windows.Forms.TextBox tb_MachineNum_Eng;
+        private System.Windows.Forms.Button btn_MachineNum_Eng;
+        private System.Windows.Forms.TextBox tb_MachineNumMCU_Eng;
+        private System.Windows.Forms.Button btn_MachineNumMCU_Eng;
     }
 }
 
