@@ -38,6 +38,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -62,7 +63,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrm));
             this.cb_Port_Main = new System.Windows.Forms.ComboBox();
             this.btn_Connect_Main = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -89,6 +89,10 @@
             this.tp_engineer = new System.Windows.Forms.TabPage();
             this.tabControl_Engineer = new System.Windows.Forms.TabControl();
             this.tp_CreateTest = new System.Windows.Forms.TabPage();
+            this.tb_MachineNumMCU_Eng = new System.Windows.Forms.TextBox();
+            this.btn_MachineNumMCU_Eng = new System.Windows.Forms.Button();
+            this.tb_MachineNum_Eng = new System.Windows.Forms.TextBox();
+            this.btn_MachineNum_Eng = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tb_OpticCurrentCY5_MCU = new System.Windows.Forms.TextBox();
             this.btn_OpticCurrentCY5_MCU = new System.Windows.Forms.Button();
@@ -459,6 +463,10 @@
             this.label39 = new System.Windows.Forms.Label();
             this.btn_pdf_print = new System.Windows.Forms.Button();
             this.dgv_test_records = new System.Windows.Forms.DataGridView();
+            this.tp_ReportViewer = new System.Windows.Forms.TabPage();
+            this.btn_pdf_close = new System.Windows.Forms.Button();
+            this.btn_pdf_open = new System.Windows.Forms.Button();
+            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
             this.tabPage_rawData = new System.Windows.Forms.TabPage();
             this.label35 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -801,14 +809,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnBarcodeGetPorts = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tp_ReportViewer = new System.Windows.Forms.TabPage();
-            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
-            this.btn_pdf_open = new System.Windows.Forms.Button();
-            this.btn_pdf_close = new System.Windows.Forms.Button();
-            this.tb_MachineNum_Eng = new System.Windows.Forms.TextBox();
-            this.btn_MachineNum_Eng = new System.Windows.Forms.Button();
-            this.tb_MachineNumMCU_Eng = new System.Windows.Forms.TextBox();
-            this.btn_MachineNumMCU_Eng = new System.Windows.Forms.Button();
             this.progressBar_step = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.panel1.SuspendLayout();
             this.tp_engineer.SuspendLayout();
@@ -858,6 +858,8 @@
             this.tp_testRecords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult_final)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_test_records)).BeginInit();
+            this.tp_ReportViewer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.tabPage_rawData.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -895,8 +897,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tp_ReportViewer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_Port_Main
@@ -1239,6 +1239,50 @@
             this.tp_CreateTest.Text = "   1. Create Test    ";
             this.tp_CreateTest.UseVisualStyleBackColor = true;
             this.tp_CreateTest.Click += new System.EventHandler(this.tabPage6_Click);
+            // 
+            // tb_MachineNumMCU_Eng
+            // 
+            this.tb_MachineNumMCU_Eng.Enabled = false;
+            this.tb_MachineNumMCU_Eng.Location = new System.Drawing.Point(565, 501);
+            this.tb_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_MachineNumMCU_Eng.Name = "tb_MachineNumMCU_Eng";
+            this.tb_MachineNumMCU_Eng.Size = new System.Drawing.Size(125, 30);
+            this.tb_MachineNumMCU_Eng.TabIndex = 132;
+            this.tb_MachineNumMCU_Eng.Text = "-";
+            this.tb_MachineNumMCU_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_MachineNumMCU_Eng
+            // 
+            this.btn_MachineNumMCU_Eng.Enabled = false;
+            this.btn_MachineNumMCU_Eng.Location = new System.Drawing.Point(460, 496);
+            this.btn_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_MachineNumMCU_Eng.Name = "btn_MachineNumMCU_Eng";
+            this.btn_MachineNumMCU_Eng.Size = new System.Drawing.Size(95, 40);
+            this.btn_MachineNumMCU_Eng.TabIndex = 131;
+            this.btn_MachineNumMCU_Eng.Text = "MC NO.";
+            this.btn_MachineNumMCU_Eng.UseVisualStyleBackColor = true;
+            // 
+            // tb_MachineNum_Eng
+            // 
+            this.tb_MachineNum_Eng.Location = new System.Drawing.Point(565, 140);
+            this.tb_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tb_MachineNum_Eng.Name = "tb_MachineNum_Eng";
+            this.tb_MachineNum_Eng.Size = new System.Drawing.Size(125, 30);
+            this.tb_MachineNum_Eng.TabIndex = 130;
+            this.tb_MachineNum_Eng.Text = "-";
+            this.tb_MachineNum_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_MachineNum_Eng.TextChanged += new System.EventHandler(this.tb_MachineNum_Eng_TextChanged);
+            // 
+            // btn_MachineNum_Eng
+            // 
+            this.btn_MachineNum_Eng.Location = new System.Drawing.Point(460, 135);
+            this.btn_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btn_MachineNum_Eng.Name = "btn_MachineNum_Eng";
+            this.btn_MachineNum_Eng.Size = new System.Drawing.Size(95, 40);
+            this.btn_MachineNum_Eng.TabIndex = 129;
+            this.btn_MachineNum_Eng.Text = "MC NO.";
+            this.btn_MachineNum_Eng.UseVisualStyleBackColor = true;
+            this.btn_MachineNum_Eng.Click += new System.EventHandler(this.btn_MachineNum_Eng_Click);
             // 
             // groupBox12
             // 
@@ -2431,13 +2475,13 @@
             this.dgv_interpretation_howTo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_interpretation_howTo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_interpretation_howTo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_interpretation_howTo.Location = new System.Drawing.Point(43, 170);
+            this.dgv_interpretation_howTo.Location = new System.Drawing.Point(24, 170);
             this.dgv_interpretation_howTo.MultiSelect = false;
             this.dgv_interpretation_howTo.Name = "dgv_interpretation_howTo";
             this.dgv_interpretation_howTo.ReadOnly = true;
             this.dgv_interpretation_howTo.RowHeadersVisible = false;
             this.dgv_interpretation_howTo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(975, 533);
+            this.dgv_interpretation_howTo.Size = new System.Drawing.Size(417, 302);
             this.dgv_interpretation_howTo.TabIndex = 6;
             this.dgv_interpretation_howTo.Visible = false;
             // 
@@ -2482,7 +2526,7 @@
             // 
             // btnBaseCycleSelection_Load
             // 
-            this.btnBaseCycleSelection_Load.Location = new System.Drawing.Point(545, 254);
+            this.btnBaseCycleSelection_Load.Location = new System.Drawing.Point(545, 39);
             this.btnBaseCycleSelection_Load.Name = "btnBaseCycleSelection_Load";
             this.btnBaseCycleSelection_Load.Size = new System.Drawing.Size(180, 35);
             this.btnBaseCycleSelection_Load.TabIndex = 6;
@@ -2492,7 +2536,7 @@
             // 
             // btnBaseCycleSelection_Save
             // 
-            this.btnBaseCycleSelection_Save.Location = new System.Drawing.Point(350, 254);
+            this.btnBaseCycleSelection_Save.Location = new System.Drawing.Point(350, 39);
             this.btnBaseCycleSelection_Save.Name = "btnBaseCycleSelection_Save";
             this.btnBaseCycleSelection_Save.Size = new System.Drawing.Size(180, 35);
             this.btnBaseCycleSelection_Save.TabIndex = 5;
@@ -2564,7 +2608,7 @@
             this.dataGridViewTextBoxColumn270,
             this.dataGridViewTextBoxColumn271});
             this.dgv_CycleForBaseCalculation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgv_CycleForBaseCalculation.Location = new System.Drawing.Point(28, 305);
+            this.dgv_CycleForBaseCalculation.Location = new System.Drawing.Point(28, 90);
             this.dgv_CycleForBaseCalculation.MultiSelect = false;
             this.dgv_CycleForBaseCalculation.Name = "dgv_CycleForBaseCalculation";
             this.dgv_CycleForBaseCalculation.RowHeadersVisible = false;
@@ -2878,7 +2922,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(23, 254);
+            this.label14.Location = new System.Drawing.Point(23, 39);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(251, 25);
             this.label14.TabIndex = 2;
@@ -2888,7 +2932,7 @@
             // lb_opticMeasurementCycleSelection
             // 
             this.lb_opticMeasurementCycleSelection.AutoSize = true;
-            this.lb_opticMeasurementCycleSelection.Location = new System.Drawing.Point(23, 36);
+            this.lb_opticMeasurementCycleSelection.Location = new System.Drawing.Point(23, 482);
             this.lb_opticMeasurementCycleSelection.Name = "lb_opticMeasurementCycleSelection";
             this.lb_opticMeasurementCycleSelection.Size = new System.Drawing.Size(324, 25);
             this.lb_opticMeasurementCycleSelection.TabIndex = 1;
@@ -2944,7 +2988,7 @@
             this.Column114,
             this.Column115});
             this.dgv_opticMeasurementCycleSelection.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgv_opticMeasurementCycleSelection.Location = new System.Drawing.Point(28, 86);
+            this.dgv_opticMeasurementCycleSelection.Location = new System.Drawing.Point(28, 532);
             this.dgv_opticMeasurementCycleSelection.MultiSelect = false;
             this.dgv_opticMeasurementCycleSelection.Name = "dgv_opticMeasurementCycleSelection";
             this.dgv_opticMeasurementCycleSelection.RowHeadersVisible = false;
@@ -5017,10 +5061,56 @@
             this.dgv_test_records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_test_records.Location = new System.Drawing.Point(34, 103);
             this.dgv_test_records.Name = "dgv_test_records";
+            this.dgv_test_records.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_test_records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_test_records.Size = new System.Drawing.Size(1285, 617);
             this.dgv_test_records.TabIndex = 1;
             this.dgv_test_records.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_test_records_CellClick);
+            // 
+            // tp_ReportViewer
+            // 
+            this.tp_ReportViewer.Controls.Add(this.btn_pdf_close);
+            this.tp_ReportViewer.Controls.Add(this.btn_pdf_open);
+            this.tp_ReportViewer.Controls.Add(this.axAcroPDF1);
+            this.tp_ReportViewer.Location = new System.Drawing.Point(4, 34);
+            this.tp_ReportViewer.Name = "tp_ReportViewer";
+            this.tp_ReportViewer.Size = new System.Drawing.Size(1352, 732);
+            this.tp_ReportViewer.TabIndex = 7;
+            this.tp_ReportViewer.Text = "    Report Viewer    ";
+            this.tp_ReportViewer.UseVisualStyleBackColor = true;
+            this.tp_ReportViewer.Enter += new System.EventHandler(this.tp_ReportViewer_Enter);
+            this.tp_ReportViewer.Leave += new System.EventHandler(this.tp_ReportViewer_Leave);
+            // 
+            // btn_pdf_close
+            // 
+            this.btn_pdf_close.Location = new System.Drawing.Point(1099, 131);
+            this.btn_pdf_close.Name = "btn_pdf_close";
+            this.btn_pdf_close.Size = new System.Drawing.Size(215, 51);
+            this.btn_pdf_close.TabIndex = 2;
+            this.btn_pdf_close.Text = "PDF Close";
+            this.btn_pdf_close.UseVisualStyleBackColor = true;
+            this.btn_pdf_close.Visible = false;
+            this.btn_pdf_close.Click += new System.EventHandler(this.btn_pdf_close_Click);
+            // 
+            // btn_pdf_open
+            // 
+            this.btn_pdf_open.Location = new System.Drawing.Point(859, 131);
+            this.btn_pdf_open.Name = "btn_pdf_open";
+            this.btn_pdf_open.Size = new System.Drawing.Size(215, 51);
+            this.btn_pdf_open.TabIndex = 1;
+            this.btn_pdf_open.Text = "PDF Open";
+            this.btn_pdf_open.UseVisualStyleBackColor = true;
+            this.btn_pdf_open.Visible = false;
+            this.btn_pdf_open.Click += new System.EventHandler(this.btn_pdf_open_Click);
+            // 
+            // axAcroPDF1
+            // 
+            this.axAcroPDF1.Enabled = true;
+            this.axAcroPDF1.Location = new System.Drawing.Point(20, 19);
+            this.axAcroPDF1.Name = "axAcroPDF1";
+            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
+            this.axAcroPDF1.Size = new System.Drawing.Size(1310, 693);
+            this.axAcroPDF1.TabIndex = 0;
             // 
             // tabPage_rawData
             // 
@@ -5236,7 +5326,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 398);
+            this.dgv_opticDatum_tube4.Location = new System.Drawing.Point(33, 392);
             this.dgv_opticDatum_tube4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube4.Name = "dgv_opticDatum_tube4";
             this.dgv_opticDatum_tube4.ReadOnly = true;
@@ -5691,7 +5781,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube3.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 223);
+            this.dgv_opticDatum_tube3.Location = new System.Drawing.Point(33, 217);
             this.dgv_opticDatum_tube3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube3.Name = "dgv_opticDatum_tube3";
             this.dgv_opticDatum_tube3.ReadOnly = true;
@@ -6146,7 +6236,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube2.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 44);
+            this.dgv_opticDatum_tube2.Location = new System.Drawing.Point(33, 38);
             this.dgv_opticDatum_tube2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube2.Name = "dgv_opticDatum_tube2";
             this.dgv_opticDatum_tube2.ReadOnly = true;
@@ -6611,7 +6701,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkGray;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_opticDatum_tube1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -142);
+            this.dgv_opticDatum_tube1.Location = new System.Drawing.Point(33, -148);
             this.dgv_opticDatum_tube1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgv_opticDatum_tube1.Name = "dgv_opticDatum_tube1";
             this.dgv_opticDatum_tube1.ReadOnly = true;
@@ -8555,94 +8645,6 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // tp_ReportViewer
-            // 
-            this.tp_ReportViewer.Controls.Add(this.btn_pdf_close);
-            this.tp_ReportViewer.Controls.Add(this.btn_pdf_open);
-            this.tp_ReportViewer.Controls.Add(this.axAcroPDF1);
-            this.tp_ReportViewer.Location = new System.Drawing.Point(4, 34);
-            this.tp_ReportViewer.Name = "tp_ReportViewer";
-            this.tp_ReportViewer.Size = new System.Drawing.Size(1352, 732);
-            this.tp_ReportViewer.TabIndex = 7;
-            this.tp_ReportViewer.Text = "    Report Viewer    ";
-            this.tp_ReportViewer.UseVisualStyleBackColor = true;
-            this.tp_ReportViewer.Enter += new System.EventHandler(this.tp_ReportViewer_Enter);
-            this.tp_ReportViewer.Leave += new System.EventHandler(this.tp_ReportViewer_Leave);
-            // 
-            // axAcroPDF1
-            // 
-            this.axAcroPDF1.Enabled = true;
-            this.axAcroPDF1.Location = new System.Drawing.Point(20, 19);
-            this.axAcroPDF1.Name = "axAcroPDF1";
-            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(1310, 693);
-            this.axAcroPDF1.TabIndex = 0;
-            // 
-            // btn_pdf_open
-            // 
-            this.btn_pdf_open.Location = new System.Drawing.Point(859, 131);
-            this.btn_pdf_open.Name = "btn_pdf_open";
-            this.btn_pdf_open.Size = new System.Drawing.Size(215, 51);
-            this.btn_pdf_open.TabIndex = 1;
-            this.btn_pdf_open.Text = "PDF Open";
-            this.btn_pdf_open.UseVisualStyleBackColor = true;
-            this.btn_pdf_open.Visible = false;
-            this.btn_pdf_open.Click += new System.EventHandler(this.btn_pdf_open_Click);
-            // 
-            // btn_pdf_close
-            // 
-            this.btn_pdf_close.Location = new System.Drawing.Point(1099, 131);
-            this.btn_pdf_close.Name = "btn_pdf_close";
-            this.btn_pdf_close.Size = new System.Drawing.Size(215, 51);
-            this.btn_pdf_close.TabIndex = 2;
-            this.btn_pdf_close.Text = "PDF Close";
-            this.btn_pdf_close.UseVisualStyleBackColor = true;
-            this.btn_pdf_close.Visible = false;
-            this.btn_pdf_close.Click += new System.EventHandler(this.btn_pdf_close_Click);
-            // 
-            // tb_MachineNum_Eng
-            // 
-            this.tb_MachineNum_Eng.Location = new System.Drawing.Point(565, 140);
-            this.tb_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tb_MachineNum_Eng.Name = "tb_MachineNum_Eng";
-            this.tb_MachineNum_Eng.Size = new System.Drawing.Size(125, 30);
-            this.tb_MachineNum_Eng.TabIndex = 130;
-            this.tb_MachineNum_Eng.Text = "-";
-            this.tb_MachineNum_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btn_MachineNum_Eng
-            // 
-            this.btn_MachineNum_Eng.Location = new System.Drawing.Point(460, 135);
-            this.btn_MachineNum_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btn_MachineNum_Eng.Name = "btn_MachineNum_Eng";
-            this.btn_MachineNum_Eng.Size = new System.Drawing.Size(95, 40);
-            this.btn_MachineNum_Eng.TabIndex = 129;
-            this.btn_MachineNum_Eng.Text = "MC NO.";
-            this.btn_MachineNum_Eng.UseVisualStyleBackColor = true;
-            this.btn_MachineNum_Eng.Click += new System.EventHandler(this.btn_MachineNum_Eng_Click);
-            // 
-            // tb_MachineNumMCU_Eng
-            // 
-            this.tb_MachineNumMCU_Eng.Enabled = false;
-            this.tb_MachineNumMCU_Eng.Location = new System.Drawing.Point(565, 501);
-            this.tb_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tb_MachineNumMCU_Eng.Name = "tb_MachineNumMCU_Eng";
-            this.tb_MachineNumMCU_Eng.Size = new System.Drawing.Size(125, 30);
-            this.tb_MachineNumMCU_Eng.TabIndex = 132;
-            this.tb_MachineNumMCU_Eng.Text = "-";
-            this.tb_MachineNumMCU_Eng.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btn_MachineNumMCU_Eng
-            // 
-            this.btn_MachineNumMCU_Eng.Enabled = false;
-            this.btn_MachineNumMCU_Eng.Location = new System.Drawing.Point(460, 496);
-            this.btn_MachineNumMCU_Eng.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btn_MachineNumMCU_Eng.Name = "btn_MachineNumMCU_Eng";
-            this.btn_MachineNumMCU_Eng.Size = new System.Drawing.Size(95, 40);
-            this.btn_MachineNumMCU_Eng.TabIndex = 131;
-            this.btn_MachineNumMCU_Eng.Text = "MC NO.";
-            this.btn_MachineNumMCU_Eng.UseVisualStyleBackColor = true;
-            // 
             // progressBar_step
             // 
             this.progressBar_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -8752,6 +8754,8 @@
             this.tp_testRecords.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_testResult_final)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_test_records)).EndInit();
+            this.tp_ReportViewer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.tabPage_rawData.ResumeLayout(false);
             this.tabPage_rawData.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -8800,8 +8804,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.tp_ReportViewer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.ResumeLayout(false);
 
         }

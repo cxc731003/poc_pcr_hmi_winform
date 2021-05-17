@@ -73,11 +73,13 @@ namespace ABI_POC_PCR
                     //{
                     // 엔지니어 계정 로그인임 --> 계정정보에서도 관리 가능
 
-
+                    DialogResult = DialogResult.OK;
+                    /*
                     this.Visible = false;
                     MainFrm dlg = new MainFrm();
                     dlg.Owner = this;
                     dlg.ShowDialog();
+                    */
                 }
                 //dataGridView_Manage.Rows.Add(data6);
             }
@@ -124,23 +126,3 @@ namespace ABI_POC_PCR
     }
 }
 
-
-/*
-                    sm.userName =   
-                    this.Visible = false;
-                    //this.Close();
-                    //Home dlg = new Home();
-                    MainFrm dlg = new MainFrm();
-                    dlg.Owner = this;
-                    dlg.ShowDialog();
-                    //dlg.Owner = this;
-                    //Owner.Show();
-
-                    //}
-
-                    ////this.Visible = false;
-                    ////Home dlg = new Home();
-                    ////dlg.Owner = this;
-                    //home.ShowDialog();
-                    //this.Close();
- */

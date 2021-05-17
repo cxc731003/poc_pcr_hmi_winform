@@ -15,8 +15,8 @@ namespace ABI_POC_PCR.GraphPlot
         public static int OPT_VAL_CNT = 4;
         public static int CH_CNT = 4;
         public static int DYE_CNT = 4;
-        public static int COL_CNT = 43; // base, 15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45
-        public static int CYCLE_CNT = 46; // you should plus one , if 45 cycle, it must be 46
+        public static int COL_CNT = 44; // base, 15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45
+        public static int CYCLE_CNT = 51; // you should plus one , if 45 cycle, it must be 46
         public static int CycleCntForBaseCal = 0;
         public static int MaxCycleForBaseCalculation = 0;
 
@@ -24,21 +24,21 @@ namespace ABI_POC_PCR.GraphPlot
 
         public static double[] CtCycles = new double[16];
 
-        public static int[] Optic_Measure_Idx = new int[43] // must be same with COL_CNT
+        public static int[] Optic_Measure_Idx = new int[44] // must be same with COL_CNT
         {
            //1, 2,
             3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
             21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,
-            37,38,39,40,41,42,43,44,45
+            37,38,39,40,41,42,43,44,45,50
             //41,42,43,44,45,
         };
 
-        public static int[] isOpticData_buffer_filled = new int[43]//// must be same with COL_CNT
+        public static int[] isOpticData_buffer_filled = new int[44]//// must be same with COL_CNT
         {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //9
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //19
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, //29
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 //39
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 //39
         };
 
         public static int[] isThisCycleWouldbeUsedForBaseCal = new int[50]
@@ -87,7 +87,7 @@ namespace ABI_POC_PCR.GraphPlot
         private static List<string> labelTicks = new List<string>();
         //private static string[] labelTicksArray = new string[8] {"Base", "15", "20", "25", "30", "35", "40", "Final" };
 
-        public static string[] labelTicksArray = new string[43]; // must be same with col_cnt 
+        public static string[] labelTicksArray = new string[44]; // must be same with col_cnt 
 
 
         public static void Init()

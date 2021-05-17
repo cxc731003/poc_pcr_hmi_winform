@@ -12,7 +12,7 @@ namespace ABI_POC_PCR
         public string resultFileName { get; set; }
 
 
-        public int machineNumber { get; set; }
+        public string machineNumber { get; set; }
         public int logLineCnt { get; set; }
         public string userID { get; set; } // Tester ID = login ID at first
         public string userPW { get; set; }  // Tester PW = login PW at first

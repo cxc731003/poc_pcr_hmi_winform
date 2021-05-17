@@ -338,11 +338,12 @@ namespace ABI_POC_PCR
         private void Form1_Load(object sender, EventArgs e)
         {
             //OnClickNewDGVAnalyticResult(sender, e);//createAnalyticDGV();
+            
+
             init_Test_Result();
 
             ctLimit_Load();
            
-
             updateDeviceStatus("Stop");
 
             sm.testName = "COVID";
@@ -1736,6 +1737,7 @@ namespace ABI_POC_PCR
             catch (Exception ex)
             {
                 backgroundWorker1.CancelAsync();
+                Console.WriteLine(ex.StackTrace);
                 //MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIon.Error);
             }
         }
@@ -1824,7 +1826,7 @@ namespace ABI_POC_PCR
             }
             catch (Exception ex)
             {
-                ex.StackTrace.ToString();
+                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -1984,13 +1986,10 @@ namespace ABI_POC_PCR
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.StackTrace);
             }
-
-
-            
         }
 
         public double CtCycleCal()
@@ -2278,18 +2277,23 @@ namespace ABI_POC_PCR
                 for (int j = 0; j < Plotter.COL_CNT; j++)
                 {
                     value = (Convert.ToDouble(MEASURED_DATA[i, j]) - BaselineVal[i]) * scaleFactor[i];
-                    if (value < 0) value = 0;
-                    //if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
-                    if (value > (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i] && (value > Convert.ToDouble(sm.ct_Limit[i])))//bigger than baseline that is calculated ( subtracted from ct line and multiplied by deviation )
+                    if (value < 0) value = 0;//if (Convert.ToDouble(MEASURED_DATA[i, j]) > CtlineVal[i])
+                    else if ((Convert.ToDouble(MEASURED_DATA[i, j]) < Convert.ToDouble(sm.ct_Limit[i])))
                     {
-                        Plotter.CtCycles[i] = j; // start at 3 cycles
-                        tempCt = j;
-                        if(tempCt > baseCalculationMaxCycle) break; //  if CT line timing is earier than baseline Calculation period, we must pass that. 
+                        Plotter.CtCycles[i] = 0;
                     }
                     else if (value < (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i])
                     {
                         Plotter.CtCycles[i] = 0;
                     }
+                    else if (value > (CtlineVal[i] - BaselineVal[i]) * scaleFactor[i] )//bigger than baseline that is calculated ( subtracted from ct line and multiplied by deviation )
+                    {
+                        Plotter.CtCycles[i] = j; // start at 3 cycles
+                        tempCt = j;
+                        if(Plotter.CtCycles[i] > baseCalculationMaxCycle) break; //  if CT line timing is earier than baseline Calculation period, we must pass that. 
+                        else { Plotter.CtCycles[i] = 0; }
+                    }
+                   
                 }
 
                 //if (tempCt < 10)
@@ -2301,7 +2305,7 @@ namespace ABI_POC_PCR
                 {
                     double tempCtline = Convert.ToDouble(MEASURED_DATA[i, (int)tempCt - 1]);
                     double delta = Math.Abs(((Convert.ToDouble(MEASURED_DATA[i, (int)tempCt]) - tempCtline)) / 100);
-                    delta *= scaleFactor[i];
+                    //delta *= scaleFactor[i];
                     Plotter.CtCycles[i] = tempCt;
                     for (int k = 0; k < 100; k++)
                     {
@@ -2317,11 +2321,7 @@ namespace ABI_POC_PCR
                         //}
                     }
 
-                    if (Plotter.CtCycles[i] < 12)
-                    {
-                        Plotter.CtCycles[i] = 0;
-                    }
-                    else
+                   
                     {
                         Plotter.CtCycles[i] += 1;
                     }
@@ -2400,7 +2400,7 @@ namespace ABI_POC_PCR
                 sm.isFirstUpdate = false;
                 FindCyclesForBaseCalculation();
 
-                if(Plotter.MaxCycleForBaseCal < sm.Routine_Cnt) //routine_cnt)
+                if( sm.Routine_Cnt > Plotter.MaxCycleForBaseCal) //routine_cnt)
                 {
 
                     if (chkbox_use_avg.Checked)
@@ -3199,8 +3199,7 @@ namespace ABI_POC_PCR
         private void btn_Start_Test_Click(object sender, EventArgs e)
         {
             //update test infomation
-
-
+            
             //updatePatientInfo();
 
             /*
@@ -3222,7 +3221,7 @@ namespace ABI_POC_PCR
             if (processStep == 8)  // ID input complete
             {
                 MessageBox.Show("검사를 시작할 수 있나 체크합니다.", "검사 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                updateDeviceStatus("Running");
                 serial.SendLine(":check_start");  // 문이 열렸는지 체크 의뢰 
             }
             else if (processStep == 9)
@@ -3230,7 +3229,7 @@ namespace ABI_POC_PCR
                 if (DialogResult.OK == MessageBox.Show("검사가 진행 중입니다. 검사를 멈추겠습니까?", "검사 안내", MessageBoxButtons.OKCancel, MessageBoxIcon.Information))
                 {
                     _reset_Process();
-                    updateDeviceStatus("Running");
+                    
                     MessageBox.Show("검사를 강제 종료하였습니다.", "검사 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -3243,6 +3242,7 @@ namespace ABI_POC_PCR
         private void _reset_Process()
         {
             //log data 
+            allData = "";
             allDataArray = new string[] { };
 
             // MCU 장비 초기화
@@ -3877,6 +3877,7 @@ namespace ABI_POC_PCR
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 //logToFile.Append(ex.ToString());
             }
 
@@ -4545,6 +4546,7 @@ namespace ABI_POC_PCR
             string[] result = temp.Split(sep);
 
             tb_MachineNum_Eng.Text = result[0];
+            sm.machineNumber = result[0];
             tb_RT_PreTemp_Eng.Text = result[1]; 
             tb_RT_PreHoldSec_Eng.Text = result[2];
             tb_PreTemp_Eng.Text = result[3];
@@ -5566,20 +5568,27 @@ namespace ABI_POC_PCR
             update_analytic_result();//updateAnalyticResult(selectedDgv);
             update_IC_result();
 
+
+            update_testResult_final();
+
+
             _reset_Process();
 
             //last data update 
             sm.DataUpdateFlag = true;
+            this.tabControl_Tester.SelectTab(0);
 
             MessageBox.Show("검사가 끝났습니다. 결과를 확인해 주세요.", "검사 종료 안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            
 
             // 결과 인쇄(pdf)
             //btn_Print_Click_1(null, null);
 
             // 관련 변수들 초기화
-            
 
-            
+
+
 
         }
 
@@ -5843,7 +5852,7 @@ namespace ABI_POC_PCR
 
             lv_testerInfo.Columns.Add("Tester Name", 250);
             lv_testerInfo.Columns.Add("Tester ID ", 250);        //컬럼추가
-
+                
 
             //test 
             listView_PatientInfo.View = View.Details;           //컬럼형식으로 변경
@@ -5895,6 +5904,9 @@ namespace ABI_POC_PCR
         {
             lv_testerInfo.BeginUpdate();
 
+            sm.userName = tb_WorkerName_Test.Text;
+            sm.userID = tb_WorkerID_Test.Text;
+
             lv_testerInfo.Items[0].SubItems[0].Text = tb_WorkerName_Test.Text;
             lv_testerInfo.Items[0].SubItems[1].Text = tb_WorkerID_Test.Text;
             lv_testerInfo.EndUpdate();
@@ -5928,7 +5940,8 @@ namespace ABI_POC_PCR
 
         public void updateTestInfo()
         {
-            test_start_time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
+            test_start_time = DateTime.Now.ToString("HH:mm");
+            sm.StartTime = test_start_time;
             lv_testInfo.BeginUpdate();
             lv_testInfo.Items[0].SubItems[0].Text = sm.testName;
             lv_testInfo.Items[0].SubItems[1].Text = test_start_time;
@@ -5940,8 +5953,8 @@ namespace ABI_POC_PCR
 
         public void endTestInfo()
         {
-            test_end_time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
-
+            test_end_time = DateTime.Now.ToString("HH:mm");
+            sm.EndTime = test_end_time;
             lv_testInfo.BeginUpdate();
 
             //lvi1 = new ListViewItem("TB");
@@ -6046,11 +6059,12 @@ namespace ABI_POC_PCR
                         return compareVal;// (int)(base_optic_Val * 1.2);
                     }
                 }
-               
+                
+
             }
             catch(Exception ex)
             {
-
+                Console.WriteLine(ex.StackTrace);
             }
             return -1;
         }
@@ -6100,6 +6114,10 @@ namespace ABI_POC_PCR
 
         public void updateCartridgeInfo()
         {
+            sm.PatientID = tb_PatientID_Test.Text;
+            sm.SampleID = tb_SampleID_Test.Text;
+            sm.CartridgeID = tb_CartridgeID_Test.Text;
+
             listView_PatientInfo.BeginUpdate();
             listView_PatientInfo.Items[0].SubItems[0].Text = tb_PatientID_Test.Text;
             listView_PatientInfo.Items[0].SubItems[1].Text = tb_SampleID_Test.Text;
@@ -6564,8 +6582,9 @@ namespace ABI_POC_PCR
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                    $"Details:\n\n{ex.StackTrace}");
+                    Console.WriteLine(ex.StackTrace);
+                    //MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                    //$"Details:\n\n{ex.StackTrace}");
                 }
             }
 
@@ -6617,9 +6636,9 @@ namespace ABI_POC_PCR
                     }
                 }
             }
-            catch (Exception e1)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.StackTrace);
 
             }
         }
@@ -6753,7 +6772,7 @@ namespace ABI_POC_PCR
             }
             catch(Exception ex)
             {
-                ex.StackTrace.ToString();
+                Console.WriteLine(ex.StackTrace);
             }
             
         }
@@ -7607,6 +7626,18 @@ namespace ABI_POC_PCR
                     sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
+                else if ( dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    sm.COVID_RESULT4[0] = "+";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
+                }
+                else if (dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
+                {
+                    dgv_testResult.Rows[3].Cells[1].Value = "+";
+                    sm.COVID_RESULT4[0] = "+";
+                    //dgv_testResult.Rows[0].Cells[].Value = "-";
+                }
                 else if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
@@ -8053,6 +8084,8 @@ namespace ABI_POC_PCR
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
+                MessageBox.Show("프린트 실패했습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //MsgBox msgbox = new MsgBox("Info", "Please select a item", "", "OK", "");
                 //msgbox.ShowDialog();
                 //MessageBox.Show("Please reselect item.", "Info" , MessageBoxButtons.OK, MessageBoxIcon.Information );
@@ -8093,6 +8126,8 @@ namespace ABI_POC_PCR
             }
 
 
+            
+
             dgv_test_records.ColumnCount = 12;
             dgv_test_records.ColumnHeadersVisible = true;
 
@@ -8102,15 +8137,20 @@ namespace ABI_POC_PCR
             columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
             dgv_test_records.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
-            dgv_test_records.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
+            
 
             //set the column header names.
             dgv_test_records.Columns[0].Name = "Date";
             dgv_test_records.Columns[0].MinimumWidth = 100;
             dgv_test_records.Columns[1].Name = "M/C No.";
             dgv_test_records.Columns[2].Name = "Test Name";
+
             dgv_test_records.Columns[3].Name = "Start Time";
+            dgv_test_records.Columns[3].MinimumWidth = 200;
+
             dgv_test_records.Columns[4].Name = "End Time";
+            dgv_test_records.Columns[4].MinimumWidth = 200;
+
             dgv_test_records.Columns[5].Name = "CartridgeID";
             dgv_test_records.Columns[5].MinimumWidth = 200;
             dgv_test_records.Columns[6].Name = "SampleID";
@@ -8132,8 +8172,9 @@ namespace ABI_POC_PCR
                 }
                 dgv_test_records.Rows.Add(record_rows);
             }
+            dgv_test_records.Sort(dgv_test_records.Columns[0], ListSortDirection.Ascending);
 
-            
+            //dgv_test_records.Columns[0].SortMode = DataGridViewColumnSortMode.Automatic;
 
 
         }
@@ -8161,6 +8202,11 @@ namespace ABI_POC_PCR
             dgv_testResult_final.Rows[0].Cells[8].Value = sm.resultFileName;
             dgv_testResult_final.Rows[0].Cells[9].Value = sm.userName;
             dgv_testResult_final.Rows[0].Cells[10].Value = sm.userID;
+
+            for(int i = 0;  i < 16; i++)
+            {
+                Plotter.CtCycles[i] = Math.Truncate(Plotter.CtCycles[i] * 100) / 100;
+            }
 
             dgv_testResult_final.Rows[0].Cells[11].Value = Plotter.CtCycles[0].ToString() + " "
                 + Plotter.CtCycles[1].ToString() + " "
@@ -8193,6 +8239,8 @@ namespace ABI_POC_PCR
         {
             //DataGridView[] dgvArr = { dataGridView1_Engineer, dataGridView2_Engineer, dataGridView3_Engineer, dataGridView4_Engineer };
             //DataGridView[] dgvArr = { dgv_opticDatum_tube1, dgv_opticDatum_tube2, dgv_opticDatum_tube3, dgv_opticDatum_tube4 };
+
+
 
             // 그리드뷰를 파일로 저장함
             string delimiter = ",";  // 구분자
@@ -8243,70 +8291,96 @@ namespace ABI_POC_PCR
 
         private void btn_ct_Limit_save_Click(object sender, EventArgs e)
         {
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
-            if (!di.Exists)
+            try
             {
-                di.Create();
+
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+                if (!di.Exists)
+                {
+                    di.Create();
+                }
+                string fileName = di.ToString() + "\\ctLimit.info";
+
+                // 기존 파일 삭제
+                FileInfo fileDel = new FileInfo(fileName);
+                if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
+
+                // 새로 저장
+                StreamWriter sw = new StreamWriter(fileName, true);
+
+                //first line
+                string buff = dgv_interpretation_ct.Rows[0].Cells[4].FormattedValue.ToString();
+                for (int i = 1; i < 16; i++)
+                {
+                    buff += "," + dgv_interpretation_ct.Rows[i].Cells[4].FormattedValue.ToString();
+                }
+                // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
+
+                sw.WriteLine(buff);
+
+                sw.Close();
             }
-            string fileName = di.ToString() + "\\ctLimit.info";
-
-            // 기존 파일 삭제
-            FileInfo fileDel = new FileInfo(fileName);
-            if (fileDel.Exists) fileDel.Delete(); // 없어도 에러안남
-
-            // 새로 저장
-            StreamWriter sw = new StreamWriter(fileName, true);
-
-            //first line
-            string buff = dgv_interpretation_ct.Rows[0].Cells[4].FormattedValue.ToString();
-            for (int i = 1; i < 16; i++)
+            catch(Exception ex)
             {
-                buff += "," + dgv_interpretation_ct.Rows[i].Cells[4].FormattedValue.ToString();
+                Console.WriteLine(ex.StackTrace);
             }
-            // + tb_ID_IDManage.Text + "," + tb_PW_IDManage.Text + "," + tb_Right_IDManage.SelectedItem;
 
-            sw.WriteLine(buff);
 
-            sw.Close();
         }
 
         private void btn_ct_limit_load_Click(object sender, EventArgs e)
         {
-            ctLimit_Load();
-            for (int i = 0; i < 16; i++)
+            try
             {
-                dgv_interpretation_ct.Rows[i].Cells[4].Value = sm.ct_Limit[i];
+                ctLimit_Load();
+                for (int i = 0; i < 16; i++)
+                {
+                    dgv_interpretation_ct.Rows[i].Cells[4].Value = sm.ct_Limit[i];
+                }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+
 
         }
 
         public void ctLimit_Load()
         {
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
-            if (!di.Exists) di.Create();
-
-            string fileName = di.ToString() + "\\ctLimit.info";
-
-            string[] lines = File.ReadAllLines(fileName);
-            string[] result = new string[16];
-
-            int readNum = 1;
-            string temp = "";
-            for (int i = 0; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+            try
             {
-                temp = lines[i];
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Application.StartupPath + @"\Data");
+                if (!di.Exists) di.Create();
 
-                char[] sep = { ',' };
+                string fileName = di.ToString() + "\\ctLimit.info";
 
-                result = temp.Split(sep);
+                string[] lines = File.ReadAllLines(fileName);
+                string[] result = new string[16];
+
+                int readNum = 1;
+                string temp = "";
+                for (int i = 0; i < lines.Length; i++) //데이터가 존재하는 라인일 때에만, label에 출력한다.
+                {
+                    temp = lines[i];
+
+                    char[] sep = { ',' };
+
+                    result = temp.Split(sep);
+                }
+
+                for (int i = 0; i < 16; i++)
+                {
+                    sm.ct_Limit[i] = result[i];
+                    //sm.ct_Limit[i] = result[i];
+
+                    //dgv_interpretation_ct.Rows[i].Cells[4].Value = result[i];
+                }
+
             }
-
-            for (int i = 0; i < 16; i++)
+            catch (Exception ex)
             {
-                sm.ct_Limit[i] = result[i];
-                //sm.ct_Limit[i] = result[i];
-
-                //dgv_interpretation_ct.Rows[i].Cells[4].Value = result[i];
+                Console.WriteLine(ex.StackTrace);
             }
 
            
@@ -8350,6 +8424,7 @@ namespace ABI_POC_PCR
             }
             catch(Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 MessageBox.Show("검사결과를 선택하세요.", "안내", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
  
@@ -8393,6 +8468,7 @@ namespace ABI_POC_PCR
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 MessageBox.Show("PDF를 프린트 해주세요.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
@@ -8403,7 +8479,10 @@ namespace ABI_POC_PCR
             //axAcroPDF1.Dispose();
         }
 
-       
+        private void tb_MachineNum_Eng_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     #endregion
 

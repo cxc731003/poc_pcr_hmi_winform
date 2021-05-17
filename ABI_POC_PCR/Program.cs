@@ -19,8 +19,45 @@ namespace ABI_POC_PCR
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new LogIn());
-            //Application.Run(new MainFrm());
+            LogIn LogIn = new LogIn();
+            LogIn.Show();
+            //LogIn.DialogResult = DialogResult.OK;// 주석 처리 필요
+            while (LogIn.DialogResult != DialogResult.OK)
+            {
+                Application.DoEvents();
+            }
+
+            LogIn.Close();
+            try
+            {
+                Application.Run(new MainFrm());
+            }
+            catch (Exception ex)
+            {
+                //Var.
+                string sPath;
+                string sFileName;
+                StreamWriter ExceptionLog;
+
+                //Set Path.
+                sPath = Path.Combine(Environment.CurrentDirectory, "Exception");
+                if (!Directory.Exists(sPath)) Directory.CreateDirectory(sPath);
+                sFileName = Path.Combine(sPath, "Program.Log");
+                FileStream fStream = new FileStream(sFileName, FileMode.OpenOrCreate);
+                fStream.Seek(0, SeekOrigin.End);
+                ExceptionLog = new StreamWriter(fStream);
+
+                //Write Exception Log.
+                ExceptionLog.WriteLine(DateTime.Now.ToLongDateString() + "/" + ex.StackTrace);
+                ExceptionLog.Close();
+
+                MessageBox.Show(ex.StackTrace);
+
+            }
+            finally
+            {
+
+            }
         }
     }
     
