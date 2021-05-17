@@ -442,7 +442,7 @@ namespace ABI_POC_PCR
             //tabControl_Engineer.TabPages.Remove(tp_simulation);
 
             tabControl_Engineer.TabPages.Remove(tp_base_UserSelection);
-            tabControl_Engineer.TabPages.Remove(tp_pcr_options);
+            //tabControl_Engineer.TabPages.Remove(tp_pcr_options);
             //dataGridView1.AutoGenerateColumns = false;
 
             //TestResult menu Info. initialize 
@@ -7512,7 +7512,7 @@ namespace ABI_POC_PCR
             if(sm.testName == "COVID")
             {
                 //tube1 - covid (pos or neg)
-                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" //FAM
+                if (dgv_interpretation_ct.Rows[0].Cells[2].Value == "+"//FAM
                     && dgv_interpretation_ct.Rows[2].Cells[2].Value == "+" //HEX 
                     && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+")//CY5
                 {
@@ -7524,6 +7524,10 @@ namespace ABI_POC_PCR
                     dgv_testResult.Rows[0].Cells[1].Value = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
+
+
+
+
                 //presumtive pos
                 if ((dgv_interpretation_ct.Rows[0].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[2].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[3].Cells[2].Value == "+"))
                 {
@@ -7626,13 +7630,13 @@ namespace ABI_POC_PCR
                     sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if ( dgv_interpretation_ct.Rows[14].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
+                else if ( dgv_interpretation_ct.Rows[14].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
                     sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[].Value = "-";
                 }
-                else if (dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+")
+                else if (dgv_interpretation_ct.Rows[12].Cells[2].Value == "+")
                 {
                     dgv_testResult.Rows[3].Cells[1].Value = "+";
                     sm.COVID_RESULT4[0] = "+";
@@ -7644,6 +7648,8 @@ namespace ABI_POC_PCR
                     sm.COVID_RESULT4[0] = "+";
                     //dgv_testResult.Rows[0].Cells[2].Value = "-";
                 }
+
+
                 //presumtive pos
                 if ((dgv_interpretation_ct.Rows[12].Cells[2].Value == "+" && dgv_interpretation_ct.Rows[14].Cells[2].Value == "-" && dgv_interpretation_ct.Rows[15].Cells[2].Value == "+"))
                 {
